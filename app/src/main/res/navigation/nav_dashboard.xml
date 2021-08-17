@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_map"
+        android:name="com.android.mealpass.view.dashboard.fragment.MapFragment"
+        android:label="Map"
+        tools:layout="@layout/fragment_map" />
+
+    <fragment
+        android:id="@+id/navigation_favourite"
+        android:name="com.android.mealpass.view.dashboard.fragment.FavouriteFragment"
+        android:label="FavouriteFragment"
+        tools:layout="@layout/fragment_favourite" />
+
+    <fragment
+        android:id="@+id/navigation_receipt"
+        android:name="com.android.mealpass.view.dashboard.fragment.ReceiptFragment"
+        android:label="ReceiptFragment"
+        tools:layout="@layout/fragment_receipt" />
+
+    <fragment
+        android:id="@+id/navigation_setting"
+        android:name="com.android.mealpass.view.dashboard.fragment.SettingFragment"
+        android:label="SettingFragment"
+        tools:layout="@layout/fragment_setting" />
+
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.android.mealpass.view.dashboard.fragment.HomeFragment"
+        android:label="@string/HomeTab"
+        tools:layout="@layout/fragment_home" />
+
+
+</navigation>

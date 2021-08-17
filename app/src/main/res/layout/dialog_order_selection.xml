@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp">
+
+            <com.android.mealpass.widgets.CustomTextView
+                android:id="@+id/seekbartext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="@string/Total"
+                android:visibility="gone" />
+
+            <com.android.mealpass.widgets.CustomTextView
+                android:id="@+id/aud"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/seekbartext"
+                android:visibility="gone"
+
+                />
+
+
+            <View
+                android:id="@+id/view_layout"
+                android:layout_width="160dp"
+                android:layout_height="0.5dp"
+                android:layout_below="@id/seekbartext"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/darker_gray"
+                android:visibility="gone"
+
+                />
+
+
+            <RelativeLayout
+                android:id="@+id/top_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view_layout"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp">
+
+                <com.android.mealpass.widgets.CustomTextView
+                    android:id="@+id/quantitylable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/Quantity"
+                    android:textColor="@color/darkgray" />
+
+
+                <com.android.mealpass.widgets.CustomTextView
+                    android:id="@+id/quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:ems="5"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="@color/darkgray" />
+
+
+                <LinearLayout
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/bucket_layout"
+                    android:weightSum="2">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/plus_count"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:padding="12dp"
+                        app:srcCompat="@drawable/ic_add" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/button_light_color" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/minus_count"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:padding="12dp"
+                        app:srcCompat="@drawable/ic_minus" />
+
+
+                </LinearLayout>
+            </RelativeLayout>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buy"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/top_layout"
+                android:layout_centerInParent="true"
+                android:background="@drawable/buttonshape"
+                android:text="@string/Proceed"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/button_size" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

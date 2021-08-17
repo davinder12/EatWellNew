@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--Preference keys-->
+<resources>
+    <string name="pkey_first_video" translatable="false">pkey_first_video</string>
+    <string name="pkey_user_Id" translatable="false">pkey_user_Id</string>
+    <string name="pkey_secure_token" translatable="false">pkey_secure_token</string>
+    <string name="pkey_userName" translatable="false">pkey_userName</string>
+    <string name="pkey_isMerchantLogin" translatable="false">pkey_isMerchantLogin</string>
+    <string name="pkey_emaiId" translatable="false">pkey_emailId</string>
+    <string name="pkey_token" translatable="false">pkey_token</string>
+    <string name="pkey_payment_token" translatable="false">pkey_payment_token</string>
+
+
+    <string name="pkey_userlat" translatable="false">pkey_userLat</string>
+    <string name="pkey_userLong" translatable="false">pkey_userLong</string>
+    <string name="pkey_location" translatable="false">pkey_location</string>
+    <string name="pkey_currency" translatable="false">pkey_currency</string>
+
+    <string name="pkey_phoneNumber" translatable="false">pkey_phoneNumber</string>
+
+
+    <string name="pkey_fromTime" translatable="false">pkey_fromTime</string>
+    <string name="pkey_toTime" translatable="false">pkey_toTime</string>
+    <string name="pkey_showOpenResturnat" translatable="false">pkey_showOpenResturnat</string>
+    <string name="pkey_filteredFoodList" translatable="false">pkey_filteredFoodList</string>
+    <string name="pkey_minValue" translatable="false">pkey_minValue</string>
+    <string name="pkey_maxValue" translatable="false">pkey_maxValue</string>
+    <string name="pkey_fcm_token_sent" translatable="false">pkey_fcm_token_sent</string>
+
+</resources>

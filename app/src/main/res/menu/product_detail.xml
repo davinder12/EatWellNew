@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+
+        <item
+            android:id="@+id/favourites"
+            android:icon="@drawable/like_selector"
+            android:checked="false"
+            android:orderInCategory="1"
+            app:showAsAction="always"
+            android:title="@string/FavouritesTab"/>
+
+
+
+        <item
+            android:id="@+id/share"
+            app:showAsAction="always"
+            android:visible="false"
+            android:icon="@drawable/ic_share_symbol"
+            android:title="My receipts"/>
+
+
+
+</menu>

@@ -1,0 +1,20 @@
+package com.android.mealpass.data.api.enums
+
+
+enum class ProductBuyEnum {
+    FREE_FOOD,
+    DONATION_PORTION_EMPTY,
+    DONATION_PORTION,
+    DONATION_PORTION_LIMIT_OVER,
+    NEW_CARD_PAYMENT,
+    CAMPAIGN_USER_ONLY,
+    SAVE_CARD,
+    INVALID_CURRENCY,
+    SHOP_CLOSE,
+    NOCAMPIGNUSER,
+    NEED_PHONENUMBER,
+    NO_ISSUE
+
+
+}
+

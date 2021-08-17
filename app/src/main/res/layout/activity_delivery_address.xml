@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.android.mealpass.view.dashboard.viewmodel.DeliveryAddressViewModel" />
+
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        tools:context=".delivery.AddressSetting">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="0dp"
+            android:background="@color/light_red"
+            android:minHeight="?attr/actionBarSize"
+            android:padding="0dp"
+            app:contentInsetStartWithNavigation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:menu="@menu/address"
+            app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
+            app:title="@string/DeliveryAddress"
+            app:titleTextAppearance="@style/Toolbar.TitleText"
+            app:titleTextColor="@android:color/white">
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/hometoolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:background="@color/light_red"
+            android:minHeight="?attr/actionBarSize"
+            android:padding="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetStart="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@android:color/white"
+                    android:orientation="horizontal">
+
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/online_search"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/white"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="@string/Search"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="10dp"
+                        android:text="@{vm.isTextEditable}"
+                        android:textSize="14sp" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/clear_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:paddingLeft="15dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="15dp"
+                        android:paddingBottom="10dp"
+                        android:visibility="gone"
+                        app:srcCompat="@drawable/ic_cancel"
+                        app:visibleGone="@{vm.isTextEmptyOrNot()}" />
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/_16sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/hometoolbar">
+
+
+            <com.android.mealpass.widgets.CustomTextView
+                android:id="@+id/delivery_note"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/DeliveryNote"
+                android:textColor="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/add_new_address"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/editback"
+                android:text="@string/ChooseDeliveryAddress"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/delivery_note" />
+
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/add_new_address">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/maunal_address_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    app:cardCornerRadius="5dp"
+                    app:cardElevation="@dimen/_5sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/add_new_address"
+                    app:visibleGone="@{vm.isManualAddressFieldOpen}">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/_15sdp"
+                        android:paddingTop="@dimen/_15sdp"
+                        android:paddingRight="@dimen/_15sdp">
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/buildingNo"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:endIconMode="clear_text"
+                            app:errorEnabled="true"
+                            app:hintEnabled="true"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="UnusedAttribute">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/HouseNo"
+                                android:imeOptions="actionNext"
+                                android:inputType="text"
+                                android:nextFocusForward="@+id/password"
+                                android:text="@={vm.flatHouseNo}"
+                                android:textAppearance="?attr/textAppearanceBody1"
+                                tools:ignore="UnusedAttribute" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/location"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:endIconMode="clear_text"
+                            app:errorEnabled="true"
+                            app:hintEnabled="true"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/buildingNo"
+                            tools:ignore="UnusedAttribute">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/StreetAddress"
+                                android:imeOptions="actionNext"
+                                android:inputType="text"
+                                android:nextFocusForward="@+id/password"
+                                android:text="@={vm.colonyStreet}"
+                                android:textAppearance="?attr/textAppearanceBody1"
+                                tools:ignore="UnusedAttribute" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/city"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:endIconMode="clear_text"
+                            app:errorEnabled="true"
+                            app:hintEnabled="true"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/location"
+                            tools:ignore="UnusedAttribute">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/City"
+                                android:imeOptions="actionNext"
+                                android:inputType="text"
+                                android:nextFocusForward="@+id/password"
+                                android:text="@={vm.city}"
+                                android:textAppearance="?attr/textAppearanceBody1"
+                                tools:ignore="UnusedAttribute" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/state"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:endIconMode="clear_text"
+                            app:errorEnabled="true"
+                            app:hintEnabled="true"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/city"
+                            tools:ignore="UnusedAttribute">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/State"
+                                android:imeOptions="actionNext"
+                                android:inputType="text"
+                                android:nextFocusForward="@+id/password"
+                                android:text="@={vm.state}"
+                                android:textAppearance="?attr/textAppearanceBody1"
+                                tools:ignore="UnusedAttribute" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/zipCode"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:endIconMode="clear_text"
+                            app:errorEnabled="true"
+                            app:hintEnabled="true"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/Country"
+                            tools:ignore="UnusedAttribute">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/Country"
+                                android:imeOptions="actionDone"
+                                android:inputType="text"
+                                android:nextFocusForward="@+id/password"
+                                android:text="@={vm.country}"
+                                android:textAppearance="?attr/textAppearanceBody1"
+                                tools:ignore="UnusedAttribute" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/Country"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:endIconMode="clear_text"
+                            app:errorEnabled="true"
+                            app:hintEnabled="true"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/state"
+                            tools:ignore="UnusedAttribute">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/PostCode"
+                                android:imeOptions="actionNext"
+                                android:inputType="text"
+                                android:nextFocusForward="@+id/password"
+                                android:text="@={vm.postalZipCode}"
+                                android:textAppearance="?attr/textAppearanceBody1"
+                                tools:ignore="UnusedAttribute" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/saveBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/georgia"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingLeft="@dimen/_10sdp"
+                            android:paddingTop="@dimen/_10sdp"
+                            android:paddingBottom="@dimen/_20sdp"
+                            android:text="@string/Saved"
+                            android:textColor="@color/tabcolor"
+                            android:textSize="@dimen/_12ssp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/zipCode" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/cancelBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/georgia"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingTop="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_5sdp"
+                            android:paddingRight="@dimen/_5sdp"
+                            android:paddingBottom="@dimen/_20sdp"
+                            android:text="@string/Cancel"
+                            android:textColor="@color/tabcolor"
+                            android:textSize="@dimen/_12ssp"
+                            app:layout_constraintBottom_toBottomOf="@+id/saveBtn"
+                            app:layout_constraintEnd_toStartOf="@+id/saveBtn"
+                            app:layout_constraintTop_toTopOf="@+id/saveBtn" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
+            </androidx.core.widget.NestedScrollView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/personal_address_list"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:goneVisible="@{vm.isManualAddressFieldOpen}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/add_new_address" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

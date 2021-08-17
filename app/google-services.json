@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "477654831113",
+    "firebase_url": "https://mealpass-a2777.firebaseio.com",
+    "project_id": "mealpass",
+    "storage_bucket": "mealpass.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:477654831113:android:b286fc8d8c5e913223a8d8",
+        "android_client_info": {
+          "package_name": "mealpass.com.mealpass"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "477654831113-p7362tff6cc08d4ddh81v6kpnd25e1ea.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mealpass.com.mealpass",
+            "certificate_hash": "470f38b880975a829169819a9e7994de8efbe3d1"
+          }
+        },
+        {
+          "client_id": "477654831113-8cfiodemd28q9o49sb6fv70quma1omp7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mealpass.com.mealpass",
+            "certificate_hash": "cd823d74143d5b7abe9715bf8e19987448d7283c"
+          }
+        },
+        {
+          "client_id": "477654831113-l5389aese8cj3sabnmvk1fmhdtvpl7ld.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8g5M5QH-chHr0wi3z2_gDrFQ-bgHW57k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "477654831113-l5389aese8cj3sabnmvk1fmhdtvpl7ld.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "477654831113-kbisa3ea4ifb9mo2acijpf6492vm660u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mealpass"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

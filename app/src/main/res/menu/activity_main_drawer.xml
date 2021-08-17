@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/find_food"
+            android:icon="@drawable/homeicon"
+            android:title="@string/HomeTab" />
+        <item
+            android:id="@+id/map"
+            android:icon="@drawable/ic_map"
+
+            android:title="@string/MapTab"/>
+        <item
+            android:id="@+id/favourites"
+            android:icon="@drawable/ic_favourite"
+            android:title="@string/FavouritesTab"/>
+        <item
+            android:id="@+id/receipts"
+            android:icon="@drawable/ic_receipt"
+            android:title="My receipts"/>
+
+
+        <!--<item-->
+            <!--android:id="@+id/setting"-->
+            <!--android:icon="@drawable/ic_userprofile"-->
+            <!--android:visible="true"-->
+            <!--android:title="@string/MyProfile"/>-->
+
+
+
+    </group>
+
+
+    <group  android:id="@+id/grp2" android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/share"
+            android:icon="@drawable/ic_share"
+            android:title="@string/Share"/>
+
+            <item
+                android:id="@+id/setting"
+                android:icon="@drawable/ic_setting"
+                android:title="@string/SettingsTab"/>
+
+
+                    <item
+                android:id="@+id/signout"
+                android:icon="@drawable/ic_logout"
+                android:title="@string/Logout"/>
+</group>
+
+
+</menu>

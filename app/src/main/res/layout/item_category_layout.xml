@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="vm"
+            type="com.android.mealpass.data.models.ProductTypeResponse.Body"></variable>
+    </data>
+
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    app:cardCornerRadius="10dp"
+    android:background="@{vm.isItemSelected ? @drawable/back_btn_selected : @drawable/background_btn}"
+    android:layout_margin="6dp"
+    android:layout_height="wrap_content">
+
+    <com.android.mealpass.widgets.CustomTextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:text="@{vm.product_type}"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.cardview.widget.CardView>
+</layout>

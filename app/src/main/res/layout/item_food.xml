@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.android.mealpass.view.units.DataConverterKt" />
+
+        <variable
+            name="vm"
+            type="com.android.mealpass.data.models.FoodData.Body" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="vertical"
+
+            app:cardBackgroundColor="@color/cynonColor">
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                >
+
+
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <RelativeLayout
+                        android:id="@+id/top_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/backgroundImage"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:srcCompat="@drawable/food_image1"
+                            app:url="@{vm.cover_photo}" />
+
+
+                        <RelativeLayout
+                            android:id="@+id/heartlayout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp">
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/highlight_background"
+                                app:visibleGone="@{vm.fav_count == 1}">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/numberof_like"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:text="@{vm.fav_count +``}"
+                                    android:textColor="@android:color/white" />
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_toEndOf="@id/numberof_like"
+                                    android:background="@drawable/ic_white_favourite" />
+                            </RelativeLayout>
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/onlineoffline"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginEnd="10dp"
+                                android:background="@{DataConverterKt.isResturantOpen(vm.itemleft,vm.is_open,vm.opening_time,vm.closing_time,vm.before_pickup_time,vm.shop_open_time,vm.is_active) ? @drawable/ok_button : @drawable/cancel_color }" />
+
+
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/heartlayout"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/highlight_background"
+                            app:visibleGone="@{vm.campaign_itemleft > 0}">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/campaignCode"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:text="@{`Meal Pass: `+vm.campaign_itemleft}"
+                                android:textColor="@android:color/white" />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="@dimen/_15sdp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="5dp"
+                                android:layout_toEndOf="@id/campaignCode"
+                                android:background="@drawable/background_logo"
+                                android:visibility="gone" />
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/home_delivery"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/heartlayout"
+                            android:layout_alignParentEnd="true"
+                            android:background="@drawable/highlight_background_left"
+                            app:visibleGone="@{DataConverterKt.isHomeDeliveryAvailable(vm.is_home_delivery,vm.allow_fullday_delivery,vm.opening_time,vm.delivery_close_before_hours)}">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_centerVertical="true"
+
+                                android:background="@drawable/ic_scooter" />
+                        </RelativeLayout>
+
+
+                        <RelativeLayout
+                            android:id="@+id/bottom_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_alignParentBottom="true"
+                            android:background="@color/transparent_color"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/distance"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:fontFamily="@font/georgia"
+                                android:maxLines="1"
+                                android:text="@{vm.distance+ ` km`}"
+                                android:textColor="@android:color/white" />
+
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/price"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:fontFamily="@font/georgia"
+                                android:textColor="@android:color/white"
+                                android:visibility="gone"
+                                app:strike="@{String.format(@string/currency_strike,vm.discounted_price,vm.currency_type)}" />
+                        </RelativeLayout>
+
+
+                    </RelativeLayout>
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/overlapImage"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_below="@id/top_layout"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="-57dp"
+                        app:civ_border_color="@color/darkgray"
+                        app:civ_border_width="2dp"
+                        app:url="@{vm.logo}">
+
+
+                    </de.hdodenhof.circleimageview.CircleImageView>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/hotel_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/overlapImage"
+                        android:layout_centerHorizontal="true"
+                        android:fontFamily="@font/georgia"
+                        android:text="@{vm.storename ?? ``}"
+                        android:textColor="@color/darkgray"
+                        android:textSize="16sp" />
+
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/hotel_name"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="5dp">
+
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/pickuptime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginEnd="45dp"
+                            android:fontFamily="@font/georgia"
+                            android:gravity="center_horizontal"
+                            android:maxLines="1"
+                            android:text="@{String.format(@string/picktime, DataConverterKt.pickUpTime(vm.opening_time,vm.closing_time))}"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="@dimen/_6ssp" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/ic_like"
+                            app:visibleGone="@{vm.isCurrentLike == 1}" />
+
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <ProgressBar
+                android:id="@+id/progressBar1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:visibility="gone" />
+
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</layout>
