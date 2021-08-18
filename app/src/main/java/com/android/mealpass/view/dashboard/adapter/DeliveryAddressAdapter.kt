@@ -5,8 +5,7 @@ import com.android.mealpass.utilitiesclasses.baseadapter.DataBoundAdapterClass
 import mealpass.com.mealpass.R
 import mealpass.com.mealpass.databinding.ItemDeliveryAddressBinding
 
-class DeliveryAddressAdapter :
-    DataBoundAdapterClass<String, ItemDeliveryAddressBinding>(diffCallback) {
+class DeliveryAddressAdapter : DataBoundAdapterClass<String, ItemDeliveryAddressBinding>(diffCallback) {
     /**
      * The [LayoutRes] for the RecyclerView item
      * This is used to inflate the view.

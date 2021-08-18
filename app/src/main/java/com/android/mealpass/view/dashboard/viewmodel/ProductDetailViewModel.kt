@@ -33,6 +33,7 @@ class ProductDetailViewModel @Inject constructor(
 ) : BaseViewModel() {
 
 
+    var resultCode = 0
     var resturantName = mutableLiveData("")
     var resturantId = MutableLiveData<String>()
     var isMerchantInfoVisible = mutableLiveData(false)
@@ -43,7 +44,7 @@ class ProductDetailViewModel @Inject constructor(
 
 
     var resturantRequest = ResourceViewModel(resturantId) {
-        productRepository.getSingleResturant(
+        productRepository. getSingleResturant(
             SingleResturantRequest(
                 it,
                 preferenceService.getString(R.string.pkey_userlat),
@@ -123,7 +124,7 @@ class ProductDetailViewModel @Inject constructor(
         isHomeDelivery(it.body, "")
     }
 
-    var isFavouriteLike = resturantRequest.data.map { it.body.isCurrentLike }
+    var isFavouriteLike = resturantRequest.data.map { it.body.isCurrentLike  == 1  }
 
     var networkState = resturantRequest.networkState.map {
         it
@@ -142,6 +143,18 @@ class ProductDetailViewModel @Inject constructor(
             subscribe(it.request)
         }.networkState
     }
+
+    fun removeToFavourite(): LiveData<NetworkState> {
+        return productRepository.resturantUnLike(
+            preferenceService.getString(R.string.pkey_user_Id),
+            resturantId.value
+        ).also {
+            subscribe(it.request)
+        }.networkState
+    }
+
+
+
 
 
     fun updatePortionValidation(product: SpecificFoodResponse.Body): ProductBuyEnum {

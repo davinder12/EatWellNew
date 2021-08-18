@@ -48,8 +48,7 @@ class HomeFragment : BaseListFragment<FragmentHomeBinding>() {
             resturantFilter.show(childFragmentManager, resturantFilter.tag)
         }
 
-        var adapter =
-            initAdapter(FoodAdapter(), binding.resturantList, viewModel.foodResource) { items ->
+        var adapter = initAdapter(FoodAdapter(), binding.resturantList, viewModel.foodResource) { items ->
                 navigation.productDetailScreen(items.id, items.storename)
             }
 
@@ -79,9 +78,7 @@ class HomeFragment : BaseListFragment<FragmentHomeBinding>() {
     private fun apiHit(item: String) {
         when {
             !requireActivity().isGPSEnabled() -> locationSnackMessage()
-            viewModel.foodResource.networkState.value != NetworkState.loading -> viewModel.searchText(
-                item
-            )
+             viewModel.foodResource.networkState.value != NetworkState.loading -> viewModel.searchText(item)
         }
     }
 

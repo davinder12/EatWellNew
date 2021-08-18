@@ -1,12 +1,16 @@
 package com.android.mealpass.view.dashboard.viewmodel
 
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.map
+import com.android.mealpass.data.models.FoodData
 import com.android.mealpass.data.models.FoodRequestModel
 import com.android.mealpass.data.repository.LocationRepository
 import com.android.mealpass.data.repository.ProductRepository
 import com.android.mealpass.data.service.PreferenceService
 import com.android.mealpass.utilitiesclasses.PagedListViewModel
+import com.android.mealpass.utilitiesclasses.ResourceViewModel
 import com.android.mealpass.utilitiesclasses.baseclass.BaseViewModel
 import com.android.mealpass.view.dashboard.fragment.HomeFragment.Companion.CURRENT_LIST_SIZE
 import com.android.mealpass.view.dashboard.fragment.HomeFragment.Companion.OFFSET
@@ -27,7 +31,7 @@ class FavouriteFragmentViewModel @Inject constructor(
     private val userId = MutableLiveData<String>()
 
 
-    var favouriteItemList = PagedListViewModel(userId) {
+    var favouriteItemList = ResourceViewModel(userId) {
         productRepository.favouriteListApi(
             FoodRequestModel(
                 "",
@@ -39,6 +43,14 @@ class FavouriteFragmentViewModel @Inject constructor(
                 it
             )
         )
+    }
+
+    var networkState = favouriteItemList.networkState.map {
+        it
+    }
+
+    var favouriteItemListData :LiveData<List<FoodData.Body>?>  = favouriteItemList.data.map {
+        it.body
     }
 
     fun updateLocation() {

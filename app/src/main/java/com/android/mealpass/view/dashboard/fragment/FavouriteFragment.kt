@@ -10,6 +10,7 @@ import com.android.mealpass.data.extension.isGPSEnabled
 import com.android.mealpass.data.extension.throttleClicks
 import com.android.mealpass.data.network.NetworkState
 import com.android.mealpass.utilitiesclasses.baseclass.BaseListFragment
+import com.android.mealpass.view.dashboard.adapter.FavouriteFoodAdapter
 import com.android.mealpass.view.dashboard.adapter.FoodAdapter
 import com.android.mealpass.view.dashboard.viewmodel.FavouriteFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,11 +31,13 @@ class FavouriteFragment : BaseListFragment<FragmentFavouriteBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fetchFavouriteList()
-        var adapter = initAdapter(FoodAdapter(), binding.itemDisplay, viewModel.favouriteItemList) {
+        var adapter = initAdapter(FavouriteFoodAdapter(), binding.itemDisplay, viewModel.favouriteItemListData) {
         }
         subscribe(emptyView.throttleClicks()) {
             fetchFavouriteList()
         }
+
+        bindNetworkState(viewModel.networkState,loadingIndicator =  binding.favouriteProgressBar)
 
     }
 

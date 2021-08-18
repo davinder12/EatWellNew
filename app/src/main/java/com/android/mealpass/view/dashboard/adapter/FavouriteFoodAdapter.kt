@@ -10,7 +10,7 @@ import io.reactivex.ObservableEmitter
 import mealpass.com.mealpass.R
 import mealpass.com.mealpass.databinding.ItemFoodBinding
 
-class FoodAdapter : DataBoundPagedListAdapter<FoodData.Body, ItemFoodBinding>(diffCallback) {
+class FavouriteFoodAdapter : DataBoundAdapterClass<FoodData.Body, ItemFoodBinding>(diffCallback) {
 
     /**
      * The [LayoutRes] for the RecyclerView item

@@ -56,21 +56,17 @@ class ProductRepository @Inject constructor(
         })
     }
 
-    fun favouriteListApi(foodRequestModel: FoodRequestModel): IListResource<FoodData.Body> {
-        return PagedListNetworkCall(object : PaginationList<FoodData.Body, FoodData>(appExecutors) {
-            override fun loadPage(page: Int): Call<FoodData> {
-                return favouriteModel(foodRequestModel)
+    fun favouriteListApi(foodRequestModel: FoodRequestModel):  IResource<FoodData> {
+        return NetworkResource(appExecutors, object :
+            IRetrofitNetworkRequestCallback.IRetrofitNetworkResourceCallback<FoodData, FoodData> {
+            override fun mapToLocal(response: FoodData): FoodData {
+                return response
             }
-
-            override fun loadAfterPage(page: Int): Call<FoodData> {
-                foodRequestModel.offset = page
+            override fun createNetworkRequest(): Single<Response<FoodData>> {
                 return favouriteModel(foodRequestModel)
-            }
-
-            override fun mapToLocal(items: FoodData): List<FoodData.Body> {
-                return items.body
             }
         })
+
     }
 
 
@@ -98,11 +94,9 @@ class ProductRepository @Inject constructor(
     fun getSingleResturant(signleResturantRequest: SingleResturantRequest): IResource<SpecificFoodResponse> {
         return NetworkResource(appExecutors, object :
             IRetrofitNetworkRequestCallback.IRetrofitNetworkResourceCallback<SpecificFoodResponse, SpecificFoodResponse> {
-
             override fun mapToLocal(response: SpecificFoodResponse): SpecificFoodResponse {
                 return response
             }
-
             override fun createNetworkRequest(): Single<Response<SpecificFoodResponse>> {
                 return productApi.getSingleRes(
                     signleResturantRequest.user_id,
@@ -121,7 +115,6 @@ class ProductRepository @Inject constructor(
             override fun mapToLocal(response: FoodData): FoodData {
                 return response
             }
-
             override fun createNetworkRequest(): Single<Response<FoodData>> {
                 return productApi.getAllResturantList(
                     getAllResturantRequest.user_id,
@@ -143,12 +136,20 @@ class ProductRepository @Inject constructor(
             override fun createNetworkRequest(): Single<Response<Unit>> {
                 return productApi.likeResturantApi(favouriteId, userId)
             }
-
         })
     }
 
 
-    fun favouriteModel(foodRequestModel: FoodRequestModel): Call<FoodData> {
+    fun resturantUnLike(userId: String?, favouriteId: String?): IRequest<Response<Unit>> {
+        return NetworkRequest(appExecutors, object : IRetrofitNetworkRequestCallback<Unit> {
+            override fun createNetworkRequest(): Single<Response<Unit>> {
+                return productApi.deleteResturantApi(favouriteId, userId)
+            }
+        })
+    }
+
+
+    fun favouriteModel(foodRequestModel: FoodRequestModel): Single<Response<FoodData>>{
         return productApi.getFavouriteApi(
             foodRequestModel.user_id,
             foodRequestModel.latitude,

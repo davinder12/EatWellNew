@@ -1,34 +1,45 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/root_info"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        tools:context=".ui.dashboard.gallery.GalleryFragment">
 
 
-        <com.android.mealpass.widgets.EmptyRecyclerView
-            android:id="@+id/receiptList"
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/receiptTabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/red_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/white"
+            app:tabMaxWidth="0dp"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@android:color/white"
+            app:tabTextAppearance="@style/tabLayoutStyle"
+            app:tabTextColor="@color/white" />
+
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/receiptViewPager"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:emptyView="@id/emptyView"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <include
-            layout="@layout/empty_view"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/receiptTabLayout" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

@@ -2,11 +2,13 @@ package com.android.mealpass.view.common
 
 import android.content.Context
 import android.content.Intent
+import com.android.mealpass.data.models.ReceiptResponse
 import com.android.mealpass.data.models.SaveReceiptRequestModel
 import com.android.mealpass.view.dashboard.DashboardActivity
 import com.android.mealpass.view.dashboard.activity.Campaign
 import com.android.mealpass.view.dashboard.activity.DeliveryAddress
 import com.android.mealpass.view.dashboard.activity.ProductDetail
+import com.android.mealpass.view.dashboard.activity.UsedReceiptDetail
 import dagger.hilt.android.qualifiers.ActivityContext
 import dagger.hilt.android.scopes.ActivityScoped
 import javax.inject.Inject
@@ -22,6 +24,8 @@ class NavigationScreen @Inject constructor(@ActivityContext private val context:
         const val RESTURANT_ID = "resturant_id"
         const val RESTURANT_Name = "resturant_name"
         const val EXTRA_PAYMENT = "EXTRA_PAYMENT"
+        const val EXTRA_ACTIVE_RECEIPT_DETAIL = "EXTRA_ACTIVE_RECEIPT_DETAIl"
+        
     }
 
     fun dashBoardScreenNavigation() {
@@ -49,6 +53,18 @@ class NavigationScreen @Inject constructor(@ActivityContext private val context:
         }
         context.startActivity(intent)
     }
+
+    fun goToUsedReceiptDetailActivity(usedReceipt: ReceiptResponse.Body.UsedReceipt) {
+        val intent = Intent(context, UsedReceiptDetail::class.java).also {
+            it.putExtra(EXTRA_ACTIVE_RECEIPT_DETAIL, usedReceipt)
+        }
+        context.startActivity(intent)
+    }
+
+
+
+
+
 
 
 }

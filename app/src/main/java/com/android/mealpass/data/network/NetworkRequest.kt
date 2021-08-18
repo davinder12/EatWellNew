@@ -61,8 +61,7 @@ open class NetworkRequest<ResponseType>
         val filter = isResponseCodeOk && isBodyStatusCodeOk
 
         when {
-            !isBodyStatusCodeOk -> {
-            }
+            !isBodyStatusCodeOk -> { }
             filter -> _networkState.postUpdate(NetworkState.success)
             else -> _networkState.postUpdate(cb.getErrorState(response))
         }

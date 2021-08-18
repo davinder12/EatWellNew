@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.android.mealpass.data.network.NetworkState
 import com.android.mealpass.utilitiesclasses.PagedListViewModel
 import com.android.mealpass.utilitiesclasses.ResourceViewModel
 import com.android.mealpass.utilitiesclasses.baseadapter.DataBoundAdapterClass
@@ -23,12 +24,12 @@ abstract class BaseListFragment<TBinding : ViewDataBinding> : BaseFragment<TBind
         adapter: X,
         recycler: RecyclerView,
         list: LiveData<List<T>?>,
+        netWorkState: LiveData<NetworkState>? = null,
         clickHandler: ((T) -> Unit)? = null
     ): X {
         recycler.adapter = adapter
-        list.observe(viewLifecycleOwner, Observer {
-            adapter.submitList(it)
-        })
+        list.observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
+        netWorkState?.observe(viewLifecycleOwner, Observer { adapter.setNetworkState(it) })
         clickHandler?.let { subscribe(adapter.clicks, it) }
         return adapter
     }
@@ -44,6 +45,8 @@ abstract class BaseListFragment<TBinding : ViewDataBinding> : BaseFragment<TBind
         clickHandler: ((T) -> Unit)? = null
     ): X {
         recycler.adapter = adapter
+
+
         list.observe(viewLifecycleOwner, adapter::submitList)
         adapter.retryClicks.subscribe(viewModel::retry)
         viewModel.networkState.observe(viewLifecycleOwner, adapter::setNetworkState)

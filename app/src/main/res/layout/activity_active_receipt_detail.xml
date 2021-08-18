@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:su="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.android.mealpass.view.units.DataConverterKt" />
+
+        <variable
+            name="vm"
+            type="com.android.mealpass.view.dashboard.viewmodel.ActiveReceiptDetailViewModel" />
+
+    </data>
+
+
+    <RelativeLayout
+        android:id="@+id/activity_receipt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.dashboard.fragment.receipt.ActiveReceiptDetail">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="?attr/colorPrimary"
+            android:contentInsetStart="0dp"
+            android:contentInsetLeft="0dp"
+            android:contentInsetRight="0dp"
+            android:minHeight="?attr/actionBarSize"
+
+            android:padding="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetStartWithNavigation="0dp"
+            app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
+            app:title="@{vm.storeName}"
+            app:titleTextAppearance="@style/Toolbar.TitleText"
+            app:titleTextColor="@android:color/white" />
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toolbar"
+            android:layout_marginBottom="80dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_centerInParent="true"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:background="@drawable/ic_inside_logo"
+                                app:url="@{vm.storeLogo}" />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/delivery_logo"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginLeft="5dp"
+                                app:visibleGone="@{vm.isDelivery == 1}"
+                                android:background="@drawable/ic_scooter" />
+
+
+                        </RelativeLayout>
+
+
+                        <com.android.mealpass.widgets.CustomTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:capitalize="sentences"
+                            android:inputType="textCapSentences"
+                            android:text="@{vm.storeName}"
+                            android:textColor="@color/darkgray"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <com.android.mealpass.widgets.CustomTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:text="@{vm.storeAddress}"
+                            android:textSize="14sp" />
+
+                        <com.android.mealpass.widgets.CustomTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="10dp"
+                            android:text="@{vm.userName}"
+                            android:textColor="@color/darkgray"
+                            android:textSize="14sp" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_centerHorizontal="true"
+                                android:background="@drawable/ic_inside_logo"
+                                android:visibility="gone" />
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentBottom="true">
+
+                                <com.android.mealpass.widgets.CustomTextView
+                                    android:id="@+id/date_lable"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/Date"
+                                    android:textAllCaps="true"
+                                    android:textSize="14sp" />
+
+                                <com.android.mealpass.widgets.CustomTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/date_lable"
+                                    android:text="@{vm.date}"
+                                    android:textColor="@color/button_light_color"
+                                    android:textSize="14sp" />
+
+                                <com.android.mealpass.widgets.CustomTextView
+                                    android:id="@+id/collection_time"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:text="@string/CollectionTime"
+                                    android:textSize="14sp" />
+
+                                <com.android.mealpass.widgets.CustomTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/collection_time"
+                                    android:layout_alignParentEnd="true"
+                                    android:text="@{vm.time}"
+                                    android:textColor="@color/button_light_color"
+                                    android:textSize="14sp" />
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+
+                        <com.android.mealpass.widgets.CustomTextView
+                            android:id="@+id/appCompatTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:gravity="center"
+                            android:text="@string/ActiveReceiptMsg"
+                            android:textSize="14sp" />
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginRight="25dp">
+
+                            <com.android.mealpass.widgets.CustomTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{@string/Bought+` `+vm.quanitity}"
+                                android:textColor="@color/button_light_color"
+                                android:textSize="16sp" />
+
+                            <com.android.mealpass.widgets.CustomTextView
+                                android:id="@+id/currencyamount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:text="@{vm.paidPrice}"
+                                android:textColor="@color/button_light_color"
+                                android:textSize="16sp" />
+
+
+                            <com.android.mealpass.widgets.CustomTextView
+                                android:id="@+id/delivery_amount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/currencyamount"
+                                android:layout_alignParentEnd="true"
+                                android:layout_gravity="center_horizontal"
+                                android:textSize="12sp" />
+
+
+                            <com.android.mealpass.widgets.CustomTextView
+                                android:id="@+id/donated_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{vm.donatedAmount}"
+                                app:visibleGone="@{vm.isDonateAmount}"
+                                android:layout_below="@id/delivery_amount"
+                                android:layout_alignParentEnd="true"
+                                android:layout_gravity="center_horizontal"
+                                android:textSize="12sp" />
+
+
+                        </RelativeLayout>
+
+                        <com.android.mealpass.widgets.CustomTextView
+                            android:id="@+id/appCompatTextView3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="10dp"
+                            android:text="@{String.format(@string/ID,vm.productId)}"/>
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </FrameLayout>
+
+        </ScrollView>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp">
+
+            <com.android.mealpass.widgets.SlideToUnlock
+                android:id="@+id/slidetounlock1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edit_text_corner"
+                android:padding="5dp"
+                su:text="@string/SlideToRedeem"
+                su:thumb="@drawable/ic_slide_right_arrow" />
+
+            <com.android.mealpass.widgets.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/slidetounlock1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="@string/SliderMsg"
+                android:textColor="@android:color/holo_red_dark" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/purchase"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:background="#A6ffffff"
+            android:visibility="gone">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="40dp"
+                android:background="@drawable/redlogorotate" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</layout>

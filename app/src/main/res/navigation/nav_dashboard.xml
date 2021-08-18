@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_receipt"
-        android:name="com.android.mealpass.view.dashboard.fragment.ReceiptFragment"
+        android:name="com.android.mealpass.view.dashboard.fragment.receipt.ReceiptCategoryFragment"
         android:label="ReceiptFragment"
         tools:layout="@layout/fragment_receipt" />
 

@@ -98,7 +98,7 @@
     <string name="Logout">Logout</string>
     <string name="Date">Date</string>
     <string name="Bought">Bought</string>
-    <string name="ID">ID:</string>
+    <string name="ID">ID: %1$d</string>
     <string name="DonatedAmount">Donated Amount :</string>
     <string name="CollectionTime">COLLECTION TIME</string>
     <string name="SlideToRedeem">Slide to redeem</string>

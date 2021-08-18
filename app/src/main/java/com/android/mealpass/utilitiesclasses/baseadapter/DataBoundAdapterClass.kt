@@ -35,8 +35,7 @@ abstract class DataBoundAdapterClass<T, V : ViewDataBinding>(
     override val clicks: Observable<T> = clickSource.throttleFirst(500, TimeUnit.MILLISECONDS)
 
     protected val retryClickSource = PublishSubject.create<NetworkState>()
-    val retryClicks: Observable<NetworkState> =
-        retryClickSource.throttleFirst(clickThrottle, TimeUnit.MILLISECONDS)
+    val retryClicks: Observable<NetworkState> = retryClickSource.throttleFirst(clickThrottle, TimeUnit.MILLISECONDS)
 
     @LayoutRes
     private val networkStateRes = R.layout.network_state_item

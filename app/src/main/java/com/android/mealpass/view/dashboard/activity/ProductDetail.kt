@@ -1,8 +1,10 @@
 package com.android.mealpass.view.dashboard.activity
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
 import com.android.mealpass.data.api.enums.ProductBuyEnum
 import com.android.mealpass.data.extension.throttleClicks
@@ -41,11 +43,50 @@ class ProductDetail : DataBindingActivity<ActivityProductDetailBinding>() {
         get() = R.layout.activity_product_detail
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val favourite =  binding.toolbar.menu.findItem(R.id.favourites)
 
         binding.toolbar.setNavigationOnClickListener {
             finish()
+        }
+
+
+        viewModel.isFavouriteLike.observe(this,  {
+            it?.let { currentLike ->
+                favourite.isChecked = currentLike
+                val drawable = if (currentLike) R.drawable.ic_white_favourite else R.drawable.ic_trans_favorite
+                favourite.icon = ResourcesCompat.getDrawable(resources, drawable, null)
+            }
+        })
+
+        favourite?.let { item ->
+            item.setOnMenuItemClickListener {
+                  when {
+                      favourite.isChecked -> {
+                          bindNetworkState(viewModel.removeToFavourite()) {
+                              item.icon = ResourcesCompat.getDrawable(resources, R.drawable.ic_trans_favorite, null)
+                              favourite.isChecked = !it.isChecked
+                              viewModel.resultCode = Activity.RESULT_OK
+                          }
+                      } else ->{ bindNetworkState(viewModel.addToFavourite()){
+                       item.icon = ResourcesCompat.getDrawable(resources, R.drawable.ic_white_favourite, null)
+                       favourite.isChecked = !it.isChecked
+                       viewModel.resultCode = Activity.RESULT_OK
+                      }
+                      }
+                  }
+
+
+//                    bindNetworkState(viewModel.addToFavourite()) {
+//                         val drawable = if (!it.isChecked) R.drawable.ic_white_favourite else R.drawable.ic_trans_favorite
+//                        item.icon = ResourcesCompat.getDrawable(resources, drawable, null)
+//                    favourite.isChecked = !it.isChecked
+//                    viewModel.resultCode = Activity.RESULT_OK
+              //  }
+                true
+            }
         }
 
         subscribe(binding.addItem.throttleClicks()) {

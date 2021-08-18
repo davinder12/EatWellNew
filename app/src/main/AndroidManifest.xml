@@ -44,6 +44,13 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.android.mealpass.view.dashboard.activity.UsedReceiptDetail"
+            android:screenOrientation="portrait"
+            />
+
+        <activity android:name="com.android.mealpass.view.dashboard.activity.ActiveReceiptDetail"
+            android:screenOrientation="portrait"
+            />
 
         <activity
             android:name="com.android.mealpass.view.login.StartUpActivity"

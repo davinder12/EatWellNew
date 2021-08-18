@@ -46,7 +46,7 @@ interface ProductApi {
         @Field("limit") limit: Int,
         @Field("offset") offset: Int,
         @Field("time_zone") timezone: String?,
-    ): Call<FoodData>
+    ): Single<Response<FoodData>>
 
 
     @FormUrlEncoded
@@ -78,9 +78,17 @@ interface ProductApi {
     @FormUrlEncoded
     @POST("add_favourite.php")
     fun likeResturantApi(
-        @Field("favourite_id") userId: String?,
-        @Field("user_id") resID: String?,
+        @Field("favourite_id") favouriteId: String?,
+        @Field("user_id") userId: String?,
     ): Single<Response<Unit>>
+
+    @FormUrlEncoded
+    @POST("delete_favourite.php")
+    fun deleteResturantApi(
+        @Field("favourite_id") favouriteId: String?,
+        @Field("user_id") userId: String?,
+    ): Single<Response<Unit>>
+
 
 
     @FormUrlEncoded

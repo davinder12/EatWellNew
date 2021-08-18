@@ -60,8 +60,7 @@ class DeliveryAddress : DataBindingActivity<ActivityDeliveryAddressBinding>() {
         }
 
 
-        initAdapter(
-            DeliveryAddressAdapter(), binding.personalAddressList, viewModel.deliveryAddressList
+        initAdapter(DeliveryAddressAdapter(), binding.personalAddressList, viewModel.deliveryAddressList
         ) {
             navigationScreen(it)
         }
