@@ -1,4 +1,4 @@
-package com.android.mealpass.view.dashboard.fragment
+package com.android.mealpass.view.dashboard.fragment.map
 
 import android.content.Context
 import android.graphics.Bitmap

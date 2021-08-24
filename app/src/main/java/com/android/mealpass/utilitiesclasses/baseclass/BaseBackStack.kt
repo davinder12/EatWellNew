@@ -36,7 +36,7 @@ abstract class BaseBackStack : Fragment() {
     }
 
 
-    fun backStackPutDouble(key: String, value: Double) {
+    fun backStackPutDouble(key: String, value: Double?) {
         findNavController().previousBackStackEntry?.savedStateHandle?.set(key, value)
     }
 
@@ -44,7 +44,16 @@ abstract class BaseBackStack : Fragment() {
         return findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<Double>(key)
     }
 
-    fun backStackPutInt(key: String, value: Int) {
+
+    fun backStackPutFloat(key: String, value: Float?) {
+        findNavController().previousBackStackEntry?.savedStateHandle?.set(key, value)
+    }
+
+    fun backStackGetFloatData(key: String): MutableLiveData<Float>? {
+        return findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<Float>(key)
+    }
+
+    fun backStackPutInt(key: String, value: Int?) {
         findNavController().previousBackStackEntry?.savedStateHandle?.set(key, value)
     }
 

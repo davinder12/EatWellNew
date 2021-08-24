@@ -9,7 +9,6 @@ import com.android.mealpass.data.models.FoodRequestModel
 import com.android.mealpass.data.repository.LocationRepository
 import com.android.mealpass.data.repository.ProductRepository
 import com.android.mealpass.data.service.PreferenceService
-import com.android.mealpass.utilitiesclasses.PagedListViewModel
 import com.android.mealpass.utilitiesclasses.ResourceViewModel
 import com.android.mealpass.utilitiesclasses.baseclass.BaseViewModel
 import com.android.mealpass.view.dashboard.fragment.HomeFragment.Companion.CURRENT_LIST_SIZE

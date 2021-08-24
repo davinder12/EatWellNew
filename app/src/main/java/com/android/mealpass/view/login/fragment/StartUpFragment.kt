@@ -55,6 +55,13 @@ class StartUpFragment : BaseFragment<FragmentStartupBinding>() {
         subscribe(binding.faceLoginLayout.throttleClicks()) {
             binding.facebookLogin.performClick();
         }
+
+        subscribe(binding.businessLogin.throttleClicks()){
+            val navigator = StartUpFragmentDirections.actionStartUpFragmentToLoginFragment().also {
+                it.isMerchantLogin = true
+            }
+            findNavController().navigate(navigator)
+        }
     }
 
     override fun onBindView(binding: FragmentStartupBinding) {

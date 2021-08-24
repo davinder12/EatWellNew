@@ -77,17 +77,11 @@ class ProductDetail : DataBindingActivity<ActivityProductDetailBinding>() {
                       }
                       }
                   }
-
-
-//                    bindNetworkState(viewModel.addToFavourite()) {
-//                         val drawable = if (!it.isChecked) R.drawable.ic_white_favourite else R.drawable.ic_trans_favorite
-//                        item.icon = ResourcesCompat.getDrawable(resources, drawable, null)
-//                    favourite.isChecked = !it.isChecked
-//                    viewModel.resultCode = Activity.RESULT_OK
-              //  }
                 true
             }
         }
+
+
 
         subscribe(binding.addItem.throttleClicks()) {
             viewModel.resturantRequest.data.value?.let { specificFoodResponse ->

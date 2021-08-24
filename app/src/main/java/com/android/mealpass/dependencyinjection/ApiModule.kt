@@ -1,9 +1,6 @@
 package com.android.mealpass.dependencyinjection
 
-import com.android.mealpass.data.api.AuthApi
-import com.android.mealpass.data.api.AuthenticationInterceptor
-import com.android.mealpass.data.api.ProductApi
-import com.android.mealpass.data.api.ReceiptApi
+import com.android.mealpass.data.api.*
 import com.android.mealpass.data.service.PreferenceService
 import dagger.Module
 import dagger.Provides
@@ -55,6 +52,14 @@ class ApiModule {
     fun provideReceiptApi(retrofit: Retrofit): ReceiptApi {
         return buildApiClient(retrofit, ReceiptApi.MODULE_PATH).create(ReceiptApi::class.java)
     }
+
+    @Singleton
+    @Provides
+    fun provideMerchantApi(retrofit: Retrofit): MerchantApi {
+        return buildApiClient(retrofit, MerchantApi.MODULE_PATH).create(MerchantApi::class.java)
+    }
+
+
 
 
     @Singleton

@@ -297,10 +297,17 @@
 
     <string name="picktime">Pickup Time : %1$s</string>
     <string name="currency">%1$s  %2$s</string>
+    <string name="referral_code">Validating refferral code..</string>
     <string name="before_price">Before price : </string>
     <string name="currency_strike"><strike>%1$s  %2$s</strike></string>
     <string name="closeorderlable">This place is currently closed for orders - Please come back soon.</string>
     <string name="not_campaign_user">You are not a campaign user</string>
+    <string name="referral_code_validation">Please enter valid referral code</string>
+    <string name="password_updated_successfully">Password updated successfully</string>
+
+    <string name="merchant_bought">Bought %1$s</string>
+    <string name="m_date">Date: %1$s</string>
+    <string name="m_time">Time: %1$s</string>
 
 
 </resources>

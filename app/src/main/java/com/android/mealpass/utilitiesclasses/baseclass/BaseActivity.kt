@@ -17,6 +17,7 @@ import com.android.mealpass.utilitiesclasses.ResourceViewModel
 import com.android.mealpass.utilitiesclasses.baseadapter.DataBoundAdapterClass
 import com.android.mealpass.utilitiesclasses.baseadapter.DataBoundPagedListAdapter
 import com.android.mealpass.view.common.NavigationScreen
+import com.google.android.material.snackbar.Snackbar
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
@@ -26,6 +27,9 @@ abstract class BaseActivity : AppCompatActivity() {
 
 
     protected fun requirePaymentRequest() = requireObject(NavigationScreen.EXTRA_PAYMENT)
+    protected fun requireReferralVisit() = requireBoolean(NavigationScreen.IS_FIRST_TIME_VISIT)
+    protected fun requireSocialLogin() = requireBoolean(NavigationScreen.IS_SOCIAL_LOGIN)
+
 
     /**
      * [ViewModelFactory] which uses Dagger2 for dependency injection
@@ -142,6 +146,13 @@ abstract class BaseActivity : AppCompatActivity() {
     fun showMessage(message: String?) {
         message?.let {
             Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    fun showSnackMessage(message: String?) {
+        message?.let {
+            val snackBar = Snackbar.make(findViewById(android.R.id.content), it, Snackbar.LENGTH_SHORT)
+            snackBar.show()
         }
     }
 

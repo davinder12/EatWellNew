@@ -74,10 +74,9 @@ class SignupFragmentViewModel @Inject constructor(
     private fun updateUserData(loginResponse: LoginResponse) {
         //   userId = loginResponse.body.user_id.toString()
         preferenceService.putBoolean(R.string.pkey_isMerchantLogin, false)
-        preferenceService.putString(
-            R.string.pkey_secure_token,
-            "Bearer " + loginResponse.body.secure_key
-        )
+        preferenceService.putBoolean(R.string.pkey_social_login,false)
+        preferenceService.putString(R.string.pkey_secure_token, "Bearer " + loginResponse.body.secure_key)
         preferenceService.putString(R.string.pkey_phoneNumber, loginResponse.body.mobile)
+        preferenceService.putString(R.string.pkey_emaiId, loginResponse.body.email)
     }
 }

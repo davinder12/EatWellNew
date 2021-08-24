@@ -1,0 +1,86 @@
+package com.android.mealpass.data.repository
+
+import com.android.mealpass.data.api.MerchantApi
+import com.android.mealpass.data.api.ReceiptApi
+import com.android.mealpass.data.models.*
+import com.android.mealpass.data.network.*
+import com.exactsciences.portalapp.data.network.AppExecutors
+import com.google.gson.JsonObject
+import io.reactivex.Single
+import okhttp3.RequestBody
+import retrofit2.Response
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.POST
+import javax.inject.Inject
+
+
+class MerchantRepository @Inject constructor(
+    private val appExecutors: AppExecutors,
+    private val merchantApi: MerchantApi
+) {
+
+    fun getPortionListMethod(userId: String?,timeZone:String?): IResource<MerchantNotificationResponse> {
+        return NetworkResource(appExecutors, object :
+            IRetrofitNetworkRequestCallback.IRetrofitNetworkResourceCallback<MerchantNotificationResponse, MerchantNotificationResponse> {
+            override fun mapToLocal(response: MerchantNotificationResponse): MerchantNotificationResponse {
+                return response
+            }
+            override fun createNetworkRequest(): Single<Response<MerchantNotificationResponse>> {
+                return merchantApi.getPortionListApi(userId,timeZone)
+            }
+        })
+    }
+
+    fun updateMerchantDescriptionMethod(userId: String?, description: String?): IRequest<Response<JsonObject>> {
+        return NetworkRequest(appExecutors, object : IRetrofitNetworkRequestCallback<JsonObject> {
+            override fun createNetworkRequest(): Single<Response<JsonObject>> {
+                return merchantApi.merchantDescriptionApi(userId,description)
+            }
+            override fun getBodyErrorStatusCode(response: Response<JsonObject>): String {
+                return response.body()?.run { this.toString() } ?: ""
+            }
+        })
+    }
+
+
+    fun updatePortionMethod(userId: String?, portion: Int?,timeZone: String?): IRequest<Response<CommonResponseModel>> {
+        return NetworkRequest(appExecutors, object : IRetrofitNetworkRequestCallback<CommonResponseModel> {
+            override fun createNetworkRequest(): Single<Response<CommonResponseModel>> {
+                return merchantApi.savePortionMethod(userId,portion,timeZone)
+            }
+        })
+    }
+
+
+    fun portionPriceNotificationMethod(userId: String?, portionPrice: String?,currencyType: String?,IsPortion:String?,portion:Int?): IRequest<Response<CommonResponseModel>> {
+        return NetworkRequest(appExecutors, object : IRetrofitNetworkRequestCallback<CommonResponseModel> {
+            override fun createNetworkRequest(): Single<Response<CommonResponseModel>> {
+                return merchantApi.portionPriceNotfication(userId,portionPrice,currencyType,IsPortion,portion)
+            }
+        })
+    }
+
+    fun updateRetailAndCostPriceMethod(userId: String?, retailPrice: String?,costPrice: String?,currencyType:String?,timeZone:String?): IRequest<Response<CommonResponseModel>> {
+        return NetworkRequest(appExecutors, object : IRetrofitNetworkRequestCallback<CommonResponseModel> {
+            override fun createNetworkRequest(): Single<Response<CommonResponseModel>> {
+                return merchantApi.updatRetailAndCostPrice(userId,retailPrice,costPrice,currencyType,timeZone )
+            }
+        })
+    }
+
+    fun changeResturantStatusMethod(userId: String?, isOpen: Int?): IRequest<Response<CommonResponseModel>> {
+        return NetworkRequest(appExecutors, object : IRetrofitNetworkRequestCallback<CommonResponseModel> {
+            override fun createNetworkRequest(): Single<Response<CommonResponseModel>> {
+                return merchantApi.changeResturant(userId,isOpen)
+            }
+        })
+    }
+
+
+
+
+
+
+
+}

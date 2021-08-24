@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+<data>
+     <import type="com.android.mealpass.data.api.enums.SettingEnum"/>
+    
+    <variable
+        name="item"
+        type="com.android.mealpass.data.api.enums.SettingEnum" />
+    
+     <variable
+         name="isNotificationOn"
+         type="androidx.lifecycle.LiveData&lt;Boolean&gt;" />
+
+</data>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/rootView"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+  >
+
+    <com.android.mealpass.widgets.CustomTextView
+        android:id="@+id/settinglable"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:padding="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/toogleBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:setText="@{item.value}" />
+    
+    
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageView2"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_margin="8dp"
+        app:srcCompat="@drawable/ic_angle_right_arow"
+        app:layout_constraintBottom_toBottomOf="@+id/settinglable"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/settinglable" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/toogleBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        app:visibleGone="@{item.value == SettingEnum.NOTIFICATION.value}"
+        android:layout_marginEnd="@dimen/_5sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@{isNotificationOn ?  @drawable/ic_switch_off_green : @drawable/ic_switch_on}" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settinglable"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

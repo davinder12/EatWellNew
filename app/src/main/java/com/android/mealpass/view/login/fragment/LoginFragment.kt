@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.android.mealpass.data.extension.progressDialog
 import com.android.mealpass.data.extension.throttleClicks
 import com.android.mealpass.utilitiesclasses.baseclass.BaseFragment
@@ -25,6 +26,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     private val viewModel: LoginFragmentViewModel by viewModels()
 
+    val  argument : LoginFragmentArgs by navArgs()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         subscribe(binding.cross.throttleClicks()) {
@@ -38,16 +41,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         subscribe(binding.login.throttleClicks()) {
             viewModel.filterMethod { isCondition, message ->
                 when {
-                    isCondition -> {
-                        bindNetworkState(
-                            viewModel.callSignInApi(),
-                            progressDialog(R.string.Pleasewait),
-                            R.string.login_success
-                        ) {
-                            navigationScreen.dashBoardScreenNavigation()
-                            requireActivity().finish()
-                        }
-                    }
+                    isCondition -> callApiMethod()
                     else -> {
                         showSnackMessage(resources.getString(message ?: R.string.Unknown_msg))
                     }
@@ -55,6 +49,22 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             }
         }
     }
+
+
+    private fun callApiMethod(){
+        if(argument.isMerchantLogin){
+            bindNetworkState(viewModel.merchantSignInMethod(), progressDialog(R.string.Pleasewait), R.string.login_success) {
+                navigationScreen.goToMerchantScreen()
+                requireActivity().finish()
+            }
+        }else{
+            bindNetworkState(viewModel.callSignInApi(), progressDialog(R.string.Pleasewait), R.string.login_success) {
+                navigationScreen.dashBoardScreenNavigation()
+                requireActivity().finish()
+            }
+        }
+    }
+
 
     override fun onBindView(binding: FragmentLoginBinding) {
         binding.vm = viewModel

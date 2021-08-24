@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@+id/merchantNotification">
+
+    <fragment
+        android:id="@+id/merchantNotification"
+        android:name="com.android.mealpass.view.merchant.fragment.MerchantNotification"
+        android:label="MerchantNotification"
+        tools:layout="@layout/fragment_merchant_notification">
+        <action
+            android:id="@+id/action_merchantNotification_to_merchantPortion"
+            app:destination="@id/merchantPortion" />
+        <action
+            android:id="@+id/action_merchantNotification_to_merchantDescriptionUpdate"
+            app:destination="@id/merchantDescriptionUpdate" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/merchantPortion"
+        tools:layout="@layout/fragment_merchant_portion"
+        android:name="com.android.mealpass.view.merchant.fragment.MerchantPortion"
+        android:label="MerchantPortion" >
+        <action
+            android:id="@+id/action_merchantPortion_to_merchantNotification"
+            app:destination="@id/merchantNotification"
+            app:popUpTo="@id/merchantNotification"
+            app:popUpToInclusive="true"
+            />
+        <argument
+            android:name="productDetail"
+            app:argType="com.android.mealpass.data.models.MerchantNotificationResponse$Body"
+            app:nullable="true"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/merchantDescriptionUpdate"
+        android:name="com.android.mealpass.view.merchant.fragment.MerchantDescriptionUpdate"
+        tools:layout="@layout/fragment_merchant_description_update"
+        android:label="MerchantDescriptionUpdate" >
+        <action
+            android:id="@+id/action_merchantDescriptionUpdate_to_merchantNotification"
+            app:destination="@id/merchantNotification"
+            app:popUpTo="@id/merchantNotification"
+            app:popUpToInclusive="true"
+            />
+        <argument
+            android:name="description"
+            app:argType="string" />
+
+    </fragment>
+
+
+</navigation>

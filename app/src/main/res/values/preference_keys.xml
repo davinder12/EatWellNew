@@ -28,4 +28,7 @@
     <string name="pkey_maxValue" translatable="false">pkey_maxValue</string>
     <string name="pkey_fcm_token_sent" translatable="false">pkey_fcm_token_sent</string>
 
+    <string name="pkey_social_login" translatable="false">pkey_social_login</string>
+    <string name="pkey_local_notification" translatable="false">pkey_local_notification</string>
+
 </resources>

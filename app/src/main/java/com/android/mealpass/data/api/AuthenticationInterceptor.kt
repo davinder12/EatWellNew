@@ -8,6 +8,9 @@ import javax.inject.Inject
 
 class AuthenticationInterceptor @Inject constructor(private val authState: AuthState) :
     Interceptor {
+
+
+
     override fun intercept(chain: Interceptor.Chain): Response {
         val response = chain.proceed(chain.request())
         when (response.code) {
@@ -17,5 +20,7 @@ class AuthenticationInterceptor @Inject constructor(private val authState: AuthS
         }
         return response
     }
+
+
 }
 

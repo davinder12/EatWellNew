@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.android.mealpass.view.units.DataConverterKt" />
+
+
+        <variable
+            name="item"
+            type="com.android.mealpass.data.models.MerchantNotificationResponse.Body.Notifiction" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/isDelivery"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/ic_scooter"
+                app:layout_constraintBottom_toBottomOf="@+id/resturant_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/resturant_name"
+                app:visibleGone="@{item.isdelivery == 1}" />
+
+            <com.android.mealpass.widgets.CustomTextView
+                android:id="@+id/resturant_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_toStartOf="@id/isDelivery"
+                android:text="@{item.storename}"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/isDelivery"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <com.android.mealpass.widgets.CustomTextView
+                android:id="@+id/customerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{@string/CustomerName(item.name)}"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/resturant_name"
+                app:layout_constraintTop_toBottomOf="@+id/resturant_name" />
+
+            <com.android.mealpass.widgets.CustomTextView
+                android:id="@+id/receiptId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{@string/ReceiptID(item.receipt_id)}"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="@+id/customerName"
+                app:layout_constraintTop_toBottomOf="@+id/customerName" />
+
+            <com.android.mealpass.widgets.CustomTextView
+                android:id="@+id/bought"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{@string/merchant_bought(item.quantity)}"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/receiptId"
+                app:layout_constraintTop_toBottomOf="@+id/receiptId" />
+
+            <com.android.mealpass.widgets.CustomTextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="@{item.amount +` `+ item.currency_type}"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@+id/bought"
+                app:layout_constraintEnd_toEndOf="@+id/isDelivery"
+                app:layout_constraintTop_toTopOf="@+id/bought" />
+
+
+            <com.android.mealpass.widgets.CustomTextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="@{@string/m_date(DataConverterKt.getDate(item.created_date))}"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/bought"
+                app:layout_constraintTop_toBottomOf="@+id/bought" />
+
+            <com.android.mealpass.widgets.CustomTextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="@{@string/m_time(item.collection_time)}"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="@+id/date"
+                app:layout_constraintEnd_toEndOf="@+id/price"
+                app:layout_constraintTop_toTopOf="@+id/date" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>

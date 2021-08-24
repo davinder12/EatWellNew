@@ -1,0 +1,32 @@
+package com.android.mealpass.view.merchant
+
+import android.os.Bundle
+import androidx.navigation.fragment.findNavController
+import com.android.mealpass.utilitiesclasses.baseclass.DataBindingActivity
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_merchant.*
+import mealpass.com.mealpass.R
+import mealpass.com.mealpass.databinding.ActivityMerchantBinding
+
+@AndroidEntryPoint
+class MerchantActivity : DataBindingActivity<ActivityMerchantBinding>() {
+
+
+    override val layoutRes: Int
+        get() = R.layout.activity_merchant
+
+
+    override fun onSupportNavigateUp(): Boolean {
+        return nav_merchant_host.findNavController()
+            .navigateUp() || super.onSupportNavigateUp()
+    }
+
+
+
+
+//    fun clearActivity() {
+//        NavigationScreen(this).goToMainScreen(this)
+//    }
+
+
+}

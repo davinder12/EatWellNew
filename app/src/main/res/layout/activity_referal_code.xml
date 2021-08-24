@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <data>
+        <variable
+            name="vm"
+            type="com.android.mealpass.view.dashboard.fragment.setting.viewmodel.ReferralCodeViewModel" />
+
+    </data>
+
+
+    <LinearLayout
+        android:id="@+id/referalCode"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+
+        >
+
+
+        <com.android.mealpass.widgets.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:padding="15dp"
+            android:text="@string/Skip"
+            android:textColor="@android:color/white"
+            android:visibility="gone" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:padding="20dp"
+            app:srcCompat="@drawable/ic_cross"
+            android:visibility="gone" />
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/padding"
+            android:paddingRight="@dimen/padding"
+            android:paddingTop="@dimen/activity_vertical_margin">
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/logo_icon"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="25dp"
+                    android:layout_marginTop="30sp"
+                    android:background="@drawable/logo"
+                    app:civ_border_color="@color/tabcolor"
+                    app:civ_border_width="2dp" />
+
+
+
+
+                <com.android.mealpass.widgets.CustomTextView
+                    android:id="@+id/referaltext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@{vm.isFirstTimeVisit ? @string/Step2Title : @string/Step2Title2 }"
+                    />
+
+
+                <com.android.mealpass.widgets.CustomEditText
+                    android:id="@+id/code"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="35dp"
+                    android:background="@drawable/boundary_shape"
+                    android:gravity="center"
+                    android:hint="@string/Code"
+                    android:text="@={vm.referralCode}"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingEnd="5dp"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/edit_text_size" />
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/varify"
+                    android:layout_width="@dimen/_200sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center"
+                    android:text="@string/Verify"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/button_size" />
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/skipLable"
+                    android:layout_width="@dimen/_200sdp"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Skip"
+                    app:visibleGone="@{vm.isFirstTimeVisit}"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/button_size" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/cross"
+                    android:layout_gravity="center"
+                    android:layout_width="@dimen/_200sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/Close"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/button_size"
+                    app:visibleGone="@{!vm.isFirstTimeVisit}"
+                    />
+
+
+            </LinearLayout>
+        </ScrollView>
+
+
+    </LinearLayout>
+</layout>

@@ -45,6 +45,7 @@ fun ImageView.setImageDrawable(resource: Drawable?) {
 }
 
 
+
 @BindingAdapter("app:strike")
 fun MaterialTextView.strike(text: String) {
     this.text = text
