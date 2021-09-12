@@ -9,6 +9,7 @@ import com.afollestad.assent.isAllGranted
 import com.afollestad.assent.runWithPermissions
 import com.android.mealpass.data.models.FoodData
 import com.android.mealpass.utilitiesclasses.baseclass.BaseListFragment
+import com.android.mealpass.view.common.NavigationScreen
 import com.android.mealpass.view.dashboard.viewmodel.MapViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -20,11 +21,14 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_map.*
 import mealpass.com.mealpass.R
 import mealpass.com.mealpass.databinding.FragmentMapBinding
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MapFragment : BaseListFragment<FragmentMapBinding>(), OnMapReadyCallback,
     OnClusterItemInfoWindowClickListener<FoodData.Body> {
 
+    @Inject
+    lateinit var navigationScreen: NavigationScreen
 
     private val viewModel: MapViewModel by viewModels()
 
@@ -97,7 +101,9 @@ class MapFragment : BaseListFragment<FragmentMapBinding>(), OnMapReadyCallback,
 
 
     override fun onClusterItemInfoWindowClick(item: FoodData.Body?) {
-        item?.let {
+        item?.let { items ->
+            navigationScreen.productDetailScreen(items.id, items.storename)
+
 //            val signOutBottomSheet = MapProductList.create(it as ArrayList<SearchApiResponse.Body.ProductInfo>,item.merchant_info.restaurent_id)
 //            signOutBottomSheet.show(childFragmentManager, signOutBottomSheet.tag)
         }

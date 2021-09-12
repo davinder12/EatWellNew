@@ -33,8 +33,15 @@
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/ic_logout_white"
             app:title="@string/Notifications"
+            app:menu="@menu/check"
             app:titleTextAppearance="@style/Toolbar.TitleText"
-            app:titleTextColor="@android:color/white" />
+            app:titleTextColor="@android:color/white" >
+
+
+
+
+
+        </androidx.appcompat.widget.Toolbar>
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -93,11 +100,22 @@
                 android:id="@+id/displayNotification"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:emptyView="@id/emptyView"
                 android:background="@android:color/white"
                 tools:listitem="@layout/item_merchant_notification"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
+
+            <include
+                layout="@layout/empty_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
         </FrameLayout>
 

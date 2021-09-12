@@ -34,7 +34,7 @@
             android:contentInsetLeft="0dp"
             android:contentInsetRight="0dp"
             android:minHeight="?attr/actionBarSize"
-
+            app:menu="@menu/receipt"
             android:padding="0dp"
             app:contentInsetLeft="0dp"
             app:contentInsetRight="0dp"
@@ -80,8 +80,9 @@
                                 android:layout_centerInParent="true"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginTop="10dp"
+                                app:civ_border_color="@color/colorPrimary"
+                                app:civ_border_width="1dp"
                                 android:layout_marginBottom="10dp"
-                                android:background="@drawable/ic_inside_logo"
                                 app:url="@{vm.storeLogo}" />
 
                             <androidx.appcompat.widget.AppCompatImageView
@@ -91,7 +92,7 @@
                                 android:layout_alignParentRight="true"
                                 android:layout_marginLeft="5dp"
                                 app:visibleGone="@{vm.isDelivery == 1}"
-                                android:background="@drawable/ic_scooter" />
+                                android:background="@drawable/ic_scooter_red" />
 
 
                         </RelativeLayout>
@@ -209,6 +210,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
                                 android:text="@{vm.paidPrice}"
+                                android:visibility="gone"
                                 android:textColor="@color/button_light_color"
                                 android:textSize="16sp" />
 
@@ -287,15 +289,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/toolbar"
+            android:visibility="gone"
             android:background="#A6ffffff"
-            android:visibility="gone">
+            >
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="110dp"
-                android:layout_height="110dp"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_70sdp"
                 android:layout_alignParentEnd="true"
                 android:layout_margin="40dp"
-                android:background="@drawable/redlogorotate" />
+                android:rotation="40"
+                android:background="@drawable/logo" />
 
         </RelativeLayout>
 

@@ -8,7 +8,7 @@ data class ReceiptResponse(
     val status: Status
 ){
     data class Status(
-        val code: String,
+        val code: Int?,
         val count: String,
         val message: String
     )
@@ -27,13 +27,13 @@ data class ReceiptResponse(
             val currency_type: String,
             val delivery_address: String,
             val delivery_amount: Float,
-            val donated_amount: Float,
+            val donated_amount: Float?=null,
             val isFromCampaign: Int,
             val is_redeemed: Int,
             val isdelivery: Int,
-            val latitude: Double,
+            val latitude: Double?=null,
             val logo: String,
-            val longitude: Double,
+            val longitude: Double?=null,
             val paymentMethod: String,
             val payment_status: Int,
             val quantity: Int,
@@ -57,9 +57,9 @@ data class ReceiptResponse(
             val isFromCampaign: Int,
             val is_redeemed: Int,
             val isdelivery: Int,
-            val latitude: Double,
+            val latitude: Double?= null,
             val logo: String,
-            val longitude: Double,
+            val longitude: Double?=null,
             val paymentMethod: String,
             val payment_status: Int,
             val quantity: Int,

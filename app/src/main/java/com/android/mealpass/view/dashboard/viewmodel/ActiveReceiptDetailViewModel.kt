@@ -25,6 +25,9 @@ class ActiveReceiptDetailViewModel @Inject constructor(
     var resultCode = 0
     var foodReceipt = MutableLiveData<ReceiptResponse.Body.ActiveReceipt>()
 
+    var latitude = ""
+    var longitude =""
+
 
     fun redeemOrder(): LiveData<NetworkState> {
         return receiptRepository.redeemOrderMethod(foodReceipt.value?.receipt_id).also {
@@ -34,6 +37,8 @@ class ActiveReceiptDetailViewModel @Inject constructor(
 
 
     fun updateActiveReceiptItem(item: ReceiptResponse.Body.ActiveReceipt) {
+        item.latitude?.let { latitude = it.toString() }
+        item.longitude?.let { longitude = it.toString() }
         foodReceipt.value = item
     }
 
@@ -76,7 +81,7 @@ class ActiveReceiptDetailViewModel @Inject constructor(
 
 
     var isDonateAmount = foodReceipt.map {
-        it.donated_amount.roundToInt() > 0
+        it.donated_amount?.roundToInt()?:0 > 0
     }
 
     var donatedAmount = foodReceipt.map {

@@ -6,6 +6,7 @@ data class ProfileResponse(
 ){
 
     data class Status(
+            val code: Int?,
         val message: String,
         val success: Boolean,
         val user_exist: Int

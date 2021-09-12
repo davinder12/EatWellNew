@@ -4,7 +4,7 @@ data class CommonResponseModel(
     val status: Status
 ){
     data class Status(
-            val code: String,
+            val code: Int,
             val message: String
     )
 }

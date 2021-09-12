@@ -2,6 +2,7 @@ package com.android.mealpass.view.login
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.android.mealpass.data.service.PreferenceService
 import com.android.mealpass.view.common.NavigationScreen
@@ -34,16 +35,14 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun navigateScreenAfterDelay() {
-        Handler().postDelayed({
-              when {
-                  !prefference.getString(R.string.pkey_user_Id).isNullOrEmpty() && prefference.getBoolean(R.string.pkey_isMerchantLogin) -> {
-                      navigationScreen.goToMerchantScreen() }
-                  !prefference.getString(R.string.pkey_user_Id).isNullOrEmpty() -> navigationScreen.goToDashBoard()
-                  else -> navigationScreen.goToStartUpScreen()
-
-              }
+        Handler(Looper.getMainLooper()).postDelayed({
+            when {
+                !prefference.getString(R.string.pkey_user_Id).isNullOrEmpty() && prefference.getBoolean(R.string.pkey_isMerchantLogin) -> {
+                    navigationScreen.goToMerchantScreen() }
+                !prefference.getString(R.string.pkey_user_Id).isNullOrEmpty() -> navigationScreen.goToDashBoard()
+                else -> navigationScreen.goToStartUpScreen()
+            }
+            finish()
         }, SPLASH_TIME_OUT)
     }
-
-
 }

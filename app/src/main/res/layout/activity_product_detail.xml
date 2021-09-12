@@ -62,7 +62,7 @@
                         android:id="@+id/loadbackgroung"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        app:url="@{vm.coverPhoto}" />
+                        app:coverProfile="@{vm.coverPhoto}" />
 
 
                     <RelativeLayout
@@ -146,7 +146,8 @@
                         android:layout_width="@dimen/_50sdp"
                         android:layout_height="@dimen/_50sdp"
                         android:layout_centerInParent="true"
-                        app:civ_border_width="2dp"
+                        app:civ_border_color="@color/colorPrimary"
+                        app:civ_border_width="1dp"
                         app:url="@{vm.logo}" />
 
                 </RelativeLayout>
@@ -212,7 +213,6 @@
                             android:id="@+id/time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
                             android:text="@{String.format(@string/picktime, DataConverterKt.pickUpTime(vm.openingTime,vm.closingTime))}"
                             android:textColor="@android:color/white"
                             android:textSize="16sp" />
@@ -455,6 +455,14 @@
                     </RelativeLayout>
 
                 </LinearLayout>
+
+                <ProgressBar
+                    android:layout_centerInParent="true"
+                    android:id="@+id/productDetailProgress"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
 
 
             </RelativeLayout>

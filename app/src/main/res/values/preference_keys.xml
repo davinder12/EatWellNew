@@ -8,6 +8,14 @@
     <string name="pkey_userName" translatable="false">pkey_userName</string>
     <string name="pkey_isMerchantLogin" translatable="false">pkey_isMerchantLogin</string>
     <string name="pkey_emaiId" translatable="false">pkey_emailId</string>
+    <string name="pkey_social_emaiId" translatable="false">pkey_social_emaiId</string>
+
+
+    <string name="pkey_merchantEmailId" translatable="false">pkey_merchantEmailId</string>
+
+    <string name="pkey_isCustomerRemeber" translatable="false">pkey_isCustomerRemeber</string>
+    <string name="pkey_isMerchantRemeber" translatable="false">pkey_isMerchantRemeber</string>
+
     <string name="pkey_token" translatable="false">pkey_token</string>
     <string name="pkey_payment_token" translatable="false">pkey_payment_token</string>
 
@@ -30,5 +38,13 @@
 
     <string name="pkey_social_login" translatable="false">pkey_social_login</string>
     <string name="pkey_local_notification" translatable="false">pkey_local_notification</string>
+
+    <string name="pkey_daily_message" translatable="false">pkey_daily_message</string>
+    <string name="pkey_allow_daily_push" translatable="false">pkey_allow_daily_push</string>
+    <string name="pkey_notification_count" translatable="false">pkey_notification_count</string>
+    <string name="pkey_local_notification_init" translatable="false">pkey_local_notification_init</string>
+
+
+
 
 </resources>

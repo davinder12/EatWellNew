@@ -22,17 +22,29 @@
 
         <activity
             android:name="com.android.mealpass.view.dashboard.activity.DeliveryAddress"
+            android:windowSoftInputMode="adjustPan|stateHidden"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.android.mealpass.view.dashboard.activity.Campaign"
+            android:windowSoftInputMode="adjustPan|stateHidden"
             android:screenOrientation="portrait" />
 
         <activity
             android:name="com.android.mealpass.view.dashboard.activity.ProductDetail"
+            android:windowSoftInputMode="adjustPan|stateHidden"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.android.mealpass.view.dashboard.fragment.setting.ProfileActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name="com.android.mealpass.view.dashboard.DashboardActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
+
         <activity
             android:name="com.android.mealpass.view.login.SplashActivity"
             android:label="@string/app_name"
@@ -40,40 +52,76 @@
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <activity android:name="com.android.mealpass.view.dashboard.activity.UsedReceiptDetail"
+            android:windowSoftInputMode="adjustPan|stateHidden"
             android:screenOrientation="portrait"
             />
 
         <activity android:name="com.android.mealpass.view.dashboard.activity.ActiveReceiptDetail"
+            android:windowSoftInputMode="adjustPan|stateHidden"
             android:screenOrientation="portrait"
             />
 
         <activity android:name="com.android.mealpass.view.dashboard.fragment.setting.ReferalCodeActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"
             android:screenOrientation="portrait" />
 
         <activity android:name="com.android.mealpass.view.dashboard.fragment.setting.ChangePasswordActivity"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait"
             />
 
-        <activity android:name="com.android.mealpass.view.dashboard.fragment.setting.ProfileActivity"
+        <activity android:name="com.android.mealpass.view.notification.NotificationActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:screenOrientation="portrait"
+            />
+
+
+        <activity android:name="com.android.mealpass.view.notification.GeneralNotificationActivity"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait"
             />
         <activity android:name="com.android.mealpass.view.dashboard.fragment.setting.ActivityFeedBack"
+            android:windowSoftInputMode="adjustPan|stateHidden"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.android.mealpass.view.login.StartUpActivity"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" />
 
         <activity android:name="com.android.mealpass.view.merchant.MerchantActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            android:screenOrientation="portrait"
+            />
+
+        <activity android:name="com.android.mealpass.view.login.TermConditionActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"
             android:screenOrientation="portrait"
             />
 
 
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/logo" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/red_color" />
+
+        <service android:name="com.android.mealpass.data.service.MealPassFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <receiver android:name="com.android.mealpass.view.units.AlarmReceiver"/>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="DEFAULT_CHANNEL_ID" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

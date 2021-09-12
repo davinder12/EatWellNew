@@ -46,10 +46,13 @@ abstract class BaseListFragment<TBinding : ViewDataBinding> : BaseFragment<TBind
     ): X {
         recycler.adapter = adapter
 
-
-        list.observe(viewLifecycleOwner, adapter::submitList)
+        list.observe(viewLifecycleOwner, Observer {
+           adapter.submitList(it)
+        })
         adapter.retryClicks.subscribe(viewModel::retry)
-        viewModel.networkState.observe(viewLifecycleOwner, adapter::setNetworkState)
+        viewModel.networkState.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            adapter.setNetworkState(it)
+        })
         clickHandler?.let { subscribe(adapter.clicks, it) }
         return adapter
     }
@@ -69,13 +72,17 @@ abstract class BaseListFragment<TBinding : ViewDataBinding> : BaseFragment<TBind
         viewModel.items.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             adapter.submitList(it)
         })
-        viewModel.frontLoadingState.observe(viewLifecycleOwner, adapter::setNetworkState)
-        viewModel.endLoadingState.observe(viewLifecycleOwner, adapter::setNetworkState)
+        viewModel.frontLoadingState.observe(viewLifecycleOwner, Observer {
+            adapter.setNetworkState(it)
+        })
+        viewModel.endLoadingState.observe(viewLifecycleOwner, Observer {
+            adapter.setNetworkState(it)
+        })
+
         adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
             override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
                 if (positionStart == 0) recyclerView.scrollToPosition(0)
             }
-
         })
         return adapter
     }
@@ -84,10 +91,15 @@ abstract class BaseListFragment<TBinding : ViewDataBinding> : BaseFragment<TBind
         adapter: X,
         viewPager: ViewPager2,
         data: LiveData<List<T>?>,
+        listSize : (Int)->Unit,
         clickHandler: ((T) -> Unit)? = null
     ) {
         viewPager.adapter = adapter
-        data.observe(viewLifecycleOwner, adapter::submitList)
+        data.observe(viewLifecycleOwner, Observer {
+           it?.let { listSize.invoke(it.size) }
+            adapter.submitList(it)
+
+        })
         clickHandler?.let { subscribe(adapter.clicks, it) }
     }
 }

@@ -8,6 +8,7 @@ import com.android.mealpass.data.models.FoodData
 import com.android.mealpass.data.models.FoodRequestModel
 import com.android.mealpass.data.repository.LocationRepository
 import com.android.mealpass.data.repository.ProductRepository
+import com.android.mealpass.data.repository.ProductRepository.Companion.RESTURANT_ACTIVE
 import com.android.mealpass.data.service.PreferenceService
 import com.android.mealpass.utilitiesclasses.ResourceViewModel
 import com.android.mealpass.utilitiesclasses.baseclass.BaseViewModel
@@ -29,7 +30,6 @@ class FavouriteFragmentViewModel @Inject constructor(
 
     private val userId = MutableLiveData<String>()
 
-
     var favouriteItemList = ResourceViewModel(userId) {
         productRepository.favouriteListApi(
             FoodRequestModel(
@@ -49,7 +49,7 @@ class FavouriteFragmentViewModel @Inject constructor(
     }
 
     var favouriteItemListData :LiveData<List<FoodData.Body>?>  = favouriteItemList.data.map {
-        it.body
+        it.body.filter { it.is_active ==  RESTURANT_ACTIVE }
     }
 
     fun updateLocation() {

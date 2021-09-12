@@ -38,6 +38,10 @@ class ActivityFeedBack : DataBindingActivity<ActivityFeedbackBinding>() {
         super.onCreate(savedInstanceState)
 
 
+        subscribe(binding.cross.throttleClicks()){
+            finish()
+        }
+
         subscribe(binding.sendFeebackBtn.throttleClicks()){
             viewModel.filterMethod { status, message ->
                 when {
@@ -52,8 +56,13 @@ class ActivityFeedBack : DataBindingActivity<ActivityFeedbackBinding>() {
                 }
             }
         }
-
     }
+
+    override fun onPause() {
+        super.onPause()
+        hideKeboard()
+    }
+
 
 //    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 //        super.onViewCreated(view, savedInstanceState)

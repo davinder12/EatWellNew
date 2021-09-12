@@ -42,13 +42,14 @@
 
     <com.android.mealpass.widgets.CustomEditText
         android:id="@+id/phoneNumber"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/editback"
         android:ems="10"
+        android:maxLength="20"
         android:text="@={vm.phoneNumber}"
         android:hint="(+123)-12345678"
         android:inputType="number"
@@ -84,7 +85,6 @@
         android:layout_marginEnd="16dp"
         android:padding="10dp"
         android:text="@string/Update"
-        android:textAllCaps="true"
         android:textColor="@color/red_color"
         android:textSize="13sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/cancel"
@@ -97,11 +97,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/cancel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.120000005" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

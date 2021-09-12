@@ -24,6 +24,5 @@ class AppModule {
     fun provideContext(@ApplicationContext context: Context): Context {
         return context
     }
-
 }
 

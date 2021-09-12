@@ -2,7 +2,9 @@ package com.android.mealpass.utilitiesclasses.baseclass
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.Context
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
@@ -29,6 +31,8 @@ abstract class BaseActivity : AppCompatActivity() {
     protected fun requirePaymentRequest() = requireObject(NavigationScreen.EXTRA_PAYMENT)
     protected fun requireReferralVisit() = requireBoolean(NavigationScreen.IS_FIRST_TIME_VISIT)
     protected fun requireSocialLogin() = requireBoolean(NavigationScreen.IS_SOCIAL_LOGIN)
+    protected fun requireIsPaymentComplete() = requireBoolean(NavigationScreen.PAYMENT_COMPLETE)
+
 
 
     /**
@@ -75,16 +79,19 @@ abstract class BaseActivity : AppCompatActivity() {
         return adapter
     }
 
+
     protected fun <X : DataBoundAdapterClass<T, *>, T> initAdapter(
         adapter: X,
         recycler: RecyclerView,
         list: LiveData<List<T>?>,
+        netWorkState: LiveData<NetworkState>? = null,
         clickHandler: ((T) -> Unit)? = null
     ): X {
         recycler.adapter = adapter
-        list.observe(this, Observer {
+        list.observe(this,  {
             adapter.submitList(it)
         })
+        netWorkState?.observe(this,  { adapter.setNetworkState(it) })
         clickHandler?.let { subscribe(adapter.clicks, it) }
         return adapter
     }
@@ -153,6 +160,13 @@ abstract class BaseActivity : AppCompatActivity() {
         message?.let {
             val snackBar = Snackbar.make(findViewById(android.R.id.content), it, Snackbar.LENGTH_SHORT)
             snackBar.show()
+        }
+    }
+
+    fun hideKeboard(){
+        currentFocus?.let {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(it.windowToken, 0)
         }
     }
 

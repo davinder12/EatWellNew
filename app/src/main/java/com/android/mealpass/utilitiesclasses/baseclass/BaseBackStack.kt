@@ -1,5 +1,7 @@
 package com.android.mealpass.utilitiesclasses.baseclass
 
+import android.os.Bundle
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
@@ -56,6 +58,16 @@ abstract class BaseBackStack : Fragment() {
     fun backStackPutInt(key: String, value: Int?) {
         findNavController().previousBackStackEntry?.savedStateHandle?.set(key, value)
     }
+
+    fun backStackPutBundle(key:String,bundle: Bundle?){
+        findNavController().previousBackStackEntry?.savedStateHandle?.set(key, bundle)
+    }
+
+    fun backStackGetBundle(key:String) : MutableLiveData<Bundle>?{
+        return findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData(key)
+    }
+
+
 
     fun backStackGetIntData(key: String): MutableLiveData<Int>? {
         return findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<Int>(key)

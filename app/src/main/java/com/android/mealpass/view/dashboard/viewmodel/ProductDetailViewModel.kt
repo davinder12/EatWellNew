@@ -18,6 +18,7 @@ import com.android.mealpass.utilitiesclasses.baseclass.BaseViewModel
 import com.android.mealpass.view.dashboard.activity.ProductDetail.Companion.DEFAULT_QTY
 import com.android.mealpass.view.dashboard.activity.ProductDetail.Companion.FOR_DONATION_ONLY
 import com.android.mealpass.view.units.isDeliverytimeOnOff
+import com.android.mealpass.view.units.isHomeDeliveryAvailable
 import com.android.mealpass.view.units.isResturantOpen
 import com.android.mealpass.view.units.pickUpTime
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -34,6 +35,7 @@ class ProductDetailViewModel @Inject constructor(
 
 
     var resultCode = 0
+    var notificationId = ""
     var resturantName = mutableLiveData("")
     var resturantId = MutableLiveData<String>()
     var isMerchantInfoVisible = mutableLiveData(false)
@@ -48,13 +50,20 @@ class ProductDetailViewModel @Inject constructor(
             SingleResturantRequest(
                 it,
                 preferenceService.getString(R.string.pkey_userlat),
-                preferenceService.getString(R.string.pkey_userLong),
-                "", TimeZone.getDefault().id,
-                preferenceService.getString(R.string.pkey_user_Id),
-
-                )
+                preferenceService.getString(R.string.pkey_userLong), notificationId, TimeZone.getDefault().id,
+                preferenceService.getString(R.string.pkey_user_Id))
         )
     }
+
+
+    fun updateBadges(){
+         var numberOfCount =preferenceService.getInt(R.string.pkey_notification_count)
+         if( numberOfCount > 0 ){
+             numberOfCount -= 1
+             preferenceService.putInt(R.string.pkey_notification_count,numberOfCount)
+         }
+    }
+
 
     var coverPhoto = resturantRequest.data.map {
         it.body.cover_photo
@@ -246,8 +255,7 @@ class ProductDetailViewModel @Inject constructor(
                     "",   // productInfo.product_id, not sure cross verify for it
                     productInfo.defaultPortion
                 )
-            ),
-            "",
+            ), paymentInfo,
             deliveryAmount,
             isdelivery,
             productInfo.currency_type,
@@ -264,11 +272,14 @@ class ProductDetailViewModel @Inject constructor(
         productInfo: SpecificFoodResponse.Body,
         paymentInfo: String
     ): Boolean {
-        val condition =
-            productInfo.allow_fullday_delivery || productInfo.is_home_delivery == 1 && isDeliverytimeOnOff(
-                productInfo.opening_time,
-                productInfo.delivery_close_before_hours
-            )
+
+//        productInfo.allow_fullday_delivery || productInfo.is_home_delivery == 1 && isDeliverytimeOnOff(
+//                productInfo.opening_time,
+//                productInfo.delivery_close_before_hours
+//        )
+
+        val condition = isHomeDeliveryAvailable(productInfo.is_home_delivery,productInfo.allow_fullday_delivery,
+                productInfo.opening_time,productInfo.delivery_close_before_hours)
         return if (paymentInfo == "campaign") productInfo.isFreeDelivery == 1 && condition else condition
     }
 

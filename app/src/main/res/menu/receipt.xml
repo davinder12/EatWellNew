@@ -10,5 +10,5 @@
         android:checked="false"
         android:orderInCategory="1"
         app:showAsAction="always"
-        android:title="Direction"/>
+       />
 </menu>

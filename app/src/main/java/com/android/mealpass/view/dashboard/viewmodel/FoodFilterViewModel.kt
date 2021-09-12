@@ -51,8 +51,9 @@ class FoodFilterViewModel @Inject constructor(
         maxValueInit = preferenceService.getFloat(R.string.pkey_maxValue, MAX_TIME)
     }
 
-    var resource =
-        ResourceViewModel(userId) { productRepository.getFoodList(it, getListOfObject()) }
+    var resource = ResourceViewModel(userId) {
+        productRepository.getFoodList(it, getListOfObject())
+    }
 
     var dataList = resource.data.map { it.body }
 

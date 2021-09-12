@@ -20,8 +20,10 @@ class ReferralCodeViewModel @Inject constructor(private val userRepository: User
       var isFirstTimeVisit = mutableLiveData(false)
 
      fun callRerralCodeApi(): LiveData<NetworkState> {
+      val emailId =  if(preferenceService.getBoolean(R.string.pkey_social_login)) { preferenceService.getString(R.string.pkey_social_emaiId)
+      } else { preferenceService.getString(R.string.pkey_emaiId) }
      val networkRequest = userRepository.referralCodeMethod(preferenceService.getString(R.string.pkey_user_Id),
-             preferenceService.getString(R.string.pkey_emaiId),referralCode.value)
+         emailId,referralCode.value)
          subscribe(networkRequest.request)
       return networkRequest.networkState
     }

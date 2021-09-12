@@ -1,8 +1,7 @@
 package com.android.mealpass.view.units
 
-import org.threeten.bp.LocalDateTime
-import org.threeten.bp.LocalTime
-import org.threeten.bp.ZonedDateTime
+import android.util.Log
+import org.threeten.bp.*
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.format.FormatStyle
 import java.util.*
@@ -10,13 +9,13 @@ import java.util.*
 
 //yyyy-MM-dd HH:mm:ss
 
-val dateTimePattern: DateTimeFormatter =
-    DateTimeFormatter.ofPattern("yyyy-MM-dd H:m:s", Locale.ENGLISH)
+val dateTimePattern: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd H:m:s", Locale.ENGLISH)
 val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)
-val dateFormatter: DateTimeFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)
+val dateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH)
 val timeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("H:m", Locale.ENGLISH)
 val localTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm", Locale.ENGLISH)
 val timeFormatter2: DateTimeFormatter = DateTimeFormatter.ofPattern("H:m:s", Locale.ENGLISH)
+val timeFormatterAmPm: DateTimeFormatter = DateTimeFormatter.ofPattern("hh:mm a", Locale.ENGLISH)
 
 
 const val DEFAULT_BEFORE_CLOSE_TIME = 30
@@ -31,11 +30,19 @@ fun dateTime(dateTime: ZonedDateTime?): CharSequence? {
 }
 
 
+fun getAmPmTimeMethod(dateTime: String?):String{
+    if(dateTime.isNullOrEmpty()) return ""
+    return timeFormatterAmPm.format(LocalDateTime.parse(dateTime, dateTimePattern).atOffset(ZoneOffset.UTC).atZoneSameInstant(ZoneId.systemDefault()))
+
+}
+
 fun time(locationDateTime: String?): String? {
     if (locationDateTime == null) return null
-    return timeFormatter.format(
-        LocalDateTime.parse(locationDateTime, dateTimePattern).toLocalTime()
-    )
+    return timeFormatter.format(LocalDateTime.parse(locationDateTime, dateTimePattern).toLocalTime())
+}
+
+fun convertTimeIntoTwoDigit(firstTime:String,secondTime:String): String {
+    return LocalTime.parse(firstTime,timeFormatter).toString()+"-"+LocalTime.parse(secondTime,timeFormatter).toString()
 }
 
 fun date(locationDateTime: String?): String? {
@@ -44,6 +51,9 @@ fun date(locationDateTime: String?): String? {
 }
 
 fun getCurrentTime(): String = LocalTime.now().format(localTimeFormatter)
+
+fun getCurrentDate(): String = LocalDate.now().format(dateFormatter)
+
 
 
 fun isTimeExpired(
@@ -78,8 +88,7 @@ fun isDeliverytimeOnOff(pickUpStartTime: String?, deliveryCloseBeforeTime: Strin
     var defaultCloseBeforeTime = DEFAULT_BEFORE_CLOSE_TIME
     val currentTime = LocalTime.parse(LocalTime.now().format(timeFormatter))
     val startTime = LocalDateTime.parse(pickUpStartTime, dateTimePattern).toLocalTime()
-    val totalminutes =
-        ((startTime.hour * MINUSTES) + startTime.minute) - ((currentTime.hour * MINUSTES) + currentTime.minute)
+    val totalminutes = ((startTime.hour * MINUSTES) + startTime.minute) - ((currentTime.hour * MINUSTES) + currentTime.minute)
 
     deliveryCloseBeforeTime?.let {
         val localTime = LocalTime.parse(it, timeFormatter2)

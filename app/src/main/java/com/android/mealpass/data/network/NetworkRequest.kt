@@ -4,6 +4,10 @@ import androidx.annotation.MainThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import com.android.mealpass.data.extension.postUpdate
+import com.android.mealpass.data.models.CommonResponseModel
+import com.android.mealpass.data.models.ResponseValidator
+import com.android.mealpass.data.repository.UserRepository.Companion.RESPONSE_FALIURE
+import com.android.mealpass.data.repository.UserRepository.Companion.SESSION_EXPIRED
 import com.exactsciences.portalapp.data.network.AppExecutors
 import io.reactivex.Maybe
 import io.reactivex.Single
@@ -55,13 +59,15 @@ open class NetworkRequest<ResponseType>
     }
 
     private fun filterAndUpdateNetworkState(response: ResponseType): Boolean {
-        val bodyStatusCode = cb.getBodyErrorStatusCode(response)
-        val isBodyStatusCodeOk = checkBodyStatusCode(bodyStatusCode)
+        val responseStatus = cb.getResponseStatus(response)
         val isResponseCodeOk = cb.isSuccess(response)
-        val filter = isResponseCodeOk && isBodyStatusCodeOk
-
+        val filter = isResponseCodeOk && responseStatus.code == 1
         when {
-            !isBodyStatusCodeOk -> { }
+            responseStatus.code == RESPONSE_FALIURE -> _networkState.postUpdate(NetworkState.error(responseStatus.message, R.string.network_error_unknown))
+            responseStatus.code == SESSION_EXPIRED ->{
+                _networkState.postUpdate(NetworkState.error(responseStatus.message, R.string.network_error_unknown))
+                cb.sessionExpired()
+            }
             filter -> _networkState.postUpdate(NetworkState.success)
             else -> _networkState.postUpdate(cb.getErrorState(response))
         }
@@ -121,6 +127,10 @@ interface INetworkRequestCallback<ResponseType> {
      */
 
 
+    fun getResponseStatus(response: ResponseType): ResponseValidator = ResponseValidator(1,"")
+
+    fun sessionExpired() {}
+
     fun getBodyErrorStatusCode(response: ResponseType): String = "{\"status\":{\"code\":\"1\"}}"
 
     /**
@@ -130,7 +140,6 @@ interface INetworkRequestCallback<ResponseType> {
     fun getExceptionState(it: Throwable): NetworkState {
         return NetworkState.error(it.localizedMessage)
     }
-
 
     /**
      * Called on success

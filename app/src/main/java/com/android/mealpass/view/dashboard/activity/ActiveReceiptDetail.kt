@@ -1,10 +1,12 @@
 package com.android.mealpass.view.dashboard.activity
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import com.android.mealpass.data.extension.progressDialog
+import com.android.mealpass.data.models.ProductReceiptResponse
 import com.android.mealpass.data.models.ReceiptResponse
 import com.android.mealpass.utilitiesclasses.baseclass.DataBindingActivity
 import com.android.mealpass.view.common.NavigationScreen
@@ -14,12 +16,16 @@ import com.android.mealpass.widgets.alertDialog
 import dagger.hilt.android.AndroidEntryPoint
 import mealpass.com.mealpass.R
 import mealpass.com.mealpass.databinding.ActivityActiveReceiptDetailBinding
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ActiveReceiptDetail : DataBindingActivity<ActivityActiveReceiptDetailBinding>(),
     SlideToUnlock.OnUnlockListener {
 
     val viewModel: ActiveReceiptDetailViewModel by viewModels()
+
+      @Inject
+      lateinit var  navigationScreen: NavigationScreen
 
     override val layoutRes: Int
         get() = R.layout.activity_active_receipt_detail
@@ -32,22 +38,30 @@ class ActiveReceiptDetail : DataBindingActivity<ActivityActiveReceiptDetailBindi
             viewModel.updateActiveReceiptItem(it)
         }
 
+
+        binding.toolbar.menu.findItem(R.id.right_dirction)?.let {
+            it.setOnMenuItemClickListener {
+                navigationScreen.goToGoogleMap(viewModel.latitude,viewModel.longitude)
+                true
+            }
+        }
+
         binding.toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
     }
 
     override fun onBackPressed() {
-//        when {
-//            requireIsPaymentComplete() -> {
-//                NavigationScreen(this).gotToResturantActivity()
-//                finish()
-//            }
-//            else -> {
-//                Intent().also { setResult(viewModel.resultCode, it) }
-//                finish()
-//            }
-//        }
+        when {
+            requireIsPaymentComplete() -> {
+                navigationScreen.goToDashBoard()
+                finish()
+            }
+            else -> {
+                Intent().also { setResult(viewModel.resultCode, it) }
+                finish()
+            }
+        }
     }
 
     override fun onBindView(binding: ActivityActiveReceiptDetailBinding) {

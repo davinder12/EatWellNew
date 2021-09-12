@@ -1,6 +1,7 @@
 package com.android.mealpass.view.dashboard.activity
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -10,6 +11,7 @@ import com.android.mealpass.data.api.enums.ProductBuyEnum
 import com.android.mealpass.data.extension.throttleClicks
 import com.android.mealpass.data.models.ProductItem
 import com.android.mealpass.data.models.SpecificFoodResponse
+import com.android.mealpass.data.service.MealPassFirebaseMessagingService
 import com.android.mealpass.utilitiesclasses.baseclass.DataBindingActivity
 import com.android.mealpass.view.common.NavigationScreen
 import com.android.mealpass.view.common.NavigationScreen.Companion.RESTURANT_ID
@@ -49,17 +51,19 @@ class ProductDetail : DataBindingActivity<ActivityProductDetailBinding>() {
         val favourite =  binding.toolbar.menu.findItem(R.id.favourites)
 
         binding.toolbar.setNavigationOnClickListener {
-            finish()
+           onBackPressed()
         }
 
 
-        viewModel.isFavouriteLike.observe(this,  {
+        viewModel.isFavouriteLike.observe(this, {
             it?.let { currentLike ->
                 favourite.isChecked = currentLike
                 val drawable = if (currentLike) R.drawable.ic_white_favourite else R.drawable.ic_trans_favorite
                 favourite.icon = ResourcesCompat.getDrawable(resources, drawable, null)
             }
         })
+
+
 
         favourite?.let { item ->
             item.setOnMenuItemClickListener {
@@ -70,12 +74,12 @@ class ProductDetail : DataBindingActivity<ActivityProductDetailBinding>() {
                               favourite.isChecked = !it.isChecked
                               viewModel.resultCode = Activity.RESULT_OK
                           }
-                      } else ->{ bindNetworkState(viewModel.addToFavourite()){
+                      } else ->{
+                       bindNetworkState(viewModel.addToFavourite()){
                        item.icon = ResourcesCompat.getDrawable(resources, R.drawable.ic_white_favourite, null)
                        favourite.isChecked = !it.isChecked
                        viewModel.resultCode = Activity.RESULT_OK
-                      }
-                      }
+                      } }
                   }
                 true
             }
@@ -89,15 +93,13 @@ class ProductDetail : DataBindingActivity<ActivityProductDetailBinding>() {
                     ProductBuyEnum.SHOP_CLOSE -> showMessage(getString(R.string.closeorderlable))
                     ProductBuyEnum.NEED_PHONENUMBER -> {
                         val phoneNumberDialog = PhoneNumberDialog.create {
-                            val orderSelectionDialog = OrderSelectionDialog.create(
-                                specificFoodResponse.body.itemleft
-                            ) {
+                            val orderSelectionDialog = OrderSelectionDialog.create(specificFoodResponse.body.itemleft) {
                                 specificFoodResponse.body.defaultPortion = it
                                 portionValidation(specificFoodResponse)
                             }
                             orderSelectionDialog.show(
-                                supportFragmentManager,
-                                orderSelectionDialog.tag
+                                    supportFragmentManager,
+                                    orderSelectionDialog.tag
                             )
                         }
                         phoneNumberDialog.show(supportFragmentManager, phoneNumberDialog.tag)
@@ -114,7 +116,7 @@ class ProductDetail : DataBindingActivity<ActivityProductDetailBinding>() {
             }
         }
 
-        viewModel.description.observe(this, Observer {
+        viewModel.description.observe(this,  {
             binding.itemDescription.loadData(it, "text/html; charset=utf-8", "utf-8")
         })
 
@@ -125,9 +127,16 @@ class ProductDetail : DataBindingActivity<ActivityProductDetailBinding>() {
             viewModel.updateResturantId(it)
         }
 
+        intent.extras?.getString(MealPassFirebaseMessagingService.NOTIFICATION_ID, "")?.let {
+           if(it.isNotEmpty()) viewModel.updateBadges()
+            viewModel.notificationId = it
+        }
+
         viewModel.resturantDrawable.observe(this, {
             binding.addItem.setImageDrawable(ContextCompat.getDrawable(this, it))
         })
+
+        bindNetworkState(viewModel.networkState,loadingIndicator =  binding.productDetailProgress)
 
     }
 
@@ -137,29 +146,29 @@ class ProductDetail : DataBindingActivity<ActivityProductDetailBinding>() {
             ProductBuyEnum.DONATION_PORTION_EMPTY -> messageDialog(getString(R.string.MaximumLimitOver))
             ProductBuyEnum.DONATION_PORTION -> {
                 campignDialog(
-                    getString(R.string.ConfirmProduct, result.quantity.toString()) + getString(
-                        R.string.OrderConfirmation
-                    )
+                        getString(R.string.ConfirmProduct, result.quantity.toString()) + getString(
+                                R.string.OrderConfirmation
+                        )
                 ) {
                     result.campaignUserHomeDelivery(
-                        result.saveReceiptRequestModel?.isDelivery ?: false,
-                        getString(R.string.Delivery),
-                        getString(R.string.DeliveryDonationPopUp)
+                            result.saveReceiptRequestModel?.isDelivery ?: false,
+                            getString(R.string.Delivery),
+                            getString(R.string.DeliveryDonationPopUp)
                     )
                 }
             }
             ProductBuyEnum.DONATION_PORTION_LIMIT_OVER -> {
                 campignDialog(
-                    getString(
-                        R.string.PortionLeft,
-                        result.quantity.toString(),
-                        result.quantity.toString()
-                    )
+                        getString(
+                                R.string.PortionLeft,
+                                result.quantity.toString(),
+                                result.quantity.toString()
+                        )
                 ) {
                     result.campaignUserHomeDelivery(
-                        result.saveReceiptRequestModel?.isDelivery ?: false,
-                        getString(R.string.Delivery),
-                        getString(R.string.DeliveryDonationPopUp)
+                            result.saveReceiptRequestModel?.isDelivery ?: false,
+                            getString(R.string.Delivery),
+                            getString(R.string.DeliveryDonationPopUp)
                     )
                 }
             }
@@ -170,24 +179,24 @@ class ProductDetail : DataBindingActivity<ActivityProductDetailBinding>() {
     }
 
     private fun ProductItem.campaignUserHomeDelivery(
-        isDelivery: Boolean,
-        title: String,
-        message: String
+            isDelivery: Boolean,
+            title: String,
+            message: String
     ) {
         when {
             isDelivery -> {
                 alertDialog(title,
-                    message,
-                    getString(R.string.Continue),
-                    getString(R.string.Cancel),
-                    successResponse = {
-                        navigationScreen.goToDeliveryScreen(this.saveReceiptRequestModel)
-                    },
-                    errorResponse = {
-                        this.saveReceiptRequestModel?.isDelivery = false
-                        this.saveReceiptRequestModel?.delivery_amount = 0f
-                        navigationScreen.goToCampaignScreen(this.saveReceiptRequestModel)
-                    }
+                        message,
+                        getString(R.string.Continue),
+                        getString(R.string.Cancel),
+                        successResponse = {
+                            navigationScreen.goToDeliveryScreen(this.saveReceiptRequestModel)
+                        },
+                        errorResponse = {
+                            this.saveReceiptRequestModel?.isDelivery = false
+                            this.saveReceiptRequestModel?.delivery_amount = 0f
+                            navigationScreen.goToCampaignScreen(this.saveReceiptRequestModel)
+                        }
                 )
             }
             else -> navigationScreen.goToCampaignScreen(this.saveReceiptRequestModel)
@@ -199,5 +208,9 @@ class ProductDetail : DataBindingActivity<ActivityProductDetailBinding>() {
         binding.vm = viewModel
     }
 
+    override fun onBackPressed() {
+        Intent().also { setResult(viewModel.resultCode, it) }
+        finish()
+    }
 
 }

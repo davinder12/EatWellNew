@@ -6,6 +6,8 @@ import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PageKeyedDataSource
 import androidx.paging.PagedList
+import com.android.mealpass.data.models.LocationResponse
+import com.android.mealpass.data.models.ResponseValidator
 import com.android.mealpass.utilitiesclasses.IListResource
 import com.exactsciences.portalapp.data.network.AppExecutors
 import mealpass.com.mealpass.R
@@ -80,6 +82,10 @@ abstract class NetworkListResourceBoundaryCallback<LocalType, RemoteType>(privat
     protected abstract fun loadAfter(page: Int): Call<RemoteType>
     protected abstract fun loadBefore(page: Int): Call<RemoteType>
     protected abstract fun mapToLocal(items: RemoteType): List<LocalType>
+    protected abstract fun getResponseStatus(items: RemoteType): ResponseValidator
+    protected abstract fun sessionExpired()
+
+
 
     override fun loadInitial(
         params: LoadInitialParams<Int>,
@@ -92,9 +98,12 @@ abstract class NetworkListResourceBoundaryCallback<LocalType, RemoteType>(privat
             val response = request.execute()
             retry = null
             if (response.isSuccessful) {
-                response.body()?.let { callback.onResult(mapToLocal(it), null, 1) }
                 networkState.postValue(NetworkState.success)
                 networkStateBefore.postValue(NetworkState.success)
+                response.body()?.let{
+                    if(getResponseStatus(it).code  == 2) sessionExpired()
+                    else callback.onResult(mapToLocal(it), null, 1)
+                }
             } else {
                 retry = { loadInitial(params, callback) }
                 networkState.postValue(NetworkState.error(R.string.network_error_unknown))
@@ -130,7 +139,10 @@ abstract class NetworkListResourceBoundaryCallback<LocalType, RemoteType>(privat
             override fun onResponse(call: Call<RemoteType>, response: Response<RemoteType>) {
                 when {
                     response.isSuccessful -> {
-                        response.body()?.let { callback.onResult(mapToLocal(it), params.key + 1) }
+                        response.body()?.let {
+                            if(getResponseStatus(it).code  == 2) sessionExpired()
+                            else   callback.onResult(mapToLocal(it), params.key + 1)
+                        }
                         networkState.postValue(NetworkState.success)
                         networkStateAfter.postValue(NetworkState.success)
                     }

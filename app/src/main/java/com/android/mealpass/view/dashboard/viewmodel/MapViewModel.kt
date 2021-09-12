@@ -66,8 +66,9 @@ class MapViewModel @Inject constructor(
         return resturantTime
     }
 
+
     var data = resourceModel.data.map {
-        it.body
+        it.body.filter { it.is_active == ProductRepository.RESTURANT_ACTIVE }
     }
 
     var networkState = resourceModel.networkState.map {
@@ -84,9 +85,7 @@ class MapViewModel @Inject constructor(
 
     fun getResturantList() {
         when {
-            preferenceService.getString(R.string.pkey_userlat)
-                .isNullOrEmpty() -> locationRepository.getUserCurrentLocation {
-
+            preferenceService.getString(R.string.pkey_userlat).isNullOrEmpty() -> locationRepository.getUserCurrentLocation {
                 this.userId.postValue(preferenceService.getString(R.string.pkey_user_Id, ""))
             }
             else -> {

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:id="@+id/root_layout"
+        android:layout_height="match_parent"
+        tools:context="com.android.mealpass.main.notification.NotificationActivity">
+
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <com.android.mealpass.widgets.EmptyRecyclerView
+                android:id="@+id/notificationlist"
+                android:layout_width="match_parent"
+                app:emptyView="@layout/empty_view"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_notification"
+                android:layout_height="match_parent"
+                />
+
+            <include
+                layout="@layout/empty_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </FrameLayout>
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="0dp"
+            android:background="?attr/colorPrimary"
+            android:contentInsetStart="0dp"
+            android:contentInsetLeft="0dp"
+            android:contentInsetRight="0dp"
+            android:minHeight="?attr/actionBarSize"
+            android:padding="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetStartWithNavigation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
+            app:title="@string/Notifications"
+            app:titleTextAppearance="@style/Toolbar.TitleText"
+            app:titleTextColor="@android:color/white" />
+
+
+
+
+
+
+           </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

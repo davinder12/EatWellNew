@@ -10,7 +10,6 @@ class AuthenticationInterceptor @Inject constructor(private val authState: AuthS
     Interceptor {
 
 
-
     override fun intercept(chain: Interceptor.Chain): Response {
         val response = chain.proceed(chain.request())
         when (response.code) {

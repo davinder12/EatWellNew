@@ -30,8 +30,7 @@ class LocationRepository @Inject constructor(
         val locationManager = context.getLocationManager()
         when {
             context.isNetworkEnabled() -> {
-                val location =
-                    locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+                val location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
                 if (location != null) {
                     updateLocation(location)
                     response?.invoke(location)

@@ -30,7 +30,7 @@ interface MerchantApi {
     @FormUrlEncoded
     @POST("save_description.php")
     fun merchantDescriptionApi(@Field("user_id") userId: String?,
-                               @Field("expected_description") portion: String?):Single<Response<JsonObject>>
+                               @Field("expected_description") portion: String?):Single<Response<CommonResponseModel>>
 
     @FormUrlEncoded
     @POST("save_current_portion.php")
@@ -61,5 +61,13 @@ interface MerchantApi {
     fun changeResturant(@Field("user_id") userId: String?,
                         @Field("is_open") isOpen: Int?): Single<Response<CommonResponseModel>>
 
+
+    @FormUrlEncoded
+    @POST("merchant_update_info.php")
+    fun merchantTokenUpdate(@Field("user_id") userId: String?,
+                            @Field("app_version") appVersion: String?,
+                            @Field("device_type") deviceType: String?,
+                            @Field("device_token") deviceToken: String?,
+                            ): Single<Response<CommonResponseModel>>
 
 }

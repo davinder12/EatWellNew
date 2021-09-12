@@ -3,11 +3,13 @@ package com.android.mealpass.view.dashboard.fragment.receipt
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import com.android.mealpass.data.extension.throttleClicks
 import com.android.mealpass.utilitiesclasses.baseclass.BaseListFragment
 import com.android.mealpass.view.common.NavigationScreen
 import com.android.mealpass.view.dashboard.adapter.UsedReceiptAdapter
 import com.android.mealpass.view.dashboard.viewmodel.ReceiptFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.empty_view.*
 import kotlinx.android.synthetic.main.fragment_receipt_item.*
 import mealpass.com.mealpass.R
 import mealpass.com.mealpass.databinding.FragmentReceiptItemBinding
@@ -30,11 +32,16 @@ class UsedReceiptFragment : BaseListFragment<FragmentReceiptItemBinding>() {
         initAdapter(UsedReceiptAdapter(), receiptList, viewModel.usedReceiptList,viewModel.networkState) {
             navigationScreen.goToUsedReceiptDetailActivity(it)
         }
+
+        subscribe(emptyView.throttleClicks()) {
+            updateList()
+        }
+
+
     }
 
     fun updateList(){
         viewModel.updateReceipt()
-
     }
 
 

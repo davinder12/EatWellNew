@@ -26,16 +26,22 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     private val viewModel: LoginFragmentViewModel by viewModels()
 
-    val  argument : LoginFragmentArgs by navArgs()
+    private val  argument : LoginFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.updateLoginType(argument.isMerchantLogin)
+
         subscribe(binding.cross.throttleClicks()) {
             findNavController().popBackStack()
         }
 
         subscribe(binding.forgotPwd.throttleClicks()) {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToForgotPasswordFragment())
+        }
+
+        subscribe(binding.termsCondition.throttleClicks()){
+             navigationScreen.goToTermAndConditionScreen(argument.isMerchantLogin)
         }
 
         subscribe(binding.login.throttleClicks()) {
@@ -49,7 +55,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             }
         }
     }
-
 
     private fun callApiMethod(){
         if(argument.isMerchantLogin){

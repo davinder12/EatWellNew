@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Meal Pass</string>
+    <string name="app_name">MealPass</string>
 
     <string name="DailyPushMsg">You can save a meal and it\'s only few minutes away. To see, Check out MealPass app.</string>
     <string name="Login">Log in</string>
@@ -245,6 +245,7 @@
     <string name="Subject">Subject</string>
 
     <string name="Pleasewait">Please wait…</string>
+    <string name="UpdateToServer">Notify to Server…</string>
     <string name="FoodPlatform">MealPass sponsor platform</string>
     <string name="DeliveryAddress">Delivery Address</string>
     <string name="GpsSetting">GPS is settings</string>

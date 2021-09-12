@@ -1,17 +1,21 @@
 package com.android.mealpass.view.merchant.viewmodel
 
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import com.android.mealpass.data.extension.mutableLiveData
 import com.android.mealpass.data.models.MerchantNotificationResponse
+import com.android.mealpass.data.network.NetworkState
 import com.android.mealpass.data.repository.MerchantRepository
+import com.android.mealpass.data.repository.UserRepository
 import com.android.mealpass.data.service.PreferenceService
 import com.android.mealpass.utilitiesclasses.PagedListViewModel
 import com.android.mealpass.utilitiesclasses.ResourceViewModel
 import com.android.mealpass.utilitiesclasses.baseclass.BaseViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
+import mealpass.com.mealpass.BuildConfig
 import mealpass.com.mealpass.R
 import java.util.*
 import javax.inject.Inject
@@ -20,7 +24,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MerchantNotificationModel @Inject constructor(
         private val preferenceService: PreferenceService,
-        merchantRepository: MerchantRepository
+        private val  merchantRepository: MerchantRepository,
+        private val  userRepository: UserRepository
 ) : BaseViewModel() {
 
     private val userId = MutableLiveData<String>()
@@ -28,6 +33,7 @@ class MerchantNotificationModel @Inject constructor(
     var price = 0.0
     var portion = 0
     var description = ""
+    var statusCode = 0
 
     var merchantNotificationResponse : MerchantNotificationResponse.Body? = null
 
@@ -36,34 +42,58 @@ class MerchantNotificationModel @Inject constructor(
         merchantRepository.getPortionListMethod(it, TimeZone.getDefault().id)
     }
 
+
     val notificationList = merchantResource.data.map {
         merchantNotificationResponse = it.body
         description =  it.body.expected_description
         it.body.notifictions
     }
 
-
-     fun callApi(){
-        userId.value = preferenceService.getString(R.string.pkey_user_Id,"")
+    val networkState = merchantResource.networkState.map {
+        it
     }
 
 
-//    private fun getMerchantList(productId: Int) {
-//        val item = MerchantNotificationRequest(
-//            5,
-//            0,
-//            productId,
-//            preferenceService.getString(R.string.pkey_user_Id)
-//        )
-//        notificationRequestModel.postValue(item)
-//    }
+    fun updateMerchantToken() {
+        preferenceService.getString(R.string.pkey_fcm_token_sent)?.let {
+            if(it.isNotEmpty()) {
+                merchantRepository.updateMerchantToken(
+                        preferenceService.getString(R.string.pkey_user_Id, ""), BuildConfig.VERSION_NAME, "0", preferenceService.getString(R.string.pkey_fcm_token_sent),
+                ).also {
+                    subscribe(it.request){
+                       it.body()?.status?.code?.let {
+                           statusCode = it
+                       }
+                    }
+                }
+            }
+        }
+    }
 
-//    fun updateItem(productItem: MerchantNotificationResponse.Body) {
-//        price = productItem.price
-//        portion = productItem.portion
-//        resturantName = productItem.storeName ?: ""
-//        getMerchantList(productItem.product_id)
-//    }
+     fun callApi(){
+        userId.value = preferenceService.getString(R.string.pkey_user_Id,"")
+     }
+
+
+    fun clearData() {
+        val merchantRemeber =  preferenceService.getBoolean(R.string.pkey_isMerchantRemeber)
+        val merchantEmailId = preferenceService.getString(R.string.pkey_merchantEmailId)
+        val userEmailId = preferenceService.getString(R.string.pkey_emaiId)
+        val customerRemeber = preferenceService.getBoolean(R.string.pkey_isCustomerRemeber)
+        preferenceService.clearPreference()
+        preferenceService.putBoolean(R.string.pkey_isMerchantRemeber,merchantRemeber)
+        preferenceService.putString(R.string.pkey_merchantEmailId,merchantEmailId)
+        preferenceService.putString(R.string.pkey_emaiId,userEmailId)
+        preferenceService.putBoolean(R.string.pkey_isCustomerRemeber,customerRemeber)
+    }
+
+    fun logoutMethod(): LiveData<NetworkState> {
+        return userRepository.logoutApi(preferenceService.getString(R.string.pkey_user_Id))
+            .also { subscribe(it.request)
+            }.networkState
+    }
+
+
 
 
 }

@@ -2,6 +2,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="vm"
+            type="com.android.mealpass.view.dashboard.viewmodel.FindFoodViewModel" />
+
+    </data>
+
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -32,7 +39,7 @@
                     android:layout_height="match_parent">
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/imageView2"
+                        android:id="@+id/customerSupport"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:paddingStart="@dimen/_10sdp"
@@ -49,26 +56,55 @@
                         android:gravity="center"
                         android:text="@string/FindFoodTab"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_9ssp"
+                        android:textSize="@dimen/_13ssp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/notificaiton"
-                        app:layout_constraintStart_toEndOf="@+id/imageView2"
+                        app:layout_constraintEnd_toEndOf="@+id/filterBtn"
+                        app:layout_constraintStart_toStartOf="@+id/customerSupport"
                         app:layout_constraintTop_toTopOf="parent" />
 
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/notificaiton"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/notificationLayout"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_vertical"
-                        android:background="@color/light_red"
-                        android:paddingStart="@dimen/_10sdp"
                         android:paddingEnd="@dimen/_5sdp"
+                        android:paddingStart="@dimen/_5sdp"
+                        android:layout_height="match_parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/filterBtn"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_notification" />
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/notificaiton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_notification" />
+
+                        <com.android.mealpass.widgets.CustomTextView
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:maxLength="3"
+                            app:visibleGone="@{vm.notificationCount > 0}"
+                            android:text="@{``+vm.notificationCount}"
+                            android:textSize="@dimen/_8ssp"
+                            android:paddingStart="@dimen/_2sdp"
+                            android:paddingEnd="@dimen/_2sdp"
+                            android:textColor="@color/white"
+                            app:layout_constraintBottom_toTopOf="@+id/notificaiton"
+                            app:layout_constraintEnd_toEndOf="@+id/notificaiton"
+                            app:layout_constraintStart_toEndOf="@+id/notificaiton"
+                            app:layout_constraintTop_toTopOf="@+id/notificaiton" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/filterBtn"
@@ -87,26 +123,7 @@
 
             </androidx.appcompat.widget.Toolbar>
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="0dp"
-                app:contentInsetLeft="0dp"
-                android:visibility="gone"
-                app:contentInsetRight="0dp"
-                app:contentInsetStart="0dp"
-                app:contentInsetStartWithNavigation="0dp"
-                android:background="@color/light_red"
-                app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
-                app:title="@string/FindFoodTab"
-                app:menu="@menu/searchmenu"
-                android:theme="@style/AppTheme.Toolbar"
-                app:titleTextAppearance="@style/Toolbar.TitleText"
-                >
 
-
-            </androidx.appcompat.widget.Toolbar>
 
             <View
                 android:layout_width="match_parent"
@@ -160,7 +177,7 @@
                 android:layout_height="0dp"
                 app:emptyView="@id/emptyView"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/adsPager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -170,11 +187,20 @@
                 layout="@layout/empty_view"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/adsPager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/adsPager"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_80sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -17,7 +17,6 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
 
-const val API_VERSION_HEADER = "Accept: application/json; version="
 
 @InstallIn(SingletonComponent::class)
 @Module
@@ -33,7 +32,6 @@ class ApiModule {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build()
     }
 
-
     @Singleton
     @Provides
     fun provideAuthApi(retrofit: Retrofit): AuthApi {
@@ -46,21 +44,26 @@ class ApiModule {
         return buildApiClient(retrofit, ProductApi.MODULE_PATH).create(ProductApi::class.java)
     }
 
-
     @Singleton
     @Provides
     fun provideReceiptApi(retrofit: Retrofit): ReceiptApi {
         return buildApiClient(retrofit, ReceiptApi.MODULE_PATH).create(ReceiptApi::class.java)
     }
 
+
+
+    @Singleton
+    @Provides
+    fun provideNotificationApi(retrofit: Retrofit): NotificationApi {
+        return buildApiClient(retrofit, NotificationApi.MODULE_PATH).create(NotificationApi::class.java)
+    }
+
+
     @Singleton
     @Provides
     fun provideMerchantApi(retrofit: Retrofit): MerchantApi {
         return buildApiClient(retrofit, MerchantApi.MODULE_PATH).create(MerchantApi::class.java)
     }
-
-
-
 
     @Singleton
     @Provides

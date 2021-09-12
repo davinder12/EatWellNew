@@ -10,8 +10,7 @@ data class ProductTypeResponse(
         var isItemSelected: Boolean = false
     )
 
-    data class Status(
-        val message: String,
-        val success: Boolean
-    )
+    data class Status(val code : Int?, val message: String, val success: Boolean)
+
+
 }

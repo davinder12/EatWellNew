@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="item"
+            type="com.android.mealpass.data.models.AdsResponse.Body" />
+         <variable
+             name="pictureUrl"
+             type="String" />
+
+        <variable
+            name="description"
+            type="String" />
+
+    </data>
+    <RelativeLayout
+        android:layout_width="match_parent"
+      android:layout_height="match_parent">
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_margin="5dp"
+    android:background="@drawable/editback"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/bannerlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/add_logo"
+            android:layout_width="100dp"
+            app:url="@{item.image_url}"
+            android:layout_height="match_parent" />
+
+        <com.android.mealpass.widgets.CustomTextView
+            android:id="@+id/add_layout"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="10dp"
+            app:htmlText="@{description}"
+            android:layout_marginRight="10dp"
+            android:layout_toStartOf="@id/adds"
+            android:layout_toEndOf="@id/add_logo"
+            android:layout_height="wrap_content" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/add_image"
+            app:url="@{item.picture_url}"
+            android:layout_toEndOf="@id/add_logo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.android.mealpass.widgets.CustomTextView
+            android:id="@+id/adds"
+            android:layout_width="wrap_content"
+            android:text=""
+            android:padding="2dp"
+            android:layout_alignParentEnd="true"
+            android:textColor="@android:color/white"
+            android:background="@color/darkgray"
+            android:layout_height="wrap_content" />
+
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>
+</RelativeLayout>
+</layout>

@@ -1,5 +1,7 @@
 package com.android.mealpass.data.models
 
+import androidx.lifecycle.MutableLiveData
+
 data class FoodRequestModel(
     val current_date_time: String? = "",
     val latitude: String? = "",
@@ -14,7 +16,9 @@ data class FoodRequestModel(
     val showOpenResturantFood: String? = "",
     val toTime: String? = "",
     val fromTime: String? = "",
-    val productFilterType: List<String>? = listOf()
+    val productFilterType: List<String>? = listOf(),
+    val defaultLimit:Int = 5,
+    val perviousHoldOffset:Int =0
 
 )
 

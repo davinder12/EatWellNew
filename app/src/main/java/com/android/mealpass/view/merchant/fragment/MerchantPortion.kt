@@ -61,7 +61,7 @@ class MerchantPortion : BaseListFragment<FragmentMerchantPortionBinding>() {
                     getString(R.string.Cancel),
                     successResponse = {
                         bindNetworkState(viewModel.updateResturantStatus(), progressDialog(R.string.Pleasewait)) {
-                            backStackPutInt(IS_SHOP_OPEN, viewModel.isOpen.value)
+                            //backStackPutInt(IS_SHOP_OPEN, viewModel.isOpen.value)
                         }
                     })
 
@@ -69,38 +69,41 @@ class MerchantPortion : BaseListFragment<FragmentMerchantPortionBinding>() {
 
         subscribe(binding.savePortion.throttleClicks()) {
             if (viewModel.remainingPortion.value?: 0 > 0) {
-                bindNetworkState(viewModel.updateMerchantPortion(), progressDialog(R.string.Pleasewait)) {
-                    backStackPutInt(BACK_STACK_INT, viewModel.remainingPortion.value)
-                    bindNetworkState(viewModel.updatePortionNotificationMethod, progressDialog(R.string.Pleasewait))
+                bindNetworkState(viewModel.updateMerchantPortion(), progressDialog(R.string.Pleasewait),R.string.PortionUpdated) {
+                   backStackPutInt(BACK_STACK_INT, viewModel.remainingPortion.value)
+                    bindNetworkState(viewModel.updatePortionNotificationMethod, progressDialog(R.string.UpdateToServer))
                 }
             }
         }
 
         subscribe(binding.retailPriceBtn.throttleClicks()){
-            requireContext().alertDialog(resources.getString(R.string.app_name),
-                    resources.getString(R.string.UpdateRetailAlert),
-                    getString(R.string.Continue),
-                    getString(R.string.Cancel),
-                    successResponse = {
-                        val apiProgress = viewModel.updateRetailPriceOrCostPrice(viewModel.retailPrice.value, "")
-                        bindNetworkState(apiProgress, progressDialog(R.string.Pleasewait)) {
-                            backStackPutFloat(RETAIL_PRICE, viewModel.retailPrice.value?.toFloatOrNull())
-                        }
-                    })
-
+            viewModel.retailPrice.value?.toFloatOrNull()?.let { retailPrice->
+                requireContext().alertDialog(resources.getString(R.string.app_name),
+                        resources.getString(R.string.UpdateRetailAlert),
+                        getString(R.string.Continue),
+                        getString(R.string.Cancel),
+                        successResponse = {
+                            val apiProgress = viewModel.updateRetailPriceOrCostPrice(retailPrice.toString(), "")
+                            bindNetworkState(apiProgress, progressDialog(R.string.Pleasewait),R.string.PriceUpdated) {
+                               // backStackPutFloat(RETAIL_PRICE, viewModel.retailPrice.value?.toFloatOrNull())
+                            }
+                        })
+            }
         }
 
         subscribe(binding.updatePrice.throttleClicks()) {
-            requireContext().alertDialog(resources.getString(R.string.app_name),
-                    resources.getString(R.string.UpdatePriceAlert),
-                    getString(R.string.Continue),
-                    getString(R.string.Cancel),
-                    successResponse = {
-                        val apiProgress = viewModel.updateRetailPriceOrCostPrice("", viewModel.costPrice.value)
-                        bindNetworkState(apiProgress, progressDialog(R.string.Pleasewait)) {
-                            backStackPutFloat(BACK_STACK_DOUBLE, viewModel.costPrice.value?.toFloatOrNull())
-                        }
-                    })
+            viewModel.costPrice.value?.toFloatOrNull()?.let { costPrice ->
+                requireContext().alertDialog(resources.getString(R.string.app_name),
+                        resources.getString(R.string.UpdatePriceAlert),
+                        getString(R.string.Continue),
+                        getString(R.string.Cancel),
+                        successResponse = {
+                            val apiProgress = viewModel.updateRetailPriceOrCostPrice("", costPrice.toString())
+                            bindNetworkState(apiProgress, progressDialog(R.string.Pleasewait),R.string.PriceUpdated) {
+                             //   backStackPutFloat(BACK_STACK_DOUBLE, viewModel.costPrice.value?.toFloatOrNull())
+                            }
+                        })
+            }
         }
     }
 

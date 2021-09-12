@@ -1,6 +1,9 @@
 package com.android.mealpass.data.api
 
+import com.android.mealpass.data.models.CommonResponseModel
+import com.android.mealpass.data.models.ProductReceiptResponse
 import com.android.mealpass.data.models.ReceiptResponse
+import com.facebook.common.Common
 import com.google.gson.JsonObject
 import io.reactivex.Single
 import retrofit2.Response
@@ -36,7 +39,7 @@ interface ReceiptApi {
         @Field("isdelivery") isHomeDelivery: String?,
         @Field("retail_price") retailPrice: String?,
         @Field("cost_price") costPrice: Float?,
-    ): Single<Response<JsonObject>>
+    ): Single<Response<ProductReceiptResponse>>
 
     @FormUrlEncoded
     @POST("get_all_receipts.php")
@@ -46,7 +49,7 @@ interface ReceiptApi {
     @FormUrlEncoded
     @POST("updateOrderStatus.php")
     fun updateOrderStatus(@Field("receipt_id") userId: Int?,
-    ):Single<Response<JsonObject>>
+    ):Single<Response<CommonResponseModel>>
 
 
 

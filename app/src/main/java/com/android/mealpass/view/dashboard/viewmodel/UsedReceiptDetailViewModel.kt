@@ -15,6 +15,9 @@ import kotlin.math.roundToInt
 class UsedReceiptDetailViewModel @Inject constructor() : BaseViewModel() {
 
 
+    var latitude =""
+    var longitude =""
+
     var portion = mutableLiveData("")
 
     var usedReceiptData = MutableLiveData<ReceiptResponse.Body.UsedReceipt>()
@@ -79,6 +82,8 @@ class UsedReceiptDetailViewModel @Inject constructor() : BaseViewModel() {
         data: ReceiptResponse.Body.UsedReceipt,
         portion: String
     ) {
+        data.latitude?.let { latitude = it.toString() }
+        data.longitude?.let { longitude = it.toString() }
         usedReceiptData.postValue(data)
         this.portion.value = portion
 

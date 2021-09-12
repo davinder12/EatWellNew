@@ -1,8 +1,6 @@
 package com.android.mealpass.data.api
 
-import com.android.mealpass.data.models.FoodData
-import com.android.mealpass.data.models.ProductTypeResponse
-import com.android.mealpass.data.models.SpecificFoodResponse
+import com.android.mealpass.data.models.*
 import com.google.gson.JsonObject
 import io.reactivex.Single
 import okhttp3.RequestBody
@@ -16,6 +14,8 @@ interface ProductApi {
     companion object {
         const val MODULE_PATH = "portal/api/"
     }
+
+
 
 
     @FormUrlEncoded
@@ -80,14 +80,14 @@ interface ProductApi {
     fun likeResturantApi(
         @Field("favourite_id") favouriteId: String?,
         @Field("user_id") userId: String?,
-    ): Single<Response<Unit>>
+    ): Single<Response<CommonResponseModel>>
 
     @FormUrlEncoded
     @POST("delete_favourite.php")
     fun deleteResturantApi(
         @Field("favourite_id") favouriteId: String?,
         @Field("user_id") userId: String?,
-    ): Single<Response<Unit>>
+    ): Single<Response<CommonResponseModel>>
 
 
 
@@ -102,5 +102,24 @@ interface ProductApi {
     @POST("user_update_profile.php")
     fun updateProfile(@PartMap partMap: Map<String, @JvmSuppressWildcards RequestBody>): Single<Response<JsonObject>>
 
+
+    @FormUrlEncoded
+    @POST("get_advertise.php")
+    fun getAdds(
+        @Field("user_id") userId: String?,
+        @Field("country") countryname: String?,
+    ):Single<Response<AdsResponse>>
+
+
+    @FormUrlEncoded
+    @POST("user_update_loc.php")
+    fun locationUpdateApi(
+        @Field("user_id") userId: String?,
+        @Field("latitude") long1: String?,
+        @Field("longitude") limit: String?,
+        @Field("app_version") appVersion: String?,
+        @Field("country") country: String?,
+        @Field("device_token") deviceToken: String?,
+    ): Single<Response<LocationResponse>>
 
 }

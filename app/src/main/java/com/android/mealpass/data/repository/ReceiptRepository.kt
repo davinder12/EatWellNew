@@ -1,12 +1,11 @@
 package com.android.mealpass.data.repository
 
 import com.android.mealpass.data.api.ReceiptApi
-import com.android.mealpass.data.models.FoodData
-import com.android.mealpass.data.models.GetAllResturantRequest
-import com.android.mealpass.data.models.ReceiptResponse
-import com.android.mealpass.data.models.SaveReceiptRequestModel
+import com.android.mealpass.data.models.*
 import com.android.mealpass.data.network.*
+import com.android.mealpass.data.service.AuthState
 import com.exactsciences.portalapp.data.network.AppExecutors
+import com.facebook.common.Common
 import com.google.gson.JsonObject
 import io.reactivex.Single
 import retrofit2.Response
@@ -15,13 +14,14 @@ import javax.inject.Inject
 
 class ReceiptRepository @Inject constructor(
     private val appExecutors: AppExecutors,
-    private val receiptApi: ReceiptApi
+    private val receiptApi: ReceiptApi,
+    private val authState: AuthState
 ) {
 
 
-    fun campaignReceiptMethod(saveReceiptRequestModel: SaveReceiptRequestModel?): IRequest<Response<JsonObject>> {
-        return NetworkRequest(appExecutors, object : IRetrofitNetworkRequestCallback<JsonObject> {
-            override fun createNetworkRequest(): Single<Response<JsonObject>> {
+    fun campaignReceiptMethod(saveReceiptRequestModel: SaveReceiptRequestModel?): IRequest<Response<ProductReceiptResponse>> {
+        return NetworkRequest(appExecutors, object : IRetrofitNetworkRequestCallback<ProductReceiptResponse> {
+            override fun createNetworkRequest(): Single<Response<ProductReceiptResponse>> {
                 return receiptApi.saveReceiptMethod(
                     saveReceiptRequestModel?.user_id,
                     saveReceiptRequestModel?.restaurent_id,
@@ -40,6 +40,12 @@ class ReceiptRepository @Inject constructor(
                     saveReceiptRequestModel?.amount
                 )
             }
+            override fun getResponseStatus(response: Response<ProductReceiptResponse>): ResponseValidator {
+                return ResponseValidator(response.body()?.status?.code,response.body()?.status?.message)
+            }
+            override fun sessionExpired() {
+                authState.logout()
+            }
         })
     }
 
@@ -53,18 +59,33 @@ class ReceiptRepository @Inject constructor(
             override fun createNetworkRequest(): Single<Response<ReceiptResponse>> {
                 return receiptApi.getReceiptId(userId)
             }
+
+            override fun getResponseStatus(response: Response<ReceiptResponse>): ResponseValidator {
+                return ResponseValidator(response.body()?.status?.code,response.body()?.status?.message)
+            }
+            override fun sessionExpired() {
+                authState.logout()
+            }
+
         })
     }
 
 
-    fun redeemOrderMethod(receiptId: Int?): IRequest<Response<JsonObject>> {
-        return NetworkRequest(appExecutors, object : IRetrofitNetworkRequestCallback<JsonObject> {
-            override fun createNetworkRequest(): Single<Response<JsonObject>> {
+    fun redeemOrderMethod(receiptId: Int?): IRequest<Response<CommonResponseModel>> {
+        return NetworkRequest(appExecutors, object : IRetrofitNetworkRequestCallback<CommonResponseModel> {
+            override fun createNetworkRequest(): Single<Response<CommonResponseModel>> {
                 return receiptApi.updateOrderStatus(receiptId)
             }
 
-            override fun getBodyErrorStatusCode(response: Response<JsonObject>): String {
+            override fun getBodyErrorStatusCode(response: Response<CommonResponseModel>): String {
                 return response.body()?.run { this.toString() } ?: ""
+            }
+
+            override fun getResponseStatus(response: Response<CommonResponseModel>): ResponseValidator {
+                return ResponseValidator(response.body()?.status?.code,response.body()?.status?.message)
+            }
+            override fun sessionExpired() {
+                authState.logout()
             }
         })
     }

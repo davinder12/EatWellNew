@@ -5,7 +5,7 @@ data class SpecificFoodResponse(
     val status: Status
 ) {
     data class Status(
-        val code: String,
+        val code: Int,
         val message: String
     )
 

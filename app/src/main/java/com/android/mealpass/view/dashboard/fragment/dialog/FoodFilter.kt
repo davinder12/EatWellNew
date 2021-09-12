@@ -2,6 +2,7 @@ package com.android.mealpass.view.dashboard.fragment.dialog
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.mealpass.data.extension.throttleClicks

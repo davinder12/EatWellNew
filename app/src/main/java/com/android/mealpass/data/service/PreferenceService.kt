@@ -25,9 +25,6 @@ class PreferenceService @Inject constructor(context: Context) {
         defaultSharedPreferences.edit().remove(resources.getString(resId)).apply()
     }
 
-    fun getBoolean(@StringRes resId: Int, default: Boolean = false): Boolean {
-        return defaultSharedPreferences.getBoolean(resources.getString(resId), default)
-    }
 
     fun getString(@StringRes resId: Int, default: String? = ""): String? {
         return defaultSharedPreferences.getString(resources.getString(resId), default)
@@ -48,6 +45,28 @@ class PreferenceService @Inject constructor(context: Context) {
     fun putBoolean(@StringRes resId: Int, value: Boolean) {
         defaultSharedPreferences.edit().putBoolean(resources.getString(resId), value).apply()
     }
+
+    fun getBoolean(@StringRes resId: Int, default: Boolean = false): Boolean {
+        return defaultSharedPreferences.getBoolean(resources.getString(resId), default)
+    }
+
+
+    fun putBoolean(resId: String, value: Boolean) {
+        defaultSharedPreferences.edit().putBoolean(resId, value).apply()
+    }
+
+    fun getBoolean(resId: String, default: Boolean = false): Boolean {
+        return defaultSharedPreferences.getBoolean(resId, default)
+    }
+
+    fun getString( resId: String, default: String? = ""): String? {
+        return defaultSharedPreferences.getString(resId, default)
+    }
+
+    fun putString( resId: String, value: String? = "") {
+        defaultSharedPreferences.edit().putString(resId, value).apply()
+    }
+
 
     fun putLong(@StringRes resId: Int, value: Long) {
         putLong(resources.getString(resId), value)

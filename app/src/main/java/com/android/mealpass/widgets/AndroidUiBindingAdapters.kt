@@ -4,8 +4,11 @@ package com.android.mealpass.widgets
 
 import android.graphics.Paint
 import android.graphics.drawable.Drawable
+import android.os.Build
+import android.text.Html
 import android.view.View
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -45,6 +48,16 @@ fun ImageView.setImageDrawable(resource: Drawable?) {
 }
 
 
+@BindingAdapter("app:htmlText")
+fun AppCompatTextView.htmlText(text: String?) {
+    if(!text.isNullOrEmpty()) {
+        val message = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(text, Html.FROM_HTML_MODE_COMPACT)
+        } else Html.fromHtml(text)
+        this.text = message
+    }
+}
+
 
 @BindingAdapter("app:strike")
 fun MaterialTextView.strike(text: String) {
@@ -54,11 +67,23 @@ fun MaterialTextView.strike(text: String) {
 
 @BindingAdapter("url")
 fun ImageView.imageUrl(url: String?) {
-    if (!url.isNullOrEmpty() && url.contains("http")) {
-        Glide.with(this.context).load(url).placeholder(R.drawable.logo).fitCenter().centerCrop()
-            .into(this)
-    } else if (!url.isNullOrEmpty()) {
-        Glide.with(this.context).load(File(url)).fitCenter().centerCrop().into(this)
-    }
+     when{
+         !url.isNullOrEmpty() && url.contains("http") -> Glide.with(this.context).load(url).placeholder(R.drawable.background_logo).fitCenter().centerCrop().into(this)
+         !url.isNullOrEmpty() -> Glide.with(this.context).load(File(url)).fitCenter().centerCrop().into(this)
+         else -> Glide.with(this.context).load("htts://www.google.com").placeholder(R.drawable.background_logo).fitCenter().centerCrop().into(this)
+     }
 }
+
+
+@BindingAdapter("coverProfile")
+fun ImageView.converProfile(url: String?) {
+    when{
+        !url.isNullOrEmpty() && url.contains("http") -> Glide.with(this.context).load(url).placeholder(R.color.light_gray).fitCenter().centerCrop().into(this)
+        !url.isNullOrEmpty() -> Glide.with(this.context).load(File(url)).fitCenter().centerCrop().into(this)
+        else -> Glide.with(this.context).load("htts://www.google.com").placeholder(R.color.light_gray).fitCenter().centerCrop().into(this)
+    }
+
+}
+
+
 

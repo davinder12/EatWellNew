@@ -61,8 +61,8 @@
                     android:layout_marginBottom="25dp"
                     android:layout_marginTop="30sp"
                     android:background="@drawable/logo"
-                    app:civ_border_color="@color/tabcolor"
-                    app:civ_border_width="2dp" />
+                    app:civ_border_color="@color/colorPrimary"
+                    app:civ_border_width="1dp" />
 
 
 

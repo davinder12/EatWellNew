@@ -7,17 +7,22 @@ import androidx.navigation.fragment.findNavController
 import com.android.mealpass.data.extension.progressDialog
 import com.android.mealpass.data.extension.throttleClicks
 import com.android.mealpass.utilitiesclasses.baseclass.BaseFragment
+import com.android.mealpass.view.common.NavigationScreen
 import com.android.mealpass.view.login.viewmodel.SignupFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_signup.*
 import mealpass.com.mealpass.R
 import mealpass.com.mealpass.databinding.FragmentSignupBinding
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
 class SignupFragment : BaseFragment<FragmentSignupBinding>() {
 
     private val viewModel: SignupFragmentViewModel by viewModels()
+
+    @Inject
+    lateinit var navigationScreen: NavigationScreen
 
     override val layoutRes: Int
         get() = R.layout.fragment_signup
@@ -37,12 +42,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>() {
                             progressDialog(R.string.Pleasewait),
                             R.string.success_register
                         ) {
-//                            findNavController().navigate(
-//                                SignupFragmentDirections.actionSignUpFragmentToOtpFragment(
-//                                    viewModel.emailId.value ?: "",
-//                                    viewModel.userId
-//                                )
-//                            )
+                            navigationScreen.goToReferralCodeScreen(true)
                         }
                     }
                     else -> {

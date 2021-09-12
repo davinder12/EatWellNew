@@ -24,6 +24,7 @@ class ChangePasswordViewModel @Inject constructor(private val userRepository: Us
     var isSocialLogin  = mutableLiveData(preferenceService.getBoolean(R.string.pkey_social_login))
 
 
+
     fun changePasswordApi(): LiveData<NetworkState> {
         return userRepository.updatePasswordMethod(
                 preferenceService.getString(R.string.pkey_user_Id),

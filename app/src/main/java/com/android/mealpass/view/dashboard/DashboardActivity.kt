@@ -1,7 +1,13 @@
 package com.android.mealpass.view.dashboard
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
+import androidx.core.app.NotificationManagerCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -11,10 +17,15 @@ import com.android.mealpass.data.extension.progressDialog
 import com.android.mealpass.utilitiesclasses.baseclass.BaseActivity
 import com.android.mealpass.view.common.NavigationScreen
 import com.android.mealpass.view.dashboard.viewmodel.DashBoardViewModel
+import com.android.mealpass.view.units.AlarmReceiver
+import com.android.mealpass.widgets.alertDialog
+import com.android.mealpass.widgets.messageDialog
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_dashboard.*
+import mealpass.com.mealpass.BuildConfig
 import mealpass.com.mealpass.R
+import java.util.*
 import javax.inject.Inject
 
 
@@ -28,12 +39,52 @@ class DashboardActivity : BaseActivity() {
     lateinit var navigationScreen: NavigationScreen
 
 
-    private val viewModel: DashBoardViewModel by viewModels()
+    companion object{
+      const val  url = "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID
+    }
+
+     val viewModel: DashBoardViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
         initDrawerBottomSheet()
+       // pushNotificationHandling()
+
+        viewModel.isLocalNotificationInit.observe(this, {
+            if (!it) {
+                Log.e("alarm receiver inital","started")
+                alarmManager()
+            }
+        })
+
+
+        viewModel.needToUpdateVersion.observe(this, {
+            val message = resources.getString(R.string.VersionMsg, viewModel.updatedVersion)
+            if (it) alertDialog(getString(R.string.app_name),message, getString(R.string.Continue), getString(R.string.Cancel), successResponse = {
+                navigationScreen.goToSocialPage(url)
+            })
+        })
+    }
+
+
+    private fun alarmManager(){
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as? AlarmManager
+        val calendar: Calendar = Calendar.getInstance().apply { timeInMillis = System.currentTimeMillis()
+            set(Calendar.HOUR_OF_DAY, 16)
+        }
+        val alarmIntent: PendingIntent = Intent(this, AlarmReceiver::class.java).let { intent ->
+            PendingIntent.getBroadcast(this, 0, intent, 0)
+        }
+
+        alarmManager?.setInexactRepeating(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            AlarmManager.INTERVAL_DAY,
+            alarmIntent
+        )
+        viewModel.updateAlarmManagerStatus()
+
     }
 
     private fun initDrawerBottomSheet() {
@@ -56,11 +107,13 @@ class DashboardActivity : BaseActivity() {
 
     fun signOut() {
         bindNetworkState(viewModel.logoutMethod(), progressDialog(R.string.Logout), onError = {
+            NotificationManagerCompat.from(this).cancelAll()
             viewModel.clearData()
             navigationScreen.goToMainScreen(this)
 
         }) {
             viewModel.clearData()
+            NotificationManagerCompat.from(this).cancelAll()
             navigationScreen.goToMainScreen(this)
         }
     }

@@ -71,20 +71,35 @@ class ProfileActivityViewModel @Inject constructor(
     }
 
 
+
+
     fun uploadProfileData(isNewsLetterCheck: Boolean): LiveData<NetworkState> {
-        val networkRequest = userRepository.updateProfileData(profileRequestModel(isNewsLetterCheck))
-        subscribe(networkRequest.request)
+
+//        imageUrl.value?.let {
+//            if(it.isNotEmpty() && !it.contains("http"))
+//                map["user_image"] = File(it).asRequestBody(UserRepository.FILE_FORMAT.toMediaTypeOrNull())
+//        }
+
+        val networkRequest = userRepository.updateProfileData(profileRequestModel(isNewsLetterCheck),imageUrl.value)
+        subscribe(networkRequest.request){
+            if(it.isSuccessful && it.body()?.status?.code == 1){
+                updateProfileInformation()
+            }
+        }
         return networkRequest.networkState
+    }
+
+    private fun updateProfileInformation(){
+        preferenceService.putString(R.string.pkey_phoneNumber, phoneNumber.value)
+        if(preferenceService.getBoolean(R.string.pkey_social_login))
+        { preferenceService.putString(R.string.pkey_social_emaiId, emailId.value) }
+        else { preferenceService.putString(R.string.pkey_emaiId, emailId.value) }
     }
 
     private fun profileRequestModel(isNewsLetterCheck:Boolean): HashMap<String, RequestBody?> {
         val map: HashMap<String, RequestBody?> = HashMap()
         map["user_id"] = createPartFromString(preferenceService.getString(R.string.pkey_user_Id))
         map["mobile"] = createPartFromString(phoneNumber.value)
-        imageUrl.value?.let {
-            if(it.isNotEmpty() && !it.contains("http"))
-            map["user_image"] = File(it).asRequestBody(UserRepository.FILE_FORMAT.toMediaTypeOrNull())
-        }
         map["name"] = createPartFromString(name.value)
         map["newsletter"] = createPartFromString(if (isNewsLetterCheck) ITEM_SELECTED else ITEM_NOT_SELECTED)
         map["email"]= createPartFromString(emailId.value)

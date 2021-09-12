@@ -19,8 +19,7 @@ import mealpass.com.mealpass.R
 import javax.inject.Inject
 
 @HiltViewModel
-class SignupFragmentViewModel @Inject constructor(
-    private val userRepository: UserRepository,
+class SignupFragmentViewModel @Inject constructor(private val userRepository: UserRepository,
     private val preferenceService: PreferenceService
 ) :
     BaseViewModel() {
@@ -37,20 +36,9 @@ class SignupFragmentViewModel @Inject constructor(
         return userRepository.signUpMethod(
             SignUpRequestModel(
                 BuildConfig.VERSION_NAME, preferenceService.getString(R.string.pkey_fcm_token_sent),
-                DEVICE_TYPE, emailId.value, mobile.value, name.value, newsLetter, password.value
-            )
+                DEVICE_TYPE, emailId.value, mobile.value, name.value, newsLetter, password.value)
         ).also {
-            subscribe(it.request) { response ->
-                response.body()?.let { jsonObject ->
-                    val convertedData = jsonObject.toString().convertJsonToModelClass {
-                        Gson().fromJson(
-                            jsonObject.toString(),
-                            LoginResponse::class.java
-                        )
-                    }
-                    convertedData?.let { updateUserData(it) }
-                }
-            }
+            subscribe(it.request) { response -> response.body()?.let { updateUserData(it) } }
         }.networkState
     }
 
@@ -72,10 +60,10 @@ class SignupFragmentViewModel @Inject constructor(
     }
 
     private fun updateUserData(loginResponse: LoginResponse) {
-        //   userId = loginResponse.body.user_id.toString()
+        preferenceService.putString(R.string.pkey_user_Id, loginResponse.body.id)
         preferenceService.putBoolean(R.string.pkey_isMerchantLogin, false)
         preferenceService.putBoolean(R.string.pkey_social_login,false)
-        preferenceService.putString(R.string.pkey_secure_token, "Bearer " + loginResponse.body.secure_key)
+        preferenceService.putString(R.string.pkey_secure_token,loginResponse.body.secure_key)
         preferenceService.putString(R.string.pkey_phoneNumber, loginResponse.body.mobile)
         preferenceService.putString(R.string.pkey_emaiId, loginResponse.body.email)
     }

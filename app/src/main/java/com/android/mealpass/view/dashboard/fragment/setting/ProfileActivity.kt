@@ -89,4 +89,9 @@ class ProfileActivity : DataBindingActivity<ActivityProfileBinding>() {
     override fun onBindView(binding: ActivityProfileBinding) {
         binding.vm =viewModel
     }
+
+    override fun onPause() {
+        super.onPause()
+        hideKeboard()
+    }
 }

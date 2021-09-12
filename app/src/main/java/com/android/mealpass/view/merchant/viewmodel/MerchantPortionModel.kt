@@ -32,21 +32,21 @@ class MerchantPortionModel @Inject constructor(
 
     var soldPortion = 0
 
-    var productData = MutableLiveData<MerchantNotificationResponse.Body>()
+    var productData : MutableLiveData<MerchantNotificationResponse.Body>? = MutableLiveData<MerchantNotificationResponse.Body>()
 
     var updateNotification = MutableLiveData<Boolean>()
 
-    var retailPrice = productData.map { it?.retail_price?.toString() } as MutableLiveData<String?>
+    var retailPrice = productData?.map { it?.retail_price?.toString() } as MutableLiveData<String?>
 
-    var currency = productData.map { it?.currency_type }
+    var currency = productData?.map { it?.currency_type }
 
-    var costPrice = productData.map { it?.protion_price?.toString() } as MutableLiveData<String?>
+    var costPrice = productData?.map { it?.protion_price?.toString() } as MutableLiveData<String?>
 
-    var remainingPortion  = productData.map {
+    var remainingPortion  = productData?.map {
         soldPortion = it.sold_portion
         it?.protion?.minus(it.sold_portion) } as MutableLiveData<Int?>
 
-    var isOpen = productData.map { it.is_open } as MutableLiveData<Int?>
+    var isOpen = productData?.map { it.is_open } as MutableLiveData<Int?>
 
 
     fun updateMerchantPortion(): LiveData<NetworkState> {
@@ -61,7 +61,7 @@ class MerchantPortionModel @Inject constructor(
     var updatePortionNotificationMethod =  updateNotification.switchMap {
         val portion =  remainingPortion.value?.plus(soldPortion)
         merchantRepository.portionPriceNotificationMethod(
-                preferenceService.getString(R.string.pkey_user_Id),"",currency.value,"1",portion).also {
+                preferenceService.getString(R.string.pkey_user_Id),"",currency?.value,"1",portion).also {
             subscribe(it.request)
         }.networkState
     }
@@ -80,7 +80,7 @@ class MerchantPortionModel @Inject constructor(
     fun updateRetailPriceOrCostPrice(retailPrice:String?,costPrice:String?): LiveData<NetworkState> {
         return merchantRepository.updateRetailAndCostPriceMethod(
                 preferenceService.getString(R.string.pkey_user_Id, ""),
-                retailPrice,costPrice,currency.value,TimeZone.getDefault().id,
+                retailPrice,costPrice,currency?.value,TimeZone.getDefault().id,
         ).also {
             subscribe(it.request)
         }.networkState
@@ -89,7 +89,6 @@ class MerchantPortionModel @Inject constructor(
 
     fun incrementUpdate() {remainingPortion.value = remainingPortion.value?.inc()}
 
-
     fun decrementUpdate() {
         if(remainingPortion.value?: MerchantPortion.PORTION_LIMIT > MerchantPortion.PORTION_LIMIT) {
             remainingPortion.value = remainingPortion.value?.dec()
@@ -97,7 +96,9 @@ class MerchantPortionModel @Inject constructor(
     }
 
     fun updateData(merchantNotification: MerchantNotificationResponse.Body?) {
-        this.productData.value = merchantNotification
+        merchantNotification?.let {
+            this.productData?.value = merchantNotification
+        }
     }
 
 

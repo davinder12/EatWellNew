@@ -9,7 +9,7 @@ data class FoodData(
 ) {
 
     data class Status(
-        val code: String,
+        val code: Int?,
         val message: String,
         val notification_Count: Int,
         val total_count: String

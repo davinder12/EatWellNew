@@ -1,6 +1,5 @@
 package com.android.mealpass.view.merchant
 
-import android.os.Bundle
 import androidx.navigation.fragment.findNavController
 import com.android.mealpass.utilitiesclasses.baseclass.DataBindingActivity
 import dagger.hilt.android.AndroidEntryPoint

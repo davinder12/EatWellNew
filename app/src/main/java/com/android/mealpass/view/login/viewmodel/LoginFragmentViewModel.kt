@@ -22,20 +22,16 @@ class LoginFragmentViewModel @Inject constructor(
 ) :
     BaseViewModel() {
 
-    var emailId = mutableLiveData("shipra@ywasteapp.com")
-    var password = mutableLiveData("123456@")
+    var emailId = mutableLiveData("")
+    var password = mutableLiveData("")
+    var isRememberMeChecked = mutableLiveData(false)
 
 
     fun callSignInApi(): LiveData<NetworkState> {
-        return userRepository.signInApi(emailId.value, password.value, "0", "").also {
+        return userRepository.signInApi(emailId.value, password.value, "0", preferenceService.getString(R.string.pkey_fcm_token_sent)).also {
             subscribe(it.request) { response ->
-                response.body()?.let { jsonObject ->
-                    val convertedData = jsonObject.toString().convertJsonToModelClass {
-                        Gson().fromJson(jsonObject.toString(), LoginResponse::class.java)
-                    }
-                    convertedData?.let {
-                        updateUserData(it, false)
-                    }
+                response.body()?.let {
+                    updateUserData(it, false)
                 }
             }
         }.networkState
@@ -43,15 +39,10 @@ class LoginFragmentViewModel @Inject constructor(
 
 
     fun merchantSignInMethod(): LiveData<NetworkState> {
-        return userRepository.merchantLoginMethod(emailId.value, password.value, "0", "ssfss").also {
+        return userRepository.merchantLoginMethod(emailId.value, password.value, "0", preferenceService.getString(R.string.pkey_fcm_token_sent,"no token available")).also {
             subscribe(it.request) { response ->
-                response.body()?.let { jsonObject ->
-                    val convertedData = jsonObject.toString().convertJsonToModelClass {
-                        Gson().fromJson(jsonObject.toString(), LoginResponse::class.java)
-                    }
-                    convertedData?.let {
-                        updateUserData(it, true)
-                    }
+                response.body()?.let {
+                    updateUserData(it, true)
                 }
             }
         }.networkState
@@ -74,18 +65,35 @@ class LoginFragmentViewModel @Inject constructor(
     }
 
 
-    private fun updateUserData(loginResponse: LoginResponse, isUserLogin: Boolean) {
-        preferenceService.putBoolean(R.string.pkey_isMerchantLogin, isUserLogin)
+    fun updateLoginType(isMerchantLoginOrNot:Boolean){
+        if(isMerchantLoginOrNot){
+            isRememberMeChecked.value =  preferenceService.getBoolean(R.string.pkey_isMerchantRemeber)
+            if(isRememberMeChecked.value == true) emailId.value =  preferenceService.getString(R.string.pkey_merchantEmailId)
+        }else{
+            isRememberMeChecked.value =  preferenceService.getBoolean(R.string.pkey_isCustomerRemeber)
+            if(isRememberMeChecked.value == true) emailId.value = preferenceService.getString(R.string.pkey_emaiId)
+        }
+    }
+
+    private fun updateUserData(loginResponse: LoginResponse, isMerchangLogin: Boolean) {
+        when  {
+            isMerchangLogin -> {
+                preferenceService.putString(R.string.pkey_merchantEmailId, loginResponse.body.email)
+                preferenceService.putBoolean(R.string.pkey_isMerchantRemeber, isRememberMeChecked.value?:false)
+            }
+            else ->{
+                preferenceService.putString(R.string.pkey_emaiId, loginResponse.body.email)
+                preferenceService.putBoolean(R.string.pkey_isCustomerRemeber, isRememberMeChecked.value?:false)
+            }
+        }
+        preferenceService.putBoolean(R.string.pkey_isMerchantLogin, isMerchangLogin)
         preferenceService.putString(R.string.pkey_user_Id, loginResponse.body.id)
         preferenceService.putBoolean(R.string.pkey_social_login,false)
         preferenceService.putString(R.string.pkey_secure_token, loginResponse.body.secure_key)
         preferenceService.putString(R.string.pkey_phoneNumber, loginResponse.body.mobile)
-        preferenceService.putString(R.string.pkey_emaiId, loginResponse.body.email)
-
-//        preferenceService.putString(R.string.pkey_userName,loginResponse.body.name)
-//        preferenceService.putString(R.string.pkey_emaiId,loginResponse.body.email)
 
     }
+
 
 
 }

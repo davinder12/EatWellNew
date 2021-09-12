@@ -21,8 +21,6 @@ class PhoneUpdateViewModel @Inject constructor(
     private val preferenceService: PreferenceService
 ) :
     BaseViewModel() {
-    var category: String = ""
-    var location: Location? = null
 
 
     var phoneNumber = mutableLiveData("")

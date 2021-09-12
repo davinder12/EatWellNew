@@ -28,9 +28,18 @@ fun isHomeDeliveryAvailable(
 fun pickUpTime(startingDateTime: String?, endDateTime: String?): String {
     var time = ""
     time(startingDateTime)?.let { time = it }
-    time(endDateTime)?.let { time = "$time-$it" }
+    time(endDateTime)?.let {
+        time = try{
+            convertTimeIntoTwoDigit(time,it)
+        }catch (e :Exception){
+            "$time-$it"
+        }
+    }
     return time
 }
+
+
+
 
 fun getPercentage(discountedPrice: Float, actualPrice: Float): Int {
     var percentage = 0
@@ -71,6 +80,23 @@ fun getDate(date: String?): String {
         Log.e("Date format", "date format")
     }
     return dateTime
+}
+
+fun getAmPmTime(createdTime :String?): String {
+    return try { getAmPmTimeMethod(createdTime) } catch (e: Exception) { "" }
+}
+
+fun getDescription(resName:String?,description:String?): String? {
+     var result = description
+     resName?.let {  resturant ->
+         description?.let { description ->
+             if(resturant.isNotEmpty() && description.isNotEmpty() && description.contains(resName)){
+                 result = description.replace(resName,"")
+                 result = "<b>$resName</b> $result";
+             }
+         }
+     }
+    return result
 }
 
 // open time show pickup start time

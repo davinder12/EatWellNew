@@ -1,6 +1,8 @@
 package com.android.mealpass.view.dashboard.fragment.setting
 
+import android.content.Context
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import com.android.mealpass.data.extension.progressDialog
 import com.android.mealpass.data.extension.throttleClicks
@@ -23,13 +25,13 @@ class ChangePasswordActivity : DataBindingActivity<ActivityChangePasswordBinding
              viewModel.filterMethod { status, message ->
                  when {
                      status -> bindNetworkState(
-                         viewModel.changePasswordApi(),
-                         progressDialog(R.string.ChangePassword),
-                         R.string.password_updated_successfully
+                             viewModel.changePasswordApi(),
+                             progressDialog(R.string.ChangePassword),
+                             R.string.password_updated_successfully
                      ) {
                          finish()
                      }
-                     else -> showSnackMessage(resources.getString(message?:R.string.Unknown_msg))
+                     else -> showSnackMessage(resources.getString(message ?: R.string.Unknown_msg))
                  }
              }
          }
@@ -41,5 +43,10 @@ class ChangePasswordActivity : DataBindingActivity<ActivityChangePasswordBinding
 
     override fun onBindView(binding: ActivityChangePasswordBinding) {
         binding.vm  = viewModel
+    }
+
+    override fun onPause() {
+        super.onPause()
+        hideKeboard()
     }
 }

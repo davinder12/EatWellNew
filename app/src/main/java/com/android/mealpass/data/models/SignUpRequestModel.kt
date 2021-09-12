@@ -8,5 +8,8 @@ data class SignUpRequestModel(
     val mobile: String?,
     val name: String?,
     val newsletter: Boolean,
-    val password: String?
+    val password: String?,
+    val socialId: String="",
+    val socialType: Int=0,
+    val createdDate:String=""
 )

@@ -50,7 +50,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             app:srcCompat="@drawable/food_image1"
-                            app:url="@{vm.cover_photo}" />
+                            app:coverProfile="@{vm.cover_photo}" />
 
 
                         <RelativeLayout
@@ -181,8 +181,8 @@
                         android:layout_below="@id/top_layout"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="-57dp"
-                        app:civ_border_color="@color/darkgray"
-                        app:civ_border_width="2dp"
+                        app:civ_border_color="@color/colorPrimary"
+                        app:civ_border_width="1dp"
                         app:url="@{vm.logo}">
 
 

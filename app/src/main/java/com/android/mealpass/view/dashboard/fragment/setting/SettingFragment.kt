@@ -41,7 +41,7 @@ class SettingFragment : BaseListFragment<FragmentSettingBinding>() {
                 SettingEnum.ADD_REFERRAL_CODE -> navigationScreen.goToReferralCodeScreen()
                 SettingEnum.PROFILE -> navigationScreen.gotToProfileActivity()
                 SettingEnum.CHANGE_PASSWORD -> navigationScreen.gotToChangePasswordActivity()
-                SettingEnum.NOTIFICATION -> navigationScreen.gotToChangePasswordActivity()
+                SettingEnum.NOTIFICATION -> {}
                 SettingEnum.CONTACT_US_FEEDBACK -> navigationScreen.goToFeedBackScreen()
                 else-> {
                     val signOutBottomSheet = SignOutDialog.create {
@@ -53,16 +53,19 @@ class SettingFragment : BaseListFragment<FragmentSettingBinding>() {
       }
 
         subscribe(adapter.itemClicks){
-            requireContext().alertDialog(resources.getString(R.string.Notification),
-                    resources.getString(R.string.SwitchOffDailyPushAlert)+"\n"+ resources.getString(R.string.SwitchOffDailyPushNote),
-                    getString(R.string.Continue),
-                    getString(R.string.Cancel),
-                    successResponse = {
-                       viewModel.updateNotification()
-                        adapter.notifyItemChanged(4)
-                    },
-
-            )
+            if(viewModel.isLocationNotification.value == true){
+                requireContext().alertDialog(resources.getString(R.string.Notification),
+                        resources.getString(R.string.SwitchOffDailyPushAlert)+"\n"+ resources.getString(R.string.SwitchOffDailyPushNote),
+                        getString(R.string.Continue),
+                        getString(R.string.Cancel),
+                        successResponse = {
+                            viewModel.updateNotification()
+                            adapter.notifyItemChanged(4)
+                        })
+            } else {
+                viewModel.updateNotification()
+                adapter.notifyItemChanged(4)
+            }
         }
     }
 

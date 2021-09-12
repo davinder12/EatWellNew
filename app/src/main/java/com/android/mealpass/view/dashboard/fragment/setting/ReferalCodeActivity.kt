@@ -1,6 +1,7 @@
 package com.android.mealpass.view.dashboard.fragment.setting
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import com.android.mealpass.data.extension.progressDialog
 import com.android.mealpass.data.extension.throttleClicks
@@ -28,7 +29,6 @@ class ReferalCodeActivity : DataBindingActivity<ActivityReferalCodeBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.updateReferralScreen(requireReferralVisit())
-
 
         subscribe(binding.varify.throttleClicks()) {
             viewModel.filterMethod { status, message ->
@@ -63,5 +63,11 @@ class ReferalCodeActivity : DataBindingActivity<ActivityReferalCodeBinding>() {
         binding.vm = viewModel
     }
 
+
+    override fun onBackPressed() {
+        if(binding.cross.visibility == View.VISIBLE){ finish() }
+        else{ navigationScreen.goToDashBoard()
+            finish() }
+    }
 
 }

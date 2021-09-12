@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+<data>
+
+    <import type="com.android.mealpass.view.units.DataConverterKt" />
+    <variable
+        name="item"
+        type="com.android.mealpass.data.models.NotificationResponse.Body" />
+
+</data>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/viewClick"
+        android:layout_width="match_parent"
+        android:layout_margin="5dp"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.android.mealpass.widgets.CustomTextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:textSize="12sp"
+                android:text="@{DataConverterKt.getAmPmTime(item.created_at)}"
+                android:layout_marginEnd="8dp"
+                android:layout_alignParentEnd="true"
+                android:layout_height="wrap_content" />
+
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="50dp"
+                android:layout_below="@id/time"
+                android:id="@+id/notification_logo"
+                android:layout_height="50dp"
+                app:civ_border_color="@color/colorPrimary"
+                app:civ_border_width="1dp"
+                app:url="@{item.merchant_logo}"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="8dp" />
+
+
+
+            <com.android.mealpass.widgets.CustomTextView
+                android:layout_below="@id/time"
+                android:layout_width="match_parent"
+                android:layout_toEndOf="@id/notification_logo"
+                android:layout_marginStart="5dp"
+                app:htmlText="@{DataConverterKt.getDescription(item.merchant_name,item.message)}"
+                android:layout_height="wrap_content" />
+
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
+</layout>

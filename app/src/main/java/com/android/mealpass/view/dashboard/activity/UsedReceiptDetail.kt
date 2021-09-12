@@ -9,6 +9,7 @@ import com.android.mealpass.view.dashboard.viewmodel.UsedReceiptDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import mealpass.com.mealpass.R
 import mealpass.com.mealpass.databinding.ActivityUsedReceiptDetailBinding
+import javax.inject.Inject
 import kotlin.math.roundToInt
 
 @AndroidEntryPoint
@@ -19,6 +20,9 @@ class UsedReceiptDetail : DataBindingActivity<ActivityUsedReceiptDetailBinding>(
     companion object {
         const val CAMPAIGN_OPEN = 1
     }
+
+    @Inject
+    lateinit var navigationScreen: NavigationScreen
 
     override val layoutRes: Int
         get() = R.layout.activity_used_receipt_detail
@@ -35,14 +39,25 @@ class UsedReceiptDetail : DataBindingActivity<ActivityUsedReceiptDetailBinding>(
             viewModel.updateUsedData(item, portion)
         }
 
-//        toolbar.setNavigationOnClickListener {
-//            finish()
-//        }
+        binding.toolbar.setNavigationOnClickListener {
+            finish()
+        }
+
+
+        binding.toolbar.menu.findItem(R.id.contain_info)?.let {
+            it.setOnMenuItemClickListener {
+                navigationScreen.goToGoogleMap(viewModel.latitude,viewModel.longitude)
+                true
+            }
+        }
+
     }
 
     override fun onBindView(binding: ActivityUsedReceiptDetailBinding) {
         binding.vm = viewModel
     }
+
+
 
 
     // TODO isFromCampaign is not working
@@ -52,8 +67,9 @@ class UsedReceiptDetail : DataBindingActivity<ActivityUsedReceiptDetailBinding>(
         amount: Float,
         isFromCampaign: Boolean
     ): String {
+       // "" + quanitity + " " + getString(R.string.Portions) + " (" + currency + " " + amount + ")" + "(C)"
         return when {
-            isFromCampaign  && !currency.isNullOrEmpty() -> "" + quanitity + " " + getString(R.string.Portions) + " (" + currency + " " + amount + ")" + "(C)"
+            isFromCampaign -> "" + quanitity + " " + getString(R.string.Portions) + "(C)"
             amount.roundToInt() == 0 -> "" + quanitity + " " + getString(R.string.Portions) + " (" + getString(R.string.Free) + ")"
             !currency.isNullOrEmpty() -> "" + quanitity + " " + getString(R.string.Portions) + " (" + currency + " " + amount + ")"
             else -> "" + quanitity + " " + getString(R.string.Portions) + " (" + "AUD" + " " + amount + ")"

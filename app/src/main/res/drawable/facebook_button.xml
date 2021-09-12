@@ -4,10 +4,10 @@
 
     <solid
         android:color="@color/blue_color"
-        ></solid>
+        />
 
 <corners
-    android:radius="3dp"
-    ></corners>
+    android:radius="@dimen/_20sdp"
+    />
 
 </shape>

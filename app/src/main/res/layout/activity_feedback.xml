@@ -152,6 +152,7 @@
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/editback"
                 android:gravity="top"
+                android:imeOptions="actionDone"
                 android:hint="@string/FeedBackDescriptionMsg"
                 android:inputType="textMultiLine"
                 android:maxLength="300"
