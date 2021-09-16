@@ -27,6 +27,7 @@ class DeliveryAddress : DataBindingActivity<ActivityDeliveryAddressBinding>() {
 
     companion object {
         const val AUTOCOMPLETE_REQUEST_CODE = 200
+        const val FIVE_RECORD = 5
     }
 
     @Inject
@@ -53,20 +54,23 @@ class DeliveryAddress : DataBindingActivity<ActivityDeliveryAddressBinding>() {
 
         subscribe(binding.saveBtn.throttleClicks()) {
             viewModel.filterMethod {
-                if (it) {
-                    viewModel.updateList()
+                val size = viewModel.deliveryAddressList.value?.size?.run { this < FIVE_RECORD } ?:false
+                when{
+                    it && size -> viewModel.updateList()
+                    else -> showSnackMessage(getString(R.string.addressSaveValidation))
                 }
             }
         }
 
 
-        initAdapter(DeliveryAddressAdapter(), binding.personalAddressList, viewModel.deliveryAddressList
-        ) {
+     val adapter =   initAdapter(DeliveryAddressAdapter(), binding.personalAddressList, viewModel.deliveryAddressList) {
             navigationScreen(it)
         }
 
-
-
+        subscribe(adapter.closeBtn){
+            viewModel.removeItemFromList(it)
+            adapter.notifyDataSetChanged()
+        }
 
 
         subscribe(binding.onlineSearch.throttleClicks()) {

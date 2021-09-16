@@ -1,7 +1,12 @@
 package com.android.mealpass.view.dashboard.adapter
 
 import androidx.recyclerview.widget.DiffUtil
+import com.android.mealpass.data.extension.throttle
+import com.android.mealpass.data.extension.throttleClicks
+import com.android.mealpass.data.models.FoodData
 import com.android.mealpass.utilitiesclasses.baseadapter.DataBoundAdapterClass
+import io.reactivex.Observable
+import io.reactivex.ObservableEmitter
 import mealpass.com.mealpass.R
 import mealpass.com.mealpass.databinding.ItemDeliveryAddressBinding
 
@@ -14,14 +19,23 @@ class DeliveryAddressAdapter : DataBoundAdapterClass<String, ItemDeliveryAddress
         get() = R.layout.item_delivery_address
 
 
+    private var closeClickEmitter: ObservableEmitter<Int>? = null
+    val closeBtn: Observable<Int> =
+            Observable.create<Int> { closeClickEmitter = it }.throttle()
+
+
     override fun bind(
         bind: ItemDeliveryAddressBinding,
         itemType: String?,
         position: Int
     ) {
-        itemType?.let {
-            bind.item = it
+        itemType?.let {  item ->
+            bind.item = item
+            bind.closeBtn.throttleClicks().subscribe{
+                closeClickEmitter?.onNext(position)
+            }
         }
+
     }
 
 

@@ -386,6 +386,7 @@
                         android:background="@android:color/darker_gray" />
 
                     <RelativeLayout
+                        android:id="@+id/marker_layout"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight=".5">
@@ -441,6 +442,7 @@
                         android:background="@android:color/darker_gray" />
 
                     <RelativeLayout
+                        android:id="@+id/site_layout"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight=".5">

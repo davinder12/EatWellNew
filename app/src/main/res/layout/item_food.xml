@@ -107,7 +107,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerVertical="true"
-                                android:text="@{`Meal Pass: `+vm.campaign_itemleft}"
+                                android:text="@{`MealPass: `+vm.campaign_itemleft}"
                                 android:textColor="@android:color/white" />
 
                             <androidx.appcompat.widget.AppCompatImageView
@@ -155,7 +155,7 @@
                                 android:layout_centerVertical="true"
                                 android:fontFamily="@font/georgia"
                                 android:maxLines="1"
-                                android:text="@{vm.distance+ ` km`}"
+                                android:text="@{DataConverterKt.convertKilometerToMiles(vm.distance)}"
                                 android:textColor="@android:color/white" />
 
 
@@ -220,7 +220,7 @@
                             android:maxLines="1"
                             android:text="@{String.format(@string/picktime, DataConverterKt.pickUpTime(vm.opening_time,vm.closing_time))}"
                             android:textColor="@android:color/darker_gray"
-                            android:textSize="@dimen/_6ssp" />
+                            />
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="15dp"

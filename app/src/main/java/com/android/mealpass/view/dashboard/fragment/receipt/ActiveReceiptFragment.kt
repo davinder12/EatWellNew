@@ -51,10 +51,11 @@ class ActiveReceiptFragment : BaseListFragment<FragmentReceiptItemBinding>() {
         }
 
 
-        initAdapter(ActiveReceiptAdapter(), binding.receiptList, viewModel.activeReceiptList,viewModel.networkState) { activeReceiptData ->
+        initAdapter(ActiveReceiptAdapter(), binding.receiptList, viewModel.activeReceiptList,viewModel.receiptResponse) { activeReceiptData ->
             launchSomeActivity.launch(navigationScreen.goToActiveReceipt(activeReceiptData))
 
         }
     }
+
 
 }

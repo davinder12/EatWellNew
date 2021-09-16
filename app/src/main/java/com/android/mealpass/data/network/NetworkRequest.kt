@@ -1,5 +1,6 @@
 package com.android.mealpass.data.network
 
+import android.util.Log
 import androidx.annotation.MainThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -25,7 +26,8 @@ open class NetworkRequest<ResponseType>
 ) : IRequest<ResponseType> {
 
     override fun retry(networkState: NetworkState) {
-        TODO("not implemented")
+        Log.e("response","sdfsd")
+        request
     }
 
 //    private val responseLiveData : MediatorLiveData<ResponseType> = MediatorLiveData()

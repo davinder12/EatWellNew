@@ -38,11 +38,10 @@ class ProductDetailViewModel @Inject constructor(
     var notificationId = ""
     var resturantName = mutableLiveData("")
     var resturantId = MutableLiveData<String>()
-    var isMerchantInfoVisible = mutableLiveData(false)
+    var latitude :String? = ""
+    var longitude :String? =""
+    var webSiteUrl:String? =""
 
-    fun updateMerchantInfo() {
-        isMerchantInfoVisible.value = !(isMerchantInfoVisible.value ?: false)
-    }
 
 
     var resturantRequest = ResourceViewModel(resturantId) {
@@ -66,6 +65,10 @@ class ProductDetailViewModel @Inject constructor(
 
 
     var coverPhoto = resturantRequest.data.map {
+        latitude = it.body.latitude
+        longitude = it.body.longitude
+        webSiteUrl= it.body.website_url
+
         it.body.cover_photo
     }
 

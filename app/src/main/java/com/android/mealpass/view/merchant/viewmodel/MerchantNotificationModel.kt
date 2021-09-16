@@ -38,7 +38,7 @@ class MerchantNotificationModel @Inject constructor(
     var merchantNotificationResponse : MerchantNotificationResponse.Body? = null
 
 
-    private val merchantResource = ResourceViewModel(userId) {
+     val merchantResource = ResourceViewModel(userId) {
         merchantRepository.getPortionListMethod(it, TimeZone.getDefault().id)
     }
 

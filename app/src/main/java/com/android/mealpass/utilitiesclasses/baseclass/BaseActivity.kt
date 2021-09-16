@@ -102,16 +102,16 @@ abstract class BaseActivity : AppCompatActivity() {
     protected fun <X : DataBoundAdapterClass<T, *>, T, R> initAdapter(
         adapter: X,
         recycler: RecyclerView,
-        viewModel: ResourceViewModel<R>,
         list: LiveData<List<T>?>,
+        viewModel: ResourceViewModel<R>,
         clickHandler: ((T) -> Unit)? = null
     ): X {
         recycler.adapter = adapter
         list.observe(this, Observer {
             adapter.submitList(it)
         })
-        adapter.retryClicks.subscribe(viewModel::retry)
-        viewModel.networkState.observe(this, Observer {
+        subscriptions += adapter.retryClicks.subscribe(viewModel::retry)
+        viewModel.networkState.observe(this, {
             adapter.setNetworkState(it)
         })
         clickHandler?.let { subscribe(adapter.clicks, it) }

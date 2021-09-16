@@ -45,14 +45,16 @@ class FavouriteFragment : BaseListFragment<FragmentFavouriteBinding>() {
             }
         }
 
-        initAdapter(FavouriteFoodAdapter(), binding.itemDisplay, viewModel.favouriteItemListData,viewModel.networkState) { items ->
+        initAdapter(FavouriteFoodAdapter(), binding.itemDisplay, viewModel.favouriteItemListData,
+                viewModel.favouriteItemList) { items ->
             launchProductDetailScreen.launch(navigationScreen.productDetailScreenWithCallBack(items.id, items.storename))
         }
         subscribe(emptyView.throttleClicks()) {
             fetchFavouriteList()
         }
-        //bindNetworkState(viewModel.networkState,loadingIndicator =  binding.favouriteProgressBar)
+
     }
+
 
     private fun fetchFavouriteList() {
         when {

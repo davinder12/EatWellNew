@@ -55,6 +55,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
+                    android:src="@drawable/background_logo"
                     app:civ_border_color="@color/colorPrimary"
                     app:civ_border_width="1dp" />
 

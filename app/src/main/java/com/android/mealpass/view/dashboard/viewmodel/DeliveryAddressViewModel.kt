@@ -4,15 +4,22 @@ package com.android.mealpass.view.dashboard.viewmodel
 import androidx.lifecycle.MutableLiveData
 import com.android.mealpass.data.extension.map
 import com.android.mealpass.data.extension.mutableLiveData
+import com.android.mealpass.data.service.PreferenceService
 import com.android.mealpass.utilitiesclasses.baseclass.BaseViewModel
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import dagger.hilt.android.lifecycle.HiltViewModel
+import mealpass.com.mealpass.R
+import java.util.ArrayList
 import javax.inject.Inject
 
 @HiltViewModel
-class DeliveryAddressViewModel @Inject constructor() : BaseViewModel() {
+class DeliveryAddressViewModel @Inject constructor(private val preferenceService: PreferenceService) : BaseViewModel() {
 
 
-    var deliveryAddressList = MutableLiveData<List<String>>()
+    var deliveryAddressList = MutableLiveData<List<String>>().also {
+        it.value = getListOfObject()
+    }
     var tempDeliveryAddressList = arrayListOf<String>()
 
     var flatHouseNo = MutableLiveData<String>()
@@ -46,11 +53,41 @@ class DeliveryAddressViewModel @Inject constructor() : BaseViewModel() {
     }
 
 
+    fun removeItemFromList(position:Int){
+        deliveryAddressList.value?.let {
+            (it as ArrayList<String>).removeAt(position)
+            deliveryAddressList.value = it
+            preferenceService.putString(R.string.pkey_deliveryAddressList, Gson().toJson(it))
+        }
+    }
+
+
+    private fun saveList(){
+        preferenceService.putString(R.string.pkey_deliveryAddressList, Gson().toJson(tempDeliveryAddressList))
+    }
+
+
+
+    private fun getListOfObject(): ArrayList<String> {
+        var response = arrayListOf<String>()
+        try {
+            preferenceService.getString(R.string.pkey_deliveryAddressList)?.let {
+                if(it.isNotEmpty()) {
+                    val type = object : TypeToken<ArrayList<String>>() {}.type
+                    response = Gson().fromJson(it, type)
+                }
+            }
+        }catch (e:Exception){}
+        return response
+    }
+
+
+
     fun updateList() {
-        val address =
-            flatHouseNo.value + ", " + colonyStreet.value + ", " + city.value + ", " + state.value + ", " + country.value + ", " + postalZipCode.value
+        val address = flatHouseNo.value + ", " + colonyStreet.value + ", " + city.value + ", " + state.value + ", " + country.value + ", " + postalZipCode.value
         tempDeliveryAddressList.add(address)
         deliveryAddressList.value = tempDeliveryAddressList
+        saveList()
         clearData()
         isManualAddressFieldOpen.value = false
     }

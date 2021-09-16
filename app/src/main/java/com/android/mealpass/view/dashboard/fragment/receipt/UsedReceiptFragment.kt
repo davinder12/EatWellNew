@@ -29,7 +29,7 @@ class UsedReceiptFragment : BaseListFragment<FragmentReceiptItemBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initAdapter(UsedReceiptAdapter(), receiptList, viewModel.usedReceiptList,viewModel.networkState) {
+        initAdapter(UsedReceiptAdapter(), receiptList, viewModel.usedReceiptList,viewModel.receiptResponse) {
             navigationScreen.goToUsedReceiptDetailActivity(it)
         }
 

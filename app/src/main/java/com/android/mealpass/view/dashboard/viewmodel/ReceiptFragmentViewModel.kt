@@ -21,7 +21,7 @@ class ReceiptFragmentViewModel @Inject constructor(
 
     var userId = MutableLiveData<String>()
 
-    private val receiptResponse = ResourceViewModel(userId) {
+     val receiptResponse = ResourceViewModel(userId) {
         receiptRepository.getReceiptMethod(it)
     }
 

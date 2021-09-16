@@ -24,12 +24,10 @@ abstract class BaseListFragment<TBinding : ViewDataBinding> : BaseFragment<TBind
         adapter: X,
         recycler: RecyclerView,
         list: LiveData<List<T>?>,
-        netWorkState: LiveData<NetworkState>? = null,
         clickHandler: ((T) -> Unit)? = null
     ): X {
         recycler.adapter = adapter
         list.observe(viewLifecycleOwner, Observer { adapter.submitList(it) })
-        netWorkState?.observe(viewLifecycleOwner, Observer { adapter.setNetworkState(it) })
         clickHandler?.let { subscribe(adapter.clicks, it) }
         return adapter
     }
@@ -40,16 +38,17 @@ abstract class BaseListFragment<TBinding : ViewDataBinding> : BaseFragment<TBind
     protected fun <X : DataBoundAdapterClass<T, *>, T, R> initAdapter(
         adapter: X,
         recycler: RecyclerView,
-        viewModel: ResourceViewModel<R>,
         list: LiveData<List<T>?>,
+        viewModel: ResourceViewModel<R>,
         clickHandler: ((T) -> Unit)? = null
     ): X {
         recycler.adapter = adapter
-
         list.observe(viewLifecycleOwner, Observer {
            adapter.submitList(it)
         })
-        adapter.retryClicks.subscribe(viewModel::retry)
+        adapter.retryClicks.subscribe {
+            viewModel.retry(it)
+        }
         viewModel.networkState.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             adapter.setNetworkState(it)
         })

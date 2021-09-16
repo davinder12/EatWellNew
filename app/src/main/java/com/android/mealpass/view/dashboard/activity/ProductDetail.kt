@@ -54,6 +54,17 @@ class ProductDetail : DataBindingActivity<ActivityProductDetailBinding>() {
            onBackPressed()
         }
 
+       subscribe(binding.markerLayout.throttleClicks()){
+           viewModel.latitude?.let { lat ->
+               viewModel.longitude?.let { lng ->
+                   navigationScreen.goToGoogleMap(lat,lng)
+               }
+           }
+       }
+
+       subscribe(binding.siteLayout.throttleClicks()){
+           navigationScreen.goToSocialPage(viewModel.webSiteUrl)
+       }
 
         viewModel.isFavouriteLike.observe(this, {
             it?.let { currentLike ->
@@ -136,7 +147,9 @@ class ProductDetail : DataBindingActivity<ActivityProductDetailBinding>() {
             binding.addItem.setImageDrawable(ContextCompat.getDrawable(this, it))
         })
 
-        bindNetworkState(viewModel.networkState,loadingIndicator =  binding.productDetailProgress)
+        bindNetworkState(viewModel.networkState,loadingIndicator =  binding.productDetailProgress,onError = {
+            finish()
+        })
 
     }
 

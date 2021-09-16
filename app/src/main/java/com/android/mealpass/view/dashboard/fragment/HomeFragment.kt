@@ -21,6 +21,7 @@ import com.android.mealpass.data.network.NetworkState
 import com.android.mealpass.data.service.MealPassFirebaseMessagingService
 import com.android.mealpass.utilitiesclasses.baseclass.BaseListFragment
 import com.android.mealpass.view.common.NavigationScreen
+import com.android.mealpass.view.dashboard.DashboardActivity
 import com.android.mealpass.view.dashboard.adapter.AdsAdapter
 import com.android.mealpass.view.dashboard.adapter.FoodAdapter
 import com.android.mealpass.view.dashboard.fragment.dialog.FoodFilter
@@ -220,7 +221,10 @@ class HomeFragment : BaseListFragment<FragmentHomeBinding>() {
 
     private fun apiHit(item: String) {
         when {
-            !requireActivity().isGPSEnabled() -> locationSnackMessage()
+            !requireActivity().isGPSEnabled() -> {
+                (requireActivity() as DashboardActivity).hideKeboard()
+                locationSnackMessage()
+            }
              viewModel.foodResource.networkState.value != NetworkState.loading -> viewModel.searchText(
                  item
              )

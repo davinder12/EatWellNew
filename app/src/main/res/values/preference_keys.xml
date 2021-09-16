@@ -44,6 +44,8 @@
     <string name="pkey_notification_count" translatable="false">pkey_notification_count</string>
     <string name="pkey_local_notification_init" translatable="false">pkey_local_notification_init</string>
 
+    <string name="pkey_deliveryAddressList" translatable="false">pkey_deliveryAddressList</string>
+
 
 
 

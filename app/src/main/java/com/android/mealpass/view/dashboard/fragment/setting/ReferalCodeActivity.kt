@@ -65,9 +65,18 @@ class ReferalCodeActivity : DataBindingActivity<ActivityReferalCodeBinding>() {
 
 
     override fun onBackPressed() {
-        if(binding.cross.visibility == View.VISIBLE){ finish() }
-        else{ navigationScreen.goToDashBoard()
-            finish() }
+        if(binding.cross.visibility == View.VISIBLE){
+            finish()
+        }
+        else {
+            navigationScreen.goToDashBoard()
+            finish()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        hideKeboard()
     }
 
 }

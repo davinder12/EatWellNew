@@ -15,13 +15,13 @@ private const val HOME_DELIVERY_ON = 1
 
 
 fun isHomeDeliveryAvailable(
-    isHomeDelivery: Int,
-    isFullDayDeliveryAllowed: Boolean,
-    openTime: String?,
-    deliveryCloseBeforeHours: String?
+        isHomeDelivery: Int,
+        isFullDayDeliveryAllowed: Boolean,
+        openTime: String?,
+        deliveryCloseBeforeHours: String?
 ): Boolean {
     return isFullDayDeliveryAllowed || isHomeDelivery == HOME_DELIVERY_ON && isDeliverytimeOnOff(
-        openTime, deliveryCloseBeforeHours
+            openTime, deliveryCloseBeforeHours
     )
 }
 
@@ -30,8 +30,8 @@ fun pickUpTime(startingDateTime: String?, endDateTime: String?): String {
     time(startingDateTime)?.let { time = it }
     time(endDateTime)?.let {
         time = try{
-            convertTimeIntoTwoDigit(time,it)
-        }catch (e :Exception){
+            convertTimeIntoTwoDigit(time, it)
+        }catch (e: Exception){
             "$time-$it"
         }
     }
@@ -39,6 +39,14 @@ fun pickUpTime(startingDateTime: String?, endDateTime: String?): String {
 }
 
 
+fun convertKilometerToMiles(kilomenter: Float?): String {
+   var defaultKilometer = "0.0"
+    kilomenter?.let {
+        defaultKilometer =  String.format("%.3f", it * 0.6213)
+    }
+    return "$defaultKilometer mi"
+
+}
 
 
 fun getPercentage(discountedPrice: Float, actualPrice: Float): Int {
@@ -82,16 +90,16 @@ fun getDate(date: String?): String {
     return dateTime
 }
 
-fun getAmPmTime(createdTime :String?): String {
+fun getAmPmTime(createdTime: String?): String {
     return try { getAmPmTimeMethod(createdTime) } catch (e: Exception) { "" }
 }
 
-fun getDescription(resName:String?,description:String?): String? {
+fun getDescription(resName: String?, description: String?): String? {
      var result = description
-     resName?.let {  resturant ->
+     resName?.let { resturant ->
          description?.let { description ->
              if(resturant.isNotEmpty() && description.isNotEmpty() && description.contains(resName)){
-                 result = description.replace(resName,"")
+                 result = description.replace(resName, "")
                  result = "<b>$resName</b> $result";
              }
          }
@@ -105,8 +113,8 @@ fun getDescription(resName:String?,description:String?): String? {
 // shopOpenTime : represent open time if we got any time other wise open time use as it is
 
 fun isResturantOpen(
-    qty: Int, isResturantOpen: Int, openTime: String?,
-    closeTime: String?, beforePickTime: String?, shopOpenTime: String?, isActive: Int
+        qty: Int, isResturantOpen: Int, openTime: String?,
+        closeTime: String?, beforePickTime: String?, shopOpenTime: String?, isActive: Int
 ): Boolean {
 
     Log.e("open time", "" + openTime)
@@ -118,10 +126,10 @@ fun isResturantOpen(
         qty <= 0 -> false
         else -> try {
             isActive == RESTURANT_ACTIVE && isResturantOpen == RESTURANT_OPEN && isTimeExpired(
-                openTime,
-                closeTime,
-                beforePickTime,
-                shopOpenTime
+                    openTime,
+                    closeTime,
+                    beforePickTime,
+                    shopOpenTime
             )
         } catch (e: Exception) {
             Log.e("number format exception", "" + e)

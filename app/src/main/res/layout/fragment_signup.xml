@@ -206,7 +206,6 @@
                     android:layout_centerVertical="true"
                     android:text="@string/NewsletterTitle"
                     android:fontFamily="@font/georgia"
-                    android:textSize="@dimen/_8ssp"
                     app:layout_constraintBottom_toBottomOf="@+id/checkbox"
                     app:layout_constraintEnd_toStartOf="@+id/checkbox"
                     app:layout_constraintHorizontal_bias="0.5"

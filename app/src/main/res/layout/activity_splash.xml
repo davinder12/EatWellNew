@@ -26,7 +26,7 @@
         android:layout_marginTop="24dp"
         android:fontFamily="@font/georgia"
         android:text="@string/welcome_to_mealpass"
-        android:textColor="@color/light_red"
+        android:textColor="@color/colorAccent"
         android:textSize="@dimen/_16ssp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/mealPasslogo"

@@ -166,8 +166,9 @@ dependencies {
 
     implementation 'com.google.android.libraries.places:places:2.4.0'
 
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+    implementation 'id.zelory:compressor:3.0.1'
 
-    implementation 'com.github.maayyaannkk:ImagePicker:1.0.10'
 
  // check version of application of playstore
     implementation 'org.jsoup:jsoup:1.8.3'

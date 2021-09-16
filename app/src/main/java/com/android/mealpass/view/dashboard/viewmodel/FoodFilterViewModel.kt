@@ -82,19 +82,25 @@ class FoodFilterViewModel @Inject constructor(
         preferenceService.putString(R.string.pkey_toTime, maxTime.value)
         preferenceService.putFloat(R.string.pkey_minValue, minValueInit)
         preferenceService.putFloat(R.string.pkey_maxValue, maxValueInit)
-        preferenceService.putString(
-            R.string.pkey_showOpenResturnat,
+        preferenceService.putString(R.string.pkey_showOpenResturnat,
             if (isShowingOpenStore.value == true) OPEN_RESTURANT else CLOSE_RESTURANT
         )
-        preferenceService.putString(R.string.pkey_filteredFoodList, Gson().toJson(filteredFood))
+        filteredFood?.let {
+            preferenceService.putString(R.string.pkey_filteredFoodList, Gson().toJson(filteredFood))
+        }
+
     }
 
     private fun getListOfObject(): List<String> {
         var response = listOf<String>()
-        preferenceService.getString(R.string.pkey_filteredFoodList, null)?.let {
-            val type = object : TypeToken<ArrayList<String>>() {}.type
-            response = Gson().fromJson(it, type)
-        }
+        try{
+            preferenceService.getString(R.string.pkey_filteredFoodList)?.let {
+                if(it.isNotEmpty()) {
+                    val type = object : TypeToken<ArrayList<String>>() {}.type
+                    response = Gson().fromJson(it, type)
+                }
+            }
+        }catch (e:Exception){}
         return response
     }
 

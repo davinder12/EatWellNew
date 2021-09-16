@@ -35,7 +35,7 @@ data class FoodData(
         val discounted_from_time: Any,
         val discounted_price: Any,
         val discounted_to_time: Any,
-        val distance: String?,
+        val distance: Float?=null,
         val email: String?,
         val expected_description: String?,
         val fav_count: Int,

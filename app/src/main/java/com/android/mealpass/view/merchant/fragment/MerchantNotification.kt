@@ -48,7 +48,7 @@ class MerchantNotification : BaseListFragment<FragmentMerchantNotificationBindin
             findNavController().popBackStack()
         }
 
-        val adapter =  initAdapter(MerchantNotificationAdapter(), binding.displayNotification, viewModel.notificationList)
+        val adapter =  initAdapter(MerchantNotificationAdapter(), binding.displayNotification, viewModel.notificationList,viewModel.merchantResource)
 
         viewModel.networkState.observe(viewLifecycleOwner, {
             adapter.setNetworkState(it)

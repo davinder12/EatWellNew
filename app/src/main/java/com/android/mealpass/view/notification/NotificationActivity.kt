@@ -35,7 +35,7 @@ class NotificationActivity : DataBindingActivity<ActivityNotificationBinding>() 
         viewModel.updateBadges()
         NotificationManagerCompat.from(this).cancelAll()
         initAdapter(NotificationListAdapter(),binding.notificationlist,
-                viewModel.notificationList,viewModel.networkState) {
+                viewModel.notificationList,viewModel.resource) {
            when {
                it.notification_type == GENENRAL_UPDATE_TYPE -> {
                    navigationScreen.goToGeneralNotification(it.message,it.merchant_logo)

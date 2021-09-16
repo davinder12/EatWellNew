@@ -38,7 +38,6 @@ class DashboardActivity : BaseActivity() {
     @Inject
     lateinit var navigationScreen: NavigationScreen
 
-
     companion object{
       const val  url = "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID
     }
@@ -106,7 +105,7 @@ class DashboardActivity : BaseActivity() {
     }
 
     fun signOut() {
-        bindNetworkState(viewModel.logoutMethod(), progressDialog(R.string.Logout), onError = {
+        bindNetworkState(viewModel.logoutMethod(), progressDialog(R.string.Pleasewait), onError = {
             NotificationManagerCompat.from(this).cancelAll()
             viewModel.clearData()
             navigationScreen.goToMainScreen(this)

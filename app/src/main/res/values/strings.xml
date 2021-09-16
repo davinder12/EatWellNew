@@ -309,6 +309,8 @@
     <string name="merchant_bought">Bought %1$s</string>
     <string name="m_date">Date: %1$s</string>
     <string name="m_time">Time: %1$s</string>
+    <string name="addressSaveValidation">You cannot save more than five address</string>
+
 
 
 </resources>

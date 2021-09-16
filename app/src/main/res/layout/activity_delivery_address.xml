@@ -141,8 +141,11 @@
 
 
             <androidx.core.widget.NestedScrollView
+                android:id="@+id/nestedScrollView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+
+                android:layout_marginBottom="@dimen/_10sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -170,54 +173,36 @@
                         android:paddingRight="@dimen/_15sdp">
 
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/buildingNo"
-                            android:layout_width="0dp"
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/saveBtn"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:endIconMode="clear_text"
-                            app:errorEnabled="true"
-                            app:hintEnabled="true"
+                            android:fontFamily="@font/georgia"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingTop="@dimen/_10sdp"
+                            android:paddingBottom="@dimen/_20sdp"
+                            android:text="@string/Saved"
+                            android:textColor="@color/red_color"
+                            android:textSize="@dimen/_9ssp"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:ignore="UnusedAttribute">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/HouseNo"
-                                android:imeOptions="actionNext"
-                                android:inputType="text"
-                                android:nextFocusForward="@+id/password"
-                                android:text="@={vm.flatHouseNo}"
-                                android:textAppearance="?attr/textAppearanceBody1"
-                                tools:ignore="UnusedAttribute" />
-                        </com.google.android.material.textfield.TextInputLayout>
+                            app:layout_constraintTop_toBottomOf="@+id/zipCode" />
 
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/location"
-                            android:layout_width="0dp"
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/cancelBtn"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:endIconMode="clear_text"
-                            app:errorEnabled="true"
-                            app:hintEnabled="true"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/buildingNo"
-                            tools:ignore="UnusedAttribute">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/StreetAddress"
-                                android:imeOptions="actionNext"
-                                android:inputType="text"
-                                android:nextFocusForward="@+id/password"
-                                android:text="@={vm.colonyStreet}"
-                                android:textAppearance="?attr/textAppearanceBody1"
-                                tools:ignore="UnusedAttribute" />
-                        </com.google.android.material.textfield.TextInputLayout>
+                            android:fontFamily="@font/georgia"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingTop="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_5sdp"
+                            android:paddingBottom="@dimen/_20sdp"
+                            android:text="@string/Cancel"
+                            android:textColor="@color/red_color"
+                            android:textSize="@dimen/_9ssp"
+                            app:layout_constraintBottom_toBottomOf="@+id/saveBtn"
+                            app:layout_constraintEnd_toStartOf="@+id/saveBtn"
+                            app:layout_constraintTop_toTopOf="@+id/saveBtn" />
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/city"
@@ -232,12 +217,13 @@
                             tools:ignore="UnusedAttribute">
 
                             <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/cityIntputText"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/City"
                                 android:imeOptions="actionNext"
                                 android:inputType="text"
-                                android:nextFocusForward="@+id/password"
+                                android:nextFocusForward="@+id/stateInputText"
                                 android:text="@={vm.city}"
                                 android:textAppearance="?attr/textAppearanceBody1"
                                 tools:ignore="UnusedAttribute" />
@@ -256,12 +242,13 @@
                             tools:ignore="UnusedAttribute">
 
                             <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/stateInputText"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/State"
                                 android:imeOptions="actionNext"
                                 android:inputType="text"
-                                android:nextFocusForward="@+id/password"
+                                android:nextFocusForward="@+id/postalZipCode"
                                 android:text="@={vm.state}"
                                 android:textAppearance="?attr/textAppearanceBody1"
                                 tools:ignore="UnusedAttribute" />
@@ -282,6 +269,7 @@
                             tools:ignore="UnusedAttribute">
 
                             <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/country"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/Country"
@@ -306,48 +294,66 @@
                             tools:ignore="UnusedAttribute">
 
                             <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/postalZipCode"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/PostCode"
                                 android:imeOptions="actionNext"
                                 android:inputType="text"
-                                android:nextFocusForward="@+id/password"
+                                android:nextFocusForward="@+id/country"
                                 android:text="@={vm.postalZipCode}"
                                 android:textAppearance="?attr/textAppearanceBody1"
                                 tools:ignore="UnusedAttribute" />
                         </com.google.android.material.textfield.TextInputLayout>
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/saveBtn"
-                            android:layout_width="wrap_content"
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/buildingNo"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/georgia"
-                            android:paddingStart="@dimen/_10sdp"
-                            android:paddingLeft="@dimen/_10sdp"
-                            android:paddingTop="@dimen/_10sdp"
-                            android:paddingBottom="@dimen/_20sdp"
-                            android:text="@string/Saved"
-                            android:textColor="@color/tabcolor"
-                            android:textSize="@dimen/_12ssp"
+                            app:endIconMode="clear_text"
+                            app:errorEnabled="true"
+                            app:hintEnabled="true"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/zipCode" />
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="UnusedAttribute">
 
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/cancelBtn"
-                            android:layout_width="wrap_content"
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/HouseNo"
+                                android:imeOptions="actionNext"
+                                android:inputType="text"
+                                android:nextFocusForward="@+id/colonyStreet"
+                                android:text="@={vm.flatHouseNo}"
+                                android:textAppearance="?attr/textAppearanceBody1"
+                                tools:ignore="UnusedAttribute" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/location"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/georgia"
-                            android:paddingStart="@dimen/_10sdp"
-                            android:paddingTop="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_5sdp"
-                            android:paddingRight="@dimen/_5sdp"
-                            android:paddingBottom="@dimen/_20sdp"
-                            android:text="@string/Cancel"
-                            android:textColor="@color/tabcolor"
-                            android:textSize="@dimen/_12ssp"
-                            app:layout_constraintBottom_toBottomOf="@+id/saveBtn"
-                            app:layout_constraintEnd_toStartOf="@+id/saveBtn"
-                            app:layout_constraintTop_toTopOf="@+id/saveBtn" />
+                            app:endIconMode="clear_text"
+                            app:errorEnabled="true"
+                            app:hintEnabled="true"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/buildingNo"
+                            tools:ignore="UnusedAttribute">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/colonyStreet"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/StreetAddress"
+                                android:imeOptions="actionNext"
+                                android:inputType="text"
+                                android:nextFocusForward="@+id/cityIntputText"
+                                android:text="@={vm.colonyStreet}"
+                                android:textAppearance="?attr/textAppearanceBody1"
+                                tools:ignore="UnusedAttribute" />
+                        </com.google.android.material.textfield.TextInputLayout>
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -357,10 +363,10 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/personal_address_list"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_height="0dp"
                 app:goneVisible="@{vm.isManualAddressFieldOpen}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/add_new_address" />
