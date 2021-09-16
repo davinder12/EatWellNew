@@ -96,17 +96,19 @@ class ProductRepository @Inject constructor(
 
     }
 
-
-    fun updateProfileData(userId: String, mobile: String): IRequest<Response<JsonObject>> {
-        return NetworkRequest(appExecutors, object : IRetrofitNetworkRequestCallback<JsonObject> {
-            override fun createNetworkRequest(): Single<Response<JsonObject>> {
+    fun updateProfileData(userId: String, mobile: String): IRequest<Response<PhoneUpdateResponse>> {
+        return NetworkRequest(appExecutors, object : IRetrofitNetworkRequestCallback<PhoneUpdateResponse> {
+            override fun createNetworkRequest(): Single<Response<PhoneUpdateResponse>> {
                 val map: HashMap<String, RequestBody> = HashMap()
                 map["user_id"] = createPartFromString(userId)
                 map["mobile"] = createPartFromString(mobile)
                 return productApi.updateProfile(map)
             }
-            override fun getBodyErrorStatusCode(response: Response<JsonObject>): String {
-                return response.body()?.run { this.toString() } ?: ""
+            override fun getResponseStatus(response: Response<PhoneUpdateResponse>): ResponseValidator {
+                return ResponseValidator(response.body()?.status?.code,response.body()?.status?.message)
+            }
+            override fun sessionExpired() {
+                authState.logout()
             }
         })
     }

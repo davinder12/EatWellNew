@@ -47,7 +47,7 @@ class ActivityFeedBack : DataBindingActivity<ActivityFeedbackBinding>() {
                 when {
                     status -> bindNetworkState(
                             viewModel.updateFeedBack(),
-                            progressDialog(R.string.ChangePassword),
+                            progressDialog(R.string.Pleasewait),
                             R.string.FeedbackThanksMessage
                     ) {
                         finish()

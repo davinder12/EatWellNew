@@ -1,7 +1,6 @@
 package com.android.mealpass.view.dashboard.viewmodel
 
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import com.android.mealpass.data.extension.mutableLiveData
 import com.android.mealpass.data.network.NetworkState

@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.NavDeepLinkBuilder
@@ -46,12 +47,13 @@ class MealPassFirebaseMessagingService  : FirebaseMessagingService() {
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-//        when{
-//             preferenceService.getString(R.string.pkey_user_Id).isNullOrEmpty() -> showNotification(Notification(MEAlPASS, getData(MESSAGE,remoteMessage),getString(R.string.app_name),null))
-//             else ->  handleMessage(remoteMessage)
-//        }
+        when{
+             preferenceService.getString(R.string.pkey_user_Id).isNullOrEmpty() &&
+                     preferenceService.getString(R.string.pkey_merchantEmailId).isNullOrEmpty()
+             -> showNotification(Notification(MEAlPASS, getData(MESSAGE,remoteMessage),getString(R.string.app_name),null))
+             else ->  handleMessage(remoteMessage)
+        }
 
-        handleMessage(remoteMessage)
     }
 
     private fun handleMessage(remoteMessage: RemoteMessage) {
@@ -78,25 +80,15 @@ class MealPassFirebaseMessagingService  : FirebaseMessagingService() {
 
 
     private  fun getMerchantNotification(): PendingIntent {
-        notifyToMerchant()
-
+         notifyToMerchant()
           return NavDeepLinkBuilder(applicationContext)
                .setGraph(R.navigation.nav_merchant)
                .setDestination(R.id.merchantNotification)
                .setComponentName(MerchantActivity::class.java)
                .createPendingIntent()
-
-
-        //Intent(applicationContext, MerchantNotification::class.java).also{ it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK }
     }
 
     private fun getGeneralNotificationIntent(remoteMessage: RemoteMessage): PendingIntent {
-//       return Intent(applicationContext, DashboardActivity::class.java).also {
-//            it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//            it.putExtra(MESSAGE, getData(MESSAGE,remoteMessage))
-//            it.putExtra(MERCHANT_LOGO, getData(MERCHANT_LOGO,remoteMessage))
-//            it.putExtra(GENERAL_NOTIFICATION_SCREEN,GENERAL_NOTIFICATION_SCREEN_TYPE)
-
           val bundle = Bundle().also {
               it.putString(MESSAGE, getData(MESSAGE, remoteMessage))
               it.putString(MERCHANT_LOGO, getData(MERCHANT_LOGO, remoteMessage))
@@ -109,7 +101,6 @@ class MealPassFirebaseMessagingService  : FirebaseMessagingService() {
                    .setArguments(bundle)
                    .createPendingIntent()
 
-  //     }
     }
 
     private fun getProductDetailIntent(remoteMessage: RemoteMessage): PendingIntent {
@@ -129,17 +120,6 @@ class MealPassFirebaseMessagingService  : FirebaseMessagingService() {
                 .setComponentName(DashboardActivity::class.java)
                 .setArguments(bundle)
                 .createPendingIntent()
-
-
-//        return Intent(applicationContext, DashboardActivity::class.java).also {
-//            it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//            it.putExtra(MESSAGE, getData(MESSAGE,remoteMessage))
-//            it.putExtra(RESTURANT_ID, getData(RESTURANT_ID,remoteMessage))
-//            it.putExtra(RESTURANT_NAME, getData(RESTURANT_NAME,remoteMessage))
-//            it.putExtra(NOTIFICATION_ID, getData(NOTIFICATION_ID,remoteMessage))
-//            it.putExtra(PRODUCT_DETAIL_SCREEN,PRODUCT_DETAIL_SCREEN_TYPE)
-//            it.putExtra(BADGES_COUNT,getNumberData(BADGES_COUNT,remoteMessage))
-//        }
     }
 
     private fun notifyToMerchant() {
@@ -159,16 +139,7 @@ class MealPassFirebaseMessagingService  : FirebaseMessagingService() {
     }
 
 
-    private fun getPendingIntent(intent: Intent?): PendingIntent? {
-        var pendingIntent : PendingIntent? = null
-        intent?.let { it -> pendingIntent = PendingIntent.getActivity(
-            applicationContext,
-            0,
-            it,
-            PendingIntent.FLAG_CANCEL_CURRENT
-        ) }
-        return pendingIntent
-    }
+
 
     private fun getData(key: String, remoteMessage: RemoteMessage): String? {
         return remoteMessage.data.getOrElse(key, { "" })

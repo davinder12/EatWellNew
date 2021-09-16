@@ -134,9 +134,10 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/retailPriceBtn"
                     android:layout_width="@dimen/_150sdp"
-                    android:layout_height="@dimen/_45sdp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/_20sdp"
+                    android:textSize="@dimen/_10ssp"
                     android:textColor="@android:color/white"
                     android:text="@string/RetailPriceLabel"
                     android:textAllCaps="false" />
@@ -271,9 +272,10 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/update_price"
                     android:layout_width="@dimen/_150sdp"
-                    android:layout_height="@dimen/_45sdp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/_20sdp"
+                    android:textSize="@dimen/_10ssp"
                     android:textColor="@android:color/white"
                     android:text="@string/UpdateCostPrice"
                     android:textAllCaps="false" />
@@ -355,11 +357,12 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/save_portion"
                     android:layout_width="@dimen/_150sdp"
-                    android:layout_height="@dimen/_45sdp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="30dp"
                     android:textColor="@android:color/white"
                     android:text="@string/updatePortion"
+                    android:textSize="@dimen/_10ssp"
                     android:textAllCaps="false" />
 
 

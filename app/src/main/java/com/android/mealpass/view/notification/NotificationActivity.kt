@@ -34,23 +34,15 @@ class NotificationActivity : DataBindingActivity<ActivityNotificationBinding>() 
         super.onCreate(savedInstanceState)
         viewModel.updateBadges()
         NotificationManagerCompat.from(this).cancelAll()
-        initAdapter(NotificationListAdapter(),binding.notificationlist,
-                viewModel.notificationList,viewModel.resource) {
+
+        initAdapter(NotificationListAdapter(),binding.notificationlist, viewModel.notificationList,viewModel.resource) {
            when {
-               it.notification_type == GENENRAL_UPDATE_TYPE -> {
-                   navigationScreen.goToGeneralNotification(it.message,it.merchant_logo)
-               }
-               else -> {
-                   navigationScreen.productDetailScreen(
-                           it.merchant_id,
-                           it.merchant_name)
-               }
+               it.notification_type == GENENRAL_UPDATE_TYPE -> { navigationScreen.goToGeneralNotification(it.message,it.merchant_logo) }
+               else -> { navigationScreen.productDetailScreen(it.merchant_id, it.merchant_name) }
            }
         }
 
-        binding.toolbar.setNavigationOnClickListener {
-            finish()
-        }
+        binding.toolbar.setNavigationOnClickListener { finish() }
     }
 
 

@@ -12,24 +12,14 @@
 
     <ScrollView
         android:layout_width="match_parent"
+        android:background="@color/light_gray"
         android:layout_height="match_parent"
-        android:fillViewport="true"
         android:scrollbars="none">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/activity_login"
         android:layout_width="match_parent"
-        android:background="@color/light_gray"
-        android:layout_gravity="center"
         android:layout_height="wrap_content">
-
-        <View
-            android:id="@+id/view7"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_150sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -37,9 +27,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/_20sdp"
-            app:layout_constraintStart_toStartOf="@+id/view7"
-            app:layout_constraintTop_toTopOf="@+id/view7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_cross" />
+
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/logo_icon"
@@ -50,9 +41,9 @@
             android:src="@drawable/logo"
             app:layout_constraintBottom_toBottomOf="@+id/view7"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/view7" />
-
+            app:layout_constraintTop_toBottomOf="@+id/cross" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView3"
@@ -107,6 +98,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:errorEnabled="true"
+                    app:endIconMode="password_toggle"
                     app:hintEnabled="true"
                     app:layout_constraintEnd_toEndOf="@+id/textInputLayout4"
                     app:layout_constraintStart_toStartOf="@+id/textInputLayout4"
@@ -118,6 +110,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/RepeatPassword"
+
                         android:imeOptions="actionDone"
                         android:inputType="textPassword"
                         android:text="@={vm.confirmPwd}"
@@ -131,6 +124,7 @@
                     android:layout_height="wrap_content"
                     android:autofillHints="phone"
                     app:errorEnabled="true"
+                    app:endIconMode="password_toggle"
                     app:hintEnabled="true"
                     app:layout_constraintEnd_toEndOf="@+id/textInputLayout3"
                     app:layout_constraintStart_toStartOf="@+id/textInputLayout3"

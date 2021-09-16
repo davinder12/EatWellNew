@@ -57,7 +57,7 @@ class FindFoodViewModel @Inject constructor(
                 preferenceService.getString(R.string.pkey_userLong), OFFSET,
                 TimeZone.getDefault().id,
                 preferenceService.getString(R.string.pkey_user_Id),
-                it, preferenceService.getString(R.string.pkey_location),
+                it, countryName = if(it.isNullOrEmpty()) preferenceService.getString(R.string.pkey_location) else "" ,
                 CATEGORY,
                 preferenceService.getString(R.string.pkey_showOpenResturnat, RESTURANT_CLOSE),
                 preferenceService.getString(R.string.pkey_toTime, ""),

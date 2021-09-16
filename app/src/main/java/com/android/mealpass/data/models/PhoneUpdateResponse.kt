@@ -5,7 +5,7 @@ data class PhoneUpdateResponse(
     val status: Status
 ) {
     data class Status(
-        val code: String,
+        val code: Int?,
         val is_mobile: Int,
         val is_seller: Int,
         val message: String,

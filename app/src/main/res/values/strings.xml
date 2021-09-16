@@ -42,7 +42,7 @@
     <string name="UpdateAvailable">New update available!</string>
     <string name="VersionMsg">New version (%1$s) of MealPass application available on play store. By Downloading the latest update you will get the latest features, improvements in application.</string>
     <string name="FacebookConnection">Facebook connection error</string>
-    <string name="UpdatePriceAlert">You are about to change Cost and Retail price. Do you wish to continue ?</string>
+    <string name="UpdatePriceAlert">You are about to change Cost price. Do you wish to continue ?</string>
     <string name="UpdateRetailAlert">You are about to change Retail price. Do you wish to continue ? </string>
     <string name="PortionUpdated">Portion updated successfully.</string>
     <string name="DescUpdated">Description updated successfully.</string>

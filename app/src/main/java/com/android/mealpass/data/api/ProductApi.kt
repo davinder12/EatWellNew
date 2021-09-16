@@ -100,7 +100,7 @@ interface ProductApi {
 
     @Multipart
     @POST("user_update_profile.php")
-    fun updateProfile(@PartMap partMap: Map<String, @JvmSuppressWildcards RequestBody>): Single<Response<JsonObject>>
+    fun updateProfile(@PartMap partMap: Map<String, @JvmSuppressWildcards RequestBody>): Single<Response<PhoneUpdateResponse>>
 
 
     @FormUrlEncoded

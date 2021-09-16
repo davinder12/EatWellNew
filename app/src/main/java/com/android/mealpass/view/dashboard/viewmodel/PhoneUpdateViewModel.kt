@@ -40,13 +40,8 @@ class PhoneUpdateViewModel @Inject constructor(
         val phoneNumber = phoneNumber.value ?: ""
         val requestModel = productRepository.updateProfileData(userId, phoneNumber)
         subscribe(requestModel.request) { response ->
-            response.body()?.let { jsonObject ->
-                val convertedData = jsonObject.toString().convertJsonToModelClass {
-                    Gson().fromJson(jsonObject.toString(), PhoneUpdateResponse::class.java)
-                }
-                convertedData?.let {
-                    updatePhoneNumber(it)
-                }
+            response.body()?.let { it ->
+                updatePhoneNumber(it)
             }
         }
         return requestModel.networkState

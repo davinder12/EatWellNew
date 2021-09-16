@@ -54,6 +54,10 @@ class UserRepository @Inject constructor(
             override fun createNetworkRequest(): Single<Response<TermConditionResponse>> {
                 return authApi.getTermCondition(isMerchantLogin)
             }
+
+            override fun getResponseStatus(response: Response<TermConditionResponse>): ResponseValidator {
+               return ResponseValidator(1,"")
+            }
         })
     }
 
@@ -124,6 +128,10 @@ class UserRepository @Inject constructor(
         return NetworkRequest(appExecutors, object : IRetrofitNetworkRequestCallback<Unit> {
             override fun createNetworkRequest(): Single<Response<Unit>> {
                 return authApi.logoutMethod(userId)
+            }
+
+            override fun getResponseStatus(response: Response<Unit>): ResponseValidator {
+               return ResponseValidator(1,"")
             }
         })
     }

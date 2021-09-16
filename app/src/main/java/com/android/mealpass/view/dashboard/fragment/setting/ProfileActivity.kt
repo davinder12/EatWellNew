@@ -83,11 +83,15 @@ class ProfileActivity : DataBindingActivity<ActivityProfileBinding>() {
 
 
         subscribe(profilePick.throttleClicks()){
-           when {
-               isAllGranted(Permission.CAMERA,Permission.READ_EXTERNAL_STORAGE) -> callImagePicker()
-               else -> runWithPermissions(Permission.CAMERA,Permission.READ_EXTERNAL_STORAGE) { callImagePicker() }
+//           when {
+//               isAllGranted(Permission.CAMERA,Permission.READ_EXTERNAL_STORAGE) -> callImagePicker()
+//               else -> runWithPermissions(Permission.CAMERA,Permission.READ_EXTERNAL_STORAGE) {
+//                   callImagePicker()
+//               }
+//
+//           }
+            callImagePicker()
 
-           }
         }
 
 

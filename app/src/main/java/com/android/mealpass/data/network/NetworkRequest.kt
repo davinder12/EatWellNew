@@ -26,8 +26,7 @@ open class NetworkRequest<ResponseType>
 ) : IRequest<ResponseType> {
 
     override fun retry(networkState: NetworkState) {
-        Log.e("response","sdfsd")
-        request
+
     }
 
 //    private val responseLiveData : MediatorLiveData<ResponseType> = MediatorLiveData()
@@ -129,11 +128,10 @@ interface INetworkRequestCallback<ResponseType> {
      */
 
 
-    fun getResponseStatus(response: ResponseType): ResponseValidator = ResponseValidator(1,"")
+    fun getResponseStatus(response: ResponseType): ResponseValidator
 
     fun sessionExpired() {}
 
-    fun getBodyErrorStatusCode(response: ResponseType): String = "{\"status\":{\"code\":\"1\"}}"
 
     /**
      * Called when the fetch operation throws an exception.

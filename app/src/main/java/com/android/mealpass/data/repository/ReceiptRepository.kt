@@ -77,9 +77,6 @@ class ReceiptRepository @Inject constructor(
                 return receiptApi.updateOrderStatus(receiptId)
             }
 
-            override fun getBodyErrorStatusCode(response: Response<CommonResponseModel>): String {
-                return response.body()?.run { this.toString() } ?: ""
-            }
 
             override fun getResponseStatus(response: Response<CommonResponseModel>): ResponseValidator {
                 return ResponseValidator(response.body()?.status?.code,response.body()?.status?.message)

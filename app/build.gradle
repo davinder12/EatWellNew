@@ -9,6 +9,14 @@ apply plugin: 'com.google.gms.google-services'
 
 
 android {
+    signingConfigs {
+        devRelease {
+            storeFile file('/Users/davinder/Documents/mealpass(17-Aug-2021)/MealPassKotlin/credential/MealPass')
+            storePassword 'MealPass'
+            keyPassword 'MealPass'
+            keyAlias 'mealpass'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
@@ -19,12 +27,15 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.devRelease
     }
 
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
         }
     }
     compileOptions {
@@ -40,7 +51,9 @@ android {
         jvmTarget = "1.8"
     }
 
-
+    lintOptions {
+        checkReleaseBuilds false
+    }
 
     flavorDimensions 'env'
     productFlavors {
