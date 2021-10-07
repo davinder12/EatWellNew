@@ -20,19 +20,20 @@ fun isHomeDeliveryAvailable(
         openTime: String?,
         deliveryCloseBeforeHours: String?
 ): Boolean {
-    return isFullDayDeliveryAllowed || isHomeDelivery == HOME_DELIVERY_ON && isDeliverytimeOnOff(
-            openTime, deliveryCloseBeforeHours
-    )
+
+    return isFullDayDeliveryAllowed || (isHomeDelivery == HOME_DELIVERY_ON && isDeliverytimeOnOff(
+            openTime, deliveryCloseBeforeHours)
+            )
 }
 
 fun pickUpTime(startingDateTime: String?, endDateTime: String?): String {
     var time = ""
-    time(startingDateTime)?.let { time = it }
-    time(endDateTime)?.let {
-        time = try{
-            convertTimeIntoTwoDigit(time, it)
-        }catch (e: Exception){
-            "$time-$it"
+    convert24HourTo12Hour(startingDateTime)?.let { time = it }
+    convert24HourTo12Hour(endDateTime)?.let {
+        time = try {
+            "$time - $it"
+        } catch (e: Exception) {
+            ""
         }
     }
     return time
@@ -61,12 +62,14 @@ fun getPercentage(discountedPrice: Float, actualPrice: Float): Int {
 }
 
 fun getPortion(portion: Int, context: Context): String {
-    return when {
+    Log.e("portion ", "" + portion)
+    val response = when {
         portion > PORTION_MAX_VALUE -> PORTION_STATIC_VALUE + context.getString(R.string.left)
         portion in PORTION_MIN_VALUE..PORTION_MAX_VALUE -> "$portion " + context.getString(R.string.left)
         else -> context.getString(R.string.OutOfStock)
-
     }
+    return context.getString(R.string.Portion) + response
+
 }
 
 
@@ -98,13 +101,21 @@ fun getDescription(resName: String?, description: String?): String? {
      var result = description
      resName?.let { resturant ->
          description?.let { description ->
-             if(resturant.isNotEmpty() && description.isNotEmpty() && description.contains(resName)){
+             if (resturant.isNotEmpty() && description.isNotEmpty() && description.contains(resName)) {
                  result = description.replace(resName, "")
-                 result = "<b>$resName</b> $result";
+                 result = "<b>$resName</b> $result"
              }
          }
      }
     return result
+}
+
+
+fun orderCancelMethod(collectionTime: String?): Boolean? {
+    return time(collectionTime)?.let {
+        canUserCancelOrder(it)
+    }
+
 }
 
 // open time show pickup start time

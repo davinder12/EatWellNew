@@ -18,9 +18,7 @@ import mealpass.com.mealpass.BuildConfig
 import mealpass.com.mealpass.R
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
@@ -43,13 +41,17 @@ class ProfileActivityViewModel @Inject constructor(
         it
     }
 
-    var name  = profileResponse.data.map { it.body.name } as MutableLiveData<String?>
+    var name = profileResponse.data.map { it.body.name } as MutableLiveData<String>
 
-    var emailId = profileResponse.data.map { it.body.email } as MutableLiveData<String?>
+    var emailId = profileResponse.data.map { it.body.email } as MutableLiveData<String>
 
-    var phoneNumber = profileResponse.data.map { it.body.mobile } as MutableLiveData<String?>
+    var phoneNumber = profileResponse.data.map { it.body.mobile } as MutableLiveData<String>
 
-    var imageUrl = profileResponse.data.map { it.body.user_image } as MutableLiveData<String?>
+    var imageUrl = profileResponse.data.map { it.body.user_image } as MutableLiveData<String>
+
+    var campaignPortion = profileResponse.data.map {
+        it.body.campaign_portion
+    }
 
     var newsLetter = profileResponse.data.map {
         it.body.newsletter

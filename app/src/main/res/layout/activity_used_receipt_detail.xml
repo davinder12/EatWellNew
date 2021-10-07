@@ -133,11 +133,6 @@
                     android:textSize="12sp" />
 
 
-                <com.android.mealpass.widgets.CustomTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/Date" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -157,12 +152,30 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true"
-                        android:text="@string/Redeemed"
+                        android:text="@{vm.isOrderCancel == 1 ? @string/OrderCancel: @string/Redeemed }"
                         android:textColor="@android:color/holo_red_dark"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
                 </RelativeLayout>
+
+
+                <com.android.mealpass.widgets.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/Date" />
+
+                <com.android.mealpass.widgets.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="@string/StaffReceipt"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_12ssp"
+                    android:textStyle="bold"
+                    app:visibleGone="@{vm.isStaffReceipt}" />
 
                 <com.android.mealpass.widgets.CustomTextView
                     android:layout_width="wrap_content"

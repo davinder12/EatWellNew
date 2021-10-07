@@ -2,11 +2,12 @@ package com.android.mealpass.view.dashboard.fragment.dialog
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.mealpass.data.extension.throttleClicks
+import com.android.mealpass.data.models.ProductTypeResponse
 import com.android.mealpass.utilitiesclasses.baseclass.BaseBottomSheetDialogFragment
+import com.android.mealpass.view.dashboard.DashboardActivity
 import com.android.mealpass.view.dashboard.adapter.FoodFilterAdapter
 import com.android.mealpass.view.dashboard.viewmodel.FoodFilterViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +32,10 @@ class FoodFilter : BaseBottomSheetDialogFragment<DialogfilterBinding>() {
         const val MAX_TIME_LABEL = "24:00"
 
         lateinit var callBack: () -> Unit
-        fun create(callBackMethod: () -> Unit): FoodFilter {
+
+        var listOfProductType: List<ProductTypeResponse.Body>? = null
+        fun create(listOfProductType: List<ProductTypeResponse.Body>?, callBackMethod: () -> Unit): FoodFilter {
+            this.listOfProductType = listOfProductType
             callBack = callBackMethod
             return FoodFilter()
         }
@@ -51,6 +55,13 @@ class FoodFilter : BaseBottomSheetDialogFragment<DialogfilterBinding>() {
             viewModel.seekBarChangeListener(minValue, maxValue)
         }
         bindNetworkState(viewModel.resource.networkState, loadingIndicator = binding.progressBar3)
+
+        if (listOfProductType.isNullOrEmpty()) viewModel.callApi() else viewModel.updateList(listOfProductType)
+
+        viewModel.updateList.observe(viewLifecycleOwner, {
+            (requireActivity() as DashboardActivity).viewModel.foodList = it
+        })
+
         initAdapter(FoodFilterAdapter(), binding.recyclerView, viewModel.dataList) {
             it.isItemSelected = !it.isItemSelected
             binding.recyclerView.adapter?.notifyDataSetChanged()

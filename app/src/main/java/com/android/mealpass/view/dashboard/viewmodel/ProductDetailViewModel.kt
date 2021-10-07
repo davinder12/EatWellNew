@@ -10,14 +10,16 @@ import com.android.mealpass.data.models.SaveReceiptRequestModel
 import com.android.mealpass.data.models.SingleResturantRequest
 import com.android.mealpass.data.models.SpecificFoodResponse
 import com.android.mealpass.data.network.NetworkState
-import com.android.mealpass.data.repository.LocationRepository
 import com.android.mealpass.data.repository.ProductRepository
 import com.android.mealpass.data.service.PreferenceService
 import com.android.mealpass.utilitiesclasses.ResourceViewModel
 import com.android.mealpass.utilitiesclasses.baseclass.BaseViewModel
+import com.android.mealpass.view.dashboard.activity.ProductDetail.Companion.CAMPAIGN
 import com.android.mealpass.view.dashboard.activity.ProductDetail.Companion.DEFAULT_QTY
 import com.android.mealpass.view.dashboard.activity.ProductDetail.Companion.FOR_DONATION_ONLY
-import com.android.mealpass.view.units.isDeliverytimeOnOff
+import com.android.mealpass.view.dashboard.activity.ProductDetail.Companion.NOT_STAFF_MEMBER
+import com.android.mealpass.view.dashboard.activity.ProductDetail.Companion.STAFF
+import com.android.mealpass.view.dashboard.activity.ProductDetail.Companion.STAFF_MEMBER
 import com.android.mealpass.view.units.isHomeDeliveryAvailable
 import com.android.mealpass.view.units.isResturantOpen
 import com.android.mealpass.view.units.pickUpTime
@@ -30,7 +32,6 @@ import javax.inject.Inject
 class ProductDetailViewModel @Inject constructor(
     private val productRepository: ProductRepository,
     private val preferenceService: PreferenceService,
-    private val locationRepository: LocationRepository
 ) : BaseViewModel() {
 
 
@@ -67,8 +68,7 @@ class ProductDetailViewModel @Inject constructor(
     var coverPhoto = resturantRequest.data.map {
         latitude = it.body.latitude
         longitude = it.body.longitude
-        webSiteUrl= it.body.website_url
-
+        webSiteUrl = it.body.website_url
         it.body.cover_photo
     }
 
@@ -76,6 +76,9 @@ class ProductDetailViewModel @Inject constructor(
         it.body.fav_count
     }
 
+    var needToVisibleStock = resturantRequest.data.map {
+        it.status.code == 1
+    }
 
     var campaignItemLeft = resturantRequest.data.map {
         it.body.campaign_itemleft
@@ -172,19 +175,24 @@ class ProductDetailViewModel @Inject constructor(
     fun updatePortionValidation(product: SpecificFoodResponse.Body): ProductBuyEnum {
         return when {
             !isResturantOpenOrClosed(product) -> ProductBuyEnum.SHOP_CLOSE
-            preferenceService.getString(R.string.pkey_phoneNumber, "")
-                .isNullOrEmpty() -> ProductBuyEnum.NEED_PHONENUMBER
+            (product.is_only_for_staff && !product.is_staff_user) && product.isOnlyforDonation != FOR_DONATION_ONLY -> ProductBuyEnum.FOR_STAFF_MEMBER_ONLY
+            preferenceService.getString(R.string.pkey_phoneNumber, "").isNullOrEmpty() -> ProductBuyEnum.NEED_PHONENUMBER
             else -> ProductBuyEnum.NO_ISSUE
         }
     }
 
-    // TODO NEED TO CHECK PHONE NUMBER For updatation
-    //  TODO NEED TO ADD COLUMBIA FUNCTIONALITY
+
     fun validationProductInfo(product: SpecificFoodResponse.Body): ProductItem {
+        val isForStaffMember = (product.is_only_for_staff && product.is_staff_user)
         return when {
-            // !isResturantOpenOrClosed(product) -> ProductItem(ProductBuyEnum.SHOP_CLOSE)
-            product.isOnlyforDonation == FOR_DONATION_ONLY -> campaignPortion(product)
-            else -> ProductItem(ProductBuyEnum.NOCAMPIGNUSER)
+            isForStaffMember -> {
+                // if all staff item is empty and use is also a campaign user need to check that part too
+                if (product.user_staff_food_left <= DEFAULT_QTY && product.isOnlyforDonation == FOR_DONATION_ONLY)
+                    campaignPortion(product, CAMPAIGN)
+                else staffPortion(product, STAFF)
+            }
+            product.isOnlyforDonation == FOR_DONATION_ONLY -> campaignPortion(product, CAMPAIGN)
+            else -> ProductItem(ProductBuyEnum.NO_CAMPIGN_USER)
         }
     }
 
@@ -200,42 +208,63 @@ class ProductDetailViewModel @Inject constructor(
         )
     }
 
-
-    private fun campaignPortion(productInfo: SpecificFoodResponse.Body): ProductItem {
+    private fun campaignPortion(productInfo: SpecificFoodResponse.Body, paymentMethod: String): ProductItem {
         val totalCampaignItemLeft = productInfo.campaign_itemleft
         val userItemSelected: Int = productInfo.defaultPortion
-
         val userItemAllowed = productInfo.userCampaignPortionLeft
         return when {
-            userItemAllowed <= DEFAULT_QTY || totalCampaignItemLeft <= DEFAULT_QTY -> ProductItem(
-                ProductBuyEnum.DONATION_PORTION_EMPTY, null
-            )
+            totalCampaignItemLeft <= DEFAULT_QTY -> ProductItem(ProductBuyEnum.TOTAL_DONATION_PORTION_LIMIT_OVER, null)
+            userItemAllowed <= DEFAULT_QTY -> ProductItem(ProductBuyEnum.DONATION_PORTION_EMPTY, null)
             userItemSelected <= totalCampaignItemLeft && userItemSelected <= userItemAllowed -> {
                 val price = userItemSelected * productInfo.price
                 ProductItem(
-                    ProductBuyEnum.DONATION_PORTION,
-                    updateRequestModel(price, productInfo, "campaign"),
-                    userItemSelected
+                        ProductBuyEnum.DONATION_PORTION,
+                        updateRequestModel(price, productInfo, paymentMethod, NOT_STAFF_MEMBER, userItemSelected),
+                        userItemSelected
                 )
             }
             else -> {
-                val itemLeft =
-                    if (userItemAllowed <= totalCampaignItemLeft) userItemAllowed else totalCampaignItemLeft
+                val itemLeft = if (userItemAllowed <= totalCampaignItemLeft) userItemAllowed else totalCampaignItemLeft
                 val price = itemLeft * productInfo.price
-                ProductItem(
-                    ProductBuyEnum.DONATION_PORTION_LIMIT_OVER,
-                    updateRequestModel(price, productInfo, "campaign"),
-                    itemLeft
+                ProductItem(ProductBuyEnum.DONATION_PORTION_LIMIT_OVER,
+                        updateRequestModel(price, productInfo, paymentMethod, NOT_STAFF_MEMBER, itemLeft),
+                        itemLeft
                 )
+            }
+        }
+    }
+
+    private fun staffPortion(productInfo: SpecificFoodResponse.Body, paymentMethod: String): ProductItem {
+        val totalStaffItemLeft = productInfo.merchant_staff_food_left
+        val userItemSelected: Int = productInfo.defaultPortion
+        val userItemAllowed = productInfo.user_staff_food_left
+        return when {
+            totalStaffItemLeft <= DEFAULT_QTY -> ProductItem(ProductBuyEnum.TOTAL_STAFF_PORTION_EMPTY, null)
+            userItemAllowed <= DEFAULT_QTY -> ProductItem(ProductBuyEnum.STAFF_PORTION_EMPTY, null)
+            userItemSelected <= totalStaffItemLeft && userItemSelected <= userItemAllowed -> {
+                val price = userItemSelected * productInfo.price
+                ProductItem(
+                        ProductBuyEnum.STAFF_PORTION,
+                        updateRequestModel(price, productInfo, paymentMethod, STAFF_MEMBER, userItemSelected),
+                        userItemSelected
+                )
+            }
+            else -> {
+                val itemLeft = if (userItemAllowed <= totalStaffItemLeft) userItemAllowed else totalStaffItemLeft
+                val price = itemLeft * productInfo.price
+                ProductItem(ProductBuyEnum.STAFF_PORTION_LIMIT_OVER,
+                        updateRequestModel(price, productInfo, paymentMethod, STAFF_MEMBER, itemLeft), itemLeft)
             }
         }
     }
 
     // Receipt Request Model
     private fun updateRequestModel(
-        amount: Float,
-        productInfo: SpecificFoodResponse.Body,
-        paymentInfo: String
+            amount: Float,
+            productInfo: SpecificFoodResponse.Body,
+            paymentInfo: String,
+            isStaffReceipt: Int,
+            userItemSelected: Int
     ): SaveReceiptRequestModel {
 
         val resturantId = productInfo.res_id
@@ -248,26 +277,24 @@ class ProductDetailViewModel @Inject constructor(
         }
 
         return SaveReceiptRequestModel(
-            amount, resturantId, preferenceService.getString(R.string.pkey_user_Id),
-            productInfo.opening_time, productInfo.closing_time,
-            listOf(
-                SaveReceiptRequestModel.ReceiptProductInfo(
-                    amount,
-                    productInfo.before_price,
-                    productInfo.price,
-                    "",   // productInfo.product_id, not sure cross verify for it
-                    productInfo.defaultPortion
-                )
-            ), paymentInfo,
-            deliveryAmount,
-            isdelivery,
-            productInfo.currency_type,
-            productInfo.defaultPortion,
-            paymentMethod = paymentInfo,
-            isFromCampaign = if (paymentInfo == "campaign") "1" else "0",
-            collection_time = pickUpTime(productInfo.opening_time, productInfo.closing_time),
-
-            )
+                amount, resturantId, preferenceService.getString(R.string.pkey_user_Id),
+                productInfo.opening_time, productInfo.closing_time,
+                listOf(
+                        SaveReceiptRequestModel.ReceiptProductInfo(
+                                amount,
+                                productInfo.before_price,
+                                productInfo.price,
+                                "",   // productInfo.product_id, not sure cross verify for it
+                                userItemSelected
+                        )
+                ), paymentInfo,
+                deliveryAmount,
+                isdelivery,
+                productInfo.currency_type, userItemSelected,
+                paymentMethod = paymentInfo,
+                isFromCampaign = if (paymentInfo == CAMPAIGN) "1" else "0",
+                collection_time = pickUpTime(productInfo.opening_time, productInfo.closing_time), isStaffReceipt = isStaffReceipt
+        )
     }
 
 
@@ -276,14 +303,9 @@ class ProductDetailViewModel @Inject constructor(
         paymentInfo: String
     ): Boolean {
 
-//        productInfo.allow_fullday_delivery || productInfo.is_home_delivery == 1 && isDeliverytimeOnOff(
-//                productInfo.opening_time,
-//                productInfo.delivery_close_before_hours
-//        )
-
         val condition = isHomeDeliveryAvailable(productInfo.is_home_delivery,productInfo.allow_fullday_delivery,
                 productInfo.opening_time,productInfo.delivery_close_before_hours)
-        return if (paymentInfo == "campaign") productInfo.isFreeDelivery == 1 && condition else condition
+        return if (paymentInfo == CAMPAIGN || paymentInfo == STAFF) productInfo.isFreeDelivery == 1 && condition else condition
     }
 
 

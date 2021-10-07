@@ -134,9 +134,12 @@ class HomeFragment : BaseListFragment<FragmentHomeBinding>() {
 
     private fun clickListener(){
         subscribe(binding.searchText.onTextChange(1)) {
-            if(viewModel.isFirstTimeLoadData){
+            if (viewModel.isFirstTimeLoadData) {
                 viewModel.isFirstTimeLoadData = false
-            }else searchItem(it.toString())
+            } else {
+                viewModel.resetItem()
+                searchItem(it.toString())
+            }
         }
 
         subscribe(binding.customerSupport.throttleClicks()){
@@ -144,7 +147,11 @@ class HomeFragment : BaseListFragment<FragmentHomeBinding>() {
         }
 
         subscribe(binding.filterBtn.throttleClicks()) {
-            val resturantFilter = FoodFilter.create {
+            val foodList = (requireActivity() as DashboardActivity).viewModel.foodList?.map {
+                it.isItemSelected = false
+                it
+            }
+            val resturantFilter = FoodFilter.create(foodList) {
                 searchItem(binding.searchText.text.toString())
             }
             resturantFilter.show(childFragmentManager, resturantFilter.tag)

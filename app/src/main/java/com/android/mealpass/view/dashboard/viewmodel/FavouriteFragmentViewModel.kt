@@ -49,7 +49,7 @@ class FavouriteFragmentViewModel @Inject constructor(
     }
 
     var favouriteItemListData :LiveData<List<FoodData.Body>?>  = favouriteItemList.data.map {
-        it.body.filter { it.is_active ==  RESTURANT_ACTIVE }
+        it.body?.filter { it.is_active == RESTURANT_ACTIVE }
     }
 
     fun updateLocation() {

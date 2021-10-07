@@ -42,7 +42,7 @@ class FindFoodViewModel @Inject constructor(
     var isNeedToUpdateAdsList = true
     var country = MutableLiveData<String>()
     var listSize = 0
-    var updatedOffset = mutableLiveData(OFFSET)
+    var updatedOffset = OFFSET
     var notificationCount = mutableLiveData(0)
 
 
@@ -51,31 +51,36 @@ class FindFoodViewModel @Inject constructor(
     private val search = MutableLiveData<String>()
     var foodResource = PagedListViewModel(search) {
         productRepository.searchApi(
-            FoodRequestModel(
-                currentTimeValidation(),
-                preferenceService.getString(R.string.pkey_userlat), getCurrentListSize(),
-                preferenceService.getString(R.string.pkey_userLong), OFFSET,
-                TimeZone.getDefault().id,
-                preferenceService.getString(R.string.pkey_user_Id),
-                it, countryName = if(it.isNullOrEmpty()) preferenceService.getString(R.string.pkey_location) else "" ,
-                CATEGORY,
-                preferenceService.getString(R.string.pkey_showOpenResturnat, RESTURANT_CLOSE),
-                preferenceService.getString(R.string.pkey_toTime, ""),
-                preferenceService.getString(R.string.pkey_fromTime, ""),
-                getListOfObject(), CURRENT_LIST_SIZE, updatedOffset.value?:0
-            ), updatedOffset
-        )
+                FoodRequestModel(
+                        currentTimeValidation(),
+                        preferenceService.getString(R.string.pkey_userlat), getCurrentListSize(),
+                        preferenceService.getString(R.string.pkey_userLong), OFFSET,
+                        TimeZone.getDefault().id,
+                        preferenceService.getString(R.string.pkey_user_Id),
+                        it, countryName = if (it.isNullOrEmpty()) preferenceService.getString(R.string.pkey_location) else "",
+                        CATEGORY,
+                        preferenceService.getString(R.string.pkey_showOpenResturnat, RESTURANT_CLOSE),
+                        preferenceService.getString(R.string.pkey_toTime, ""),
+                        preferenceService.getString(R.string.pkey_fromTime, ""),
+                        getListOfObject(), CURRENT_LIST_SIZE, updatedOffset
+                )) {
+            updatedOffset = it
+        }
+    }
+
+    fun resetItem() {
+        listSize = CURRENT_LIST_SIZE
+        updatedOffset = 0
+    }
+
+    private fun getCurrentListSize(): Int {
+        return if (listSize > 0) listSize else CURRENT_LIST_SIZE
     }
 
 
-    private fun getCurrentListSize() : Int  {
-     return  if(listSize > 0) listSize else CURRENT_LIST_SIZE
+    var foodApiNetworkState = foodResource.networkState.map {
+        it
     }
-
-
-     var foodApiNetworkState = foodResource.networkState.map{
-          it
-     }
 
      fun locationUpdateApi(){
             if(!preferenceService.getString(R.string.pkey_userlat).isNullOrEmpty() && isNeedToUpdateDataFirstTime ){

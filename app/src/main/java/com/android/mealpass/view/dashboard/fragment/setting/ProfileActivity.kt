@@ -3,13 +3,9 @@ package com.android.mealpass.view.dashboard.fragment.setting
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.viewModels
 import androidx.core.net.toFile
 import androidx.lifecycle.lifecycleScope
-import com.afollestad.assent.Permission
-import com.afollestad.assent.isAllGranted
-import com.afollestad.assent.runWithPermissions
 import com.android.mealpass.data.extension.progressDialog
 import com.android.mealpass.data.extension.throttleClicks
 import com.android.mealpass.utilitiesclasses.baseclass.DataBindingActivity
@@ -33,9 +29,7 @@ class ProfileActivity : DataBindingActivity<ActivityProfileBinding>() {
         get() = R.layout.activity_profile
 
 
-    var launchSomeActivity : ActivityResultLauncher<Intent>?= null
     companion object {
-        const val CAMERA_RESULT_CODE = 101
         const val ITEM_SELECTED = "1"
         const val ITEM_NOT_SELECTED = "0"
         private const val PROFILE_IMAGE_SIZE = 300
@@ -52,14 +46,6 @@ class ProfileActivity : DataBindingActivity<ActivityProfileBinding>() {
         })
 
 
-//        launchSomeActivity =  registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-//            if (result.resultCode == Activity.RESULT_OK) {
-//                result.data?.getStringExtra(ImageSelectActivity.RESULT_FILE_PATH)?.let { imagePath ->
-//                    viewModel.updateProfilePic(imagePath)
-//                }
-//
-//            }
-//        }
 
         subscribe(binding.update.throttleClicks()){
             viewModel.filterMethod{status,message->
@@ -83,13 +69,6 @@ class ProfileActivity : DataBindingActivity<ActivityProfileBinding>() {
 
 
         subscribe(profilePick.throttleClicks()){
-//           when {
-//               isAllGranted(Permission.CAMERA,Permission.READ_EXTERNAL_STORAGE) -> callImagePicker()
-//               else -> runWithPermissions(Permission.CAMERA,Permission.READ_EXTERNAL_STORAGE) {
-//                   callImagePicker()
-//               }
-//
-//           }
             callImagePicker()
 
         }

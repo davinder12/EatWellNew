@@ -5,8 +5,6 @@ import com.android.mealpass.data.models.*
 import com.android.mealpass.data.network.*
 import com.android.mealpass.data.service.AuthState
 import com.exactsciences.portalapp.data.network.AppExecutors
-import com.facebook.common.Common
-import com.google.gson.JsonObject
 import io.reactivex.Single
 import retrofit2.Response
 import javax.inject.Inject
@@ -23,26 +21,28 @@ class ReceiptRepository @Inject constructor(
         return NetworkRequest(appExecutors, object : IRetrofitNetworkRequestCallback<ProductReceiptResponse> {
             override fun createNetworkRequest(): Single<Response<ProductReceiptResponse>> {
                 return receiptApi.saveReceiptMethod(
-                    saveReceiptRequestModel?.user_id,
-                    saveReceiptRequestModel?.restaurent_id,
-                    saveReceiptRequestModel?.collection_time,
-                    saveReceiptRequestModel?.receipt_product_info?.get(0)?.quantity,
-                    saveReceiptRequestModel?.reference_id,
-                    saveReceiptRequestModel?.payment_info,
-                    saveReceiptRequestModel?.payment_info,
-                    saveReceiptRequestModel?.amount,
-                    saveReceiptRequestModel?.isFromCampaign,
-                    saveReceiptRequestModel?.donated_amount,
-                    saveReceiptRequestModel?.delivery_amount,
-                    saveReceiptRequestModel?.delivery_address,
-                    saveReceiptRequestModel?.isHomeDelivery,
-                    saveReceiptRequestModel?.receipt_product_info?.get(0)?.before_price,
-                    saveReceiptRequestModel?.amount
+                        saveReceiptRequestModel?.user_id,
+                        saveReceiptRequestModel?.restaurent_id,
+                        saveReceiptRequestModel?.collection_time,
+                        saveReceiptRequestModel?.total_quantity,
+                        saveReceiptRequestModel?.reference_id,
+                        saveReceiptRequestModel?.payment_info,
+                        saveReceiptRequestModel?.payment_info,
+                        saveReceiptRequestModel?.amount,
+                        saveReceiptRequestModel?.isFromCampaign,
+                        saveReceiptRequestModel?.donated_amount,
+                        saveReceiptRequestModel?.delivery_amount,
+                        saveReceiptRequestModel?.delivery_address,
+                        saveReceiptRequestModel?.isHomeDelivery,
+                        saveReceiptRequestModel?.receipt_product_info?.get(0)?.before_price,
+                        saveReceiptRequestModel?.receipt_product_info?.get(0)?.price, saveReceiptRequestModel?.isStaffReceipt
                 )
             }
+
             override fun getResponseStatus(response: Response<ProductReceiptResponse>): ResponseValidator {
-                return ResponseValidator(response.body()?.status?.code,response.body()?.status?.message)
+                return ResponseValidator(response.body()?.status?.code, response.body()?.status?.message)
             }
+
             override fun sessionExpired() {
                 authState.logout()
             }
@@ -79,15 +79,30 @@ class ReceiptRepository @Inject constructor(
 
 
             override fun getResponseStatus(response: Response<CommonResponseModel>): ResponseValidator {
-                return ResponseValidator(response.body()?.status?.code,response.body()?.status?.message)
+                return ResponseValidator(response.body()?.status?.code, response.body()?.status?.message)
             }
+
             override fun sessionExpired() {
                 authState.logout()
             }
         })
     }
 
+    fun cancelOrderMethod(userId: String?, orderId: Int?): IRequest<Response<CommonResponseModel>> {
+        return NetworkRequest(appExecutors, object : IRetrofitNetworkRequestCallback<CommonResponseModel> {
+            override fun createNetworkRequest(): Single<Response<CommonResponseModel>> {
+                return receiptApi.cancelOrder(userId, orderId)
+            }
 
+            override fun getResponseStatus(response: Response<CommonResponseModel>): ResponseValidator {
+                return ResponseValidator(response.body()?.status?.code, response.body()?.status?.message)
+            }
+
+            override fun sessionExpired() {
+                authState.logout()
+            }
+        })
+    }
 
 
 }

@@ -18,6 +18,7 @@ class UsedReceiptDetailViewModel @Inject constructor() : BaseViewModel() {
     var latitude =""
     var longitude =""
 
+
     var portion = mutableLiveData("")
 
     var usedReceiptData = MutableLiveData<ReceiptResponse.Body.UsedReceipt>()
@@ -35,9 +36,6 @@ class UsedReceiptDetailViewModel @Inject constructor() : BaseViewModel() {
         getDate(it.created_date)
     }
 
-    var collectionTime = usedReceiptData.map {
-         it.collection_time
-    }
 
     var storeName = usedReceiptData.map {
         it.storename
@@ -53,17 +51,11 @@ class UsedReceiptDetailViewModel @Inject constructor() : BaseViewModel() {
         it.quantity
     }
 
-    var currencyType = usedReceiptData.map {
-        it.currency_type
-    }
 
     var amount = usedReceiptData.map {
         it.amount
     }
 
-    var isHomeDelivery = usedReceiptData.map {
-        false
-    }
 
     var isDelivery = usedReceiptData.map {
         it.isdelivery
@@ -77,10 +69,18 @@ class UsedReceiptDetailViewModel @Inject constructor() : BaseViewModel() {
         it.donated_amount.toString() + " " + it.currency_type
     }
 
+    var isOrderCancel = usedReceiptData.map {
+        it.is_cancel
+    }
+
+    var isStaffReceipt = usedReceiptData.map {
+        it.isStaffReceipt == 1
+    }
+
 
     fun updateUsedData(
-        data: ReceiptResponse.Body.UsedReceipt,
-        portion: String
+            data: ReceiptResponse.Body.UsedReceipt,
+            portion: String
     ) {
         data.latitude?.let { latitude = it.toString() }
         data.longitude?.let { longitude = it.toString() }

@@ -1,11 +1,8 @@
 package com.android.mealpass.view.notification.viewmodel
 
 
-import androidx.lifecycle.LiveData
 import com.android.mealpass.data.extension.map
 import com.android.mealpass.data.extension.mutableLiveData
-import com.android.mealpass.data.models.SaveReceiptRequestModel
-import com.android.mealpass.data.network.NetworkState
 import com.android.mealpass.data.repository.NotificationRepository
 import com.android.mealpass.data.service.PreferenceService
 import com.android.mealpass.utilitiesclasses.ResourceViewModel
@@ -37,16 +34,20 @@ class NotificationViewModel @Inject constructor(
         it
     }
 
-    fun updateBadgesCount(){
+    fun updateBadgesCount() {
         var numberOfCount = preferenceService.getInt(R.string.pkey_notification_count)
-        if( numberOfCount > 0 ){
+        if (numberOfCount > 0) {
             numberOfCount -= 1
-            preferenceService.putInt(R.string.pkey_notification_count,numberOfCount)
+            preferenceService.putInt(R.string.pkey_notification_count, numberOfCount)
         }
     }
 
-    fun updateBadges(){
-        preferenceService.putInt(R.string.pkey_notification_count,0)
+    fun callApi() {
+        userId.value = preferenceService.getString(R.string.pkey_user_Id)
+    }
+
+    fun updateBadges() {
+        preferenceService.putInt(R.string.pkey_notification_count, 0)
     }
 
 }

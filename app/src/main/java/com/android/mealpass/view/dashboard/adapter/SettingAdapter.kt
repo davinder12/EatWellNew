@@ -11,7 +11,7 @@ import io.reactivex.ObservableEmitter
 import mealpass.com.mealpass.R
 import mealpass.com.mealpass.databinding.ItemSettingBinding
 
-class SettingAdapter(private val locationNotification: MutableLiveData<Boolean>) : DataBoundAdapterClass<SettingEnum, ItemSettingBinding>(diffCallback) {
+class SettingAdapter(private val locationNotification: MutableLiveData<Boolean>, private val versionName: String) : DataBoundAdapterClass<SettingEnum, ItemSettingBinding>(diffCallback) {
     /**
      * The [LayoutRes] for the RecyclerView item
      * This is used to inflate the view.
@@ -33,9 +33,11 @@ class SettingAdapter(private val locationNotification: MutableLiveData<Boolean>)
 
         itemType?.let { item->
             bind.item = item
-            bind.isNotificationOn  = locationNotification
+            bind.isNotificationOn = locationNotification
+            bind.version = versionName
             bind.toogleBtn.throttleClicks().subscribe {
                 itemClickEmitter?.onNext(item)
+
             }
         }
     }

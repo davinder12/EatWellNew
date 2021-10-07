@@ -12,10 +12,7 @@ import com.android.mealpass.data.service.MealPassFirebaseMessagingService.Compan
 import com.android.mealpass.data.service.MealPassFirebaseMessagingService.Companion.NOTIFICATION_ID
 import com.android.mealpass.view.dashboard.DashboardActivity
 import com.android.mealpass.view.dashboard.activity.*
-import com.android.mealpass.view.dashboard.fragment.setting.ActivityFeedBack
-import com.android.mealpass.view.dashboard.fragment.setting.ChangePasswordActivity
-import com.android.mealpass.view.dashboard.fragment.setting.ProfileActivity
-import com.android.mealpass.view.dashboard.fragment.setting.ReferalCodeActivity
+import com.android.mealpass.view.dashboard.fragment.setting.*
 import com.android.mealpass.view.login.StartUpActivity
 import com.android.mealpass.view.login.TermConditionActivity
 import com.android.mealpass.view.merchant.MerchantActivity
@@ -98,6 +95,7 @@ class NavigationScreen @Inject constructor(@ActivityContext private val context:
         }
     }
 
+
     fun goToUsedReceiptDetailActivity(usedReceipt: ReceiptResponse.Body.UsedReceipt) {
         val intent = Intent(context, UsedReceiptDetail::class.java).also {
             it.putExtra(EXTRA_ACTIVE_RECEIPT_DETAIL, usedReceipt)
@@ -116,6 +114,21 @@ class NavigationScreen @Inject constructor(@ActivityContext private val context:
             context.startActivity(it)
         }
     }
+
+
+    fun goToChooseReferralScreen() {
+        Intent(context, ChooseReferralCodeActivity::class.java).also {
+            context.startActivity(it)
+        }
+    }
+
+    fun goToStaffCodeScreen(isFirstTimeVisit: Boolean = false) {
+        Intent(context, AddStaffCodeActivity::class.java).also {
+            it.putExtra(IS_FIRST_TIME_VISIT, isFirstTimeVisit)
+            context.startActivity(it)
+        }
+    }
+
 
     fun gotToProfileActivity() {
         Intent(context, ProfileActivity::class.java).also {

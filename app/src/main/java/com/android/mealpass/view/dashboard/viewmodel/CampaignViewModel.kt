@@ -2,9 +2,7 @@ package com.android.mealpass.view.dashboard.viewmodel
 
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.android.mealpass.data.models.ActiveReceiptMapper
-import com.android.mealpass.data.models.ProductReceiptResponse
 import com.android.mealpass.data.models.ReceiptResponse
 import com.android.mealpass.data.models.SaveReceiptRequestModel
 import com.android.mealpass.data.network.NetworkState
@@ -18,18 +16,14 @@ class CampaignViewModel @Inject constructor(
     private val receiptRepository: ReceiptRepository
 ) : BaseViewModel() {
 
-
     var response : ReceiptResponse.Body.ActiveReceipt ? = null
-
     fun updateReceiptRequest(saveReceiptRequestModel: SaveReceiptRequestModel): LiveData<NetworkState> {
         return receiptRepository.campaignReceiptMethod(saveReceiptRequestModel).also {
             subscribe(it.request) {
                 if(it.isSuccessful){
-                    response =   ActiveReceiptMapper.Mapper.from(it.body()?.body)
+                    response = ActiveReceiptMapper.Mapper.from(it.body()?.body)
                 }
             }
         }.networkState
     }
-
-
 }

@@ -28,7 +28,7 @@ class MerchantPortion : BaseListFragment<FragmentMerchantPortionBinding>() {
     }
 
     private val viewModel: MerchantPortionModel by viewModels()
-//
+
     private val args: MerchantPortionArgs by navArgs()
 
     override val layoutRes: Int
@@ -39,19 +39,29 @@ class MerchantPortion : BaseListFragment<FragmentMerchantPortionBinding>() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.updateData(args.productDetail)
 
+        viewModel.updatedCondition.observe(viewLifecycleOwner, {
+            viewModel.monthlyTaxDeduction.value = it
+            viewModel.yearlyTaxDeduction.value = it * 365
+        })
+
+
         binding.toolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
 
 
         binding.plusCount.setOnClickListener {
-           viewModel.incrementUpdate()
+            viewModel.incrementUpdate()
         }
 
         binding.minusCount.setOnClickListener {
-           viewModel.decrementUpdate()
+            viewModel.decrementUpdate {
+                if (it) {
+                    showSnackMessage(getString(R.string.SoldPortionAlertMsg))
+                }
+            }
         }
-       
+
 
         subscribe(binding.switcher.throttleClicks()){
            val message : String =   if (viewModel.isOpen.value == SHOP_OPEN) resources.getString(R.string.CloseShopAlert) else resources.getString(R.string.OpenShopAlert)
@@ -68,24 +78,26 @@ class MerchantPortion : BaseListFragment<FragmentMerchantPortionBinding>() {
         }
 
         subscribe(binding.savePortion.throttleClicks()) {
-            if (viewModel.remainingPortion.value?: 0 > 0) {
-                bindNetworkState(viewModel.updateMerchantPortion(), progressDialog(R.string.Pleasewait),R.string.PortionUpdated) {
-                   backStackPutInt(BACK_STACK_INT, viewModel.remainingPortion.value)
-                    bindNetworkState(viewModel.updatePortionNotificationMethod, progressDialog(R.string.UpdateToServer))
+            viewModel.filterMethod { condition ->
+                if (condition) {
+                    bindNetworkState(viewModel.callProductDetailApi(), progressDialog(R.string.Pleasewait), R.string.PortionUpdated) {
+                        backStackPutInt(BACK_STACK_INT, viewModel.totalPortion.value)
+                        bindNetworkState(viewModel.updatePortionNotificationMethod, progressDialog(R.string.UpdateToServer))
+                    }
                 }
             }
         }
 
-        subscribe(binding.retailPriceBtn.throttleClicks()){
-            viewModel.retailPrice.value?.toFloatOrNull()?.let { retailPrice->
+
+        subscribe(binding.retailPriceBtn.throttleClicks()) {
+            viewModel.retailPrice.value?.toFloatOrNull()?.let { retailPrice ->
                 requireContext().alertDialog(resources.getString(R.string.app_name),
                         resources.getString(R.string.UpdateRetailAlert),
                         getString(R.string.Continue),
                         getString(R.string.Cancel),
                         successResponse = {
                             val apiProgress = viewModel.updateRetailPriceOrCostPrice(retailPrice.toString(), "")
-                            bindNetworkState(apiProgress, progressDialog(R.string.Pleasewait),R.string.PriceUpdated) {
-                               // backStackPutFloat(RETAIL_PRICE, viewModel.retailPrice.value?.toFloatOrNull())
+                            bindNetworkState(apiProgress, progressDialog(R.string.Pleasewait), R.string.PriceUpdated) {
                             }
                         })
             }
@@ -110,7 +122,7 @@ class MerchantPortion : BaseListFragment<FragmentMerchantPortionBinding>() {
 
     override fun onBindView(binding: FragmentMerchantPortionBinding) {
         binding.vm = viewModel
-    }
 
+    }
 
 }

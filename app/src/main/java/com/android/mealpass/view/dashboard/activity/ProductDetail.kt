@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import androidx.lifecycle.Observer
 import com.android.mealpass.data.api.enums.ProductBuyEnum
 import com.android.mealpass.data.extension.throttleClicks
 import com.android.mealpass.data.models.ProductItem
@@ -39,6 +38,10 @@ class ProductDetail : DataBindingActivity<ActivityProductDetailBinding>() {
     companion object {
         const val DEFAULT_QTY = 0
         const val FOR_DONATION_ONLY = 1
+        const val CAMPAIGN = "campaign"
+        const val STAFF = "staffMember"
+        const val STAFF_MEMBER = 1
+        const val NOT_STAFF_MEMBER = 0
     }
 
     override val layoutRes: Int
@@ -74,8 +77,6 @@ class ProductDetail : DataBindingActivity<ActivityProductDetailBinding>() {
             }
         })
 
-
-
         favourite?.let { item ->
             item.setOnMenuItemClickListener {
                   when {
@@ -96,22 +97,18 @@ class ProductDetail : DataBindingActivity<ActivityProductDetailBinding>() {
             }
         }
 
-
-
         subscribe(binding.addItem.throttleClicks()) {
             viewModel.resturantRequest.data.value?.let { specificFoodResponse ->
                 when (viewModel.updatePortionValidation(specificFoodResponse.body)) {
                     ProductBuyEnum.SHOP_CLOSE -> showMessage(getString(R.string.closeorderlable))
+                    ProductBuyEnum.FOR_STAFF_MEMBER_ONLY -> showMessage(getString(R.string.staffMemberValidation))
                     ProductBuyEnum.NEED_PHONENUMBER -> {
                         val phoneNumberDialog = PhoneNumberDialog.create {
                             val orderSelectionDialog = OrderSelectionDialog.create(specificFoodResponse.body.itemleft) {
                                 specificFoodResponse.body.defaultPortion = it
                                 portionValidation(specificFoodResponse)
                             }
-                            orderSelectionDialog.show(
-                                    supportFragmentManager,
-                                    orderSelectionDialog.tag
-                            )
+                            orderSelectionDialog.show(supportFragmentManager, orderSelectionDialog.tag)
                         }
                         phoneNumberDialog.show(supportFragmentManager, phoneNumberDialog.tag)
                     }
@@ -156,13 +153,14 @@ class ProductDetail : DataBindingActivity<ActivityProductDetailBinding>() {
     private fun portionValidation(specificFoodResponse: SpecificFoodResponse) {
         val result = viewModel.validationProductInfo(specificFoodResponse.body)
         when (result.productBuyEnum) {
-            ProductBuyEnum.DONATION_PORTION_EMPTY -> messageDialog(getString(R.string.MaximumLimitOver))
-            ProductBuyEnum.DONATION_PORTION -> {
-                campignDialog(
-                        getString(R.string.ConfirmProduct, result.quantity.toString()) + getString(
-                                R.string.OrderConfirmation
-                        )
-                ) {
+            ProductBuyEnum.DONATION_PORTION_EMPTY, ProductBuyEnum.STAFF_PORTION_EMPTY -> messageDialog(getString(R.string.MaximumLimitOver))
+            ProductBuyEnum.TOTAL_STAFF_PORTION_EMPTY, ProductBuyEnum.TOTAL_DONATION_PORTION_LIMIT_OVER -> {
+                messageDialog(getString(R.string.RestaurantLimitOver))
+            }
+            ProductBuyEnum.DONATION_PORTION, ProductBuyEnum.STAFF_PORTION -> {
+                campignDialog(getString(R.string.ConfirmProduct, result.quantity.toString()) + getString(
+                        R.string.OrderConfirmation
+                )) {
                     result.campaignUserHomeDelivery(
                             result.saveReceiptRequestModel?.isDelivery ?: false,
                             getString(R.string.Delivery),
@@ -170,14 +168,9 @@ class ProductDetail : DataBindingActivity<ActivityProductDetailBinding>() {
                     )
                 }
             }
-            ProductBuyEnum.DONATION_PORTION_LIMIT_OVER -> {
-                campignDialog(
-                        getString(
-                                R.string.PortionLeft,
-                                result.quantity.toString(),
-                                result.quantity.toString()
-                        )
-                ) {
+            ProductBuyEnum.DONATION_PORTION_LIMIT_OVER, ProductBuyEnum.STAFF_PORTION_LIMIT_OVER -> {
+                getMessage(result)
+                campignDialog(getMessage(result)) {
                     result.campaignUserHomeDelivery(
                             result.saveReceiptRequestModel?.isDelivery ?: false,
                             getString(R.string.Delivery),
@@ -190,6 +183,14 @@ class ProductDetail : DataBindingActivity<ActivityProductDetailBinding>() {
             }
         }
     }
+
+    private fun getMessage(productItem: ProductItem): String {
+        return if (productItem.productBuyEnum == ProductBuyEnum.STAFF_PORTION_LIMIT_OVER)
+            getString(R.string.StaffPortionLeft, productItem.quantity.toString(), productItem.quantity.toString())
+        else getString(R.string.PortionLeft, productItem.quantity.toString(), productItem.quantity.toString())
+
+    }
+
 
     private fun ProductItem.campaignUserHomeDelivery(
             isDelivery: Boolean,

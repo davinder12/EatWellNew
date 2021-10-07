@@ -23,15 +23,12 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:orientation="vertical"
-
-            app:cardBackgroundColor="@color/cynonColor">
+            app:cardBackgroundColor="@{vm.is_only_for_staff ? @color/cynonColor : @color/white }">
 
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                >
+                android:layout_height="wrap_content">
 
 
                 <RelativeLayout
@@ -49,7 +46,6 @@
                             android:id="@+id/backgroundImage"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            app:srcCompat="@drawable/food_image1"
                             app:coverProfile="@{vm.cover_photo}" />
 
 
@@ -169,6 +165,20 @@
                                 android:textColor="@android:color/white"
                                 android:visibility="gone"
                                 app:strike="@{String.format(@string/currency_strike,vm.discounted_price,vm.currency_type)}" />
+
+
+                            <!--                            <com.google.android.material.textview.MaterialTextView-->
+                            <!--                                app:visibleGone="@{vm.is_only_for_staff}"-->
+                            <!--                                android:layout_width="wrap_content"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:layout_alignParentEnd="true"-->
+                            <!--                                android:layout_centerVertical="true"-->
+                            <!--                                android:fontFamily="@font/georgia"-->
+                            <!--                                android:textColor="@android:color/white"-->
+                            <!--                                android:text="@string/OnlyForStaff"-->
+                            <!--                                />-->
+
+
                         </RelativeLayout>
 
 

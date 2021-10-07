@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.fragment.findNavController
 import com.android.mealpass.data.extension.progressDialog

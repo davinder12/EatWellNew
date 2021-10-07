@@ -24,8 +24,8 @@ android {
         applicationId "mealpass.com.mealpass"
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 8
+        versionName "1.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.devRelease
     }
@@ -34,6 +34,7 @@ android {
         release {
             minifyEnabled true
             shrinkResources true
+            useProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
         }
@@ -184,5 +185,6 @@ dependencies {
 
 
  // check version of application of playstore
+    implementation 'com.google.android.play:core:1.10.1'
     implementation 'org.jsoup:jsoup:1.8.3'
 }

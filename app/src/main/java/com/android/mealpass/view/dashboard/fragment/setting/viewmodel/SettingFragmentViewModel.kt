@@ -20,8 +20,8 @@ class SettingFragmentViewModel @Inject constructor(private val userRepository: U
 
 
     var settingList  = mutableLiveData(
-        listOf(SettingEnum.ADD_REFERRAL_CODE, SettingEnum.PROFILE,SettingEnum.CHANGE_PASSWORD,
-            SettingEnum.CONTACT_US_FEEDBACK, SettingEnum.NOTIFICATION, SettingEnum.LOGOUT)
+            listOf(SettingEnum.ADD_REFERRAL_CODE, SettingEnum.ADD_STAFF_CODE, SettingEnum.PROFILE, SettingEnum.CHANGE_PASSWORD,
+                    SettingEnum.CONTACT_US_FEEDBACK, SettingEnum.NOTIFICATION, SettingEnum.BUILD_VERSION, SettingEnum.LOGOUT)
     )
 
 

@@ -42,7 +42,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>() {
                             progressDialog(R.string.Pleasewait),
                             R.string.success_register
                         ) {
-                            navigationScreen.goToReferralCodeScreen(true)
+                            navigationScreen.goToChooseReferralScreen()
                         }
                     }
                     else -> {

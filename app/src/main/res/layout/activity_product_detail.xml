@@ -193,20 +193,14 @@
                     <LinearLayout
                         android:id="@+id/pickuptime_layout"
                         android:layout_width="wrap_content"
+                        app:visibleGone="@{vm.needToVisibleStock}"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/total_layout"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
 
-                        <com.android.mealpass.widgets.CustomTextView
-                            android:id="@+id/pickuptime_lable"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
-                            android:text=""
-                            android:textColor="@android:color/white"
-                            android:textSize="14sp" />
+
 
 
                         <com.android.mealpass.widgets.CustomTextView
@@ -223,24 +217,17 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        app:visibleGone="@{vm.needToVisibleStock}"
                         android:layout_below="@id/pickuptime_layout"
                         android:gravity="center_vertical"
-
                         android:orientation="horizontal">
-
-                        <com.android.mealpass.widgets.CustomTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/Portion"
-                            android:textColor="@android:color/white"
-                            android:textSize="14sp" />
 
 
                         <com.android.mealpass.widgets.CustomTextView
                             android:id="@+id/stock"
                             android:layout_width="wrap_content"
+
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="5dp"
                             android:text="@{DataConverterKt.getPortion(vm.itemLeft,context)}"
                             android:textColor="@android:color/white"
                             android:textSize="16sp" />
@@ -330,7 +317,7 @@
                     android:layout_below="@id/item_description"
                     android:layout_margin="10dp"
                     android:text="@string/WhatToExpect"
-                    android:textColor="@color/button_light_color"
+                    android:textColor="@color/red_color"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:goneVisible="@{TextUtils.isEmpty(vm.expectedDescription)}" />
@@ -357,7 +344,7 @@
                     android:layout_below="@id/expect_description"
                     android:layout_margin="10dp"
                     android:text="@string/Address"
-                    android:textColor="@color/button_light_color"
+                    android:textColor="@color/red_color"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -410,7 +397,7 @@
                     android:layout_below="@id/address_layout"
                     android:layout_margin="10dp"
                     android:text="@string/Homepage"
-                    android:textColor="@color/button_light_color"
+                    android:textColor="@color/red_color"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:goneVisible="@{TextUtils.isEmpty(vm.webUrl)}" />
@@ -458,6 +445,7 @@
 
                 </LinearLayout>
 
+
                 <ProgressBar
                     android:layout_centerInParent="true"
                     android:id="@+id/productDetailProgress"
@@ -466,8 +454,9 @@
                     android:layout_height="wrap_content" />
 
 
-
             </RelativeLayout>
+
+
         </ScrollView>
 
 

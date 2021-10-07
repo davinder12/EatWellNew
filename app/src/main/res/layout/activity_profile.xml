@@ -31,21 +31,20 @@
             android:id="@+id/toolbar2"
             android:layout_width="0dp"
             android:layout_height="50dp"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_margin="0dp"
+            android:background="?attr/colorPrimary"
+            android:contentInsetStart="0dp"
             android:contentInsetLeft="0dp"
             android:contentInsetRight="0dp"
-            android:contentInsetStart="0dp"
+            android:minHeight="?attr/actionBarSize"
             android:padding="0dp"
+            android:theme="?attr/actionBarTheme"
             app:contentInsetLeft="0dp"
             app:contentInsetRight="0dp"
             app:contentInsetStart="0dp"
-            >
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -54,52 +53,88 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/menu_layout"
                     android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_centerVertical="true"
-                    android:padding="15dp"
                     android:background="?attr/selectableItemBackground"
                     android:clickable="true"
                     android:focusable="true"
-                    app:srcCompat="@drawable/ic_back_arrow"
-                    android:layout_height="match_parent"/>
-
-                <com.android.mealpass.widgets.CustomTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/MyProfile"
-                    android:textSize="16sp"
-                    android:textColor="@android:color/white"
-                    android:layout_centerInParent="true"
-                    />
-
-
+                    android:padding="15dp"
+                    app:srcCompat="@drawable/ic_back_arrow" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/edit_icon"
                     android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:padding="15dp"
-                    android:src="@{vm.isEditTable ? @drawable/ic_check_circle : @drawable/ic_edit}"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true" />
+                    android:src="@{vm.isEditTable ? @drawable/ic_check_circle : @drawable/ic_edit}" />
+
+
+                <com.android.mealpass.widgets.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/MyProfile"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
 
             </RelativeLayout>
 
 
         </androidx.appcompat.widget.Toolbar>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profilePick"
-            android:layout_width="85dp"
-            android:layout_height="85dp"
-            android:layout_marginTop="20dp"
+        <com.android.mealpass.widgets.CustomEditText
+            android:id="@+id/name"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/editback"
+            android:cursorVisible="false"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:padding="5dp"
+            android:text="@={vm.name}"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-            app:url="@{vm.imageUrl}"
-            android:src="@drawable/earth"
-            app:civ_border_color="@color/colorPrimary"
-            app:civ_border_width="1dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
+        <com.android.mealpass.widgets.CustomEditText
+            android:id="@+id/email_id"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/editback"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:padding="5dp"
+            android:text="@={vm.emailId}"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <com.android.mealpass.widgets.CustomEditText
+            android:id="@+id/phoneno"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/editback"
+            android:ems="10"
+            android:inputType="number"
+            android:padding="5dp"
+            android:text="@={vm.phoneNumber}"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <com.android.mealpass.widgets.CustomTextView
             android:id="@+id/textView"
@@ -111,24 +146,6 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profilePick" />
 
-        <com.android.mealpass.widgets.CustomEditText
-            android:id="@+id/name"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:text="@={vm.name}"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/editback"
-            android:ems="10"
-            android:cursorVisible="false"
-            android:padding="5dp"
-            android:textSize="16sp"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
-
         <com.android.mealpass.widgets.CustomTextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
@@ -138,23 +155,6 @@
             android:text="@string/EmailAddress"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name" />
-
-        <com.android.mealpass.widgets.CustomEditText
-            android:id="@+id/email_id"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/editback"
-            android:ems="10"
-            android:text="@={vm.emailId}"
-            android:textSize="16sp"
-            android:inputType="textEmailAddress"
-            android:padding="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <com.android.mealpass.widgets.CustomTextView
             android:id="@+id/textView3"
@@ -167,102 +167,69 @@
             app:layout_constraintTop_toBottomOf="@+id/email_id" />
 
 
-
-        <com.android.mealpass.widgets.CustomEditText
-            android:id="@+id/phoneno"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/editback"
-            android:ems="10"
-            android:inputType="number"
-            android:text="@={vm.phoneNumber}"
-            android:padding="5dp"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
         <com.android.mealpass.widgets.CustomTextView
-            android:id="@+id/textView4"
+            android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="16dp"
-            android:text="@string/NewsletterTitle"
-            app:layout_constraintEnd_toStartOf="@+id/newslatter"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/phoneno" />
-
-        <com.google.android.material.checkbox.MaterialCheckBox
-            android:id="@+id/newslatter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:checked="@{vm.newsLetter == 1}"
-            app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textView4" />
-
-        <com.android.mealpass.widgets.CustomTextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:visibility="gone"
-
-            app:layout_constraintEnd_toStartOf="@+id/checkBox2"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-        <com.google.android.material.checkbox.MaterialCheckBox
-            android:id="@+id/checkBox2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="19dp"
-            android:visibility="gone"
-            app:layout_constraintBaseline_toBaselineOf="@+id/textView5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textView5" />
-
+            android:text="@{String.format(@string/DailyNumberOfMeals,vm.campaignPortion)}"
+            app:layout_constraintStart_toStartOf="@+id/phoneno"
+            app:layout_constraintTop_toBottomOf="@+id/phoneno"
+            app:visibleGone="@{vm.campaignPortion > 0 }" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/update"
-            android:layout_width="0dp"
+            android:layout_width="260dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:text="@string/Update"
+            android:visibility="gone"
             android:textColor="@android:color/white"
             android:textColorLink="@color/common_google_signin_btn_text_dark_default"
-            app:layout_constraintEnd_toEndOf="@+id/newslatter"
-            app:layout_constraintStart_toStartOf="@+id/textView4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/newslatter"
             app:visibleGone="@{vm.isEditTable}" />
-
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/edilayout"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="@color/transparent_color"
             android:visibility="gone"
-            android:background="#33FFFFFF"
+            app:backgroundTint="@android:color/transparent"
             app:goneVisible="@{vm.isEditTable}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar2"/>
+            app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
 
 
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/newslatter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:checked="@{vm.newsLetter == 1}"
+            android:paddingTop="@dimen/_4sdp"
+            android:paddingBottom="@dimen/_4sdp"
+            android:text="@string/NewsletterTitle"
+            app:layout_constraintStart_toStartOf="@+id/phoneno"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profilePick"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:layout_marginTop="20dp"
+            app:civ_border_color="@color/colorPrimary"
+            app:civ_border_width="1dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar2"
+            app:url="@{vm.imageUrl}" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

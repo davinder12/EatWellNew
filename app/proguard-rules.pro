@@ -2,6 +2,7 @@
 -keep class com.android.** { *; }
 -keep class org.jsoup.**{*;}
 
+-repackageclasses
 
 ## Retrofit
 # Platform calls Class.forName on types which do not exist on Android to determine platform.

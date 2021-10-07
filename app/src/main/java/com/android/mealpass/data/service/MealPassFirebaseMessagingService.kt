@@ -28,9 +28,9 @@ class MealPassFirebaseMessagingService  : FirebaseMessagingService() {
     @Inject
     lateinit var preferenceService: PreferenceService
 
-
     companion object {
         const val MERCHANT_NOTIFICATION_SCREEN = "product_order_push"
+        const val MERCHANT_CANCEL_ORDER_SCREEN = "product_order_cancel_push"
         const val PRODUCT_DETAIL_SCREEN = "1"
         const val GENERAL_NOTIFICATION_SCREEN = "3"
         const val TYPE = "type"
@@ -47,11 +47,10 @@ class MealPassFirebaseMessagingService  : FirebaseMessagingService() {
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
+        Log.e("message are", "" + remoteMessage)
         when{
-             preferenceService.getString(R.string.pkey_user_Id).isNullOrEmpty() &&
-                     preferenceService.getString(R.string.pkey_merchantEmailId).isNullOrEmpty()
-             -> showNotification(Notification(MEAlPASS, getData(MESSAGE,remoteMessage),getString(R.string.app_name),null))
-             else ->  handleMessage(remoteMessage)
+            preferenceService.getString(R.string.pkey_user_Id).isNullOrEmpty() && preferenceService.getString(R.string.pkey_merchantEmailId).isNullOrEmpty() -> showNotification(Notification(MEAlPASS, getData(MESSAGE, remoteMessage), getString(R.string.app_name), null))
+            else -> handleMessage(remoteMessage)
         }
 
     }
@@ -61,6 +60,7 @@ class MealPassFirebaseMessagingService  : FirebaseMessagingService() {
         try {
              remoteMessage.data[TYPE]?.let { type ->
               val pendingIntent =  when (type) {
+                  MERCHANT_CANCEL_ORDER_SCREEN -> getMerchantNotification()
                   MERCHANT_NOTIFICATION_SCREEN -> getMerchantNotification()
                   PRODUCT_DETAIL_SCREEN -> getProductDetailIntent(remoteMessage)
                   GENERAL_NOTIFICATION_SCREEN -> getGeneralNotificationIntent(remoteMessage)
@@ -137,8 +137,6 @@ class MealPassFirebaseMessagingService  : FirebaseMessagingService() {
             }
         }
     }
-
-
 
 
     private fun getData(key: String, remoteMessage: RemoteMessage): String? {

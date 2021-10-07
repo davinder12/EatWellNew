@@ -2,12 +2,15 @@ package com.android.mealpass.view.dashboard.viewmodel
 
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.android.mealpass.data.extension.mutableLiveData
+import com.android.mealpass.data.models.ProductTypeResponse
 import com.android.mealpass.data.network.NetworkState
 import com.android.mealpass.data.repository.LocationRepository
 import com.android.mealpass.data.repository.UserRepository
 import com.android.mealpass.data.service.PreferenceService
 import com.android.mealpass.utilitiesclasses.baseclass.BaseViewModel
+import com.android.mealpass.view.dashboard.DashboardActivity.Companion.VERSION_MESSAGE
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,18 +33,16 @@ class DashBoardViewModel @Inject constructor(
     BaseViewModel() {
 
 
+    var foodList: List<ProductTypeResponse.Body>? = null
 
+    var versionNetworkState = MutableLiveData<NetworkState>()
     var isLocalNotificationInit = mutableLiveData(preferenceService.getBoolean(R.string.pkey_local_notification_init))
-    var updatedVersion =""
-    var needToUpdateVersion = mutableLiveData(false)
-
-    init {
-        checkVersionOnPlayStore()
-    }
+    var updatedVersion = ""
+    var needToUpdateVersion = true
 
     // TODO Foodfiltered value is not clear
     fun clearData() {
-        val merchantRemeber =  preferenceService.getBoolean(R.string.pkey_isMerchantRemeber)
+        val merchantRemeber = preferenceService.getBoolean(R.string.pkey_isMerchantRemeber)
         val merchantEmailId = preferenceService.getString(R.string.pkey_merchantEmailId)
         val userEmailId = preferenceService.getString(R.string.pkey_emaiId)
         val customerRemeber = preferenceService.getBoolean(R.string.pkey_isCustomerRemeber)
@@ -54,27 +55,37 @@ class DashBoardViewModel @Inject constructor(
     }
 
 
-    private fun checkVersionOnPlayStore(){
+    fun checkVersionOnPlayStore() {
+        versionNetworkState.postValue(NetworkState.loading)
         CoroutineScope(Dispatchers.IO).launch {
             val accessTokenDeferred = async { playStoreApi() }
             compareVersion(accessTokenDeferred.await())
         }
     }
 
-   private fun compareVersion(playStoreVersion: Float?) {
+    private fun compareVersion(playStoreVersion: String?) {
         CoroutineScope(Dispatchers.Main).launch {
             BuildConfig.VERSION_NAME.toFloatOrNull()?.let { currentVersion ->
-                playStoreVersion?.let { playStoreVersion ->
-                    if(currentVersion < playStoreVersion){
-                        updatedVersion = playStoreVersion.toString()
-                        needToUpdateVersion.postValue(true)
+                when {
+                    playStoreVersion.isNullOrEmpty() -> versionNetworkState.postValue(NetworkState.error(VERSION_MESSAGE))
+                    else -> {
+                        playStoreVersion.toFloatOrNull()?.let { playStoreVersion ->
+                            if (currentVersion < playStoreVersion) {
+                                needToUpdateVersion = true
+                                updatedVersion = playStoreVersion.toString()
+                                versionNetworkState.postValue(NetworkState.success)
+                            } else {
+                                needToUpdateVersion = false
+                                versionNetworkState.postValue(NetworkState.error(VERSION_MESSAGE))
+                            }
+                        }
                     }
                 }
             }
         }
     }
 
-    private fun playStoreApi(): Float? {
+    private fun playStoreApi(): String {
         var newVersion = ""
         try {
             val document: Document = Jsoup.connect("https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "&hl=en")
@@ -83,19 +94,19 @@ class DashBoardViewModel @Inject constructor(
                     .referrer("http://www.google.com")
                     .get()
 
-                val element: Elements = document.getElementsContainingOwnText("Current Version")
-                for (ele in element) {
-                    if (ele.siblingElements() != null) {
-                        val sibElemets: Elements = ele.siblingElements()
-                        for (sibElemet in sibElemets) {
-                            newVersion = sibElemet.text()
-                        }
+            val element: Elements = document.getElementsContainingOwnText("Current Version")
+            for (ele in element) {
+                if (ele.siblingElements() != null) {
+                    val sibElemets: Elements = ele.siblingElements()
+                    for (sibElemet in sibElemets) {
+                        newVersion = sibElemet.text()
                     }
                 }
+            }
         } catch (e: IOException) {
             e.printStackTrace()
         }
-        return newVersion.toFloatOrNull()
+        return newVersion
     }
 
 

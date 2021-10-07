@@ -1,7 +1,6 @@
 package com.android.mealpass.view.dashboard.fragment.receipt
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
@@ -9,7 +8,6 @@ import androidx.fragment.app.viewModels
 import com.android.mealpass.data.extension.throttleClicks
 import com.android.mealpass.utilitiesclasses.baseclass.BaseListFragment
 import com.android.mealpass.view.common.NavigationScreen
-import com.android.mealpass.view.dashboard.activity.ActiveReceiptDetail
 import com.android.mealpass.view.dashboard.adapter.ActiveReceiptAdapter
 import com.android.mealpass.view.dashboard.viewmodel.ReceiptFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,7 +43,6 @@ class ActiveReceiptFragment : BaseListFragment<FragmentReceiptItemBinding>() {
             }
         }
 
-
         subscribe(emptyView.throttleClicks()) {
             viewModel.updateReceipt()
         }
@@ -53,7 +50,6 @@ class ActiveReceiptFragment : BaseListFragment<FragmentReceiptItemBinding>() {
 
         initAdapter(ActiveReceiptAdapter(), binding.receiptList, viewModel.activeReceiptList,viewModel.receiptResponse) { activeReceiptData ->
             launchSomeActivity.launch(navigationScreen.goToActiveReceipt(activeReceiptData))
-
         }
     }
 

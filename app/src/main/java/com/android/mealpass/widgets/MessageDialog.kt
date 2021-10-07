@@ -28,11 +28,11 @@ fun dateDialog(context: Context, response: (String) -> Unit): DatePickerDialog {
 }
 
 
-fun Context.messageDialog(message: String, callBack: (() -> Unit)? = null) {
+fun Context.messageDialog(message: String, isCancelable: Boolean = true, callBack: (() -> Unit)? = null) {
     val alertDialogBuilder = AlertDialog.Builder(this).also {
         it.setMessage(message)
         it.setTitle(R.string.app_name)
-        it.setCancelable(true)
+        it.setCancelable(isCancelable)
     }
     alertDialogBuilder.setPositiveButton(getString(R.string.OK)) { dialog, which ->
         dialog.dismiss()
@@ -61,16 +61,18 @@ fun Context.campignDialog(message: String, successResponse: () -> Unit) {
 }
 
 fun Context.alertDialog(
-    title: String,
-    message: String,
-    postitiveBtnMsg: String,
-    negativebtnMsg: String,
-    successResponse: (() -> Unit)? = null,
-    errorResponse: (() -> Unit)? = null
-) {
+        title: String,
+        message: String,
+        postitiveBtnMsg: String,
+        negativebtnMsg: String,
+        successResponse: (() -> Unit)? = null,
+        errorResponse: (() -> Unit)? = null,
+
+        ) {
     val alertDialogBuilder = AlertDialog.Builder(this).also {
         it.setTitle(title)
         it.setMessage(message)
+
     }
     alertDialogBuilder.setPositiveButton(postitiveBtnMsg) { dialog, _ ->
         dialog.dismiss()

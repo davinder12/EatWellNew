@@ -13,8 +13,7 @@ import javax.inject.Inject
  */
 class PreferenceService @Inject constructor(context: Context) {
 
-    private val defaultSharedPreferences: SharedPreferences =
-        PreferenceManager.getDefaultSharedPreferences(context)
+    private val defaultSharedPreferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
     private val resources: Resources = context.resources
 
     operator fun contains(@StringRes resId: Int): Boolean {
@@ -95,7 +94,7 @@ class PreferenceService @Inject constructor(context: Context) {
 
 
     fun clearPreference() {
-        defaultSharedPreferences.edit().clear().apply();
+        defaultSharedPreferences.edit().clear().apply()
     }
 
 }

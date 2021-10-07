@@ -98,18 +98,34 @@ interface AuthApi {
     @FormUrlEncoded
     @POST("signup_user_part2.php")
     fun referralCodeApi(
-        @Field("user_id") userId: String?,
-        @Field("email") email: String?,
-        @Field("referral_code") referral_code: String?
+            @Field("user_id") userId: String?,
+            @Field("email") email: String?,
+            @Field("referral_code") referral_code: String?
+    ): Single<Response<CommonResponseModel>>
+
+
+    @FormUrlEncoded
+    @POST("verify_staff_code.php")
+    fun verifyStaffCode(
+            @Field("email") email: String?,
+            @Field("referral_code") referral_code: String?
+    ): Single<Response<CommonResponseModel>>
+
+
+    @FormUrlEncoded
+    @POST("update_campaign_portion.php")
+    fun updateCampaignPortion(
+            @Field("email") email: String?,
+            @Field("campaign_portion") campaignPortion: String?
     ): Single<Response<CommonResponseModel>>
 
 
     @FormUrlEncoded
     @POST("user_update_pass.php")
     fun updatePassword(
-        @Field("user_id") userId: String?,
-        @Field("old_pass") oldPwd: String?,
-        @Field("pass") newPwd: String?
+            @Field("user_id") userId: String?,
+            @Field("old_pass") oldPwd: String?,
+            @Field("pass") newPwd: String?
     ): Single<Response<CommonResponseModel>>
 
 

@@ -21,8 +21,8 @@
     <string name="Close">Close</string>
     <string name="Verify">Verify</string>
     <string name="Code">Code</string>
-    <string name="Step2Title">If you have a Foodbank code, Please enter it below press skip.</string>
-    <string name="Step2Title2">If you have a Foodbank code, Please enter it below.</string>
+    <string name="Step2Title">If you have a MealPass code, Please enter it below or press skip.</string>
+    <string name="Step2Title2">If you have a MealPass code, Please enter it below.</string>
     <string name="Tutorial">Tutorial</string>
     <string name="VideoDes">MealPass is an Australian market leader when it comes to targeting food waste at the retail level.We help food merchants reduce the amount of food that gets thrown away every day because it is not sold. We provide an app where merchants can post and sell the excess food at discounted prices.</string>
     <string name="VideoDes2">Please click on link to know more about us</string>
@@ -43,8 +43,8 @@
     <string name="VersionMsg">New version (%1$s) of MealPass application available on play store. By Downloading the latest update you will get the latest features, improvements in application.</string>
     <string name="FacebookConnection">Facebook connection error</string>
     <string name="UpdatePriceAlert">You are about to change Cost price. Do you wish to continue ?</string>
-    <string name="UpdateRetailAlert">You are about to change Retail price. Do you wish to continue ? </string>
-    <string name="PortionUpdated">Portion updated successfully.</string>
+    <string name="UpdateRetailAlert">You are about to change Retail price Cost price and Number of Portion. Do you wish to continue ? </string>
+    <string name="PortionUpdated">Product detail updated successfully.</string>
     <string name="DescUpdated">Description updated successfully.</string>
     <string name="PriceUpdated">Price updated successfully.</string>
     <string name="EnterName">Please enter username</string>
@@ -52,23 +52,27 @@
     <string name="ProfileUpdated">Profile updated successfully</string>
     <string name="EnterPassword">Please enter password</string>
     <string name="PasswordLimit">Password should contain at least 5 characters.</string>
+    <string name="OrderCancelValidation">You cannot cancel your meal during pickup time.</string>
     <string name="PasswordMismatch">Password mismatch</string>
     <string name="EnjoyFreePortion">Enjoy your magic portion free of cost.</string>
-    <string name="MaximumLimitOver">Your maximum limit to get foodbank meals is over. Please try tomorrow :)</string>
+    <string name="MaximumLimitOver">Your maximum limit to get MealPass meals is over. Please try tomorrow :)</string>
     <string name="EnterAmount">Enter Amount</string>
-    <string name="MinPortionLimit">You can get maximum %1$s campaign portion(s).</string>
-    <string name="PortionLeft">We have only %1$s quantity to be use as campaign portion(s). Would you like to get %2$s magic portion(s)?</string>
+    <string name="MinPortionLimit">You can get maximum %1$s MealPass portion(s).</string>
+    <string name="PortionLeft">You have only %1$s quantity to be use as MealPass portion(s). Would you like to get %2$s magic portion(s)?</string>
+    <string name="StaffPortionLeft">You have only %1$s quantity to be use as MealPass portion(s). Would you like to get %2$s magic portion(s)?</string>
     <string name="ShareMsg">Hi this is %1$s here, I recently just saved some food and around 50–80%2$s off meals, flowers, groceries around my area, and I wanted to share this app with you so you could save $$ and save food as well, click here to download MealPass.</string>
     <string name="ConfirmProduct">Confirmation: you are about to order %1$s portion(s).</string>
     <string name="OrderConfirmation">&#160;<![CDATA[When you press continue you also accept MealPass terms & conditions]]></string>
     <string name="ContactNumberUpdated">Mobile number updated successfully</string>
     <string name="RedeemReceipt">This will redeem the receipt. This should only be done by the restaurant. Continue ?</string>
+    <string name="CancelOrderConfirmation">Do you want to cancel order ?</string>
+
     <string name="ValidCvv">Enter valid CVV</string>
     <string name="ValidName">Enter valid name</string>
     <string name="ValidCardNumber">Enter valid card number</string>
     <string name="ValidExpiry">Enter valid expiry date</string>
     <!--   Donation message is different DonationMsg-->
-    <string name="DonationMsg">For every $1 you add Foodbank can provide 2 meals to someone in need. By adding just a little extra YOU can make a huge difference in someones life. Would you like to add a little extra?</string>
+    <string name="DonationMsg">For every $1 you add MealPass can provide 2 meals to someone in need. By adding just a little extra YOU can make a huge difference in someones life. Would you like to add a little extra?</string>
     <string name="InvalidUsername">Invalid username or password</string>
     <string name="FailedRequestToken">Failed to request token</string>
 
@@ -97,7 +101,7 @@
     <string name="InviteViaFB">Invite via Facebook or Text message</string>
     <string name="Logout">Logout</string>
     <string name="Date">Date</string>
-    <string name="Bought">Bought</string>
+    <string name="Bought">Meals Claimed:</string>
     <string name="ID">ID: %1$d</string>
     <string name="DonatedAmount">Donated Amount :</string>
     <string name="CollectionTime">COLLECTION TIME</string>
@@ -108,6 +112,7 @@
     <string name="UsedReceipts">Used Receipts</string>
     <string name="ActiveReceiptMsg">Head to the restaurant for the specified time and show your receipt . If you have any questions then please don\'t hesitate to get in touch with us at MealPass</string>
     <string name="Redeemed">Redeemed</string>
+    <string name="OrderCancel">Order Cancelled</string>
     <string name="WhatToExpect">What to expect:</string>
     <string name="Free">Free</string>
     <string name="SearchPlaceHolder">Search by location,store,etc.</string>
@@ -122,15 +127,15 @@
         Any payment information saved is only stored within your device.    \n\n\nFor any enquiries please contact our 24/7 customer support line at: 1300 848 428</string>
 
     <string name="OutOfStock">Out of stock</string>
-    <string name="NoResults">No Recode Found</string>
+    <string name="NoResults">No Record Found</string>
     <string name="left">left</string>
     <string name="TotalMeals">Total meals donated so far :&#160;</string>
     <string name="Total">Total:</string>
     <string name="Order">Order</string>
     <string name="CampaignCode">Campaign Code</string>
-    <string name="CampaignCodeMsg">This portion is donated by your local shop</string>
+    <string name="CampaignCodeMsg">This portion is provided to you by your local shop</string>
     <string name="GetMagicPortion">Get Magic Portion</string>
-    <string name="CampaignNote">Note: -Please observe any pickup Instructions.</string>
+    <string name="CampaignNote">Note: -Please observe any pickup instructions.</string>
     <string name="Donation">Donation</string>
     <string name="With">with</string>
     <string name="ContinueToPayment">Continue To Payment</string>
@@ -142,13 +147,17 @@
     <string name="ReduceTodayPrice">Reduce today\'s price of product</string>
 
     <string name="UpdateRetailPrice">Update Retail Price of product</string>
-    <string name="RetailPrice">Retail price in %1$s : </string>
+    <string name="RetailPrice">Retail price in USD: </string>
+    <string name="DailyNumberOfMeals">Daily number of MealPass meals: %1$s</string>
     <string name="RetailPriceLabel">Update Retail Price</string>
     <string name="updatePortion">Update Portion</string>
     <string name="UpdateCostPrice">Update Price</string>
+    <string name="PricingDetail">Pricing Detail</string>
+    <string name="Number_Of_Portions">Number of portions</string>
+    <string name="Submit">Submit</string>
 
 
-    <string name="PortionIsNowSellingFor">Cost price in %1$s : </string>
+    <string name="PortionIsNowSellingFor">Cost price in USD: </string>
     <string name="UpdateDetail">Update detail</string>
     <string name="CustomerName">Customer name: %1$s</string>
     <string name="ReceiptID">Receipt ID: %1$s</string>
@@ -173,7 +182,7 @@
     <string name="WallOfFame">Wall of Fame</string>
     <string name="Search">Search</string>
     <string name="AddReferralCode">Add MealPass Code</string>
-    <string name="CongratulationReferralApproved">Congratulation! Code Verified. Now enjoy your magic portion free of cost</string>
+    <string name="CongratulationReferralApproved">Your code is verified and you now enjoy your free meal.</string>
     <string name="Sponsor">Sponsor</string>
     <string name="PayForward">Pay it forward</string>
     <string name="SponsorTxt">What is a MealPass sponsor? \n\nA MealPass sponsor is a supporter of MealPass revolutionising digital food donation platform where food retailers can donate food directly to the recipients in their local communities in collaboration with food charities. The platform targets the end-of-day-unsold food (70% of total excess food) which food charities are unable to collect and redistribute.\n\n\nWhy become MealPass sponsor?\n\nA sponsorship can go a long way for someone in need and you can make a huge difference to someone\'s life by supporting MealPass food donation platform. Together we can reduce hunger and food waste, which are 2 of the most pressing issues in the world today.\n\n\nHow to become MealPass sponsor?\n\nBecoming a sponsor of MealPass food donation platform is easy:\n\n1- You can sponsor meal donations from a specific food retailer where you decide how many daily meals you want to sponsor and for how many days. The price can vary from food retailer to food retailer.\n\nOR\n\n2- You can sponsor the hard work of expanding and implementing MealPass food donation platform in local communities all over the country where people need help. This sponsorship can be a one off or recurring.\n\nYou can pay either by credit card or bank transfer.\n\nEvery sponsor will be offered a place on our sponsors wall of fame page where your picture/company logo together with your name and city/country will be visible and is shown both on our app and our website. Please note that it is not mandatory to be placed on our wall of fame. The choice is all yours.</string>
@@ -233,7 +242,7 @@
     <string name="PaidAtRestaurant">Paid At Restaurant</string>
     <string name="Feedback">Contact &amp; Feedback</string>
     <string name="FeedBackTitle">Send us your feedback!</string>
-    <string name="FeedBackMsg">Do you have comments,quires or general feedback please let us know in the field below.</string>
+    <string name="FeedBackMsg">Do you have comments, queries or general feedback please let us know in the field below.</string>
     <string name="FeedBackDescriptionMsg">Describe your experience here...</string>
     <string name="FeedBackValidation">Please fill both Subject and description</string>
 
@@ -245,6 +254,7 @@
     <string name="Subject">Subject</string>
 
     <string name="Pleasewait">Please wait…</string>
+    <string name="SoldPortionAlertMsg">Sorry! you cannot decrease portion less than sold portion</string>
     <string name="UpdateToServer">Notify to Server…</string>
     <string name="FoodPlatform">MealPass sponsor platform</string>
     <string name="DeliveryAddress">Delivery Address</string>
@@ -276,6 +286,7 @@
     <string name="acinfomation" translatable="false">5855306627</string>
     <string name="cenaidja" translatable="false">&#160;CENAIDJA</string>
     <string name="Notification">Notification</string>
+    <string name="APPVERSION">App Version</string>
     <string name="SwitchOffDailyPushAlert">Are you sure? you want to switch off Daily reminder.</string>
     <string name="SwitchOffDailyPushNote">Note : It will not stop all remote push but just stop the daily reminder.</string>
     <string name="FeedbackThanksMessage">Thank you for giving your valuable feedback</string>
@@ -288,6 +299,7 @@
     <string name="EmptyRecyclerView_defaultText">No item Found.</string>
     <string name="welcome_to_mealpass">Welcome to MealPass</string>
     <string name="Unknown_msg">Unknown error</string>
+    <string name="updateVersion">Application is  UpTo Date</string>
     <string name="login_success">Login Successfull</string>
     <string name="success_register">User Successfully registered</string>
     <string name="forgotpwd_success">Password has been sent. Please check your inbox (and spam folder) for New Password</string>
@@ -295,22 +307,39 @@
     <string name="title_activity_bottom">MainActivity</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="CancelOrderMessage">Your order cancel successfully</string>
 
     <string name="picktime">Pickup Time : %1$s</string>
     <string name="currency">%1$s  %2$s</string>
     <string name="referral_code">Validating refferral code..</string>
+    <string name="familyMemberUpdate">Family member updating..</string>
     <string name="before_price">Before price : </string>
     <string name="currency_strike"><strike>%1$s  %2$s</strike></string>
     <string name="closeorderlable">This place is currently closed for orders - Please come back soon.</string>
+    <string name="staffMemberValidation">Sorry! This product is only for staff.</string>
+
     <string name="not_campaign_user">You are not a campaign user</string>
+    <string name="RestaurantLimitOver">Free meals are out of stock. Please try again tomorrow 😀</string>
     <string name="referral_code_validation">Please enter valid referral code</string>
+    <string name="familyMemberRange">Please enter family member range between 1 to 20</string>
     <string name="password_updated_successfully">Password updated successfully</string>
 
-    <string name="merchant_bought">Bought %1$s</string>
+    <string name="merchant_bought">Meals Claimed: %1$s</string>
     <string name="m_date">Date: %1$s</string>
     <string name="m_time">Time: %1$s</string>
     <string name="addressSaveValidation">You cannot save more than five address</string>
-
+    <string name="cancel_order">Cancel Order</string>
+    <string name="number_of_person_in_family">Enter number of members in family</string>
+    <string name="count">count</string>
+    <string name="AddStaffCode">Add Staff Code</string>
+    <string name="StaffCode">Staff Code</string>
+    <string name="MealPassCode">MealPass Code</string>
+    <string name="StaffCodeMsg">If you have a staff code, please enter it below.</string>
+    <string name="StaffCampaignCodeMsg">Do you have any Mealpass or staff code,otherwise press skip.?</string>
+    <string name="OnlyForStaff">Only For Staff</string>
+    <string name="StaffReceipt">Staff Receipt</string>
+    <string name="MonthlyTaxDeduction">Estimated daily tax deduction: <b>%1$s$</b></string>
+    <string name="YearlyTaxDeduction">Estimated yearly tax deduction: <b>%1$s$</b></string>
 
 
 </resources>

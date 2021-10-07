@@ -49,6 +49,7 @@ class PhoneNumberDialog : BaseDialogFragment<DialogPhoneUpdateBinding>() {
         }
     }
 
+
     override fun onBindView(binding: DialogPhoneUpdateBinding) {
         binding.vm = viewModel
     }

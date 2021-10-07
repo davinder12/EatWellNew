@@ -19,8 +19,13 @@ import com.android.mealpass.view.common.NavigationScreen
 import com.android.mealpass.view.dashboard.viewmodel.DashBoardViewModel
 import com.android.mealpass.view.units.AlarmReceiver
 import com.android.mealpass.widgets.alertDialog
-import com.android.mealpass.widgets.messageDialog
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.play.core.appupdate.AppUpdateInfo
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.InstallStatus
+import com.google.android.play.core.install.model.UpdateAvailability
+import com.google.android.play.core.tasks.Task
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import mealpass.com.mealpass.BuildConfig
@@ -39,7 +44,8 @@ class DashboardActivity : BaseActivity() {
     lateinit var navigationScreen: NavigationScreen
 
     companion object{
-      const val  url = "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID
+        const val url = "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID
+        const val VERSION_MESSAGE = "Application is UpToDate"
     }
 
      val viewModel: DashBoardViewModel by viewModels()
@@ -48,27 +54,35 @@ class DashboardActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
         initDrawerBottomSheet()
-       // pushNotificationHandling()
-
+        // pushNotificationHandling()
+        // checkUpdate()
         viewModel.isLocalNotificationInit.observe(this, {
             if (!it) {
-                Log.e("alarm receiver inital","started")
+                Log.e("alarm receiver inital", "started")
                 alarmManager()
             }
         })
 
 
-        viewModel.needToUpdateVersion.observe(this, {
+        bindNetworkState(viewModel.versionNetworkState, progressDialog(R.string.Pleasewait)) {
             val message = resources.getString(R.string.VersionMsg, viewModel.updatedVersion)
-            if (it) alertDialog(getString(R.string.app_name),message, getString(R.string.Continue), getString(R.string.Cancel), successResponse = {
-                navigationScreen.goToSocialPage(url)
-            })
-        })
+            if (viewModel.needToUpdateVersion) {
+                viewModel.needToUpdateVersion = false
+                alertDialog(getString(R.string.app_name),
+                        message, getString(R.string.Continue), getString(R.string.Cancel
+                ), successResponse = {
+                    navigationScreen.goToSocialPage(url)
+                })
+            } else {
+                showMessage(getString(R.string.updateVersion))
+            }
+        }
     }
 
 
     private fun alarmManager(){
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as? AlarmManager
+
         val calendar: Calendar = Calendar.getInstance().apply { timeInMillis = System.currentTimeMillis()
             set(Calendar.HOUR_OF_DAY, 16)
         }
@@ -77,27 +91,58 @@ class DashboardActivity : BaseActivity() {
         }
 
         alarmManager?.setInexactRepeating(
-            AlarmManager.RTC_WAKEUP,
-            calendar.timeInMillis,
-            AlarmManager.INTERVAL_DAY,
-            alarmIntent
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
+                AlarmManager.INTERVAL_DAY,
+                alarmIntent
         )
         viewModel.updateAlarmManagerStatus()
-
     }
+
+    private fun checkUpdate() {
+        val appUpdateInfoTask: Task<AppUpdateInfo> = AppUpdateManagerFactory.create(this).appUpdateInfo
+        appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE && appUpdateInfo.isUpdateTypeAllowed(
+                            AppUpdateType.FLEXIBLE)) {
+                Log.e("information", "" + appUpdateInfo.availableVersionCode())
+            } else if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
+                Log.e("sdf", "sdfdsf")
+
+                //  popupSnackBarForCompleteUpdate()
+            }
+        }
+
+        appUpdateInfoTask.addOnFailureListener {
+            Log.e("response", "" + it.message)
+        }
+    }
+
+
+//    private fun startUpdateFlow(appUpdateInfo: AppUpdateInfo) {
+//        try {
+//            appUpdateManager.startUpdateFlowForResult(
+//                appUpdateInfo,
+//                AppUpdateType.FLEXIBLE,
+//                this,
+//                Flexible.FLEXIBLE_APP_UPDATE_REQ_CODE
+//            )
+//        } catch (e: SendIntentException) {
+//            e.printStackTrace()
+//        }
+//    }
 
     private fun initDrawerBottomSheet() {
         setSupportActionBar(toolbar)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home,
-                R.id.navigation_map,
-                R.id.navigation_favourite,
-                R.id.navigation_setting,
-                R.id.navigation_receipt
-            )
+                setOf(
+                        R.id.navigation_home,
+                        R.id.navigation_map,
+                        R.id.navigation_favourite,
+                        R.id.navigation_setting,
+                        R.id.navigation_receipt
+                )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)

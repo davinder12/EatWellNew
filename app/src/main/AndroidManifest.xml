@@ -20,8 +20,10 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
 
+
         <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat"/>
+
 
         <activity
             android:name="com.android.mealpass.view.dashboard.activity.DeliveryAddress"
@@ -98,16 +100,25 @@
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="portrait" />
 
-        <activity android:name="com.android.mealpass.view.merchant.MerchantActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            android:screenOrientation="portrait"
-            />
+        <activity
+            android:name="com.android.mealpass.view.merchant.MerchantActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:screenOrientation="portrait" />
 
-        <activity android:name="com.android.mealpass.view.login.TermConditionActivity"
+        <activity
+            android:name="com.android.mealpass.view.login.TermConditionActivity"
             android:windowSoftInputMode="adjustPan|stateHidden"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
 
+        <activity
+            android:name="com.android.mealpass.view.dashboard.fragment.setting.ChooseReferralCodeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+
+        <activity
+            android:name="com.android.mealpass.view.dashboard.fragment.setting.AddStaffCodeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
 
 
         <meta-data

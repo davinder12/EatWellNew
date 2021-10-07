@@ -1,21 +1,17 @@
 package com.android.mealpass.data.repository
 
-import androidx.lifecycle.MutableLiveData
 import com.android.mealpass.data.api.ProductApi
 import com.android.mealpass.data.models.*
 import com.android.mealpass.data.network.*
 import com.android.mealpass.data.service.AuthState
 import com.android.mealpass.utilitiesclasses.IListResource
-import com.android.mealpass.utilitiesclasses.ResourceViewModel
 import com.exactsciences.portalapp.data.network.AppExecutors
-import com.google.gson.JsonObject
 import io.reactivex.Single
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Response
-import retrofit2.http.Field
 import javax.inject.Inject
 
 
@@ -31,23 +27,27 @@ class ProductRepository @Inject constructor(
         const val RESTURANT_ACTIVE = 1  //
     }
 
-    fun searchApi(foodRequestModel: FoodRequestModel, updatedOffset:MutableLiveData<Int>): IListResource<FoodData.Body> {
+    fun searchApi(foodRequestModel: FoodRequestModel, updateOffset: (Int) -> Unit): IListResource<FoodData.Body> {
         return PagedListNetworkCall(object : PaginationList<FoodData.Body, FoodData>(appExecutors) {
             override fun loadPage(page: Int): Call<FoodData> {
                 return productRequestModel(foodRequestModel)
             }
+
             override fun loadAfterPage(page: Int): Call<FoodData> {
                 foodRequestModel.offset = page + foodRequestModel.perviousHoldOffset
                 foodRequestModel.limit = foodRequestModel.defaultLimit
-                updatedOffset.postValue(foodRequestModel.offset)
+                updateOffset.invoke(foodRequestModel.offset)
                 return productRequestModel(foodRequestModel)
             }
+
             override fun mapToLocal(items: FoodData): List<FoodData.Body> {
-                return items.body.filter { it.is_active == RESTURANT_ACTIVE }
+                return items.body?.filter { it.is_active == RESTURANT_ACTIVE } ?: listOf()
             }
+
             override fun getResponseStatus(items: FoodData): ResponseValidator {
-               return ResponseValidator(items.status.code, items.status.message)
+                return ResponseValidator(items.status.code, items.status.message)
             }
+
             override fun sessionExpired() {
                 authState.logout()
             }
@@ -60,11 +60,9 @@ class ProductRepository @Inject constructor(
             override fun mapToLocal(response: ProductTypeResponse): ProductTypeResponse {
                 return FoodDataFilterMapper.Mapper.from(response, listOfObject)
             }
-
             override fun createNetworkRequest(): Single<Response<ProductTypeResponse>> {
                 return productApi.getFoodType(userId)
             }
-
             override fun getResponseStatus(response: Response<ProductTypeResponse>): ResponseValidator {
                 return  ResponseValidator(response.body()?.status?.code, response.body()?.status?.message)
             }

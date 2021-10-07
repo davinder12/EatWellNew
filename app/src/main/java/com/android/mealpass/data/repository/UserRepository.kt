@@ -5,7 +5,6 @@ import com.android.mealpass.data.models.*
 import com.android.mealpass.data.network.*
 import com.android.mealpass.data.service.AuthState
 import com.exactsciences.portalapp.data.network.AppExecutors
-import com.google.gson.JsonObject
 import io.reactivex.Single
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -139,25 +138,64 @@ class UserRepository @Inject constructor(
     fun referralCodeMethod(userId: String?,emailId:String?,referalCode:String?): IRequest<Response<CommonResponseModel>> {
         return NetworkRequest(appExecutors, object : IRetrofitNetworkRequestCallback<CommonResponseModel> {
             override fun createNetworkRequest(): Single<Response<CommonResponseModel>> {
-                return authApi.referralCodeApi(userId,emailId,referalCode)
+                return authApi.referralCodeApi(userId, emailId, referalCode)
             }
+
             override fun getResponseStatus(response: Response<CommonResponseModel>): ResponseValidator {
-                return ResponseValidator(response.body()?.status?.code,response.body()?.status?.message)
+                return ResponseValidator(response.body()?.status?.code, response.body()?.status?.message)
             }
+
             override fun sessionExpired() {
                 authState.logout()
             }
         })
     }
 
-    fun updatePasswordMethod(userId: String?,oldPassword:String?,newPassword:String?): IRequest<Response<CommonResponseModel>> {
+
+    fun verifyStaffCodeMethod(emailId: String?, referalCode: String?): IRequest<Response<CommonResponseModel>> {
         return NetworkRequest(appExecutors, object : IRetrofitNetworkRequestCallback<CommonResponseModel> {
             override fun createNetworkRequest(): Single<Response<CommonResponseModel>> {
-                return authApi.updatePassword(userId,oldPassword,newPassword)
+                return authApi.verifyStaffCode(emailId, referalCode)
             }
+
             override fun getResponseStatus(response: Response<CommonResponseModel>): ResponseValidator {
-                return ResponseValidator(response.body()?.status?.code,response.body()?.status?.message)
+                return ResponseValidator(response.body()?.status?.code, response.body()?.status?.message)
             }
+
+            override fun sessionExpired() {
+                authState.logout()
+            }
+        })
+    }
+
+
+    fun updateCampaignPortionMethod(emailId: String?, campaignPortion: String?): IRequest<Response<CommonResponseModel>> {
+        return NetworkRequest(appExecutors, object : IRetrofitNetworkRequestCallback<CommonResponseModel> {
+            override fun createNetworkRequest(): Single<Response<CommonResponseModel>> {
+                return authApi.updateCampaignPortion(emailId, campaignPortion)
+            }
+
+            override fun getResponseStatus(response: Response<CommonResponseModel>): ResponseValidator {
+                return ResponseValidator(response.body()?.status?.code, response.body()?.status?.message)
+            }
+
+            override fun sessionExpired() {
+                authState.logout()
+            }
+        })
+    }
+
+
+    fun updatePasswordMethod(userId: String?, oldPassword: String?, newPassword: String?): IRequest<Response<CommonResponseModel>> {
+        return NetworkRequest(appExecutors, object : IRetrofitNetworkRequestCallback<CommonResponseModel> {
+            override fun createNetworkRequest(): Single<Response<CommonResponseModel>> {
+                return authApi.updatePassword(userId, oldPassword, newPassword)
+            }
+
+            override fun getResponseStatus(response: Response<CommonResponseModel>): ResponseValidator {
+                return ResponseValidator(response.body()?.status?.code, response.body()?.status?.message)
+            }
+
             override fun sessionExpired() {
                 authState.logout()
             }

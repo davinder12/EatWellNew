@@ -4,6 +4,8 @@ package com.android.mealpass.view.dashboard.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import com.android.mealpass.data.extension.mutableLiveData
+import com.android.mealpass.data.models.FoodDataFilterMapper
+import com.android.mealpass.data.models.ProductTypeResponse
 import com.android.mealpass.data.repository.ProductRepository
 import com.android.mealpass.data.service.PreferenceService
 import com.android.mealpass.utilitiesclasses.ResourceViewModel
@@ -46,7 +48,6 @@ class FoodFilterViewModel @Inject constructor(
     var maxValueInit = MAX_TIME
 
     init {
-        userId.postValue(preferenceService.getString(R.string.pkey_user_Id))
         minValueInit = preferenceService.getFloat(R.string.pkey_minValue, MIN_TIME)
         maxValueInit = preferenceService.getFloat(R.string.pkey_maxValue, MAX_TIME)
     }
@@ -55,7 +56,15 @@ class FoodFilterViewModel @Inject constructor(
         productRepository.getFoodList(it, getListOfObject())
     }
 
-    var dataList = resource.data.map { it.body }
+    var dataList = resource.data.map { it.body } as MutableLiveData
+
+    var updateList = resource.data.map {
+        it.body
+    }
+
+    fun updateList(listOfProductType: List<ProductTypeResponse.Body>?) {
+        dataList.value = FoodDataFilterMapper.Mapper.from(ProductTypeResponse(listOfProductType, null), getListOfObject()).body
+    }
 
 
     fun onCheckedChanged(checked: Boolean) {
@@ -76,6 +85,11 @@ class FoodFilterViewModel @Inject constructor(
     }
 
 
+    fun callApi() {
+        userId.postValue(preferenceService.getString(R.string.pkey_user_Id))
+    }
+
+
     fun saveFilterRecord() {
         val filteredFood = dataList.value?.filter { it.isItemSelected }?.map { it.id }
         preferenceService.putString(R.string.pkey_fromTime, minimumTime.value)
@@ -83,7 +97,7 @@ class FoodFilterViewModel @Inject constructor(
         preferenceService.putFloat(R.string.pkey_minValue, minValueInit)
         preferenceService.putFloat(R.string.pkey_maxValue, maxValueInit)
         preferenceService.putString(R.string.pkey_showOpenResturnat,
-            if (isShowingOpenStore.value == true) OPEN_RESTURANT else CLOSE_RESTURANT
+                if (isShowingOpenStore.value == true) OPEN_RESTURANT else CLOSE_RESTURANT
         )
         filteredFood?.let {
             preferenceService.putString(R.string.pkey_filteredFoodList, Gson().toJson(filteredFood))

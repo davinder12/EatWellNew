@@ -68,7 +68,7 @@ class MapViewModel @Inject constructor(
 
 
     var data = resourceModel.data.map {
-        it.body.filter { it.is_active == ProductRepository.RESTURANT_ACTIVE }
+        it.body?.filter { it.is_active == ProductRepository.RESTURANT_ACTIVE }
     }
 
     var networkState = resourceModel.networkState.map {

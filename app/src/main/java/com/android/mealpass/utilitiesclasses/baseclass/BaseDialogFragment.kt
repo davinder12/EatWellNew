@@ -1,6 +1,7 @@
 package com.android.mealpass.utilitiesclasses.baseclass
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -102,24 +103,28 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding> : DialogFragment()
     }
 
     protected fun bindNetworkState(
-        networkState: LiveData<NetworkState>,
-        @StringRes success: Int? = null,
-        @StringRes error: Int? = null,
-        loadingIndicator: View? = null,
-        onError: (() -> Unit)? = null,
-        onSuccess: (() -> Unit)? = null
+            networkState: LiveData<NetworkState>,
+            dialog: AlertDialog? = null,
+            @StringRes success: Int? = null,
+            @StringRes error: Int? = null,
+            loadingIndicator: View? = null,
+            onError: (() -> Unit)? = null,
+            onSuccess: (() -> Unit)? = null
     ) {
         networkState.observe(viewLifecycleOwner, Observer {
             when (it.status) {
                 NetworkState.Status.RUNNING -> {
                     loadingIndicator?.visibility = View.VISIBLE
+                    dialog?.show()
                 }
                 NetworkState.Status.FAILED -> {
+                    dialog?.dismiss()
                     loadingIndicator?.visibility = View.GONE
                     showMessage(it.msg)
                 }
                 NetworkState.Status.SUCCESS -> {
                     loadingIndicator?.visibility = View.GONE
+                    dialog?.dismiss()
                     success?.let {
                         showMessage(resources.getString(it))
                     }
@@ -128,6 +133,7 @@ abstract class BaseDialogFragment<TBinding : ViewDataBinding> : DialogFragment()
             }
         })
     }
+
 
     // TODO Need to refactor retryClick  funtionality
     @SuppressLint("CheckResult")

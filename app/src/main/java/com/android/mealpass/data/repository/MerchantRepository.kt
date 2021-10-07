@@ -1,18 +1,14 @@
 package com.android.mealpass.data.repository
 
 import com.android.mealpass.data.api.MerchantApi
-import com.android.mealpass.data.api.ReceiptApi
-import com.android.mealpass.data.models.*
+import com.android.mealpass.data.models.CommonResponseModel
+import com.android.mealpass.data.models.MerchantNotificationResponse
+import com.android.mealpass.data.models.ResponseValidator
 import com.android.mealpass.data.network.*
 import com.android.mealpass.data.service.AuthState
 import com.exactsciences.portalapp.data.network.AppExecutors
-import com.google.gson.JsonObject
 import io.reactivex.Single
-import okhttp3.RequestBody
 import retrofit2.Response
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
 import javax.inject.Inject
 
 
@@ -54,28 +50,50 @@ class MerchantRepository @Inject constructor(
     }
 
 
-    fun updatePortionMethod(userId: String?, portion: Int?,timeZone: String?): IRequest<Response<CommonResponseModel>> {
+    fun updatePortionMethod(userId: String?, portion: Int?, timeZone: String?): IRequest<Response<CommonResponseModel>> {
         return NetworkRequest(appExecutors, object : IRetrofitNetworkRequestCallback<CommonResponseModel> {
             override fun createNetworkRequest(): Single<Response<CommonResponseModel>> {
-                return merchantApi.savePortionMethod(userId,portion,timeZone)
+                return merchantApi.savePortionMethod(userId, portion, timeZone)
             }
+
             override fun getResponseStatus(response: Response<CommonResponseModel>): ResponseValidator {
-                return ResponseValidator(response.body()?.status?.code,response.body()?.status?.message)
+                return ResponseValidator(response.body()?.status?.code, response.body()?.status?.message)
             }
+
             override fun sessionExpired() {
                 authState.logout()
             }
         })
     }
 
-    fun portionPriceNotificationMethod(userId: String?, portionPrice: String?,currencyType: String?,IsPortion:String?,portion:Int?): IRequest<Response<CommonResponseModel>> {
+
+    fun updateProductDetailMethod(userId: String?, portion: Int?, retailPrice: String?, costPrice: String?, currencyType: String?, timeZone: String?): IRequest<Response<CommonResponseModel>> {
         return NetworkRequest(appExecutors, object : IRetrofitNetworkRequestCallback<CommonResponseModel> {
             override fun createNetworkRequest(): Single<Response<CommonResponseModel>> {
-                return merchantApi.portionPriceNotfication(userId,portionPrice,currencyType,IsPortion,portion)
+                return merchantApi.updateProductDetailMethod(userId, portion,
+                        retailPrice, costPrice, currencyType, timeZone)
             }
+
             override fun getResponseStatus(response: Response<CommonResponseModel>): ResponseValidator {
-                return ResponseValidator(response.body()?.status?.code,response.body()?.status?.message)
+                return ResponseValidator(response.body()?.status?.code, response.body()?.status?.message)
             }
+
+            override fun sessionExpired() {
+                authState.logout()
+            }
+        })
+    }
+
+    fun portionPriceNotificationMethod(userId: String?, portionPrice: String?, currencyType: String?, IsPortion: String?, portion: Int?): IRequest<Response<CommonResponseModel>> {
+        return NetworkRequest(appExecutors, object : IRetrofitNetworkRequestCallback<CommonResponseModel> {
+            override fun createNetworkRequest(): Single<Response<CommonResponseModel>> {
+                return merchantApi.portionPriceNotfication(userId, portionPrice, currencyType, IsPortion, portion)
+            }
+
+            override fun getResponseStatus(response: Response<CommonResponseModel>): ResponseValidator {
+                return ResponseValidator(response.body()?.status?.code, response.body()?.status?.message)
+            }
+
             override fun sessionExpired() {
                 authState.logout()
             }

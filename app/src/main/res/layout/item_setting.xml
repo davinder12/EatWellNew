@@ -4,20 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
-<data>
-     <import type="com.android.mealpass.data.api.enums.SettingEnum"/>
-    
-    <variable
-        name="item"
-        type="com.android.mealpass.data.api.enums.SettingEnum" />
-    
-     <variable
-         name="isNotificationOn"
-         type="androidx.lifecycle.LiveData&lt;Boolean&gt;" />
-
-</data>
-
-
 <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/rootView"
     android:background="?attr/selectableItemBackground"
@@ -37,8 +23,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:setText="@{item.value}" />
-    
-    
 
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -46,10 +30,24 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_margin="8dp"
+        app:goneVisible="@{item.value == SettingEnum.NOTIFICATION.value || item.value == SettingEnum.BUILD_VERSION.value}"
         app:srcCompat="@drawable/ic_angle_right_arow"
         app:layout_constraintBottom_toBottomOf="@+id/settinglable"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/settinglable" />
+
+
+    <com.android.mealpass.widgets.CustomTextView
+        android:id="@+id/buildVersion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:text="@{version}"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:visibleGone="@{item.value == SettingEnum.BUILD_VERSION.value}" />
 
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -72,7 +70,26 @@
         android:background="@android:color/darker_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settinglable"/>
+        app:layout_constraintTop_toBottomOf="@+id/settinglable" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <data>
+
+        <import type="com.android.mealpass.data.api.enums.SettingEnum" />
+
+        <variable
+            name="item"
+            type="com.android.mealpass.data.api.enums.SettingEnum" />
+
+        <variable
+            name="isNotificationOn"
+            type="androidx.lifecycle.LiveData&lt;Boolean&gt;" />
+
+        <variable
+            name="version"
+            type="String" />
+
+    </data>
 </layout>

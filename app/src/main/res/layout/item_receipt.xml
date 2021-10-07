@@ -31,7 +31,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             app:url="@{item.logo}"
-            android:src="@drawable/earth"
+
             app:civ_border_color="@color/colorPrimary"
             app:civ_border_width="1dp"
             android:layout_alignParentTop="true"

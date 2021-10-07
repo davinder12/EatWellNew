@@ -48,15 +48,18 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@id/toolbar"
+            android:fillViewport="true"
             android:layout_marginBottom="80dp">
 
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="match_parent"
+                android:orientation="vertical"
                 android:layout_height="wrap_content">
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp">
@@ -89,8 +92,8 @@
                                 android:id="@+id/delivery_logo"
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
-                                android:layout_alignParentRight="true"
-                                android:layout_marginLeft="5dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="5dp"
                                 app:visibleGone="@{vm.isDelivery == 1}"
                                 android:background="@drawable/ic_scooter_red" />
 
@@ -102,7 +105,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:capitalize="sentences"
                             android:inputType="textCapSentences"
                             android:text="@{vm.storeName}"
                             android:textColor="@color/darkgray"
@@ -156,7 +158,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_below="@id/date_lable"
                                     android:text="@{vm.date}"
-                                    android:textColor="@color/button_light_color"
+                                    android:textColor="@color/red_color"
                                     android:textSize="14sp" />
 
                                 <com.android.mealpass.widgets.CustomTextView
@@ -173,53 +175,31 @@
                                     android:layout_below="@id/collection_time"
                                     android:layout_alignParentEnd="true"
                                     android:text="@{vm.time}"
-                                    android:textColor="@color/button_light_color"
+                                    android:textColor="@color/red_color"
                                     android:textSize="14sp" />
                             </RelativeLayout>
 
                         </RelativeLayout>
 
 
-                        <com.android.mealpass.widgets.CustomTextView
-                            android:id="@+id/appCompatTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:gravity="center"
-                            android:text="@string/ActiveReceiptMsg"
-                            android:textSize="14sp" />
-
-
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="25dp"
-                            android:layout_marginTop="15dp"
-                            android:layout_marginRight="25dp">
+                            android:layout_marginTop="15dp">
 
                             <com.android.mealpass.widgets.CustomTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@{@string/Bought+` `+vm.quanitity}"
-                                android:textColor="@color/button_light_color"
-                                android:textSize="16sp" />
+                                android:textColor="@color/red_color"
+                                android:textSize="@dimen/_11ssp" />
 
-                            <com.android.mealpass.widgets.CustomTextView
-                                android:id="@+id/currencyamount"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:text="@{vm.paidPrice}"
-                                android:visibility="gone"
-                                android:textColor="@color/button_light_color"
-                                android:textSize="16sp" />
 
 
                             <com.android.mealpass.widgets.CustomTextView
                                 android:id="@+id/delivery_amount"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@id/currencyamount"
                                 android:layout_alignParentEnd="true"
                                 android:layout_gravity="center_horizontal"
                                 android:textSize="12sp" />
@@ -239,18 +219,55 @@
 
                         </RelativeLayout>
 
+
+                        <com.android.mealpass.widgets.CustomTextView
+                            android:id="@+id/appCompatTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:gravity="center"
+                            app:goneVisible="@{vm.isStaffReceipt}"
+                            android:text="@string/ActiveReceiptMsg"
+                            android:textSize="14sp" />
+
+                        <com.android.mealpass.widgets.CustomTextView
+                            android:id="@+id/currencyamount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="@string/StaffReceipt"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/_12ssp"
+                            app:visibleGone="@{vm.isStaffReceipt}" />
+
+
                         <com.android.mealpass.widgets.CustomTextView
                             android:id="@+id/appCompatTextView3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="10dp"
-                            android:text="@{String.format(@string/ID,vm.productId)}"/>
+                            android:text="@{String.format(@string/ID,vm.productId)}" />
+
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
-            </FrameLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/cancelOrderBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:paddingStart="@dimen/_30sdp"
+                    android:paddingEnd="@dimen/_30sdp"
+                    android:text="@string/cancel_order"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:goneVisible="@{vm.isUserCanCancelOrder}" />
+
+            </LinearLayout>
 
         </ScrollView>
 

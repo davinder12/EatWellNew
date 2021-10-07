@@ -27,15 +27,13 @@ class Campaign : DataBindingActivity<ActivityCampaignCodeBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         subscribe(binding.getmagicPortion.throttleClicks()) {
             requirePaymentRequest()?.let {
                 bindNetworkState(
-                    viewModel.updateReceiptRequest(it),
-                    progressDialog(R.string.Pleasewait)
-                ) {
+                        viewModel.updateReceiptRequest(it),
+                        progressDialog(R.string.Pleasewait)) {
                     viewModel.response?.let { data ->
-                       startActivity(navigationScreen.goToActiveReceipt(data,true))
+                        startActivity(navigationScreen.goToActiveReceipt(data, true))
                     }
                     finish()
                 }

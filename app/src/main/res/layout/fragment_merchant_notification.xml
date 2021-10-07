@@ -35,20 +35,50 @@
             app:title="@string/Notifications"
             app:menu="@menu/check"
             app:titleTextAppearance="@style/Toolbar.TitleText"
-            app:titleTextColor="@android:color/white" >
-
-
-
+            app:titleTextColor="@android:color/white">
 
 
         </androidx.appcompat.widget.Toolbar>
+
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+            tools:listitem="@layout/item_merchant_notification">
+
+            <com.android.mealpass.widgets.EmptyRecyclerView
+                android:id="@+id/displayNotification"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:emptyView="@id/emptyView"
+                android:background="@android:color/white"
+                tools:listitem="@layout/item_merchant_notification"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <include
+                layout="@layout/empty_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </FrameLayout>
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/darker_gray"
+            android:background="@color/light_gray"
             android:orientation="vertical"
             android:padding="15dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -87,39 +117,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/updatePortion" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-            tools:listitem="@layout/item_merchant_notification">
-
-            <com.android.mealpass.widgets.EmptyRecyclerView
-                android:id="@+id/displayNotification"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:emptyView="@id/emptyView"
-                android:background="@android:color/white"
-                tools:listitem="@layout/item_merchant_notification"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <include
-                layout="@layout/empty_view"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-        </FrameLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
