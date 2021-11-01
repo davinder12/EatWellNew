@@ -2,7 +2,7 @@ package com.android.mealpass.data.service
 
 import android.content.Context
 import android.content.Intent
-import com.android.mealpass.view.login.StartUpActivity
+import com.android.mealpass.view.login.activity.StartUpActivity
 import mealpass.com.mealpass.R
 import javax.inject.Inject
 

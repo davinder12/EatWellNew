@@ -33,16 +33,21 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>() {
             findNavController().popBackStack()
         }
 
+        subscribe(terms_condition.throttleClicks()) {
+            navigationScreen.goToTermAndConditionScreen(false)
+        }
+
         subscribe(binding.signup.throttleClicks()) {
             viewModel.filterMethod { status, message ->
                 when {
                     status -> {
                         bindNetworkState(
-                            viewModel.callSignUpApi(checkbox.isChecked),
-                            progressDialog(R.string.Pleasewait),
-                            R.string.success_register
+                                viewModel.callSignUpApi(checkbox.isChecked),
+                                progressDialog(R.string.Pleasewait),
+                                R.string.success_register
                         ) {
                             navigationScreen.goToChooseReferralScreen()
+                            requireActivity().finish()
                         }
                     }
                     else -> {

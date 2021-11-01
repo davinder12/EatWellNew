@@ -26,49 +26,50 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-
-                <com.android.mealpass.widgets.CustomTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/referaltext"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:textStyle="bold"
                     android:text="@string/StaffCampaignCodeMsg" />
 
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/staffBtn"
-                    android:layout_width="@dimen/_200sdp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/_180sdp"
+                    android:layout_height="@dimen/_60sdp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:text="@string/StaffCode"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:backgroundTint="@color/red"
+                    android:text="@string/StaffCodeBtnMsg"
                     android:textAllCaps="false"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/button_size" />
+                    android:textColor="@android:color/white" />
 
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/foodbankBtn"
-                    android:layout_width="@dimen/_200sdp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/_180sdp"
+                    android:layout_height="@dimen/_60sdp"
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:text="@string/MealPassCode"
                     android:textAllCaps="false"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/button_size" />
+                    android:textColor="@android:color/white" />
 
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/skiptBtn"
-                    android:layout_width="@dimen/_200sdp"
+                    android:layout_width="@dimen/_180sdp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:backgroundTint="@color/yellow"
+                    android:text="@string/ViewOnly"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:text="@string/Skip"
                     android:textAllCaps="false"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/button_size" />
+                    android:textColor="@android:color/white" />
 
 
                 <de.hdodenhof.circleimageview.CircleImageView

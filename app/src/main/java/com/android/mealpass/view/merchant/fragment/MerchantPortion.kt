@@ -9,6 +9,7 @@ import com.android.mealpass.data.extension.progressDialog
 import com.android.mealpass.data.extension.throttleClicks
 import com.android.mealpass.utilitiesclasses.baseclass.BaseListFragment
 import com.android.mealpass.view.merchant.viewmodel.MerchantPortionModel
+import com.android.mealpass.view.units.floatTwoDigits
 import com.android.mealpass.widgets.alertDialog
 import dagger.hilt.android.AndroidEntryPoint
 import mealpass.com.mealpass.R
@@ -40,8 +41,8 @@ class MerchantPortion : BaseListFragment<FragmentMerchantPortionBinding>() {
         viewModel.updateData(args.productDetail)
 
         viewModel.updatedCondition.observe(viewLifecycleOwner, {
-            viewModel.monthlyTaxDeduction.value = it
-            viewModel.yearlyTaxDeduction.value = it * 365
+            viewModel.monthlyTaxDeduction.value = it.floatTwoDigits()
+            viewModel.yearlyTaxDeduction.value = (it * 365).floatTwoDigits()
         })
 
 

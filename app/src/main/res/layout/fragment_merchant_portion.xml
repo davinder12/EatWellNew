@@ -51,14 +51,25 @@
                 tools:context="com.android.mealpass.merchant.MerchantPortion">
 
 
-
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_marginTop="20dp"
 
                     android:orientation="horizontal"
                     android:layout_height="wrap_content">
+
+                    <com.android.mealpass.widgets.CustomTextView
+                        android:id="@+id/updated_price"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:text="@string/PortionIsNowSellingFor"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_12ssp" />
+
 
                     <com.android.mealpass.widgets.CustomEditText
                         android:id="@+id/PortionAmt"
@@ -77,27 +88,28 @@
                         android:hint="@string/EnterAmount"
                         android:background="@drawable/background_btn" />
 
-                    <com.android.mealpass.widgets.CustomTextView
-                        android:id="@+id/updated_price"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="start"
-                        android:text="@string/PortionIsNowSellingFor"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/_12ssp" />
 
                 </LinearLayout>
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content">
+                    android:orientation="horizontal">
 
+
+                    <com.android.mealpass.widgets.CustomTextView
+                        android:id="@+id/retailLabel"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="start"
+                        android:text="@string/RetailPrice"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_12ssp" />
 
                     <com.android.mealpass.widgets.CustomEditText
                         android:id="@+id/inputRetailPrice"
@@ -116,19 +128,56 @@
                         android:hint="@string/EnterAmount"
                         android:background="@drawable/background_btn" />
 
-                    <com.android.mealpass.widgets.CustomTextView
-                        android:id="@+id/retailLabel"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="start"
-                        android:text="@string/RetailPrice"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/_12ssp" />
 
                 </LinearLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/switcher"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:background="@{vm.isOpen == 1 ?  @drawable/ic_switch_off_green  :  @drawable/ic_switch_on}" />
+
+                    <com.android.mealpass.widgets.CustomTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/CloseSale"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/_12ssp" />
+                </RelativeLayout>
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:fontFamily="@font/georgia"
+                    android:gravity="start"
+                    android:text="@string/PricingDetail"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:fontFamily="@font/georgia"
+                    android:gravity="start"
+                    android:text="@string/Number_Of_Portions"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold" />
 
 
                 <LinearLayout
@@ -190,40 +239,9 @@
                 </LinearLayout>
 
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:orientation="horizontal">
-
-                    <com.android.mealpass.widgets.CustomTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@android:color/black"
-                        android:textSize="@dimen/_12ssp"
-                        android:layout_centerVertical="true"
-                        android:text="@string/CloseSale" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:background="@{vm.isOpen == 1 ?  @drawable/ic_switch_off_green  :  @drawable/ic_switch_on}"
-                        android:id="@+id/switcher"
-                        android:layout_alignParentEnd="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </RelativeLayout>
 
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:fontFamily="@font/georgia"
-                    android:gravity="start"
-                    android:text="@string/PricingDetail"
-                    android:textColor="@android:color/black"
-                    android:textSize="@dimen/_15ssp"
-                    android:textStyle="bold" />
+
 
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -311,17 +329,6 @@
 
 
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:fontFamily="@font/georgia"
-                    android:text="@string/Number_Of_Portions"
-                    android:textStyle="bold"
-                    android:gravity="start"
-                    android:textSize="@dimen/_15ssp"
-                    android:textColor="@android:color/black" />
 
 
                 <com.android.mealpass.widgets.CustomTextView
@@ -379,7 +386,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="30dp"
                     android:textColor="@android:color/white"
-                    android:text="@string/Submit"
+                    android:text="@string/Update"
                     android:textSize="@dimen/_10ssp"
                     android:textAllCaps="false" />
 

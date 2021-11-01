@@ -1,17 +1,11 @@
-package com.android.mealpass.view.login
+package com.android.mealpass.view.login.activity
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.annotation.NonNull
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.android.mealpass.utilitiesclasses.baseclass.BaseActivity
 import com.android.mealpass.view.login.viewmodel.StartUpActivityViewModel
-import com.android.mealpass.view.login.viewmodel.StartUpFragmentViewModel
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_start_up.*
@@ -44,5 +38,6 @@ class StartUpActivity : BaseActivity() {
             }
         }
     }
+
 
 }

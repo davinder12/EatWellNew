@@ -3,7 +3,6 @@ package com.android.mealpass.view.login.viewmodel
 
 import android.util.Patterns
 import androidx.lifecycle.LiveData
-import com.android.mealpass.data.extension.convertJsonToModelClass
 import com.android.mealpass.data.extension.mutableLiveData
 import com.android.mealpass.data.models.LoginResponse
 import com.android.mealpass.data.models.SignUpRequestModel
@@ -12,7 +11,6 @@ import com.android.mealpass.data.repository.UserRepository
 import com.android.mealpass.data.service.PreferenceService
 import com.android.mealpass.utilitiesclasses.baseclass.BaseBackStack.Companion.DEVICE_TYPE
 import com.android.mealpass.utilitiesclasses.baseclass.BaseViewModel
-import com.google.gson.Gson
 import dagger.hilt.android.lifecycle.HiltViewModel
 import mealpass.com.mealpass.BuildConfig
 import mealpass.com.mealpass.R
@@ -34,9 +32,9 @@ class SignupFragmentViewModel @Inject constructor(private val userRepository: Us
 
     fun callSignUpApi(newsLetter: Boolean): LiveData<NetworkState> {
         return userRepository.signUpMethod(
-            SignUpRequestModel(
-                BuildConfig.VERSION_NAME, preferenceService.getString(R.string.pkey_fcm_token_sent),
-                DEVICE_TYPE, emailId.value, mobile.value, name.value, newsLetter, password.value)
+                SignUpRequestModel(
+                        BuildConfig.VERSION_NAME, preferenceService.getString(R.string.pkey_fcm_token_sent),
+                        DEVICE_TYPE, emailId.value, mobile.value, name.value, false, password.value)
         ).also {
             subscribe(it.request) { response -> response.body()?.let { updateUserData(it) } }
         }.networkState

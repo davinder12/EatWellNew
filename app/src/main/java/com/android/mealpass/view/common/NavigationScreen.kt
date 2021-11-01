@@ -13,8 +13,9 @@ import com.android.mealpass.data.service.MealPassFirebaseMessagingService.Compan
 import com.android.mealpass.view.dashboard.DashboardActivity
 import com.android.mealpass.view.dashboard.activity.*
 import com.android.mealpass.view.dashboard.fragment.setting.*
-import com.android.mealpass.view.login.StartUpActivity
-import com.android.mealpass.view.login.TermConditionActivity
+import com.android.mealpass.view.login.activity.RestaurantOptionActivity
+import com.android.mealpass.view.login.activity.StartUpActivity
+import com.android.mealpass.view.login.activity.TermConditionActivity
 import com.android.mealpass.view.merchant.MerchantActivity
 import com.android.mealpass.view.notification.GeneralNotificationActivity
 import com.android.mealpass.view.notification.NotificationActivity
@@ -33,15 +34,15 @@ class NavigationScreen @Inject constructor(@ActivityContext private val context:
         const val EXTRA_PAYMENT = "EXTRA_PAYMENT"
         const val EXTRA_ACTIVE_RECEIPT_DETAIL = "EXTRA_ACTIVE_RECEIPT_DETAIl"
         const val IS_FIRST_TIME_VISIT = "IS_FIRST_TIME_VISIT"
-        const val IS_SOCIAL_LOGIN ="IS_SOCIAL_LOGIN"
+        const val IS_SOCIAL_LOGIN = "IS_SOCIAL_LOGIN"
         const val PAYMENT_COMPLETE = "EXTRA_PAYMENT_COMPLETE"
         const val MERCHANT_LOGIN = "EXTRA_MERCHANT_LOGIN"
 
     }
 
 
-    fun dashBoardScreenNavigation() {
-        val intent = Intent(context, DashboardActivity::class.java)
+    fun goToRestaurnatOptionActivity() {
+        val intent = Intent(context, RestaurantOptionActivity::class.java)
         context.startActivity(intent)
     }
 

@@ -118,6 +118,9 @@ fun orderCancelMethod(collectionTime: String?): Boolean? {
 
 }
 
+fun Float.floatTwoDigits() = String.format("%.2f", this)
+
+
 // open time show pickup start time
 // close time show pickup close time
 // beforePickup time use for merchant to close resturant/product before open/start time

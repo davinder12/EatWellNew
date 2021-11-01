@@ -16,37 +16,7 @@
         android:id="@+id/activity_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/light_gray">
-
-        <!--            <com.facebook.login.widget.LoginButton-->
-        <!--                android:id="@+id/facebook_login"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:layout_gravity="center_horizontal"-->
-        <!--                android:visibility="gone"-->
-        <!--                app:com_facebook_login_text="@string/LoginWithFacebook"-->
-        <!--                app:layout_constraintStart_toStartOf="parent"-->
-        <!--                app:layout_constraintTop_toTopOf="parent" />-->
-
-
-        <View
-            android:id="@+id/view7"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_150sdp"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imageView3"
-            android:layout_width="@dimen/_60sdp"
-            android:layout_height="@dimen/_60sdp"
-            app:layout_constraintBottom_toBottomOf="@+id/view7"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/view7"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/logo" />
+        android:background="@android:color/white">
 
 
         <ScrollView
@@ -62,7 +32,10 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_50sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                app:cardElevation="0dp"
                 app:cardCornerRadius="@dimen/_10sdp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -72,28 +45,29 @@
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/login_btn"
                         android:layout_width="@dimen/_200sdp"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="32dp"
-                        android:drawablePadding="0dp"
-                        android:text="@string/Login"
-                        app:cornerRadius="@dimen/_20sdp"
-                        app:iconPadding="-16dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_30sdp"
+                        android:text="@string/login_into_existing_account"
+                        android:textColor="@color/darkgray"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/signup_btn"
+                        app:layout_constraintStart_toStartOf="@+id/signup_btn"
+                        app:layout_constraintTop_toBottomOf="@+id/textView36"
+                        app:strokeColor="@color/light_red" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/signup_btn"
                         android:layout_width="@dimen/_200sdp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_30sdp"
                         android:drawablePadding="0dp"
                         android:text="@string/CreateNewAccount"
-                        app:cornerRadius="@dimen/_20sdp"
                         app:iconPadding="-16dp"
-                        app:layout_constraintEnd_toEndOf="@+id/login_btn"
-                        app:layout_constraintStart_toStartOf="@+id/login_btn"
-                        app:layout_constraintTop_toBottomOf="@+id/login_btn" />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                     <com.google.android.material.textview.MaterialTextView
@@ -105,6 +79,7 @@
                         android:text="Social Login"
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/_12ssp"
+                        android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="@+id/signup_btn"
                         app:layout_constraintStart_toStartOf="@+id/signup_btn"
                         app:layout_constraintTop_toBottomOf="@+id/signup_btn" />
@@ -121,77 +96,45 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
 
+                    <!--                    <com.google.android.material.button.MaterialButton-->
+                    <!--                        android:id="@+id/face_login_layout"-->
+                    <!--                        android:layout_width="0dp"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_marginTop="@dimen/_24sdp"-->
+                    <!--                        android:layout_marginBottom="@dimen/_24sdp"-->
+                    <!--                        android:text="@string/LoginWithFacebook"-->
+                    <!--                        app:backgroundTint="@color/blue_color"-->
+                    <!--                        app:icon="@drawable/com_facebook_button_icon"-->
+                    <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+                    <!--                        app:layout_constraintEnd_toEndOf="@+id/signup_btn"-->
+                    <!--                        app:layout_constraintStart_toStartOf="@+id/signup_btn"-->
+                    <!--                        app:layout_constraintTop_toBottomOf="@+id/textView36" />-->
 
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/face_login_layout"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_24sdp"
-                        android:layout_marginBottom="@dimen/_24sdp"
-                        app:backgroundTint="@color/blue_color"
-                        app:icon="@drawable/com_facebook_button_icon"
-                        android:text="@string/LoginWithFacebook"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/signup_btn"
-                        app:layout_constraintStart_toStartOf="@+id/signup_btn"
-                        app:layout_constraintTop_toBottomOf="@+id/textView36"/>
-
-
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                       android:visibility="gone"
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_40sdp"
-                        android:layout_centerVertical="true"
-                        android:layout_marginTop="32dp"
-                        android:layout_marginBottom="32dp"
-                        android:background="@drawable/ic_facebook"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/instagramlogin"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintHorizontal_chainStyle="packed"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView36" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/instagramlogin"
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_40sdp"
-                        android:visibility="gone"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/_12sdp"
-                        android:background="@drawable/instagram_logo"
-                        app:layout_constraintBottom_toBottomOf="@+id/face_login_layout"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/face_login_layout"
-                        app:layout_constraintTop_toTopOf="@+id/face_login_layout" />
-
-                    <View
-                        android:id="@+id/textView39"
-                        android:layout_width="@dimen/_50sdp"
-                        android:layout_height="0.5dp"
-                        android:layout_marginEnd="@dimen/_4sdp"
-                        android:background="@color/darkgray"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView36"
-                        app:layout_constraintEnd_toStartOf="@+id/textView36"
-                        app:layout_constraintTop_toTopOf="@+id/textView36" />
-
-                    <View
-                        android:id="@+id/textView40"
-                        android:layout_width="@dimen/_50sdp"
-                        android:layout_height="0.5dp"
-                        android:layout_marginStart="@dimen/_4sdp"
-                        android:background="@color/darkgray"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView36"
-                        app:layout_constraintStart_toEndOf="@+id/textView36"
-                        app:layout_constraintTop_toTopOf="@+id/textView36" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
         </ScrollView>
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageView3"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cross"
+            app:srcCompat="@drawable/logo" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/cross"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_20sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_cross" />
 
 
         <com.google.android.material.button.MaterialButton
@@ -201,7 +144,7 @@
             android:layout_marginBottom="@dimen/_8sdp"
             android:text="@string/BusinessLogin"
             app:backgroundTint="@color/blue_color"
-            app:cornerRadius="@dimen/_20sdp"
+            android:visibility="gone"
             app:iconPadding="-16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

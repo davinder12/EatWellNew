@@ -8,6 +8,7 @@ import com.android.mealpass.utilitiesclasses.baseclass.DataBindingActivity
 import com.android.mealpass.view.common.NavigationScreen
 import com.android.mealpass.view.dashboard.activity.dialog.AddFamilyMember
 import com.android.mealpass.view.dashboard.fragment.setting.viewmodel.ReferralCodeViewModel
+import com.android.mealpass.widgets.messageDialog
 import dagger.hilt.android.AndroidEntryPoint
 import mealpass.com.mealpass.R
 import mealpass.com.mealpass.databinding.ActivityReferalCodeBinding
@@ -37,8 +38,12 @@ class ReferalCodeActivity : DataBindingActivity<ActivityReferalCodeBinding>() {
                     status -> {
                         bindNetworkState(viewModel.callRerralCodeApi(), progressDialog(R.string.referral_code)) {
                             val familyMember = AddFamilyMember.create {
-                                showMessage(getString(R.string.CongratulationReferralApproved))
-                                onBackPressed()
+                                messageDialog(getString(R.string.CongratulationReferralApproved), false) {
+                                    // showMessage(getString(R.string.CongratulationReferralApproved))
+                                    //onBackPressed()
+                                    navigationScreen.goToRestaurnatOptionActivity()
+                                    finish()
+                                }
                             }
                             familyMember.show(supportFragmentManager, familyMember.tag)
                         }

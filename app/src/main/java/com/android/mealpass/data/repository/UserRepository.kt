@@ -82,14 +82,15 @@ class UserRepository @Inject constructor(
         return NetworkRequest(appExecutors, object : IRetrofitNetworkRequestCallback<LoginResponse> {
             override fun createNetworkRequest(): Single<Response<LoginResponse>> {
                 return authApi.signUpMethod(
-                    signUpRequestModel.name, signUpRequestModel.email,
-                    signUpRequestModel.mobile, signUpRequestModel.password,
-                    signUpRequestModel.newsletter, signUpRequestModel.device_token,
-                    signUpRequestModel.device_type, signUpRequestModel.version_name
+                        signUpRequestModel.name, signUpRequestModel.email,
+                        signUpRequestModel.mobile, signUpRequestModel.password,
+                        0, signUpRequestModel.device_token,
+                        signUpRequestModel.device_type, signUpRequestModel.version_name
                 )
             }
+
             override fun getResponseStatus(response: Response<LoginResponse>): ResponseValidator {
-                return ResponseValidator(response.body()?.status?.code,response.body()?.status?.message)
+                return ResponseValidator(response.body()?.status?.code, response.body()?.status?.message)
             }
         })
     }

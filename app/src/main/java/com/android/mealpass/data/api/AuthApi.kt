@@ -41,14 +41,14 @@ interface AuthApi {
     @FormUrlEncoded
     @POST("signup_user.php")
     fun signUpMethod(
-        @Field("name") firstname: String?,
-        @Field("email") emailId: String?,
-        @Field("mobile") mobileNumber: String?,
-        @Field("password") password: String?,
-        @Field("newsletter") newsletter: Boolean?,
-        @Field("device_token") deviceToken: String?,
-        @Field("device_type") device_type: String?,
-        @Field("app_version") versionName: String?
+            @Field("name") firstname: String?,
+            @Field("email") emailId: String?,
+            @Field("mobile") mobileNumber: String?,
+            @Field("password") password: String?,
+            @Field("newsletter") newsletter: Int?,
+            @Field("device_token") deviceToken: String?,
+            @Field("device_type") device_type: String?,
+            @Field("app_version") versionName: String?
     ): Single<Response<LoginResponse>>
 
 

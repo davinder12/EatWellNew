@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/startUpFragment">
+    app:startDestination="@id/loginCategoryFragment">
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.android.mealpass.view.login.fragment.LoginFragment"
@@ -21,6 +21,16 @@
             android:name="isMerchantLogin"
             app:argType="boolean"
             android:defaultValue="false" />
+        <action
+            android:id="@+id/action_loginFragment_to_loginCategoryFragment"
+            app:destination="@id/loginCategoryFragment"
+            app:popUpTo="@id/loginCategoryFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_merchantLoginCategoryFragment"
+            app:destination="@id/merchantLoginCategoryFragment"
+            app:popUpTo="@id/merchantLoginCategoryFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/startUpFragment"
@@ -33,6 +43,11 @@
         <action
             android:id="@+id/action_startUpFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
+        <action
+            android:id="@+id/action_startUpFragment_to_loginCategoryFragment"
+            app:destination="@id/loginCategoryFragment"
+            app:popUpTo="@id/loginCategoryFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
@@ -56,4 +71,33 @@
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/loginCategoryFragment"
+        android:name="com.android.mealpass.view.login.fragment.LoginCategoryFragment"
+        android:label="LoginCategoryFragment"
+        tools:layout="@layout/fragment_login_option">
+        <action
+            android:id="@+id/action_loginCategoryFragment_to_startUpFragment"
+            app:destination="@id/startUpFragment" />
+        <action
+            android:id="@+id/action_loginCategoryFragment_to_merchantLoginCategoryFragment"
+            app:destination="@id/merchantLoginCategoryFragment"
+
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/merchantLoginCategoryFragment"
+        android:name="com.android.mealpass.view.merchant.fragment.MerchantLoginCategoryFragment"
+        android:label="MerchantLoginCategoryFragment"
+        tools:layout="@layout/fragment_merchant_category">
+        <action
+            android:id="@+id/action_merchantLoginCategoryFragment_to_loginCategoryFragment"
+            app:destination="@id/loginCategoryFragment"
+            app:popUpTo="@id/loginCategoryFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_merchantLoginCategoryFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
 </navigation>

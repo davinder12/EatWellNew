@@ -12,6 +12,7 @@ import com.android.mealpass.view.merchant.fragment.MerchantPortion
 import com.android.mealpass.view.merchant.fragment.MerchantPortion.Companion.SHOP_CLOSE
 import com.android.mealpass.view.merchant.fragment.MerchantPortion.Companion.SHOP_OPEN
 import com.android.mealpass.view.units.DataChangeListener
+import com.android.mealpass.view.units.floatTwoDigits
 import dagger.hilt.android.lifecycle.HiltViewModel
 import mealpass.com.mealpass.R
 import java.util.*
@@ -46,13 +47,12 @@ class MerchantPortionModel @Inject constructor(
     } as MutableLiveData<Int?>
 
     var monthlyTaxDeduction = productData?.map {
-        minOf(it.cost_price.times(2), (it.retail_price.minus(it.cost_price).div(2).plus(it.cost_price))).times(it.protion)
-    } as MutableLiveData<Float>
+        minOf(it.cost_price.times(2), (it.retail_price.minus(it.cost_price).div(2).plus(it.cost_price))).times(it.protion).floatTwoDigits()
+    } as MutableLiveData<String>
 
     var yearlyTaxDeduction = productData?.map {
-        minOf(it.cost_price.times(2), (it.retail_price.minus(it.cost_price).div(2).plus(it.cost_price))).times(it.protion)
-                .run { this * 365 }
-    } as MutableLiveData<Float>
+        minOf(it.cost_price.times(2), (it.retail_price.minus(it.cost_price).div(2).plus(it.cost_price))).times(it.protion).run { this * 365 }.floatTwoDigits()
+    } as MutableLiveData<String>
 
     var isOpen = productData?.map { it.is_open } as MutableLiveData<Int?>
 

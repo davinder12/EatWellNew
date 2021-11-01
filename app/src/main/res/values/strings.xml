@@ -9,19 +9,24 @@
     <string name="BusinessLogin">Business login</string>
     <string name="Email">Email</string>
     <string name="Password">Password</string>
+    <string name="CreatePassword">Create password</string>
     <string name="Send">Send</string>
     <string name="TermsAndConditions"><u>Terms and Conditions</u></string>
     <string name="ForgotTitle">Help! I’ve lost my password…</string>
     <string name="FullName">Full Name</string>
-    <string name="RepeatPassword">Repeat password</string>
+    <string name="RepeatPassword">Confirm password</string>
     <string name="NewsletterTitle">Sign up for our newsletter</string>
     <string name="Signup">Sign up</string>
     <string name="TermAndConditionSignUp">By continuing you agree to our <u>terms &amp; conditions</u></string>
     <string name="Skip">Skip</string>
+    <string name="ViewOnly">No Code - view only</string>
+    <string name="ViewAppOnly">No Code - view App only</string>
+
+    ViewOnly
     <string name="Close">Close</string>
     <string name="Verify">Verify</string>
-    <string name="Code">Code</string>
-    <string name="Step2Title">If you have a MealPass code, Please enter it below or press skip.</string>
+    <string name="Code">Enter Code to activate account</string>
+    <string name="Step2Title">Please enter your MealPass Code below.</string>
     <string name="Step2Title2">If you have a MealPass code, Please enter it below.</string>
     <string name="Tutorial">Tutorial</string>
     <string name="VideoDes">MealPass is an Australian market leader when it comes to targeting food waste at the retail level.We help food merchants reduce the amount of food that gets thrown away every day because it is not sold. We provide an app where merchants can post and sell the excess food at discounted prices.</string>
@@ -182,7 +187,8 @@
     <string name="WallOfFame">Wall of Fame</string>
     <string name="Search">Search</string>
     <string name="AddReferralCode">Add MealPass Code</string>
-    <string name="CongratulationReferralApproved">Your code is verified and you now enjoy your free meal.</string>
+
+    <string name="CongratulationReferralApproved">I\'m ready to order my free meals!.</string>
     <string name="Sponsor">Sponsor</string>
     <string name="PayForward">Pay it forward</string>
     <string name="SponsorTxt">What is a MealPass sponsor? \n\nA MealPass sponsor is a supporter of MealPass revolutionising digital food donation platform where food retailers can donate food directly to the recipients in their local communities in collaboration with food charities. The platform targets the end-of-day-unsold food (70% of total excess food) which food charities are unable to collect and redistribute.\n\n\nWhy become MealPass sponsor?\n\nA sponsorship can go a long way for someone in need and you can make a huge difference to someone\'s life by supporting MealPass food donation platform. Together we can reduce hunger and food waste, which are 2 of the most pressing issues in the world today.\n\n\nHow to become MealPass sponsor?\n\nBecoming a sponsor of MealPass food donation platform is easy:\n\n1- You can sponsor meal donations from a specific food retailer where you decide how many daily meals you want to sponsor and for how many days. The price can vary from food retailer to food retailer.\n\nOR\n\n2- You can sponsor the hard work of expanding and implementing MealPass food donation platform in local communities all over the country where people need help. This sponsorship can be a one off or recurring.\n\nYou can pay either by credit card or bank transfer.\n\nEvery sponsor will be offered a place on our sponsors wall of fame page where your picture/company logo together with your name and city/country will be visible and is shown both on our app and our website. Please note that it is not mandatory to be placed on our wall of fame. The choice is all yours.</string>
@@ -329,17 +335,27 @@
     <string name="m_time">Time: %1$s</string>
     <string name="addressSaveValidation">You cannot save more than five address</string>
     <string name="cancel_order">Cancel Order</string>
-    <string name="number_of_person_in_family">Enter number of members in family</string>
+    <string name="number_of_person_in_family">Number of people you will be ordering meals for</string>
     <string name="count">count</string>
     <string name="AddStaffCode">Add Staff Code</string>
     <string name="StaffCode">Staff Code</string>
-    <string name="MealPassCode">MealPass Code</string>
-    <string name="StaffCodeMsg">If you have a staff code, please enter it below.</string>
-    <string name="StaffCampaignCodeMsg">Do you have any Mealpass or staff code,otherwise press skip.?</string>
+    <string name="StaffCodeBtnMsg">Restaurant Staff Code</string>
+    <string name="MealPassCode">General App User Code</string>
+    <string name="StaffCodeMsg">Please enter your Restaurant Staff Code below.</string>
+    <string name="StaffCampaignCodeMsg">Enter assigned code to activate \n account and claim meals.</string>
     <string name="OnlyForStaff">Only For Staff</string>
     <string name="StaffReceipt">Staff Receipt</string>
     <string name="MonthlyTaxDeduction">Estimated daily tax deduction: <b>%1$s$</b></string>
     <string name="YearlyTaxDeduction">Estimated yearly tax deduction: <b>%1$s$</b></string>
+    <string name="LoginExistingAccount">Login Existing Account</string>
+    <string name="RegisterNewAccount">Register New Account</string>
+    <string name="PersonalAccount">Personal Account</string>
+    <string name="BusinessAccount">Business Account</string>
+    <string name="restaurant_pick_up_time">Go to restaurant at pick up time.</string>
+    <string name="restaurant_claim_meals">Select restaurant and claim meals in advance.</string>
+    <string name="swipe_receipt_at_resaurant">Swipe receipt at restaurant and enjoy your meal!</string>
+    <string name="login_into_existing_account">Login into Existing Account</string>
+    <string name="MerchantRegister">New to MealPass? Register your interest here</string>
 
 
 </resources>

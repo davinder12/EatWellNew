@@ -1,4 +1,4 @@
-package com.android.mealpass.view.login
+package com.android.mealpass.view.login.activity
 
 import android.os.Bundle
 import android.os.Handler

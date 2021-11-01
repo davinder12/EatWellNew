@@ -1,14 +1,11 @@
-package com.android.mealpass.view.login
+package com.android.mealpass.view.login.activity
 
 import android.os.Bundle
-import android.text.Html
 import androidx.activity.viewModels
-import com.android.mealpass.utilitiesclasses.baseclass.BaseActivity
 import com.android.mealpass.utilitiesclasses.baseclass.DataBindingActivity
 import com.android.mealpass.view.common.NavigationScreen
 import com.android.mealpass.view.login.viewmodel.TermAndConditionViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_start_up.*
 import mealpass.com.mealpass.R
 import mealpass.com.mealpass.databinding.ActivityTermConditionBinding
 

@@ -12,17 +12,18 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:background="@color/light_gray"
+        android:background="@android:color/white"
+
         android:layout_height="match_parent"
         android:scrollbars="none">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/activity_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/activity_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
 
-        <androidx.appcompat.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/cross"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -50,6 +51,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_20sdp"
+            app:cardElevation="0dp"
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -118,56 +120,28 @@
                         tools:ignore="UnusedAttribute" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout4"
-                    android:layout_width="0dp"
+                <View
+                    android:id="@+id/view6"
+                    android:layout_width="100dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone"
+                    android:background="@color/red_color"
+                    app:layout_constraintEnd_toEndOf="@+id/checkbox"
+                    app:layout_constraintStart_toStartOf="@+id/signuplable"
+                    app:layout_constraintTop_toBottomOf="@+id/signuplable" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/signup"
+                    android:layout_width="@dimen/_150sdp"
                     android:layout_height="wrap_content"
-                    android:autofillHints="phone"
-                    app:errorEnabled="true"
-                    app:endIconMode="password_toggle"
-                    app:hintEnabled="true"
-                    app:layout_constraintEnd_toEndOf="@+id/textInputLayout3"
-                    app:layout_constraintStart_toStartOf="@+id/textInputLayout3"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
-                    tools:ignore="UnusedAttribute">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/password"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/Password"
-                        android:imeOptions="actionNext"
-                        android:inputType="textPassword"
-                        android:text="@={vm.password}"
-                        android:textAppearance="?attr/textAppearanceBody1"
-                        tools:ignore="UnusedAttribute" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:autofillHints="phone"
-                    app:errorEnabled="true"
-                    app:hintEnabled="true"
-                    app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
-                    app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
-                    tools:ignore="UnusedAttribute">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/phoneno"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:autofillHints="phone"
-                        android:digits="0123456789"
-                        android:hint="@string/PhoneNumber"
-                        android:imeOptions="actionNext"
-                        android:inputType="phone"
-                        android:text="@={vm.mobile}"
-                        android:textAppearance="?attr/textAppearanceBody1"
-                        tools:ignore="UnusedAttribute" />
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginBottom="@dimen/_22sdp"
+                    android:text="@string/Signup"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/textInputLayout5"
+                    app:layout_constraintStart_toStartOf="@+id/textInputLayout5"
+                    app:layout_constraintTop_toBottomOf="@+id/terms_condition" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayout2"
@@ -193,10 +167,94 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
 
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:checked="true"
+                    android:visibility="gone"
+                    android:fontFamily="@font/georgia"
+                    android:padding="@dimen/_3sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/signuplable"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout5" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout3"
+                    android:layout_width="0dp"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="phone"
+                    app:errorEnabled="true"
+                    app:hintEnabled="true"
+                    app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
+                    app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+                    tools:ignore="UnusedAttribute">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/phoneno"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autofillHints="phone"
+                        android:digits="0123456789"
+                        android:hint="@string/PhoneNumber"
+                        android:imeOptions="actionNext"
+                        android:inputType="phone"
+                        android:text="@={vm.mobile}"
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        tools:ignore="UnusedAttribute" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout4"
+                    android:layout_width="0dp"
+
+                    android:layout_height="wrap_content"
+                    android:autofillHints="phone"
+                    app:endIconMode="password_toggle"
+                    app:errorEnabled="true"
+                    app:hintEnabled="true"
+                    app:layout_constraintEnd_toEndOf="@+id/textInputLayout2"
+                    app:layout_constraintStart_toStartOf="@+id/textInputLayout2"
+                    app:layout_constraintTop_toTopOf="@+id/textInputLayout3"
+                    tools:ignore="UnusedAttribute">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/CreatePassword"
+                        android:imeOptions="actionNext"
+                        android:inputType="textPassword"
+                        android:text="@={vm.password}"
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        tools:ignore="UnusedAttribute" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/terms_condition"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/georgia"
+                    android:text="@string/TermsAndConditions"
+                    android:textAllCaps="false"
+                    android:textColor="@color/quantum_black_100"
+                    android:textSize="@dimen/_10ssp"
+                    app:layout_constraintEnd_toEndOf="@+id/textInputLayout5"
+                    app:layout_constraintStart_toStartOf="@+id/textInputLayout5"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout5" />
+
+
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/signuplable"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_centerVertical="true"
                     android:text="@string/NewsletterTitle"
                     android:fontFamily="@font/georgia"
@@ -206,42 +264,6 @@
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/checkbox" />
-
-                <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/checkbox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_4sdp"
-                    android:checked="true"
-                    android:fontFamily="@font/georgia"
-                    android:padding="@dimen/_3sdp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/signuplable"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout5" />
-
-
-                <View
-                    android:id="@+id/view6"
-                    android:layout_width="100dp"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="8dp"
-                    android:background="@color/red_color"
-                    app:layout_constraintEnd_toEndOf="@+id/checkbox"
-                    app:layout_constraintStart_toStartOf="@+id/signuplable"
-                    app:layout_constraintTop_toBottomOf="@+id/signuplable" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/signup"
-                    android:layout_width="@dimen/_150sdp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="24dp"
-                    android:text="@string/Signup"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/textInputLayout5"
-                    app:layout_constraintStart_toStartOf="@+id/textInputLayout5"
-                    app:layout_constraintTop_toBottomOf="@+id/view6" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

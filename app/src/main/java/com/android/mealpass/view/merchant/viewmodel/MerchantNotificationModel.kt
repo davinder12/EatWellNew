@@ -4,16 +4,13 @@ package com.android.mealpass.view.merchant.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
-import com.android.mealpass.data.extension.mutableLiveData
 import com.android.mealpass.data.models.MerchantNotificationResponse
 import com.android.mealpass.data.network.NetworkState
 import com.android.mealpass.data.repository.MerchantRepository
 import com.android.mealpass.data.repository.UserRepository
 import com.android.mealpass.data.service.PreferenceService
-import com.android.mealpass.utilitiesclasses.PagedListViewModel
 import com.android.mealpass.utilitiesclasses.ResourceViewModel
 import com.android.mealpass.utilitiesclasses.baseclass.BaseViewModel
-import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import mealpass.com.mealpass.BuildConfig
 import mealpass.com.mealpass.R
@@ -45,7 +42,7 @@ class MerchantNotificationModel @Inject constructor(
 
     val notificationList = merchantResource.data.map {
         merchantNotificationResponse = it.body
-        description =  it.body.expected_description
+        description = it.body.expected_description ?: ""
         it.body.notifictions
     }
 
