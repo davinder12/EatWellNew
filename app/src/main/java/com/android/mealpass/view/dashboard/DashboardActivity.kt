@@ -80,10 +80,10 @@ class DashboardActivity : BaseActivity() {
     }
 
 
-    private fun alarmManager(){
+    private fun alarmManager() {
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as? AlarmManager
-
-        val calendar: Calendar = Calendar.getInstance().apply { timeInMillis = System.currentTimeMillis()
+        val calendar: Calendar = Calendar.getInstance().apply {
+            timeInMillis = System.currentTimeMillis()
             set(Calendar.HOUR_OF_DAY, 16)
         }
         val alarmIntent: PendingIntent = Intent(this, AlarmReceiver::class.java).let { intent ->

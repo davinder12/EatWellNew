@@ -26,6 +26,7 @@
                 android:id="@+id/notificationlist"
                 android:layout_width="match_parent"
                 app:emptyView="@id/emptyView"
+                android:layout_marginTop="@dimen/_10sdp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_notification"
                 android:layout_height="match_parent"

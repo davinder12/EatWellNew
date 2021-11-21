@@ -26,6 +26,17 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/logo_icon"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:background="@drawable/logo"
+                    app:civ_border_color="@color/colorPrimary"
+                    app:civ_border_width="1dp" />
+
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/referaltext"
                     android:layout_width="wrap_content"
@@ -72,16 +83,6 @@
                     android:textColor="@android:color/white" />
 
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/logo_icon"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="30sp"
-                    android:layout_marginBottom="25dp"
-                    android:background="@drawable/logo"
-                    app:civ_border_color="@color/colorPrimary"
-                    app:civ_border_width="1dp" />
 
 
             </LinearLayout>

@@ -93,6 +93,8 @@
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/boundary_shape"
                 android:hint="@string/Subject"
+                android:fontFamily="@font/georgia"
+
                 android:inputType="text"
                 android:maxLines="1"
                 android:text="@={vm.subject}"
@@ -152,6 +154,8 @@
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/editback"
                 android:gravity="top"
+                android:fontFamily="@font/georgia"
+
                 android:imeOptions="actionDone"
                 android:hint="@string/FeedBackDescriptionMsg"
                 android:inputType="textMultiLine"

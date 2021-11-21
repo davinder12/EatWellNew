@@ -13,7 +13,6 @@
     <ScrollView
         android:layout_width="match_parent"
         android:background="@android:color/white"
-
         android:layout_height="match_parent"
         android:scrollbars="none">
 
@@ -66,59 +65,27 @@
                 android:layout_height="wrap_content">
 
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout"
+                <com.facebook.login.widget.LoginButton
+                    android:id="@+id/facebookSignUpBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginLeft="24dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginRight="24dp"
-                    app:errorEnabled="true"
-                    app:hintEnabled="true"
+                    android:layout_gravity="center_horizontal"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="UnusedAttribute">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/username"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/FullName"
-                        android:imeOptions="actionNext"
-                        android:inputType="textPersonName"
-                        android:text="@={vm.name}"
-                        android:textAppearance="?attr/textAppearanceBody1"
-                        tools:ignore="UnusedAttribute" />
-                </com.google.android.material.textfield.TextInputLayout>
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/textInputLayout5"
-                    android:layout_width="0dp"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/registerWithFacebook"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:errorEnabled="true"
-                    app:endIconMode="password_toggle"
-                    app:hintEnabled="true"
-                    app:layout_constraintEnd_toEndOf="@+id/textInputLayout4"
-                    app:layout_constraintStart_toStartOf="@+id/textInputLayout4"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
-                    tools:ignore="UnusedAttribute">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/repeatpassword"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/RepeatPassword"
-
-                        android:imeOptions="actionDone"
-                        android:inputType="textPassword"
-                        android:text="@={vm.confirmPwd}"
-                        android:textAppearance="?attr/textAppearanceBody1"
-                        tools:ignore="UnusedAttribute" />
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:text="@string/RegisterWithFacebook"
+                    app:backgroundTint="@color/blue_color"
+                    app:icon="@drawable/com_facebook_button_icon"
+                    app:layout_constraintEnd_toEndOf="@+id/textInputLayout5"
+                    app:layout_constraintStart_toStartOf="@+id/textInputLayout5"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout5" />
 
                 <View
                     android:id="@+id/view6"
@@ -134,14 +101,13 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/signup"
-                    android:layout_width="@dimen/_150sdp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_22sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
                     android:text="@string/Signup"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/textInputLayout5"
-                    app:layout_constraintStart_toStartOf="@+id/textInputLayout5"
-                    app:layout_constraintTop_toBottomOf="@+id/terms_condition" />
+                    app:layout_constraintEnd_toEndOf="@+id/registerWithFacebook"
+                    app:layout_constraintStart_toStartOf="@+id/registerWithFacebook"
+                    app:layout_constraintTop_toBottomOf="@+id/registerWithFacebook" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayout2"
@@ -159,6 +125,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/Email"
+                        android:fontFamily="@font/georgia"
+
                         android:imeOptions="actionNext"
                         android:inputType="textEmailAddress"
                         android:text="@={vm.emailId}"
@@ -228,26 +196,38 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/CreatePassword"
                         android:imeOptions="actionNext"
+                        android:fontFamily="@font/georgia"
+
                         android:inputType="textPassword"
                         android:text="@={vm.password}"
-                        android:textAppearance="?attr/textAppearanceBody1"
                         tools:ignore="UnusedAttribute" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/terms_condition"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_width="wrap_content"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout5"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:fontFamily="@font/georgia"
-                    android:text="@string/TermsAndConditions"
-                    android:textAllCaps="false"
-                    android:textColor="@color/quantum_black_100"
-                    android:textSize="@dimen/_10ssp"
-                    app:layout_constraintEnd_toEndOf="@+id/textInputLayout5"
-                    app:layout_constraintStart_toStartOf="@+id/textInputLayout5"
-                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout5" />
+                    app:errorEnabled="true"
+                    app:endIconMode="password_toggle"
+                    app:hintEnabled="true"
+                    app:layout_constraintEnd_toEndOf="@+id/textInputLayout4"
+                    app:layout_constraintStart_toStartOf="@+id/textInputLayout4"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
+                    tools:ignore="UnusedAttribute">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/repeatpassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/RepeatPassword"
+                        android:fontFamily="@font/georgia"
+
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"
+                        android:text="@={vm.confirmPwd}"
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        tools:ignore="UnusedAttribute" />
+                </com.google.android.material.textfield.TextInputLayout>
 
 
                 <com.google.android.material.textview.MaterialTextView
@@ -264,6 +244,55 @@
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/checkbox" />
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginRight="24dp"
+                    app:errorEnabled="true"
+                    app:hintEnabled="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="UnusedAttribute">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/FullName"
+                        android:fontFamily="@font/georgia"
+
+                        android:imeOptions="actionNext"
+                        android:inputType="textPersonName"
+                        android:text="@={vm.name}"
+                        android:textAppearance="?attr/textAppearanceBody1"
+                        tools:ignore="UnusedAttribute" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/terms_condition"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:fontFamily="@font/georgia"
+                    android:text="@string/TermsAndConditions"
+                    android:textAllCaps="false"
+                    android:textColor="@color/quantum_black_100"
+                    android:textSize="@dimen/_10ssp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/signup"
+                    app:layout_constraintStart_toStartOf="@+id/signup"
+                    app:layout_constraintTop_toBottomOf="@+id/signup" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

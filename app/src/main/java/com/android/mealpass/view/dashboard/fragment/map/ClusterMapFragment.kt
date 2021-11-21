@@ -25,25 +25,25 @@ class ClusterMapFragment(
         item: FoodData.Body,
         markerOptions: MarkerOptions
     ) {
-
+        markerOptions.snippet(null)
 
         lateinit var icon: Bitmap
 
         val condition = isResturantOpen(
-            item.itemleft,
-            item.is_open,
-            item.opening_time,
-            item.closing_time,
-            item.before_pickup_time,
-            item.shop_open_time,
-            item.is_active
+                item.itemleft,
+                item.is_open,
+                item.opening_time,
+                item.closing_time,
+                item.before_pickup_time,
+                item.shop_open_time,
+                item.is_active
         )
         icon = when {
             condition -> BitmapFactory.decodeResource(context.resources, R.drawable.green_ywaste)
             else -> BitmapFactory.decodeResource(context.resources, R.drawable.red_ywaste)
         }
-        getResizedBitmap(icon, 60, 60)?.let {
-            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(it)).title(item.title + " >")
+        getResizedBitmap(icon, 100, 100)?.let {
+            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(it))
         }
         super.onBeforeClusterItemRendered(item, markerOptions)
     }

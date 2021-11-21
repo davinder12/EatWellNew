@@ -38,11 +38,13 @@ class MerchantRepository @Inject constructor(
     fun updateMerchantDescriptionMethod(userId: String?, description: String?): IRequest<Response<CommonResponseModel>> {
         return NetworkRequest(appExecutors, object : IRetrofitNetworkRequestCallback<CommonResponseModel> {
             override fun createNetworkRequest(): Single<Response<CommonResponseModel>> {
-                return merchantApi.merchantDescriptionApi(userId,description)
+                return merchantApi.merchantPushNotification(userId, description)
             }
+
             override fun getResponseStatus(response: Response<CommonResponseModel>): ResponseValidator {
-                return ResponseValidator(response.body()?.status?.code,response.body()?.status?.message)
+                return ResponseValidator(response.body()?.status?.code, response.body()?.status?.message)
             }
+
             override fun sessionExpired() {
                 authState.logout()
             }

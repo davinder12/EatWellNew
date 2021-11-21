@@ -8,9 +8,6 @@ import android.util.AttributeSet;
 import mealpass.com.mealpass.R;
 
 
-/**
- * Created by singh.gagandeep on 18/09/17.
- */
 
 public class CustomEditText extends androidx.appcompat.widget.AppCompatEditText {
 

@@ -27,6 +27,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import mealpass.com.mealpass.R
 import java.util.*
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 @HiltViewModel
 class ProductDetailViewModel @Inject constructor(
@@ -101,7 +102,7 @@ class ProductDetailViewModel @Inject constructor(
     }
 
     var merchantTotalCampaignSell = resturantRequest.data.map {
-        it.body.MerchantTotalCampaignSell
+        it.body.MerchantTotalCampaignSell?.roundToInt() ?: 0
     }
 
     var description = resturantRequest.data.map {
@@ -276,7 +277,7 @@ class ProductDetailViewModel @Inject constructor(
             isdelivery = true
         }
 
-        return SaveReceiptRequestModel(
+        return SaveReceiptRequestModel(productInfo.storename,
                 amount, resturantId, preferenceService.getString(R.string.pkey_user_Id),
                 productInfo.opening_time, productInfo.closing_time,
                 listOf(

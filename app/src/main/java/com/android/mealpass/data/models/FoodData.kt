@@ -70,12 +70,12 @@ data class FoodData(
             val is_staff_user: Boolean
     ) : ClusterItem {
         data class ProductType(
-            val id: String,
-            val product_type: String
+                val id: String,
+                val product_type: String
         )
 
-        override fun getTitle(): String? {
-            return name
+        override fun getTitle(): String {
+            return "$storename >"
         }
 
         override fun getPosition(): LatLng {

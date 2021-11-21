@@ -1,10 +1,13 @@
 <resources>
     <string name="app_name">MealPass</string>
 
+    <string name="Reminder">Reminder</string>
+    <string name="Dashboard">Dashboard</string>
     <string name="DailyPushMsg">You can save a meal and it\'s only few minutes away. To see, Check out MealPass app.</string>
     <string name="Login">Log in</string>
     <string name="CreateNewAccount">Create new account</string>
     <string name="LoginWithFacebook">Log in with Facebook</string>
+    <string name="RegisterWithFacebook">Register with Facebook</string>
     <string name="LoginWithInstagram">Log in with Instagram</string>
     <string name="BusinessLogin">Business login</string>
     <string name="Email">Email</string>
@@ -60,7 +63,7 @@
     <string name="OrderCancelValidation">You cannot cancel your meal during pickup time.</string>
     <string name="PasswordMismatch">Password mismatch</string>
     <string name="EnjoyFreePortion">Enjoy your magic portion free of cost.</string>
-    <string name="MaximumLimitOver">Your maximum limit to get MealPass meals is over. Please try tomorrow :)</string>
+    <string name="MaximumLimitOver">Your maximum limit to get MealPass meals is over. Please try tomorrow 😀</string>
     <string name="EnterAmount">Enter Amount</string>
     <string name="MinPortionLimit">You can get maximum %1$s MealPass portion(s).</string>
     <string name="PortionLeft">You have only %1$s quantity to be use as MealPass portion(s). Would you like to get %2$s magic portion(s)?</string>
@@ -115,7 +118,7 @@
     <string name="PickupTime">Pickup Time :</string>
     <string name="ActiveReceipts">Active Receipts</string>
     <string name="UsedReceipts">Used Receipts</string>
-    <string name="ActiveReceiptMsg">Head to the restaurant for the specified time and show your receipt . If you have any questions then please don\'t hesitate to get in touch with us at MealPass</string>
+    <string name="ActiveReceiptMsg">Head to the restaurant for the specified pickup time and show your receipt . If you have any questions then please don\'t hesitate to get in touch with us at MealPass</string>
     <string name="Redeemed">Redeemed</string>
     <string name="OrderCancel">Order Cancelled</string>
     <string name="WhatToExpect">What to expect:</string>
@@ -138,8 +141,8 @@
     <string name="Total">Total:</string>
     <string name="Order">Order</string>
     <string name="CampaignCode">Campaign Code</string>
-    <string name="CampaignCodeMsg">This portion is provided to you by your local shop</string>
-    <string name="GetMagicPortion">Get Magic Portion</string>
+    <string name="CampaignCodeMsg">This meal is provided by </string>
+    <string name="GetMagicPortion">Get receipt</string>
     <string name="CampaignNote">Note: -Please observe any pickup instructions.</string>
     <string name="Donation">Donation</string>
     <string name="With">with</string>
@@ -336,8 +339,8 @@
     <string name="addressSaveValidation">You cannot save more than five address</string>
     <string name="cancel_order">Cancel Order</string>
     <string name="number_of_person_in_family">Number of people you will be ordering meals for</string>
-    <string name="count">count</string>
-    <string name="AddStaffCode">Add Staff Code</string>
+    <string name="count">Number of people</string>
+    <string name="AddStaffCode">MealPass test only</string>
     <string name="StaffCode">Staff Code</string>
     <string name="StaffCodeBtnMsg">Restaurant Staff Code</string>
     <string name="MealPassCode">General App User Code</string>
@@ -345,8 +348,8 @@
     <string name="StaffCampaignCodeMsg">Enter assigned code to activate \n account and claim meals.</string>
     <string name="OnlyForStaff">Only For Staff</string>
     <string name="StaffReceipt">Staff Receipt</string>
-    <string name="MonthlyTaxDeduction">Estimated daily tax deduction: <b>%1$s$</b></string>
-    <string name="YearlyTaxDeduction">Estimated yearly tax deduction: <b>%1$s$</b></string>
+    <string name="MonthlyTaxDeduction">Estimated daily tax deduction: <b>$%1$s</b></string>
+    <string name="YearlyTaxDeduction">Estimated yearly tax deduction: <b>$%1$s</b></string>
     <string name="LoginExistingAccount">Login Existing Account</string>
     <string name="RegisterNewAccount">Register New Account</string>
     <string name="PersonalAccount">Personal Account</string>
@@ -354,8 +357,13 @@
     <string name="restaurant_pick_up_time">Go to restaurant at pick up time.</string>
     <string name="restaurant_claim_meals">Select restaurant and claim meals in advance.</string>
     <string name="swipe_receipt_at_resaurant">Swipe receipt at restaurant and enjoy your meal!</string>
-    <string name="login_into_existing_account">Login into Existing Account</string>
+    <string name="login_into_existing_account">Login into existing Account</string>
     <string name="MerchantRegister">New to MealPass? Register your interest here</string>
-
-
+    <string name="PickUpOrder_Reminder">Your MealPass order is ready for pickup in 60 minutes. If you are unable to pick up please cancel so someone else can enjoy the meal.</string>
+    <string name="SendPushNotification">Send Push Notification</string>
+    <string name="WriteYourTextBelow">Write your text below</string>
+    <string name="NotificationLabel">Add text here for your notification</string>
+    <string name="MistakeMealDescription">Note:-  When sending a push notification you can reach all MealPass users within a 5 miles radius of your business. If you are posting a "mistake" meal - please add a description and how long time its available for.</string>
+    <string name="NotificationSuccessMessage">Notification has been successfully sent to near by customers.</string>
+    <string name="staff_meal_note">Note:- One account can serve your entire family. Just tell us how many people you are ordering meals for.</string>
 </resources>

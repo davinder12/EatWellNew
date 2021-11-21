@@ -2,6 +2,7 @@ package com.android.mealpass.view.dashboard.viewmodel
 
 
 import androidx.lifecycle.LiveData
+import com.android.mealpass.data.extension.mutableLiveData
 import com.android.mealpass.data.models.ActiveReceiptMapper
 import com.android.mealpass.data.models.ReceiptResponse
 import com.android.mealpass.data.models.SaveReceiptRequestModel
@@ -16,11 +17,14 @@ class CampaignViewModel @Inject constructor(
     private val receiptRepository: ReceiptRepository
 ) : BaseViewModel() {
 
-    var response : ReceiptResponse.Body.ActiveReceipt ? = null
+
+    var storeName = mutableLiveData("")
+
+    var response: ReceiptResponse.Body.ActiveReceipt? = null
     fun updateReceiptRequest(saveReceiptRequestModel: SaveReceiptRequestModel): LiveData<NetworkState> {
         return receiptRepository.campaignReceiptMethod(saveReceiptRequestModel).also {
             subscribe(it.request) {
-                if(it.isSuccessful){
+                if (it.isSuccessful) {
                     response = ActiveReceiptMapper.Mapper.from(it.body()?.body)
                 }
             }

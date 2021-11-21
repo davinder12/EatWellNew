@@ -2,18 +2,17 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+<RelativeLayout
 
-    <RelativeLayout
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
 
-        android:id="@+id/activity_login"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        >
+    >
 
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="0dp"
@@ -63,11 +62,8 @@
                 <com.android.mealpass.widgets.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/CampaignCodeMsg"
                     android:textColor="@color/darkgray"
-
-                    />
+                    app:htmlText="@{DataConverterKt.getCampaignDescription(vm.storeName,context)}" />
 
 
                 <com.android.mealpass.widgets.CustomTextView
@@ -108,5 +104,14 @@
         </ScrollView>
 
 
-    </RelativeLayout>
+</RelativeLayout>
+
+    <data>
+
+        <import type="com.android.mealpass.view.units.DataConverterKt" />
+
+        <variable
+            name="vm"
+            type="com.android.mealpass.view.dashboard.viewmodel.CampaignViewModel" />
+    </data>
 </layout>

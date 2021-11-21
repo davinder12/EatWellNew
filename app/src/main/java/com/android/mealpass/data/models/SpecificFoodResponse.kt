@@ -10,7 +10,7 @@ data class SpecificFoodResponse(
     )
 
     data class Body(
-            val MerchantTotalCampaignSell: Int,
+            val MerchantTotalCampaignSell: Float?,
             val address: String?,
             val allow_fullday_delivery: Boolean,
             val allow_subscription: Boolean,

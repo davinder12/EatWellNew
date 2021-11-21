@@ -29,6 +29,7 @@ class LoginFragmentViewModel @Inject constructor(
     var emailId = mutableLiveData("")
     var password = mutableLiveData("")
     var isRememberMeChecked = mutableLiveData(false)
+    var needToShowSocialLogin = mutableLiveData(false)
 
 
     var name = ""
@@ -100,6 +101,7 @@ class LoginFragmentViewModel @Inject constructor(
 
 
     fun updateLoginType(isMerchantLoginOrNot: Boolean) {
+        needToShowSocialLogin.value = isMerchantLoginOrNot
         if (isMerchantLoginOrNot) {
             isRememberMeChecked.value = preferenceService.getBoolean(R.string.pkey_isMerchantRemeber)
             if (isRememberMeChecked.value == true) emailId.value = preferenceService.getString(R.string.pkey_merchantEmailId)

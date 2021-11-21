@@ -61,11 +61,12 @@
                     app:civ_border_color="@color/colorPrimary"
                     app:civ_border_width="1dp" />
 
-
                 <com.android.mealpass.widgets.CustomEditText
                     android:id="@+id/code"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
+                    android:fontFamily="@font/georgia"
+
                     android:layout_marginTop="@dimen/_20sdp"
                     android:background="@drawable/boundary_shape"
                     android:gravity="center"
@@ -73,7 +74,6 @@
                     android:text="@={vm.referralCode}"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:paddingEnd="5dp"
                     android:textAllCaps="false"
                     android:textSize="@dimen/edit_text_size" />
 
@@ -82,8 +82,8 @@
                     android:id="@+id/referaltext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
                     android:layout_marginTop="@dimen/_10sdp"
+                    android:gravity="center"
                     android:text="@string/Step2Title" />
 
 
@@ -118,9 +118,15 @@
                     android:text="@string/Close"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
+                    app:visibleGone="@{!vm.isFirstTimeVisit}" />
 
-                    app:visibleGone="@{!vm.isFirstTimeVisit}"
-                    />
+
+                <com.android.mealpass.widgets.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="@string/staff_meal_note" />
 
 
             </LinearLayout>

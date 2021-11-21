@@ -31,6 +31,7 @@ class MealPassFirebaseMessagingService  : FirebaseMessagingService() {
     companion object {
         const val MERCHANT_NOTIFICATION_SCREEN = "product_order_push"
         const val MERCHANT_CANCEL_ORDER_SCREEN = "product_order_cancel_push"
+        const val MERCHANT_PUSH = "merchant_push"
         const val PRODUCT_DETAIL_SCREEN = "1"
         const val GENERAL_NOTIFICATION_SCREEN = "3"
         const val TYPE = "type"

@@ -21,14 +21,20 @@ interface MerchantApi {
     @FormUrlEncoded
     @POST("get_current_portion.php")
     fun getPortionListApi(@Field("user_id") userId: String?,
-                          @Field("time_zone") timezone: String?) : Single<Response<MerchantNotificationResponse>>
-
+                          @Field("time_zone") timezone: String?): Single<Response<MerchantNotificationResponse>>
 
 
     @FormUrlEncoded
     @POST("save_description.php")
     fun merchantDescriptionApi(@Field("user_id") userId: String?,
                                @Field("expected_description") portion: String?): Single<Response<CommonResponseModel>>
+
+
+    @FormUrlEncoded
+    @POST("merchant_push.php")
+    fun merchantPushNotification(@Field("product_id") userId: String?,
+                                 @Field("push_msg") pushMessage: String?): Single<Response<CommonResponseModel>>
+
 
     @FormUrlEncoded
     @POST("save_current_portion.php")

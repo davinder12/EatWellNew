@@ -43,13 +43,19 @@ fun time(locationDateTime: String?): String? {
     return timeFormatter.format(LocalDateTime.parse(locationDateTime, dateTimePattern).toLocalTime())
 }
 
-fun convertTimeIntoTwoDigit(firstTime:String,secondTime:String): String {
-    return LocalTime.parse(firstTime,timeFormatter).toString()+"-"+LocalTime.parse(secondTime,timeFormatter).toString()
+fun convertTimeIntoTwoDigit(firstTime: String, secondTime: String): String {
+    return LocalTime.parse(firstTime, timeFormatter).toString() + "-" + LocalTime.parse(secondTime, timeFormatter).toString()
 }
 
 fun date(locationDateTime: String?): String? {
     if (locationDateTime == null) return null
     return LocalDateTime.parse(locationDateTime, dateTimePattern).toLocalDate().toString()
+}
+
+fun getLocatDate(dateTimeFormat: String?): LocalTime? {
+    if (dateTimeFormat == null) return null
+    val localTime = LocalDateTime.parse(dateTimeFormat, dateTimePattern).toLocalTime()
+    return localTime.minusMinutes(60)
 }
 
 fun getCurrentTime(): String = LocalTime.now().format(localTimeFormatter)
@@ -110,6 +116,14 @@ fun getStartTime(shopOpenTime: String): LocalTime {
 //    return startTime.minusMinutes(beforeStartTime.minute.toLong())
 //        .also { it.minusHours(beforeStartTime.hour.toLong()) }
 //}
+
+fun isLocalTimeGreaterThan60Min(localTime: LocalTime): Boolean {
+    val totalLocalMinute = (LocalTime.now().hour * MINUSTES) + LocalTime.now().minute
+    val notificationTotalMinutes = (localTime.hour * MINUSTES) + localTime.minute
+    val remainingMinutes = notificationTotalMinutes - totalLocalMinute
+    return remainingMinutes > 0
+
+}
 
 
 fun isDeliverytimeOnOff(pickUpStartTime: String?, deliveryCloseBeforeTime: String?): Boolean {

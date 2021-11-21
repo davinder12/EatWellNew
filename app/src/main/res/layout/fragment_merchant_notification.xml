@@ -32,7 +32,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:navigationIcon="@drawable/ic_logout_white"
-            app:title="@string/Notifications"
+            app:title="@string/Dashboard"
             app:menu="@menu/check"
             app:titleTextAppearance="@style/Toolbar.TitleText"
             app:titleTextColor="@android:color/white">
@@ -109,7 +109,7 @@
                 android:layout_marginTop="8dp"
                 android:padding="10dp"
                 android:textSize="@dimen/_10ssp"
-                android:text="@string/UpdateDesc"
+                android:text="@string/SendPushNotification"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="@+id/updatePortion"

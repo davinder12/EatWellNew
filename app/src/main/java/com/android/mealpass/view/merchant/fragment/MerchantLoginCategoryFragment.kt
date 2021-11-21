@@ -16,7 +16,7 @@ import javax.inject.Inject
 class MerchantLoginCategoryFragment : BaseFragment<FragmentMerchantCategoryBinding>() {
 
     companion object {
-        const val MERCHANT_URL = "https://mealpass.org/admin/merchant/index.php"
+        const val MERCHANT_URL = "https://www.mealpassapp.org/contact-8?fbclid=IwAR21UpapQmAdPPJxyUjuBzUTVVpLnPucfnI0jk5QoBgB-op9NcOLwkRhxTU"
     }
 
     @Inject

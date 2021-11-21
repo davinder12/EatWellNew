@@ -18,7 +18,7 @@ import javax.inject.Inject
 class NotificationActivity : DataBindingActivity<ActivityNotificationBinding>() {
 
     companion object {
-      const val    GENENRAL_UPDATE_TYPE =3
+      const val GENENRAL_UPDATE_TYPE = 3
     }
 
     @Inject
@@ -36,12 +36,8 @@ class NotificationActivity : DataBindingActivity<ActivityNotificationBinding>() 
 
         initAdapter(NotificationListAdapter(), binding.notificationlist, viewModel.notificationList, viewModel.resource) {
             when {
-                it.notification_type == GENENRAL_UPDATE_TYPE -> {
-                    navigationScreen.goToGeneralNotification(it.message, it.merchant_logo)
-                }
-                else -> {
-                    navigationScreen.productDetailScreen(it.merchant_id, it.merchant_name)
-                }
+                it.notification_type == GENENRAL_UPDATE_TYPE -> navigationScreen.goToGeneralNotification(it.message, it.merchant_logo)
+                else -> navigationScreen.productDetailScreen(it.merchant_id, it.merchant_name)
             }
         }
 

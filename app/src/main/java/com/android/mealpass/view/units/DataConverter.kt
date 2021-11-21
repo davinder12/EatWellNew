@@ -111,6 +111,11 @@ fun getDescription(resName: String?, description: String?): String? {
 }
 
 
+fun getCampaignDescription(resName: String?, context: Context): String {
+    return context.getString(R.string.CampaignCodeMsg) + " <b>$resName</b>"
+}
+
+
 fun orderCancelMethod(collectionTime: String?): Boolean? {
     return time(collectionTime)?.let {
         canUserCancelOrder(it)

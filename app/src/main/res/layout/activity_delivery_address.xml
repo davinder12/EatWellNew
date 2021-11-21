@@ -222,6 +222,8 @@
                                 android:layout_height="wrap_content"
                                 android:hint="@string/City"
                                 android:imeOptions="actionNext"
+                                android:fontFamily="@font/georgia"
+
                                 android:inputType="text"
                                 android:nextFocusForward="@+id/stateInputText"
                                 android:text="@={vm.city}"
@@ -247,6 +249,8 @@
                                 android:layout_height="wrap_content"
                                 android:hint="@string/State"
                                 android:imeOptions="actionNext"
+                                android:fontFamily="@font/georgia"
+
                                 android:inputType="text"
                                 android:nextFocusForward="@+id/postalZipCode"
                                 android:text="@={vm.state}"
@@ -275,6 +279,8 @@
                                 android:hint="@string/Country"
                                 android:imeOptions="actionDone"
                                 android:inputType="text"
+                                android:fontFamily="@font/georgia"
+
                                 android:nextFocusForward="@+id/password"
                                 android:text="@={vm.country}"
                                 android:textAppearance="?attr/textAppearanceBody1"
@@ -300,6 +306,8 @@
                                 android:hint="@string/PostCode"
                                 android:imeOptions="actionNext"
                                 android:inputType="text"
+                                android:fontFamily="@font/georgia"
+
                                 android:nextFocusForward="@+id/country"
                                 android:text="@={vm.postalZipCode}"
                                 android:textAppearance="?attr/textAppearanceBody1"
@@ -323,6 +331,8 @@
                                 android:layout_height="wrap_content"
                                 android:hint="@string/HouseNo"
                                 android:imeOptions="actionNext"
+                                android:fontFamily="@font/georgia"
+
                                 android:inputType="text"
                                 android:nextFocusForward="@+id/colonyStreet"
                                 android:text="@={vm.flatHouseNo}"
@@ -349,6 +359,8 @@
                                 android:hint="@string/StreetAddress"
                                 android:imeOptions="actionNext"
                                 android:inputType="text"
+                                android:fontFamily="@font/georgia"
+
                                 android:nextFocusForward="@+id/cityIntputText"
                                 android:text="@={vm.colonyStreet}"
                                 android:textAppearance="?attr/textAppearanceBody1"

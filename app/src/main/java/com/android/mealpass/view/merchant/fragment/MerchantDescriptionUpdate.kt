@@ -9,6 +9,7 @@ import com.android.mealpass.data.extension.progressDialog
 import com.android.mealpass.data.extension.throttleClicks
 import com.android.mealpass.utilitiesclasses.baseclass.BaseListFragment
 import com.android.mealpass.view.merchant.viewmodel.MerchantDescriptionUpdateModel
+import com.android.mealpass.widgets.messageDialog
 import dagger.hilt.android.AndroidEntryPoint
 import mealpass.com.mealpass.R
 import mealpass.com.mealpass.databinding.FragmentMerchantDescriptionUpdateBinding
@@ -30,16 +31,16 @@ class MerchantDescriptionUpdate : BaseListFragment<FragmentMerchantDescriptionUp
             findNavController().popBackStack()
         }
 
-        viewModel.updateData(args.description)
+        // viewModel.updateData(args.description)
 
         subscribe(binding.updateDescription.throttleClicks()) {
             viewModel.description.value?.let {
                 if (it.isNotEmpty()) {
-                    bindNetworkState(
-                        viewModel.updateMerchantDescription(),
-                        progressDialog(R.string.Pleasewait),R.string.DescUpdated) {
-                        backStackPutData(BACK_STACK_DESCRIPTION, it)
-                        findNavController().popBackStack()
+                    bindNetworkState(viewModel.updateMerchantDescription(), progressDialog(R.string.Pleasewait)) {
+                        requireContext().messageDialog(getString(R.string.NotificationSuccessMessage), false) {
+                            backStackPutData(BACK_STACK_DESCRIPTION, it)
+                            findNavController().popBackStack()
+                        }
                     }
                 }
             }

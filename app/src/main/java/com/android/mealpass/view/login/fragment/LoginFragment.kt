@@ -39,6 +39,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+
         callbackManager = CallbackManager.Factory.create()
         binding.facebookLogin.fragment = this
         binding.facebookLogin.setPermissions(listOf("public_profile", "email"))

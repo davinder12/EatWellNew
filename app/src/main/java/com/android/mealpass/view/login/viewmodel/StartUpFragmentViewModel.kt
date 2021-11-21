@@ -57,6 +57,8 @@ class StartUpFragmentViewModel @Inject constructor(private val preferenceService
 
 
     private fun updateUserData(loginResponse: LoginResponse) {
+
+
         preferenceService.putString(R.string.pkey_user_Id, loginResponse.body.id)
         preferenceService.putBoolean(R.string.pkey_social_login,true)
         preferenceService.putString(R.string.pkey_secure_token, loginResponse.body.secure_key)

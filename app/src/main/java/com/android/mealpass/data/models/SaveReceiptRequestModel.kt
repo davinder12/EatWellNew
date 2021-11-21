@@ -6,6 +6,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class SaveReceiptRequestModel(
+        var storeName: String? = "",
         var amount: Float = 0f,
         val restaurent_id: String? = "",
         val user_id: String? = "",
