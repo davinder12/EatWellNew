@@ -28,15 +28,17 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:padding="@dimen/_10sdp"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp"
                 android:layout_height="match_parent">
 
                 <com.android.mealpass.widgets.CustomTextView
                     android:id="@+id/time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/_4sdp"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="@dimen/_6sdp"
                     android:text="@{DataConverterKt.getAmPmTime(item.created_at)}"
                     android:textSize="@dimen/_10ssp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -48,9 +50,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/time"
+                    android:layout_marginTop="@dimen/_2sdp"
                     android:layout_toEndOf="@id/notification_logo"
                     android:text="@{item.message}"
-                    app:layout_constraintEnd_toEndOf="@+id/textView8"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView8"
                     app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -68,7 +71,7 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@+id/time"
                     app:layout_constraintStart_toEndOf="@+id/notification_logo"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/notification_logo"
                     app:tooltipText="description" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -76,6 +79,7 @@
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_below="@id/time"
+                    android:layout_marginTop="@dimen/_12sdp"
                     app:civ_border_color="@color/colorPrimary"
                     app:civ_border_width="1dp"
                     app:layout_constraintStart_toStartOf="parent"
