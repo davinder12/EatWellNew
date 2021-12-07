@@ -30,6 +30,7 @@ class ActiveReceiptDetailViewModel @Inject constructor(
     var latitude = ""
     var longitude = ""
     private var opening_time = ""
+    private var created_date = ""
     private var delivery_close_before_hours = ""
     var isUserCanCancelOrder = mutableLiveData(false)
 
@@ -51,8 +52,8 @@ class ActiveReceiptDetailViewModel @Inject constructor(
     fun filterMethod(callBack: (Boolean, Int?) -> Unit) {
         //|| isTimeExpired(opening_time,closing_time,before_pickup_time,shop_open_time)
         when {
-            !(orderCancelMethod(opening_time)
-                    ?: false) || !isDeliverytimeOnOff(opening_time, delivery_close_before_hours) -> callBack(false, R.string.OrderCancelValidation)
+            !(orderCancelMethod(opening_time, created_date)
+                ?: false) || !isDeliverytimeOnOff(opening_time, delivery_close_before_hours) -> callBack(false, R.string.OrderCancelValidation)
             else -> callBack(true, null)
         }
     }
@@ -62,10 +63,11 @@ class ActiveReceiptDetailViewModel @Inject constructor(
         item.latitude?.let { latitude = it.toString() }
         item.longitude?.let { longitude = it.toString() }
         item.opening_time?.let { opening_time = it }
+        item.created_date?.let { created_date = it }
         item.delivery_close_before_hours?.let { delivery_close_before_hours = it }
 
-        isUserCanCancelOrder.value = !(orderCancelMethod(opening_time)
-                ?: false) || !isDeliverytimeOnOff(opening_time, delivery_close_before_hours)
+        isUserCanCancelOrder.value = !(orderCancelMethod(opening_time, created_date)
+            ?: false) || !isDeliverytimeOnOff(opening_time, delivery_close_before_hours)
         foodReceipt.value = item
     }
 

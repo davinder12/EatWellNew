@@ -40,11 +40,23 @@ fun convert24HourTo12Hour(dateTime: String?): String? {
 
 fun time(locationDateTime: String?): String? {
     if (locationDateTime.isNullOrEmpty()) return null
-    return timeFormatter.format(LocalDateTime.parse(locationDateTime, dateTimePattern).toLocalTime())
+    return timeFormatter.format(
+        LocalDateTime.parse(locationDateTime, dateTimePattern).toLocalTime()
+    )
+}
+
+fun compareDate(locationDateTime: String?): Boolean {
+    if (locationDateTime.isNullOrEmpty()) return false
+    val serverDate = LocalDateTime.parse(locationDateTime, dateTimePattern).toLocalDate()
+    val localDate = LocalDate.parse(LocalDate.now().format(dateFormatter), dateFormatter)
+    return localDate.isEqual(serverDate)
 }
 
 fun convertTimeIntoTwoDigit(firstTime: String, secondTime: String): String {
-    return LocalTime.parse(firstTime, timeFormatter).toString() + "-" + LocalTime.parse(secondTime, timeFormatter).toString()
+    return LocalTime.parse(firstTime, timeFormatter).toString() + "-" + LocalTime.parse(
+        secondTime,
+        timeFormatter
+    ).toString()
 }
 
 fun date(locationDateTime: String?): String? {
@@ -63,13 +75,13 @@ fun getCurrentTime(): String = LocalTime.now().format(localTimeFormatter)
 fun getCurrentDate(): String = LocalDate.now().format(dateFormatter)
 
 
-fun canUserCancelOrder(pickUpStartTime: String?): Boolean {
+fun canUserCancelOrder(pickUpStartTime: String?, createdDate: String?): Boolean {
     return when {
         pickUpStartTime.isNullOrEmpty() -> false
         else -> {
             val pickUpTime = LocalTime.parse(pickUpStartTime, timeFormatter)
             val currentTime = LocalTime.parse(LocalTime.now().format(localTimeFormatter))
-            return currentTime.isBefore(pickUpTime)
+            return currentTime.isBefore(pickUpTime) && compareDate(createdDate)
         }
     }
 

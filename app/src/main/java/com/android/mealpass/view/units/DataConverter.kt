@@ -116,9 +116,9 @@ fun getCampaignDescription(resName: String?, context: Context): String {
 }
 
 
-fun orderCancelMethod(collectionTime: String?): Boolean? {
+fun orderCancelMethod(collectionTime: String?, createdDate: String?): Boolean? {
     return time(collectionTime)?.let {
-        canUserCancelOrder(it)
+        canUserCancelOrder(it, createdDate)
     }
 
 }
