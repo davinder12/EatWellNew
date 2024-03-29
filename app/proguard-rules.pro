@@ -17,6 +17,12 @@
 -keepclassmembernames,allowobfuscation interface * {
     @retrofit2.http.* <methods>;
 }
+# R8 full mode strips generic signatures from return types if not kept.
+-if interface * { @retrofit2.http.* public *** *(...); }
+-keep,allowoptimization,allowshrinking,allowobfuscation class <3>
+
+# With R8 full mode generic signatures are stripped for classes that are not kept.
+-keep,allowobfuscation,allowshrinking class retrofit2.Response
 
 
 ##---------------Begin: proguard configuration for Gson  ----------
