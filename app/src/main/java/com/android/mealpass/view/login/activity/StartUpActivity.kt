@@ -1,9 +1,14 @@
 package com.android.mealpass.view.login.activity
 
+import android.Manifest
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.navigation.fragment.findNavController
+import com.android.mealpass.data.extension.checkNotificationPermission
 import com.android.mealpass.utilitiesclasses.baseclass.BaseActivity
 import com.android.mealpass.view.login.viewmodel.StartUpActivityViewModel
 import com.google.firebase.messaging.FirebaseMessaging
@@ -20,8 +25,14 @@ class StartUpActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start_up)
-        fireBaseGenerateToken()
+      //  fireBaseGenerateToken()
+        askNotificationPermission()
+    }
 
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission(),
+    ) {
+        fireBaseGenerateToken()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -35,6 +46,17 @@ class StartUpActivity : BaseActivity() {
             if(it.isSuccessful){
                 Log.e("messsage",""+it.result)
                 viewModel.updateDeviceToken(it.result)
+            }
+        }
+    }
+
+    private fun askNotificationPermission() {
+        // This is only necessary for API level >= 33 (TIRAMISU)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (this.checkNotificationPermission()) {
+                fireBaseGenerateToken()
+            } else {
+                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
         }
     }

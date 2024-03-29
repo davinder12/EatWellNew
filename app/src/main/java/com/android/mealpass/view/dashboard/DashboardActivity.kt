@@ -2,8 +2,10 @@ package com.android.mealpass.view.dashboard
 
 import android.app.AlarmManager
 import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
@@ -56,12 +58,12 @@ class DashboardActivity : BaseActivity() {
         initDrawerBottomSheet()
         // pushNotificationHandling()
         // checkUpdate()
-        viewModel.isLocalNotificationInit.observe(this, {
+        viewModel.isLocalNotificationInit.observe(this) {
             if (!it) {
                 Log.e("alarm receiver inital", "started")
                 alarmManager()
             }
-        })
+        }
 
 
         bindNetworkState(viewModel.versionNetworkState, progressDialog(R.string.Pleasewait)) {
@@ -82,22 +84,38 @@ class DashboardActivity : BaseActivity() {
 
     private fun alarmManager() {
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as? AlarmManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (alarmManager?.canScheduleExactAlarms() == true) {
+                alarmManagerFun(alarmManager)
+            } else {
+                // val intent = Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM)
+                // intent.data = Uri.parse("package:$packageName")
+                //requestPermissionLauncher.launch(intent)
+                alarmManagerFun(alarmManager)
+            }
+        } else {
+            alarmManagerFun(alarmManager)
+        }
+    }
+
+    private fun alarmManagerFun(alarmManager: AlarmManager?) {
         val calendar: Calendar = Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()
             set(Calendar.HOUR_OF_DAY, 16)
         }
         val alarmIntent: PendingIntent = Intent(this, AlarmReceiver::class.java).let { intent ->
-            PendingIntent.getBroadcast(this, 0, intent, 0)
+            PendingIntent.getBroadcast(this, 0, intent, 0 or FLAG_IMMUTABLE)
         }
 
         alarmManager?.setInexactRepeating(
-                AlarmManager.RTC_WAKEUP,
-                calendar.timeInMillis,
-                AlarmManager.INTERVAL_DAY,
-                alarmIntent
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            AlarmManager.INTERVAL_DAY,
+            alarmIntent
         )
         viewModel.updateAlarmManagerStatus()
     }
+
 
     private fun checkUpdate() {
         val appUpdateInfoTask: Task<AppUpdateInfo> = AppUpdateManagerFactory.create(this).appUpdateInfo

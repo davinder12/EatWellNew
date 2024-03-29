@@ -2,6 +2,7 @@ package com.android.mealpass.view.dashboard.activity
 
 import android.app.AlarmManager
 import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -68,7 +69,8 @@ class Campaign : DataBindingActivity<ActivityCampaignCodeBinding>() {
 //            val bundle = Bundle()
 //            bundle.putParcelable(EXTRA_ACTIVE_RECEIPT_DETAIL,data)
 //            intent.putExtra(EXTRA_ACTIVE_RECEIPT_DETAIL,bundle)
-            PendingIntent.getBroadcast(this, 0, intent, 0)
+            PendingIntent.getBroadcast(this, 0, intent, 0 or FLAG_IMMUTABLE)
+
         }
         val calendar: Calendar = Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()

@@ -83,7 +83,7 @@ class LocationRepository @Inject constructor(
                 location.latitude,
                 location.longitude,
                 1
-            )
+            )?.toList()?: emptyList()
             if (!addresses.isNullOrEmpty()) preferenceService.putString(
                 R.string.pkey_location,
                 addresses[0].countryName

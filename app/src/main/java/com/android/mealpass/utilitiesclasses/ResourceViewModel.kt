@@ -1,7 +1,7 @@
 package com.android.mealpass.utilitiesclasses
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.switchMap
 import com.android.mealpass.data.extension.liveData
 import com.android.mealpass.data.extension.map
 import com.android.mealpass.data.network.IResource
@@ -39,24 +39,30 @@ class ResourceViewModel<EntityType>(private var resource: LiveData<IResource<Ent
      * True if the resource is refreshing it's data.
      */
     val isRefreshing: LiveData<Boolean> by lazy {
-        Transformations.switchMap(resource) {
+        resource.switchMap {
             it.isRefreshing
         }
+//        Transformations.switchMap(resource) {
+//            it.isRefreshing
+//        }
     }
 
     /**
      * The network state of the resource.
      */
     val networkState: LiveData<NetworkState> by lazy {
-        Transformations.switchMap(resource) { it.networkState }
+        resource.switchMap {
+            it.networkState
+        }
+       // Transformations.switchMap(resource) { it.networkState }
     }
 
     /**
      * The resource data.
      */
-    val data: LiveData<EntityType> = Transformations.switchMap(resource) {
-        it.data
-    }
+    val data: LiveData<EntityType> = resource.switchMap {
+            it.data
+        }
 
 
     fun retry(networkState: NetworkState) {

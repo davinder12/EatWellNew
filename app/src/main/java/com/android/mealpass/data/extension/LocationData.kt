@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.widget.EditText
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.jakewharton.rxbinding3.widget.textChanges
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -24,6 +25,12 @@ fun Context.isGPSEnabled() =
     (getSystemService(Context.LOCATION_SERVICE) as LocationManager).isProviderEnabled(
         LocationManager.GPS_PROVIDER
     )
+
+fun Context.checkNotificationPermission(): Boolean = (ContextCompat.checkSelfPermission(
+    this,
+    Manifest.permission.POST_NOTIFICATIONS
+) == PackageManager.PERMISSION_GRANTED)
+
 
 fun Context.isNetworkEnabled() =
     (getSystemService(Context.LOCATION_SERVICE) as LocationManager).isProviderEnabled(

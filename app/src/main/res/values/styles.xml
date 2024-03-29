@@ -10,7 +10,7 @@
         <item name="actionMenuTextColor">@android:color/white</item>
         <item name="materialButtonStyle">@style/Button</item>
         <item name="textInputStyle">@style/LoginTextInputLayoutStyle</item>
-
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
 

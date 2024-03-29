@@ -1,7 +1,8 @@
 package com.android.mealpass.data.extension
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+//import androidx.lifecycle.Transformations
+import androidx.lifecycle.map
 
 /**
  * Returns a [LiveData] mapped from `this` LiveData by applying [transform] to each value set on
@@ -20,7 +21,9 @@ import androidx.lifecycle.Transformations
  * ```
  */
 inline fun <X, Y> LiveData<X>.map(crossinline transform: (X) -> Y): LiveData<Y> =
-    Transformations.map(this) {
-        transform(it)
-    }
+    this.map{ transform(it) }
+
+    //    Transformations.map(this) {
+//        transform(it)
+//    }
 

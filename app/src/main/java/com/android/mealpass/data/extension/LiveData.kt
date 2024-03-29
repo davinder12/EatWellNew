@@ -3,7 +3,7 @@ package com.android.mealpass.data.extension
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.switchMap
 
 fun <T> liveData(value: T?): LiveData<T> {
     return mutableLiveData(value)
@@ -35,7 +35,9 @@ fun <TSOURCE, TOUT> mediatorLiveData(
  * Extension wrapper for [Transformations.switchMap]
  */
 fun <X, Y> LiveData<X>.switchMap(func: (X) -> LiveData<Y>?): LiveData<Y> =
-    Transformations.switchMap(this, func)
+    this.switchMap{ func(it) }
+
+   // Transformations.switchMap(this, func)
 
 fun <TriggerType, EntityType> validationPart(
     src: LiveData<TriggerType>,
