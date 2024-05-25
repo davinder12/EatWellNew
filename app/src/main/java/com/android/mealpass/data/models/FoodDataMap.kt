@@ -3,7 +3,7 @@ package com.android.mealpass.data.models
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterItem
 
-data class FoodData(
+data class FoodDataMap(
     val body: List<Body>?,
     val status: Status
 ) {
@@ -58,7 +58,7 @@ data class FoodData(
         val discounted_from_time: Any?,
         val discounted_price: Any?,
         val discounted_to_time: Any?,
-        val product_types: List<ProductType>,
+    //    val product_types: List<ProductType>,
         val shop_open_time: String?,
         val sponsor_portion: Int? = 0,
         val sponsor_product_amount: String?,
@@ -69,18 +69,15 @@ data class FoodData(
         val is_only_for_staff: Boolean?,
         val is_staff_user: Boolean?
     ) : ClusterItem {
-        data class ProductType(
-            val id: String,
-            val product_type: String
-        )
 
         override fun getTitle(): String {
-            return "$storename >"
+            return   "$storename >"
         }
 
         override fun getPosition(): LatLng {
             return LatLng(latitude?:0.0, longitude?:0.0)
         }
+
 
         override fun getSnippet(): String {
             return ""

@@ -35,7 +35,7 @@ class MealPassFirebaseMessagingService  : FirebaseMessagingService() {
         const val PRODUCT_DETAIL_SCREEN = "1"
         const val GENERAL_NOTIFICATION_SCREEN = "3"
         const val TYPE = "type"
-        const val MEAlPASS ="MealPass"
+        const val MEAlPASS ="EatWell"
         const val MESSAGE ="message"
         const val MERCHANT_LOGO = "merchant_logo"
         const val RESTURANT_ID ="user_id"

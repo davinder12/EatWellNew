@@ -80,8 +80,8 @@
                     android:layout_height="@dimen/_40sdp"
                     android:layout_below="@id/time"
                     android:layout_marginTop="@dimen/_12sdp"
-                    app:civ_border_color="@color/colorPrimary"
-                    app:civ_border_width="1dp"
+                    app:civ_border_color="@color/color_blue"
+                    app:civ_circle_background_color="@color/white"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:url="@{item.merchant_logo}" />

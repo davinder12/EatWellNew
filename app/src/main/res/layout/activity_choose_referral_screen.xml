@@ -28,12 +28,11 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/logo_icon"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/_30sdp"
                     android:background="@drawable/logo"
-                    app:civ_border_color="@color/colorPrimary"
                     app:civ_border_width="1dp" />
 
 
@@ -43,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:textStyle="bold"
                     android:text="@string/StaffCampaignCodeMsg" />
 

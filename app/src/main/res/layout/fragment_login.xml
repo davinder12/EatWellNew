@@ -16,42 +16,35 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <View
-            android:id="@+id/view7"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_150sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/cross"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/_20sdp"
-            app:layout_constraintStart_toStartOf="@+id/view7"
-            app:layout_constraintTop_toTopOf="@+id/view7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_cross" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/logo_icon"
-            android:layout_width="@dimen/_60sdp"
-            android:layout_height="@dimen/_60sdp"
-            android:src="@drawable/logo"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
-            app:layout_constraintBottom_toBottomOf="@+id/view7"
+            android:src="@drawable/logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/view7" />
+            app:layout_constraintTop_toBottomOf="@+id/cross" />
 
 
         <ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
             android:scrollbars="none"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -175,8 +168,6 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="24dp"
                         android:layout_marginRight="24dp"
-
-
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"

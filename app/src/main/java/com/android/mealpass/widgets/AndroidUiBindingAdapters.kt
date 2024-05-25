@@ -68,9 +68,9 @@ fun MaterialTextView.strike(text: String) {
 @BindingAdapter("url")
 fun ImageView.imageUrl(url: String?) {
      when{
-         !url.isNullOrEmpty() && url.contains("http") -> Glide.with(this.context).load(url).placeholder(R.drawable.background_logo).fitCenter().centerCrop().into(this)
+         !url.isNullOrEmpty() && url.contains("http") -> Glide.with(this.context).load(url).placeholder(R.drawable.logo).fitCenter().centerCrop().into(this)
          !url.isNullOrEmpty() -> Glide.with(this.context).load(File(url)).fitCenter().centerCrop().into(this)
-         else -> Glide.with(this.context).load("htts://www.google.com").placeholder(R.drawable.background_logo).fitCenter().centerCrop().into(this)
+         else -> Glide.with(this.context).load("htts://www.google.com").placeholder(R.drawable.logo).fitCenter().centerCrop().into(this)
      }
 }
 

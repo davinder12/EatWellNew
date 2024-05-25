@@ -15,7 +15,7 @@ abstract class BaseBackStack : Fragment() {
         const val BACK_STACK_INT = "BACK_STACK_INT"
         const val BACK_STACK_BOOLEAN = "BACK_STACK_BOOLEAN"
         const val DEVICE_TYPE = "0"
-        const val APP_NAME = "MealPass"
+
 
     }
 

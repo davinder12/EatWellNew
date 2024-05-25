@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import com.android.mealpass.data.models.FoodData
+import com.android.mealpass.data.models.FoodDataMap
 import com.android.mealpass.view.units.isResturantOpen
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -16,13 +17,13 @@ import mealpass.com.mealpass.R
 class ClusterMapFragment(
     private val context: Context,
     map: GoogleMap?,
-    mClusterManager: ClusterManager<FoodData.Body>?
+    mClusterManager: ClusterManager<FoodDataMap.Body>?
 ) :
-    DefaultClusterRenderer<FoodData.Body>(context, map, mClusterManager) {
+    DefaultClusterRenderer<FoodDataMap.Body>(context, map, mClusterManager) {
 
 
     override fun onBeforeClusterItemRendered(
-        item: FoodData.Body,
+        item: FoodDataMap.Body,
         markerOptions: MarkerOptions
     ) {
         markerOptions.snippet(null)
@@ -30,13 +31,13 @@ class ClusterMapFragment(
         lateinit var icon: Bitmap
 
         val condition = isResturantOpen(
-                item.itemleft,
-                item.is_open,
+                item?.itemleft?:0 ,
+                item?.is_open?:0,
                 item.opening_time,
                 item.closing_time,
                 item.before_pickup_time,
                 item.shop_open_time,
-                item.is_active
+                item.is_active?:0
         )
         icon = when {
             condition -> BitmapFactory.decodeResource(context.resources, R.drawable.green_ywaste)

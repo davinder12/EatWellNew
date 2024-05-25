@@ -5,6 +5,8 @@ import android.content.SharedPreferences
 import android.content.res.Resources
 import androidx.annotation.StringRes
 import androidx.preference.PreferenceManager
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import javax.inject.Inject
 
 /**
@@ -13,8 +15,19 @@ import javax.inject.Inject
  */
 class PreferenceService @Inject constructor(context: Context) {
 
-    private val defaultSharedPreferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+    // private val defaultSharedPreferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
     private val resources: Resources = context.resources
+    //  val masterKeyAlias = //MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+    private val masterKeyAlias = MasterKey.Builder(context)
+        .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+        .build()
+
+    private val defaultSharedPreferences: SharedPreferences = EncryptedSharedPreferences.create(
+        context,
+        "MealPass",
+        masterKeyAlias,
+        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM)
 
     operator fun contains(@StringRes resId: Int): Boolean {
         return defaultSharedPreferences.contains(resources.getString(resId))

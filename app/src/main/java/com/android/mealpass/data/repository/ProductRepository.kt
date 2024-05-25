@@ -141,13 +141,13 @@ class ProductRepository @Inject constructor(
     }
 
 
-    fun getAllResturantList(getAllResturantRequest: GetAllResturantRequest): IResource<FoodData> {
+    fun getAllResturantList(getAllResturantRequest: GetAllResturantRequest): IResource<FoodDataMap> {
         return NetworkResource(appExecutors, object :
-            IRetrofitNetworkRequestCallback.IRetrofitNetworkResourceCallback<FoodData, FoodData> {
-            override fun mapToLocal(response: FoodData): FoodData {
+            IRetrofitNetworkRequestCallback.IRetrofitNetworkResourceCallback<FoodDataMap, FoodDataMap> {
+            override fun mapToLocal(response: FoodDataMap): FoodDataMap {
                 return response
             }
-            override fun createNetworkRequest(): Single<Response<FoodData>> {
+            override fun createNetworkRequest(): Single<Response<FoodDataMap>> {
                 return productApi.getAllResturantList(
                     getAllResturantRequest.user_id,
                     getAllResturantRequest.time_zone,
@@ -159,7 +159,7 @@ class ProductRepository @Inject constructor(
                     getAllResturantRequest.currentTime
                 )
             }
-            override fun getResponseStatus(response: Response<FoodData>): ResponseValidator {
+            override fun getResponseStatus(response: Response<FoodDataMap>): ResponseValidator {
                 return ResponseValidator(response.body()?.status?.code, response.body()?.status?.message)
             }
             override fun sessionExpired() {

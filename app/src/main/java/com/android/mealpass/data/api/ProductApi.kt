@@ -60,7 +60,7 @@ interface ProductApi {
         @Field("filter_pickup_fromtime") fromTime: String?,
         @Field("filter_product_type[]") list: List<String>?,
         @Field("current_time") currentTime: String?
-    ): Single<Response<FoodData>>
+    ): Single<Response<FoodDataMap>>
 
 
     @FormUrlEncoded

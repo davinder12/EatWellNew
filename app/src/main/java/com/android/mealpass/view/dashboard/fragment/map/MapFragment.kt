@@ -7,7 +7,7 @@ import androidx.fragment.app.viewModels
 import com.afollestad.assent.Permission
 import com.afollestad.assent.isAllGranted
 import com.afollestad.assent.runWithPermissions
-import com.android.mealpass.data.models.FoodData
+import com.android.mealpass.data.models.FoodDataMap
 import com.android.mealpass.utilitiesclasses.baseclass.BaseListFragment
 import com.android.mealpass.view.common.NavigationScreen
 import com.android.mealpass.view.dashboard.viewmodel.MapViewModel
@@ -25,14 +25,14 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MapFragment : BaseListFragment<FragmentMapBinding>(), OnMapReadyCallback,
-    OnClusterItemInfoWindowClickListener<FoodData.Body> {
+    OnClusterItemInfoWindowClickListener<FoodDataMap.Body> {
 
     @Inject
     lateinit var navigationScreen: NavigationScreen
 
     private val viewModel: MapViewModel by viewModels()
 
-    private var mClusterManager: ClusterManager<FoodData.Body>? = null
+    private var mClusterManager: ClusterManager<FoodDataMap.Body>? = null
 
     override val layoutRes: Int
         get() = R.layout.fragment_map
@@ -49,12 +49,12 @@ class MapFragment : BaseListFragment<FragmentMapBinding>(), OnMapReadyCallback,
 
         bindNetworkState(viewModel.networkState, loadingIndicator = progressBar)
 
-        viewModel.data.observe(viewLifecycleOwner, {
+        viewModel.data.observe(viewLifecycleOwner) {
             mClusterManager?.addItems(it)
             clusterMethod()
             googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(viewModel.getLocation(), 7f))
 
-        })
+        }
     }
 
 
@@ -100,7 +100,7 @@ class MapFragment : BaseListFragment<FragmentMapBinding>(), OnMapReadyCallback,
     }
 
 
-    override fun onClusterItemInfoWindowClick(item: FoodData.Body?) {
+    override fun onClusterItemInfoWindowClick(item: FoodDataMap.Body?) {
         item?.let { items ->
             navigationScreen.productDetailScreen(items.id, items.storename)
 

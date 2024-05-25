@@ -51,15 +51,14 @@
 
 
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/logo_icon"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="25dp"
-                    android:layout_marginTop="30sp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:background="@drawable/logo"
-                    app:civ_border_color="@color/colorPrimary"
                     app:civ_border_width="1dp" />
 
                 <com.android.mealpass.widgets.CustomTextView

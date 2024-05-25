@@ -69,13 +69,14 @@ class ProductDetail : DataBindingActivity<ActivityProductDetailBinding>() {
            navigationScreen.goToSocialPage(viewModel.webSiteUrl)
        }
 
-        viewModel.isFavouriteLike.observe(this, {
+        viewModel.isFavouriteLike.observe(this) {
             it?.let { currentLike ->
                 favourite.isChecked = currentLike
-                val drawable = if (currentLike) R.drawable.ic_white_favourite else R.drawable.ic_trans_favorite
+                val drawable =
+                    if (currentLike) R.drawable.ic_white_favourite else R.drawable.ic_trans_favorite
                 favourite.icon = ResourcesCompat.getDrawable(resources, drawable, null)
             }
-        })
+        }
 
         favourite?.let { item ->
             item.setOnMenuItemClickListener {
@@ -124,9 +125,9 @@ class ProductDetail : DataBindingActivity<ActivityProductDetailBinding>() {
             }
         }
 
-        viewModel.description.observe(this,  {
+        viewModel.description.observe(this) {
             binding.itemDescription.loadData(it, "text/html; charset=utf-8", "utf-8")
-        })
+        }
 
         intent.extras?.getString(RESTURANT_Name, "")?.let {
             viewModel.resturantName.value = it
@@ -140,9 +141,9 @@ class ProductDetail : DataBindingActivity<ActivityProductDetailBinding>() {
             viewModel.notificationId = it
         }
 
-        viewModel.resturantDrawable.observe(this, {
+        viewModel.resturantDrawable.observe(this) {
             binding.addItem.setImageDrawable(ContextCompat.getDrawable(this, it))
-        })
+        }
 
         bindNetworkState(viewModel.networkState,loadingIndicator =  binding.productDetailProgress,onError = {
             finish()
@@ -223,6 +224,7 @@ class ProductDetail : DataBindingActivity<ActivityProductDetailBinding>() {
     }
 
     override fun onBackPressed() {
+        super.onBackPressed()
         Intent().also { setResult(viewModel.resultCode, it) }
         finish()
     }

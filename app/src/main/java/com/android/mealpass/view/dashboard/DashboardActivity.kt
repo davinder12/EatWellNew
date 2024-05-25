@@ -30,6 +30,7 @@ import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.android.play.core.tasks.Task
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_dashboard.*
+import kotlinx.coroutines.*
 import mealpass.com.mealpass.BuildConfig
 import mealpass.com.mealpass.R
 import java.util.*
@@ -56,6 +57,9 @@ class DashboardActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
         initDrawerBottomSheet()
+
+
+
         // pushNotificationHandling()
         // checkUpdate()
         viewModel.isLocalNotificationInit.observe(this) {

@@ -7,8 +7,8 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/mealPasslogo"
-        android:layout_width="@dimen/_80sdp"
-        android:layout_height="@dimen/_80sdp"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
         android:layout_centerInParent="true"
         android:background="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,10 +23,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/mealPasslogo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
         android:fontFamily="@font/georgia"
         android:text="@string/welcome_to_mealpass"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/color_blue"
         android:textSize="@dimen/_16ssp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/mealPasslogo"

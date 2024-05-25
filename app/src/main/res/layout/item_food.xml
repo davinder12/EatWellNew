@@ -107,13 +107,14 @@
                                 android:textColor="@android:color/white" />
 
                             <androidx.appcompat.widget.AppCompatImageView
-                                android:layout_width="@dimen/_15sdp"
-                                android:layout_height="@dimen/_15sdp"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
                                 android:layout_centerVertical="true"
                                 android:layout_marginStart="5dp"
                                 android:layout_toEndOf="@id/campaignCode"
-                                android:background="@drawable/background_logo"
-                                android:visibility="gone" />
+                                android:background="@drawable/logo"
+                                android:visibility="gone"
+                                />
                         </RelativeLayout>
 
 
@@ -191,8 +192,8 @@
                         android:layout_below="@id/top_layout"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="-57dp"
-                        app:civ_border_color="@color/colorPrimary"
-                        app:civ_border_width="1dp"
+                        app:civ_border_color="@color/color_blue"
+                        app:civ_circle_background_color="@color/white"
                         app:url="@{vm.logo}">
 
 

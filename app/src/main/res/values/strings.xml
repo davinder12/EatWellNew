@@ -1,9 +1,8 @@
 <resources>
-    <string name="app_name">MealPass</string>
-
+    <string name="app_name">EatWell</string>
     <string name="Reminder">Reminder</string>
     <string name="Dashboard">Dashboard</string>
-    <string name="DailyPushMsg">You can save a meal and it\'s only few minutes away. To see, Check out MealPass app.</string>
+    <string name="DailyPushMsg">You can save a meal and it\'s only few minutes away. To see, Check out EatWell app.</string>
     <string name="Login">Log in</string>
     <string name="CreateNewAccount">Create new account</string>
     <string name="LoginWithFacebook">Log in with Facebook</string>
@@ -29,10 +28,10 @@
     <string name="Close">Close</string>
     <string name="Verify">Verify</string>
     <string name="Code">Enter Code to activate account</string>
-    <string name="Step2Title">Please enter your MealPass Code below.</string>
-    <string name="Step2Title2">If you have a MealPass code, Please enter it below.</string>
+    <string name="Step2Title">Please enter your EatWell Code below.</string>
+    <string name="Step2Title2">If you have a EatWell code, Please enter it below.</string>
     <string name="Tutorial">Tutorial</string>
-    <string name="VideoDes">MealPass is an Australian market leader when it comes to targeting food waste at the retail level.We help food merchants reduce the amount of food that gets thrown away every day because it is not sold. We provide an app where merchants can post and sell the excess food at discounted prices.</string>
+    <string name="VideoDes">EatWell is an Australian market leader when it comes to targeting food waste at the retail level.We help food merchants reduce the amount of food that gets thrown away every day because it is not sold. We provide an app where merchants can post and sell the excess food at discounted prices.</string>
     <string name="VideoDes2">Please click on link to know more about us</string>
     <string name="MerchantDetail">Generating detail to merchant…</string>
     <string name="Cancel">Cancel</string>
@@ -48,7 +47,7 @@
     <string name="NetworkOffline">The Internet connection appears to be offline.</string>
     <string name="MerchantConnectionError">Merchant connection error. Payment is completed. Please contact merchant..</string>
     <string name="UpdateAvailable">New update available!</string>
-    <string name="VersionMsg">New version (%1$s) of MealPass application available on play store. By Downloading the latest update you will get the latest features, improvements in application.</string>
+    <string name="VersionMsg">New version (%1$s) of EatWell application available on play store. By Downloading the latest update you will get the latest features, improvements in application.</string>
     <string name="FacebookConnection">Facebook connection error</string>
     <string name="UpdatePriceAlert">You are about to change Cost price. Do you wish to continue ?</string>
     <string name="UpdateRetailAlert">You are about to change Retail price Cost price and Number of Portion. Do you wish to continue ? </string>
@@ -63,14 +62,14 @@
     <string name="OrderCancelValidation">You cannot cancel your meal during pickup time.</string>
     <string name="PasswordMismatch">Password mismatch</string>
     <string name="EnjoyFreePortion">Enjoy your magic portion free of cost.</string>
-    <string name="MaximumLimitOver">Your maximum limit to get MealPass meals is over. Please try tomorrow 😀</string>
+    <string name="MaximumLimitOver">Your maximum limit to get EatWell meals is over. Please try tomorrow 😀</string>
     <string name="EnterAmount">Enter Amount</string>
-    <string name="MinPortionLimit">You can get maximum %1$s MealPass portion(s).</string>
-    <string name="PortionLeft">You have only %1$s quantity to be use as MealPass portion(s). Would you like to get %2$s magic portion(s)?</string>
-    <string name="StaffPortionLeft">You have only %1$s quantity to be use as MealPass portion(s). Would you like to get %2$s magic portion(s)?</string>
-    <string name="ShareMsg">Hi this is %1$s here, I recently just saved some food and around 50–80%2$s off meals, flowers, groceries around my area, and I wanted to share this app with you so you could save $$ and save food as well, click here to download MealPass.</string>
+    <string name="MinPortionLimit">You can get maximum %1$s EatWell portion(s).</string>
+    <string name="PortionLeft">You have only %1$s quantity to be use as EatWell portion(s). Would you like to get %2$s magic portion(s)?</string>
+    <string name="StaffPortionLeft">You have only %1$s quantity to be use as EatWell portion(s). Would you like to get %2$s magic portion(s)?</string>
+    <string name="ShareMsg">Hi this is %1$s here, I recently just saved some food and around 50–80%2$s off meals, flowers, groceries around my area, and I wanted to share this app with you so you could save $$ and save food as well, click here to download EatWell.</string>
     <string name="ConfirmProduct">Confirmation: you are about to order %1$s portion(s).</string>
-    <string name="OrderConfirmation">&#160;<![CDATA[When you press continue you also accept MealPass terms & conditions]]></string>
+    <string name="OrderConfirmation">&#160;<![CDATA[When you press continue you also accept EatWell terms & conditions]]></string>
     <string name="ContactNumberUpdated">Mobile number updated successfully</string>
     <string name="RedeemReceipt">This will redeem the receipt. This should only be done by the restaurant. Continue ?</string>
     <string name="CancelOrderConfirmation">Do you want to cancel order ?</string>
@@ -80,7 +79,7 @@
     <string name="ValidCardNumber">Enter valid card number</string>
     <string name="ValidExpiry">Enter valid expiry date</string>
     <!--   Donation message is different DonationMsg-->
-    <string name="DonationMsg">For every $1 you add MealPass can provide 2 meals to someone in need. By adding just a little extra YOU can make a huge difference in someones life. Would you like to add a little extra?</string>
+    <string name="DonationMsg">For every $1 you add EatWell can provide 2 meals to someone in need. By adding just a little extra YOU can make a huge difference in someones life. Would you like to add a little extra?</string>
     <string name="InvalidUsername">Invalid username or password</string>
     <string name="FailedRequestToken">Failed to request token</string>
 
@@ -118,7 +117,7 @@
     <string name="PickupTime">Pickup Time :</string>
     <string name="ActiveReceipts">Active Receipts</string>
     <string name="UsedReceipts">Used Receipts</string>
-    <string name="ActiveReceiptMsg">Head to the restaurant for the specified pickup time and show your receipt . If you have any questions then please don\'t hesitate to get in touch with us at MealPass</string>
+    <string name="ActiveReceiptMsg">Head to the restaurant for the specified pickup time and show your receipt . If you have any questions then please don\'t hesitate to get in touch with us at EatWell</string>
     <string name="Redeemed">Redeemed</string>
     <string name="OrderCancel">Order Cancelled</string>
     <string name="WhatToExpect">What to expect:</string>
@@ -131,7 +130,7 @@
     <string name="Proceed">Proceed</string>
     <string name="SaveCardForFutureOrder">Save card for future order</string>
     <string name="PaymentMsg">We accept all Mastercard and Visa Debit and Credit cards.
-        Your payment information is transmitted securely using SSL encryption technology and is stored and processed through a secure third party payment gateway in cooperation with the banks above. MealPass does not store your payment information on our server.
+        Your payment information is transmitted securely using SSL encryption technology and is stored and processed through a secure third party payment gateway in cooperation with the banks above. EatWell does not store your payment information on our server.
         Any payment information saved is only stored within your device.    \n\n\nFor any enquiries please contact our 24/7 customer support line at: 1300 848 428</string>
 
     <string name="OutOfStock">Out of stock</string>
@@ -156,7 +155,7 @@
 
     <string name="UpdateRetailPrice">Update Retail Price of product</string>
     <string name="RetailPrice">Retail price in USD: </string>
-    <string name="DailyNumberOfMeals">Daily number of MealPass meals: %1$s</string>
+    <string name="DailyNumberOfMeals">Daily number of EatWell meals: %1$s</string>
     <string name="RetailPriceLabel">Update Retail Price</string>
     <string name="updatePortion">Update Portion</string>
     <string name="UpdateCostPrice">Update Price</string>
@@ -184,17 +183,17 @@
     <string name="SponsorFoodDonation">Sponsor Food Donation</string>
     <string name="MealsPerDay">Meals Per day</string>
     <string name="NoOfDays">No. of Days:</string>
-    <string name="ShowOnWallOfFame">Yes! I would like to be on MealPass wall of fame.</string>
+    <string name="ShowOnWallOfFame">Yes! I would like to be on EatWell wall of fame.</string>
     <string name="SponsorTo">Sponsor To</string>
-    <string name="SponsorToYwaste">&#160;is a proud sponsor of MealPass food donation platform.</string>
+    <string name="SponsorToYwaste">&#160;is a proud sponsor of EatWell food donation platform.</string>
     <string name="WallOfFame">Wall of Fame</string>
     <string name="Search">Search</string>
-    <string name="AddReferralCode">Add MealPass Code</string>
+    <string name="AddReferralCode">Add EatWell Code</string>
 
     <string name="CongratulationReferralApproved">I\'m ready to order my free meals!.</string>
     <string name="Sponsor">Sponsor</string>
     <string name="PayForward">Pay it forward</string>
-    <string name="SponsorTxt">What is a MealPass sponsor? \n\nA MealPass sponsor is a supporter of MealPass revolutionising digital food donation platform where food retailers can donate food directly to the recipients in their local communities in collaboration with food charities. The platform targets the end-of-day-unsold food (70% of total excess food) which food charities are unable to collect and redistribute.\n\n\nWhy become MealPass sponsor?\n\nA sponsorship can go a long way for someone in need and you can make a huge difference to someone\'s life by supporting MealPass food donation platform. Together we can reduce hunger and food waste, which are 2 of the most pressing issues in the world today.\n\n\nHow to become MealPass sponsor?\n\nBecoming a sponsor of MealPass food donation platform is easy:\n\n1- You can sponsor meal donations from a specific food retailer where you decide how many daily meals you want to sponsor and for how many days. The price can vary from food retailer to food retailer.\n\nOR\n\n2- You can sponsor the hard work of expanding and implementing MealPass food donation platform in local communities all over the country where people need help. This sponsorship can be a one off or recurring.\n\nYou can pay either by credit card or bank transfer.\n\nEvery sponsor will be offered a place on our sponsors wall of fame page where your picture/company logo together with your name and city/country will be visible and is shown both on our app and our website. Please note that it is not mandatory to be placed on our wall of fame. The choice is all yours.</string>
+    <string name="SponsorTxt">What is a EatWell sponsor? \n\nA EatWell sponsor is a supporter of EatWell revolutionising digital food donation platform where food retailers can donate food directly to the recipients in their local communities in collaboration with food charities. The platform targets the end-of-day-unsold food (70% of total excess food) which food charities are unable to collect and redistribute.\n\n\nWhy become EatWell sponsor?\n\nA sponsorship can go a long way for someone in need and you can make a huge difference to someone\'s life by supporting EatWell food donation platform. Together we can reduce hunger and food waste, which are 2 of the most pressing issues in the world today.\n\n\nHow to become EatWell sponsor?\n\nBecoming a sponsor of EatWell food donation platform is easy:\n\n1- You can sponsor meal donations from a specific food retailer where you decide how many daily meals you want to sponsor and for how many days. The price can vary from food retailer to food retailer.\n\nOR\n\n2- You can sponsor the hard work of expanding and implementing EatWell food donation platform in local communities all over the country where people need help. This sponsorship can be a one off or recurring.\n\nYou can pay either by credit card or bank transfer.\n\nEvery sponsor will be offered a place on our sponsors wall of fame page where your picture/company logo together with your name and city/country will be visible and is shown both on our app and our website. Please note that it is not mandatory to be placed on our wall of fame. The choice is all yours.</string>
     <string name="SavingDetail">Saving detail..</string>
     <string name="CloseSale">Close sale for today</string>
     <string name="CloseShopAlert">Are you sure you want to close the sale for today?</string>
@@ -204,7 +203,7 @@
     <string name="GeneralMsg">The product is not available for purchase in this location at the moment, but will be soon. Thank you for your support and interest.</string>
     <string name="DirectDeposit">DIRECT BANK TRANSFER</string>
     <string name="SponsorMsg">Until our payment gateway is not live, we have to ask you to make a direct bank transfer to account below. Your sponsor details will be saved and will show after successful payment. We apologise for any inconvenience this might have and thank you on behalf of the people in need in your local community.</string>
-    <string name="BankDetail">Bank detail\n\nBANK CENTRAL ASIA (BCA) AMPERA, KEMANG BRANCH\n\nAccount holder : PT MealPass MAJU TEKNOLOGI\n\nAccount number : 5855306627\n\nSwift code : CENAIDJA</string>
+    <string name="BankDetail">Bank detail\n\nBANK CENTRAL ASIA (BCA) AMPERA, KEMANG BRANCH\n\nAccount holder : PT EatWell MAJU TEKNOLOGI\n\nAccount number : 5855306627\n\nSwift code : CENAIDJA</string>
     <string name="Camera">Camera</string>
     <string name="Gallery">Gallery</string>
     <string name="ChangePhoto">Change Photo</string>
@@ -223,7 +222,7 @@
     <string name="HomeCooked">Home Cooked</string>
     <string name="LogoutConfirmation">Do you want to logout?</string>
     <string name="Amount">Amount</string>
-    <string name="ConnectionErrorYwaste" translatable="false">Server connection error. Payment has been completed. Please contact to MealPass team..</string>
+    <string name="ConnectionErrorYwaste" translatable="false">Server connection error. Payment has been completed. Please contact to EatWell team..</string>
     <string name="StoresAvailable">Stores Available</string>
     <string name="ShowOpenStroeTitle">Only show stores which are open</string>
     <string name="PickupTimeBetween">Pickup time between</string>
@@ -265,12 +264,12 @@
     <string name="Pleasewait">Please wait…</string>
     <string name="SoldPortionAlertMsg">Sorry! you cannot decrease portion less than sold portion</string>
     <string name="UpdateToServer">Notify to Server…</string>
-    <string name="FoodPlatform">MealPass sponsor platform</string>
+    <string name="FoodPlatform">EatWell sponsor platform</string>
     <string name="DeliveryAddress">Delivery Address</string>
     <string name="GpsSetting">GPS is settings</string>
     <string name="GpsValidationMsg">GPS is not enabled. Do you want to go to settings menu?</string>
     <string name="ExitMsg">Do you want to exit?</string>
-    <string name="NotificationMsg">Please allow MealPass to always run in the background, else our notification services can\'t be work in background.</string>
+    <string name="NotificationMsg">Please allow EatWell to always run in the background, else our notification services can\'t be work in background.</string>
     <string name="AmountValidation">Inaccurate amount</string>
     <string name="SocialMsg">Not applicable through social login</string>
 
@@ -283,7 +282,7 @@
     <string name="branch" translatable="false">Branch :</string>
     <string name="bca_jakarta" translatable="false">BCA Jakarta</string>
     <string name="account_holder" translatable="false">Account holder :</string>
-    <string name="pt_ywaste_maju_teknologi" translatable="false">PT MealPass MAJU TEKNOLOGI</string>
+    <string name="pt_ywaste_maju_teknologi" translatable="false">PT EatWell MAJU TEKNOLOGI</string>
     <string name="account_number" translatable="false">Account number :</string>
     <string name="swift_code" translatable="false">Swift code :</string>
 
@@ -306,7 +305,7 @@
 
     <string name="NetworkState_retry">Retry</string>
     <string name="EmptyRecyclerView_defaultText">No item Found.</string>
-    <string name="welcome_to_mealpass">Welcome to MealPass</string>
+    <string name="welcome_to_mealpass">Welcome to EatWell</string>
     <string name="Unknown_msg">Unknown error</string>
     <string name="updateVersion">Application is  UpTo Date</string>
     <string name="login_success">Login Successfull</string>
@@ -340,7 +339,7 @@
     <string name="cancel_order">Cancel Order</string>
     <string name="number_of_person_in_family">Number of people you will be ordering meals for</string>
     <string name="count">Number of people</string>
-    <string name="AddStaffCode">MealPass test only</string>
+    <string name="AddStaffCode">EatWell test only</string>
     <string name="StaffCode">Staff Code</string>
     <string name="StaffCodeBtnMsg">Restaurant Staff Code</string>
     <string name="MealPassCode">General App User Code</string>
@@ -358,12 +357,12 @@
     <string name="restaurant_claim_meals">Select restaurant and claim meals in advance.</string>
     <string name="swipe_receipt_at_resaurant">Swipe receipt at restaurant and enjoy your meal!</string>
     <string name="login_into_existing_account">Login into existing Account</string>
-    <string name="MerchantRegister">New to MealPass? Register your interest here</string>
-    <string name="PickUpOrder_Reminder">Your MealPass order is ready for pickup in 60 minutes. If you are unable to pick up please cancel so someone else can enjoy the meal.</string>
+    <string name="MerchantRegister">New to EatWell? Register your interest here</string>
+    <string name="PickUpOrder_Reminder">Your EatWell order is ready for pickup in 60 minutes. If you are unable to pick up please cancel so someone else can enjoy the meal.</string>
     <string name="SendPushNotification">Send Push Notification</string>
     <string name="WriteYourTextBelow">Write your text below</string>
     <string name="NotificationLabel">Add text here for your notification</string>
-    <string name="MistakeMealDescription">Note:-  When sending a push notification you can reach all MealPass users within a 5 miles radius of your business. If you are posting a "mistake" meal - please add a description and how long time its available for.</string>
+    <string name="MistakeMealDescription">Note:-  When sending a push notification you can reach all EatWell users within a 5 miles radius of your business. If you are posting a "mistake" meal - please add a description and how long time its available for.</string>
     <string name="NotificationSuccessMessage">Notification has been successfully sent to near by customers.</string>
     <string name="staff_meal_note">Note:- One account can serve your entire family. Just tell us how many people you are ordering meals for.</string>
 </resources>

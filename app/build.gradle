@@ -26,8 +26,8 @@ android {
         applicationId "mealpass.com.mealpass"
         minSdkVersion 21
         targetSdkVersion 34
-        versionCode 13
-        versionName "2.3"
+        versionCode 15
+        versionName "2.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.devRelease
     }
