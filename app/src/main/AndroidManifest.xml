@@ -18,6 +18,7 @@
         android:icon="@mipmap/logo"
         android:largeHeap="true"
         android:supportsRtl="true"
+        android:fullBackupContent="false"
         android:networkSecurityConfig="@xml/network_security"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
