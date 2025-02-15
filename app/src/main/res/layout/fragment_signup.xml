@@ -6,7 +6,7 @@
     <data>
         <variable
             name="vm"
-            type="com.android.mealpass.view.login.viewmodel.SignupFragmentViewModel" />
+            type="com.android.eatwell.view.login.viewmodel.SignupFragmentViewModel" />
 
     </data>
 
@@ -80,6 +80,7 @@
                     android:id="@+id/registerWithFacebook"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:text="@string/RegisterWithFacebook"
                     app:backgroundTint="@color/blue_color"
                     app:icon="@drawable/com_facebook_button_icon"
@@ -103,11 +104,12 @@
                     android:id="@+id/signup"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_6sdp"
+                    android:layout_marginStart="@dimen/_34sdp"
+                    android:layout_marginEnd="@dimen/_34sdp"
                     android:text="@string/Signup"
-                    app:layout_constraintEnd_toEndOf="@+id/registerWithFacebook"
-                    app:layout_constraintStart_toStartOf="@+id/registerWithFacebook"
-                    app:layout_constraintTop_toBottomOf="@+id/registerWithFacebook" />
+                    app:layout_constraintEnd_toEndOf="@+id/textInputLayout5"
+                    app:layout_constraintStart_toStartOf="@+id/textInputLayout5"
+                    app:layout_constraintTop_toTopOf="@+id/registerWithFacebook" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayout2"

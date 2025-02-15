@@ -18,7 +18,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.android.mealpass.main.genralupdate.GenralUpdate">
+    tools:context="com.android.eatwell.main.genralupdate.GenralUpdate">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -59,7 +59,7 @@
         tools:layout_editor_absoluteX="103dp"
         tools:layout_editor_absoluteY="87dp" />
 
-    <com.android.mealpass.widgets.CustomTextView
+    <com.android.eatwell.widgets.CustomTextView
         android:id="@+id/notificationMessage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

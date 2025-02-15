@@ -12,7 +12,7 @@
         app:layout_behavior="@string/bottom_sheet_behavior">
 
 
-        <com.android.mealpass.widgets.CustomTextView
+        <com.android.eatwell.widgets.CustomTextView
             android:id="@+id/textView28"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
             app:layout_constraintStart_toStartOf="@+id/textView42"
             app:layout_constraintTop_toBottomOf="@+id/textView42" />
 
-        <com.android.mealpass.widgets.CustomTextView
+        <com.android.eatwell.widgets.CustomTextView
             android:id="@+id/textView42"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

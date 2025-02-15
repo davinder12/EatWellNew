@@ -11,7 +11,7 @@
         android:orientation="vertical">
 
 
-        <com.android.mealpass.widgets.EmptyRecyclerView
+        <com.android.eatwell.widgets.EmptyRecyclerView
             android:id="@+id/receiptList"
             android:layout_width="0dp"
             android:background="@color/light_gray"

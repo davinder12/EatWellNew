@@ -7,11 +7,11 @@
 
     <data>
 
-        <import type="com.android.mealpass.view.units.DataConverterKt" />
+        <import type="com.android.eatwell.view.units.DataConverterKt" />
 
         <variable
             name="vm"
-            type="com.android.mealpass.view.dashboard.viewmodel.ActiveReceiptDetailViewModel" />
+            type="com.android.eatwell.view.dashboard.viewmodel.ActiveReceiptDetailViewModel" />
 
     </data>
 
@@ -101,7 +101,7 @@
                         </RelativeLayout>
 
 
-                        <com.android.mealpass.widgets.CustomTextView
+                        <com.android.eatwell.widgets.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
@@ -111,7 +111,7 @@
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
-                        <com.android.mealpass.widgets.CustomTextView
+                        <com.android.eatwell.widgets.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
@@ -119,7 +119,7 @@
                             android:text="@{vm.storeAddress}"
                             android:textSize="14sp" />
 
-                        <com.android.mealpass.widgets.CustomTextView
+                        <com.android.eatwell.widgets.CustomTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
@@ -145,7 +145,7 @@
                                 android:layout_alignParentStart="true"
                                 android:layout_alignParentBottom="true">
 
-                                <com.android.mealpass.widgets.CustomTextView
+                                <com.android.eatwell.widgets.CustomTextView
                                     android:id="@+id/date_lable"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -153,7 +153,7 @@
                                     android:textAllCaps="true"
                                     android:textSize="14sp" />
 
-                                <com.android.mealpass.widgets.CustomTextView
+                                <com.android.eatwell.widgets.CustomTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_below="@id/date_lable"
@@ -161,7 +161,7 @@
                                     android:textColor="@color/red_color"
                                     android:textSize="14sp" />
 
-                                <com.android.mealpass.widgets.CustomTextView
+                                <com.android.eatwell.widgets.CustomTextView
                                     android:id="@+id/collection_time"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -169,7 +169,7 @@
                                     android:text="@string/CollectionTime"
                                     android:textSize="14sp" />
 
-                                <com.android.mealpass.widgets.CustomTextView
+                                <com.android.eatwell.widgets.CustomTextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_below="@id/collection_time"
@@ -187,7 +187,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp">
 
-                            <com.android.mealpass.widgets.CustomTextView
+                            <com.android.eatwell.widgets.CustomTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@{@string/Bought+` `+vm.quanitity}"
@@ -196,7 +196,7 @@
 
 
 
-                            <com.android.mealpass.widgets.CustomTextView
+                            <com.android.eatwell.widgets.CustomTextView
                                 android:id="@+id/delivery_amount"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -205,7 +205,7 @@
                                 android:textSize="12sp" />
 
 
-                            <com.android.mealpass.widgets.CustomTextView
+                            <com.android.eatwell.widgets.CustomTextView
                                 android:id="@+id/donated_label"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -220,7 +220,7 @@
                         </RelativeLayout>
 
 
-                        <com.android.mealpass.widgets.CustomTextView
+                        <com.android.eatwell.widgets.CustomTextView
                             android:id="@+id/appCompatTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -230,7 +230,7 @@
                             android:text="@string/ActiveReceiptMsg"
                             android:textSize="14sp" />
 
-                        <com.android.mealpass.widgets.CustomTextView
+                        <com.android.eatwell.widgets.CustomTextView
                             android:id="@+id/currencyamount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -242,7 +242,7 @@
                             app:visibleGone="@{vm.isStaffReceipt}" />
 
 
-                        <com.android.mealpass.widgets.CustomTextView
+                        <com.android.eatwell.widgets.CustomTextView
                             android:id="@+id/appCompatTextView3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -278,7 +278,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="10dp">
 
-            <com.android.mealpass.widgets.SlideToUnlock
+            <com.android.eatwell.widgets.SlideToUnlock
                 android:id="@+id/slidetounlock1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -290,7 +290,7 @@
                 su:text="@string/SlideToRedeem"
                 su:thumb="@drawable/ic_slide_right_arrow" />
 
-            <com.android.mealpass.widgets.CustomTextView
+            <com.android.eatwell.widgets.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/slidetounlock1"

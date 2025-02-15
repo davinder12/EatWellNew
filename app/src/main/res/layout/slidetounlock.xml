@@ -9,7 +9,7 @@
 
         />
 
-    <com.android.mealpass.widgets.CustomTextView
+    <com.android.eatwell.widgets.CustomTextView
         android:id="@+id/slider_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

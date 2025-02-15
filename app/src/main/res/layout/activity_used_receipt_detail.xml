@@ -5,11 +5,11 @@
 
     <data>
 
-        <import type="com.android.mealpass.view.units.DataConverterKt" />
+        <import type="com.android.eatwell.view.units.DataConverterKt" />
 
         <variable
             name="vm"
-            type="com.android.mealpass.view.dashboard.viewmodel.UsedReceiptDetailViewModel" />
+            type="com.android.eatwell.view.dashboard.viewmodel.UsedReceiptDetailViewModel" />
 
     </data>
 
@@ -85,7 +85,7 @@
                 </RelativeLayout>
 
 
-                <com.android.mealpass.widgets.CustomTextView
+                <com.android.eatwell.widgets.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -96,7 +96,7 @@
                     android:textStyle="bold" />
 
 
-                <com.android.mealpass.widgets.CustomTextView
+                <com.android.eatwell.widgets.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -104,7 +104,7 @@
                     android:text="@{vm.storeAddress}"
                     android:textSize="12sp" />
 
-                <com.android.mealpass.widgets.CustomTextView
+                <com.android.eatwell.widgets.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -115,7 +115,7 @@
                     android:textStyle="bold" />
 
 
-                <com.android.mealpass.widgets.CustomTextView
+                <com.android.eatwell.widgets.CustomTextView
                     android:id="@+id/delivery_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -124,7 +124,7 @@
                     android:textSize="12sp" />
 
 
-                <com.android.mealpass.widgets.CustomTextView
+                <com.android.eatwell.widgets.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{vm.donatedAmount}"
@@ -139,14 +139,14 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <com.android.mealpass.widgets.CustomTextView
+                    <com.android.eatwell.widgets.CustomTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{vm.date}"
                         android:textColor="@color/button_dark_color"
                         android:textStyle="bold" />
 
-                    <com.android.mealpass.widgets.CustomTextView
+                    <com.android.eatwell.widgets.CustomTextView
                         android:id="@+id/appCompatTextView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -160,13 +160,13 @@
                 </RelativeLayout>
 
 
-                <com.android.mealpass.widgets.CustomTextView
+                <com.android.eatwell.widgets.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:text="@string/Date" />
 
-                <com.android.mealpass.widgets.CustomTextView
+                <com.android.eatwell.widgets.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -177,7 +177,7 @@
                     android:textStyle="bold"
                     app:visibleGone="@{vm.isStaffReceipt}" />
 
-                <com.android.mealpass.widgets.CustomTextView
+                <com.android.eatwell.widgets.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"

@@ -96,7 +96,7 @@
             app:srcCompat="@drawable/ic_cross" />
 
 
-        <com.android.mealpass.widgets.CustomTextView
+        <com.android.eatwell.widgets.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"

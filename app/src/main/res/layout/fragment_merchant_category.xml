@@ -94,7 +94,7 @@
 
         <variable
             name="vm"
-            type="com.android.mealpass.view.login.viewmodel.StartUpFragmentViewModel" />
+            type="com.android.eatwell.view.login.viewmodel.StartUpFragmentViewModel" />
     </data>
 
 </layout>

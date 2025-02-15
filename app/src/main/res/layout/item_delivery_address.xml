@@ -66,7 +66,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_angle_right_arow" />
 
-                <com.android.mealpass.widgets.CustomTextView
+                <com.android.eatwell.widgets.CustomTextView
                     android:id="@+id/address_label"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

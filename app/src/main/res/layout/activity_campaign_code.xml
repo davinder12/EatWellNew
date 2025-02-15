@@ -57,7 +57,7 @@
                     app:civ_border_width="1dp" />
 
 
-                <com.android.mealpass.widgets.CustomTextView
+                <com.android.eatwell.widgets.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
@@ -65,7 +65,7 @@
                     app:htmlText="@{DataConverterKt.getCampaignDescription(vm.storeName,context)}" />
 
 
-                <com.android.mealpass.widgets.CustomTextView
+                <com.android.eatwell.widgets.CustomTextView
                     android:id="@+id/portionlimit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
                     android:textSize="@dimen/button_size" />
 
 
-                <com.android.mealpass.widgets.CustomTextView
+                <com.android.eatwell.widgets.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
@@ -107,10 +107,10 @@
 
     <data>
 
-        <import type="com.android.mealpass.view.units.DataConverterKt" />
+        <import type="com.android.eatwell.view.units.DataConverterKt" />
 
         <variable
             name="vm"
-            type="com.android.mealpass.view.dashboard.viewmodel.CampaignViewModel" />
+            type="com.android.eatwell.view.dashboard.viewmodel.CampaignViewModel" />
     </data>
 </layout>

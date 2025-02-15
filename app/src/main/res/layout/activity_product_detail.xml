@@ -7,11 +7,11 @@
 
         <import type="android.text.TextUtils" />
 
-        <import type="com.android.mealpass.view.units.DataConverterKt" />
+        <import type="com.android.eatwell.view.units.DataConverterKt" />
 
         <variable
             name="vm"
-            type="com.android.mealpass.view.dashboard.viewmodel.ProductDetailViewModel" />
+            type="com.android.eatwell.view.dashboard.viewmodel.ProductDetailViewModel" />
     </data>
 
     <RelativeLayout
@@ -73,7 +73,7 @@
                         android:background="@drawable/highlight_background"
                         app:visibleGone="@{vm.favCount > 0}">
 
-                        <com.android.mealpass.widgets.CustomTextView
+                        <com.android.eatwell.widgets.CustomTextView
                             android:id="@+id/numberof_like"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
                         android:background="@drawable/highlight_background"
                         app:visibleGone="@{vm.campaignItemLeft > 0}">
 
-                        <com.android.mealpass.widgets.CustomTextView
+                        <com.android.eatwell.widgets.CustomTextView
                             android:id="@+id/doantion_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -179,7 +179,7 @@
                             android:background="@drawable/ic_heart"
                             android:visibility="gone" />
 
-                        <com.android.mealpass.widgets.CustomTextView
+                        <com.android.eatwell.widgets.CustomTextView
                             android:id="@+id/totalPortionDonated"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -203,7 +203,7 @@
 
 
 
-                        <com.android.mealpass.widgets.CustomTextView
+                        <com.android.eatwell.widgets.CustomTextView
                             android:id="@+id/time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -223,7 +223,7 @@
                         android:orientation="horizontal">
 
 
-                        <com.android.mealpass.widgets.CustomTextView
+                        <com.android.eatwell.widgets.CustomTextView
                             android:id="@+id/stock"
                             android:layout_width="wrap_content"
 
@@ -256,7 +256,7 @@
                         app:srcCompat="@drawable/ic_shopping_basket"
                         app:tint="@null" />
 
-                    <com.android.mealpass.widgets.CustomTextView
+                    <com.android.eatwell.widgets.CustomTextView
                         android:id="@+id/price"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -269,7 +269,7 @@
                         android:visibility="gone" />
 
 
-                    <com.android.mealpass.widgets.CustomTextView
+                    <com.android.eatwell.widgets.CustomTextView
                         android:id="@+id/before_price"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -281,7 +281,7 @@
                         android:visibility="gone" />
 
 
-                    <com.android.mealpass.widgets.CustomTextView
+                    <com.android.eatwell.widgets.CustomTextView
                         android:id="@+id/discount"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -310,7 +310,7 @@
                     android:textSize="16sp" />
 
 
-                <com.android.mealpass.widgets.CustomTextView
+                <com.android.eatwell.widgets.CustomTextView
                     android:id="@+id/expect_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -323,7 +323,7 @@
                     app:goneVisible="@{TextUtils.isEmpty(vm.expectedDescription)}" />
 
 
-                <com.android.mealpass.widgets.CustomTextView
+                <com.android.eatwell.widgets.CustomTextView
                     android:id="@+id/expect_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -337,7 +337,7 @@
                     app:goneVisible="@{TextUtils.isEmpty(vm.expectedDescription)}" />
 
 
-                <com.android.mealpass.widgets.CustomTextView
+                <com.android.eatwell.widgets.CustomTextView
                     android:id="@+id/address_lable"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -357,7 +357,7 @@
                     android:orientation="horizontal"
                     android:weightSum="2">
 
-                    <com.android.mealpass.widgets.CustomTextView
+                    <com.android.eatwell.widgets.CustomTextView
                         android:id="@+id/address"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -390,7 +390,7 @@
                 </LinearLayout>
 
 
-                <com.android.mealpass.widgets.CustomTextView
+                <com.android.eatwell.widgets.CustomTextView
                     android:id="@+id/home_page"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -413,7 +413,7 @@
                     android:weightSum="2"
                     app:goneVisible="@{TextUtils.isEmpty(vm.webUrl)}">
 
-                    <com.android.mealpass.widgets.CustomTextView
+                    <com.android.eatwell.widgets.CustomTextView
                         android:id="@+id/homepage_url"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

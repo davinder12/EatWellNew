@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:id="@+id/root_layout"
         android:layout_height="match_parent"
-        tools:context="com.android.mealpass.main.notification.NotificationActivity">
+        tools:context="com.android.eatwell.main.notification.NotificationActivity">
 
 
         <FrameLayout
@@ -22,7 +22,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-            <com.android.mealpass.widgets.EmptyRecyclerView
+            <com.android.eatwell.widgets.EmptyRecyclerView
                 android:id="@+id/notificationlist"
                 android:layout_width="match_parent"
                 app:emptyView="@id/emptyView"

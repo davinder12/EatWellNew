@@ -6,7 +6,7 @@
     app:startDestination="@id/loginCategoryFragment">
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.android.mealpass.view.login.fragment.LoginFragment"
+        android:name="com.android.eatwell.view.login.fragment.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login">
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/startUpFragment"
-        android:name="com.android.mealpass.view.login.fragment.StartUpFragment"
+        android:name="com.android.eatwell.view.login.fragment.StartUpFragment"
         android:label="StartUpFragment"
         tools:layout="@layout/fragment_startup">
         <action
@@ -51,7 +51,7 @@
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
-        android:name="com.android.mealpass.view.login.fragment.SignupFragment"
+        android:name="com.android.eatwell.view.login.fragment.SignupFragment"
         android:label="SignupFragment"
         tools:layout="@layout/fragment_signup">
         <action
@@ -62,7 +62,7 @@
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
-        android:name="com.android.mealpass.view.login.fragment.ForgotPasswordFragment"
+        android:name="com.android.eatwell.view.login.fragment.ForgotPasswordFragment"
         android:label="ForgotPasswordFragment"
         tools:layout="@layout/fragment_forgotpassword">
         <action
@@ -73,7 +73,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginCategoryFragment"
-        android:name="com.android.mealpass.view.login.fragment.LoginCategoryFragment"
+        android:name="com.android.eatwell.view.login.fragment.LoginCategoryFragment"
         android:label="LoginCategoryFragment"
         tools:layout="@layout/fragment_login_option">
         <action
@@ -87,7 +87,7 @@
     </fragment>
     <fragment
         android:id="@+id/merchantLoginCategoryFragment"
-        android:name="com.android.mealpass.view.merchant.fragment.MerchantLoginCategoryFragment"
+        android:name="com.android.eatwell.view.merchant.fragment.MerchantLoginCategoryFragment"
         android:label="MerchantLoginCategoryFragment"
         tools:layout="@layout/fragment_merchant_category">
         <action

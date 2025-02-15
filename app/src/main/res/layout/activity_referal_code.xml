@@ -6,7 +6,7 @@
     <data>
         <variable
             name="vm"
-            type="com.android.mealpass.view.dashboard.fragment.setting.viewmodel.ReferralCodeViewModel" />
+            type="com.android.eatwell.view.dashboard.fragment.setting.viewmodel.ReferralCodeViewModel" />
 
     </data>
 
@@ -20,7 +20,7 @@
         >
 
 
-        <com.android.mealpass.widgets.CustomTextView
+        <com.android.eatwell.widgets.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -61,7 +61,7 @@
                     android:background="@drawable/logo"
                     app:civ_border_width="1dp" />
 
-                <com.android.mealpass.widgets.CustomTextView
+                <com.android.eatwell.widgets.CustomTextView
                     android:id="@+id/referaltext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
                     android:text="@string/Step2Title" />
 
 
-                <com.android.mealpass.widgets.CustomEditText
+                <com.android.eatwell.widgets.CustomEditText
                     android:id="@+id/code"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_40sdp"
@@ -123,7 +123,7 @@
                     app:visibleGone="@{!vm.isFirstTimeVisit}" />
 
 
-                <com.android.mealpass.widgets.CustomTextView
+                <com.android.eatwell.widgets.CustomTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 

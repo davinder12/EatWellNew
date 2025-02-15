@@ -5,7 +5,7 @@
     <data>
         <variable
             name="item"
-            type="com.android.mealpass.data.models.AdsResponse.Body" />
+            type="com.android.eatwell.data.models.AdsResponse.Body" />
          <variable
              name="pictureUrl"
              type="String" />
@@ -36,7 +36,7 @@
             app:url="@{item.image_url}"
             android:layout_height="match_parent" />
 
-        <com.android.mealpass.widgets.CustomTextView
+        <com.android.eatwell.widgets.CustomTextView
             android:id="@+id/add_layout"
             android:layout_width="match_parent"
             android:layout_marginLeft="10dp"
@@ -53,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <com.android.mealpass.widgets.CustomTextView
+        <com.android.eatwell.widgets.CustomTextView
             android:id="@+id/adds"
             android:layout_width="wrap_content"
             android:text=""

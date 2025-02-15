@@ -7,32 +7,32 @@
 
     <fragment
         android:id="@+id/navigation_map"
-        android:name="com.android.mealpass.view.dashboard.fragment.map.MapFragment"
+        android:name="com.android.eatwell.view.dashboard.fragment.map.MapFragment"
         android:label="Map"
         tools:layout="@layout/fragment_map" />
 
     <fragment
         android:id="@+id/navigation_favourite"
-        android:name="com.android.mealpass.view.dashboard.fragment.FavouriteFragment"
+        android:name="com.android.eatwell.view.dashboard.fragment.FavouriteFragment"
         android:label="FavouriteFragment"
         tools:layout="@layout/fragment_favourite" />
 
     <fragment
         android:id="@+id/navigation_receipt"
-        android:name="com.android.mealpass.view.dashboard.fragment.receipt.ReceiptCategoryFragment"
+        android:name="com.android.eatwell.view.dashboard.fragment.receipt.ReceiptCategoryFragment"
         android:label="ReceiptFragment"
         tools:layout="@layout/fragment_receipt" />
 
     <fragment
         android:id="@+id/navigation_setting"
-        android:name="com.android.mealpass.view.dashboard.fragment.setting.SettingFragment"
+        android:name="com.android.eatwell.view.dashboard.fragment.setting.SettingFragment"
         android:label="SettingFragment"
         tools:layout="@layout/fragment_setting" />
 
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.android.mealpass.view.dashboard.fragment.HomeFragment"
+        android:name="com.android.eatwell.view.dashboard.fragment.HomeFragment"
         android:label="@string/HomeTab"
         tools:layout="@layout/fragment_home" />
 

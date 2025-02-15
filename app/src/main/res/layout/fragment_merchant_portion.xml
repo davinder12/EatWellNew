@@ -6,7 +6,7 @@
     <data>
         <variable
             name="vm"
-            type="com.android.mealpass.view.merchant.viewmodel.MerchantPortionModel" />
+            type="com.android.eatwell.view.merchant.viewmodel.MerchantPortionModel" />
     </data>
 
     <LinearLayout
@@ -48,7 +48,7 @@
                 android:orientation="vertical"
                 android:layout_marginLeft="@dimen/_20sdp"
                 android:layout_marginRight="@dimen/_20sdp"
-                tools:context="com.android.mealpass.merchant.MerchantPortion">
+                tools:context="com.android.eatwell.merchant.MerchantPortion">
 
 
                 <LinearLayout
@@ -58,7 +58,7 @@
                     android:orientation="horizontal"
                     android:layout_height="wrap_content">
 
-                    <com.android.mealpass.widgets.CustomTextView
+                    <com.android.eatwell.widgets.CustomTextView
                         android:id="@+id/updated_price"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
                         android:textSize="@dimen/_12ssp" />
 
 
-                    <com.android.mealpass.widgets.CustomEditText
+                    <com.android.eatwell.widgets.CustomEditText
                         android:id="@+id/PortionAmt"
                         android:layout_width="@dimen/_80sdp"
                         android:layout_height="40dp"
@@ -99,7 +99,7 @@
                     android:orientation="horizontal">
 
 
-                    <com.android.mealpass.widgets.CustomTextView
+                    <com.android.eatwell.widgets.CustomTextView
                         android:id="@+id/retailLabel"
                         android:layout_width="0dp"
                         android:layout_weight="1"
@@ -111,7 +111,7 @@
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/_12ssp" />
 
-                    <com.android.mealpass.widgets.CustomEditText
+                    <com.android.eatwell.widgets.CustomEditText
                         android:id="@+id/inputRetailPrice"
                         android:layout_width="@dimen/_80sdp"
                         android:layout_height="40dp"
@@ -145,7 +145,7 @@
                         android:layout_alignParentEnd="true"
                         android:background="@{vm.isOpen == 1 ?  @drawable/ic_switch_off_green  :  @drawable/ic_switch_on}" />
 
-                    <com.android.mealpass.widgets.CustomTextView
+                    <com.android.eatwell.widgets.CustomTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -209,7 +209,7 @@
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="15dp">
 
-                        <com.android.mealpass.widgets.CustomTextView
+                        <com.android.eatwell.widgets.CustomTextView
                             android:id="@+id/portion"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
@@ -331,7 +331,7 @@
 
 
 
-                <com.android.mealpass.widgets.CustomTextView
+                <com.android.eatwell.widgets.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_20sdp"
@@ -340,7 +340,7 @@
                     android:textSize="@dimen/_11ssp" />
 
 
-                <com.android.mealpass.widgets.CustomTextView
+                <com.android.eatwell.widgets.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{String.format(@string/MonthlyTaxDeduction, vm.monthlyTaxDeduction)}"
@@ -348,7 +348,7 @@
                     android:textSize="@dimen/_11ssp" />
 
 
-                <com.android.mealpass.widgets.CustomTextView
+                <com.android.eatwell.widgets.CustomTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{String.format(@string/YearlyTaxDeduction, vm.yearlyTaxDeduction)}"
@@ -391,7 +391,7 @@
                     android:textAllCaps="false" />
 
 
-                <com.android.mealpass.widgets.CustomTextView
+                <com.android.eatwell.widgets.CustomTextView
                     android:layout_width="0dp"
                     android:layout_height="40dp" />
 

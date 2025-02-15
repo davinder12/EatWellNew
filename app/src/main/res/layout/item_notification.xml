@@ -4,11 +4,11 @@
 
     <data>
 
-        <import type="com.android.mealpass.view.units.DataConverterKt" />
+        <import type="com.android.eatwell.view.units.DataConverterKt" />
 
         <variable
             name="item"
-            type="com.android.mealpass.data.models.NotificationResponse.Body" />
+            type="com.android.eatwell.data.models.NotificationResponse.Body" />
 
     </data>
 
@@ -33,7 +33,7 @@
                 android:paddingBottom="@dimen/_10sdp"
                 android:layout_height="match_parent">
 
-                <com.android.mealpass.widgets.CustomTextView
+                <com.android.eatwell.widgets.CustomTextView
                     android:id="@+id/time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
 
-                <com.android.mealpass.widgets.CustomTextView
+                <com.android.eatwell.widgets.CustomTextView
                     android:id="@+id/customTextView4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
 
                 <!--app:htmlText="@{DataConverterKt.getDescription(item.merchant_name,item.message)}"-->
 
-                <com.android.mealpass.widgets.CustomTextView
+                <com.android.eatwell.widgets.CustomTextView
                     android:id="@+id/textView8"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

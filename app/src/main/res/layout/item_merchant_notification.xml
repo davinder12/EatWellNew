@@ -4,12 +4,12 @@
 
     <data>
 
-        <import type="com.android.mealpass.view.units.DataConverterKt" />
+        <import type="com.android.eatwell.view.units.DataConverterKt" />
 
 
         <variable
             name="item"
-            type="com.android.mealpass.data.models.MerchantNotificationResponse.Body.Notifiction" />
+            type="com.android.eatwell.data.models.MerchantNotificationResponse.Body.Notifiction" />
 
     </data>
 
@@ -37,7 +37,7 @@
                 app:visibleGone="@{item.isdelivery == 1}" />
 
 
-            <com.android.mealpass.widgets.CustomTextView
+            <com.android.eatwell.widgets.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -48,7 +48,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/isDelivery" />
 
-            <com.android.mealpass.widgets.CustomTextView
+            <com.android.eatwell.widgets.CustomTextView
                 android:id="@+id/resturant_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-            <com.android.mealpass.widgets.CustomTextView
+            <com.android.eatwell.widgets.CustomTextView
                 android:id="@+id/customerName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
                 app:layout_constraintStart_toStartOf="@+id/resturant_name"
                 app:layout_constraintTop_toBottomOf="@+id/resturant_name" />
 
-            <com.android.mealpass.widgets.CustomTextView
+            <com.android.eatwell.widgets.CustomTextView
                 android:id="@+id/receiptId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
                 app:layout_constraintStart_toStartOf="@+id/customerName"
                 app:layout_constraintTop_toBottomOf="@+id/customerName" />
 
-            <com.android.mealpass.widgets.CustomTextView
+            <com.android.eatwell.widgets.CustomTextView
                 android:id="@+id/bought"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
                 app:layout_constraintStart_toStartOf="@+id/receiptId"
                 app:layout_constraintTop_toBottomOf="@+id/receiptId" />
 
-            <com.android.mealpass.widgets.CustomTextView
+            <com.android.eatwell.widgets.CustomTextView
                 android:id="@+id/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
                 app:layout_constraintTop_toTopOf="@+id/bought" />
 
 
-            <com.android.mealpass.widgets.CustomTextView
+            <com.android.eatwell.widgets.CustomTextView
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -123,7 +123,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
 
-            <com.android.mealpass.widgets.CustomTextView
+            <com.android.eatwell.widgets.CustomTextView
                 android:id="@+id/staffReceipt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -137,7 +137,7 @@
                 app:visibleGone="@{item.isStaffReceipt == 1}" />
 
 
-            <com.android.mealpass.widgets.CustomTextView
+            <com.android.eatwell.widgets.CustomTextView
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

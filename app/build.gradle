@@ -9,25 +9,25 @@ plugins {
     id 'kotlin-android-extensions'
 }
 
-
 android {
     signingConfigs {
         devRelease {
-            storeFile file('/Users/shipra/Documents/android project/Ian Price/MealPassLive/credential/MealPass')
-            storePassword 'MealPass'
-            keyPassword 'MealPass'
-            keyAlias 'mealpass'
+            storeFile file('/Users/shipra/Documents/android project/Ian Price/MealPassLive/credential/eatwell/eatwell')
+            storePassword 'eatwell'
+            keyPassword 'eatwell'
+            keyAlias 'eatwell'
         }
+
     }
     compileSdkVersion 34
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "mealpass.com.mealpass"
+        applicationId "eatwell.com.eatwell"
         minSdkVersion 21
         targetSdkVersion 34
-        versionCode 15
-        versionName "2.5"
+        versionCode 1
+        versionName "1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.devRelease
     }
@@ -40,18 +40,26 @@ android {
             signingConfig signingConfigs.devRelease
         }
     }
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+//    }
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = "11"
     }
 
     dataBinding {
         enabled = true
     }
 
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
+//    kotlinOptions {
+//        jvmTarget = "1.8"
+//    }
 
     lintOptions {
         checkReleaseBuilds false
@@ -60,14 +68,16 @@ android {
     flavorDimensions 'env'
     productFlavors {
         dev {
-            buildConfigField 'String', 'API_URL', '"https://mealpass.org/"'
+            buildConfigField 'String', 'API_URL', '"https://eat-well.org/"'
             buildConfigField 'String', 'PLACE_API_KEY', '"AIzaSyC8g5M5QH-chHr0wi3z2_gDrFQ-bgHW57k"'
             buildConfigField 'String', 'INSTAGRAM_CLIENT_ID', '"391031582631770"'
             buildConfigField 'String', 'INSTAGRAM_CLIENT_SECRET', '"fa31989b97289a3a237cd941a8c77b7d"'
             buildConfigField 'String', 'SUPPORT_NUMBER', '"+1(508)9748343"'
         }
+
+
         prod {
-            buildConfigField 'String', 'API_URL', '"https://mealpass.org/"'
+            buildConfigField 'String', 'API_URL', '"https://eat-well.org/"'
             buildConfigField 'String', 'PLACE_API_KEY', '"AIzaSyC8g5M5QH-chHr0wi3z2_gDrFQ-bgHW57k"'
             buildConfigField 'String', 'INSTAGRAM_CLIENT_ID', '"8a0d0ae65b0443d09b4feac3259e56df"'
             buildConfigField 'String', 'INSTAGRAM_CLIENT_SECRET', '"6bf84049dfdb4d409c35e80a3ae3e486"'
@@ -133,12 +143,20 @@ dependencies {
 //    implementation("com.google.firebase:firebase-analytics")
 
     // Import the BoM for the Firebase platform
-    implementation platform('com.google.firebase:firebase-bom:28.4.0')
+    implementation platform('com.google.firebase:firebase-bom:32.1.1')
+    //implementation(platform("com.google.firebase:firebase-bom:33.8.0"))
+
+    // Add the dependencies for the Crashlytics and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-crashlytics")
+    implementation("com.google.firebase:firebase-analytics")
+    implementation 'com.google.firebase:firebase-messaging'
+
 
     // Declare the dependencies for the Firebase Cloud Messaging and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation 'com.google.firebase:firebase-messaging'
-    implementation 'com.google.firebase:firebase-analytics'
+    //implementation 'com.google.firebase:firebase-messaging'
+    //implementation 'com.google.firebase:firebase-analytics'
 
 
     // integrate navigation library
@@ -153,7 +171,8 @@ dependencies {
     implementation "androidx.viewpager2:viewpager2:1.0.0"
 
     implementation 'com.android.support:multidex:1.0.3'
-    implementation 'com.github.d-max:spots-dialog:1.1@aar'
+    implementation 'com.github.d-max:spots-dialog:0.7@aar'
+
 
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
@@ -178,16 +197,14 @@ dependencies {
         exclude group: 'com.android.volley'
     }
     implementation 'com.android.volley:volley:1.2.0'
-    implementation 'com.crystal:crystalrangeseekbar:1.1.3'
+    //implementation 'com.crystal:crystalrangeseekbar:1.1.3'
     //implementation 'com.google.android.libraries.places:places:2.4.0'
-    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
-    //  implementation("com.vanniktech:android-image-cropper:4.3.3")
+    implementation 'com.github.dhaval2404:imagepicker:2.1'
+   // implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+    implementation 'com.vanniktech:android-image-cropper:4.4.0'
 
     implementation 'id.zelory:compressor:3.0.1'
-//
-//
-//    // check version of application of playstore
-    implementation 'com.google.android.play:core:1.10.3'
+
     implementation 'org.jsoup:jsoup:1.13.1'
 
 

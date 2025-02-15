@@ -5,11 +5,11 @@
 
     <data>
 
-        <import type="com.android.mealpass.view.units.DataConverterKt" />
+        <import type="com.android.eatwell.view.units.DataConverterKt" />
 
         <variable
             name="item"
-            type="com.android.mealpass.data.models.ReceiptResponse.Body.UsedReceipt" />
+            type="com.android.eatwell.data.models.ReceiptResponse.Body.UsedReceipt" />
 
     </data>
 
@@ -43,7 +43,7 @@
             android:layout_marginStart="10dp"
             android:layout_centerVertical="true"
             >
-            <com.android.mealpass.widgets.CustomTextView
+            <com.android.eatwell.widgets.CustomTextView
                 android:id="@+id/food_lable"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                 android:textColor="@color/darkgray"
                 />
 
-            <com.android.mealpass.widgets.CustomTextView
+            <com.android.eatwell.widgets.CustomTextView
                 android:id="@+id/pickuptime"
                 android:layout_width="match_parent"
                 android:layout_below="@id/food_lable"

@@ -5,7 +5,7 @@
 
     <data>
 
-        <import type="com.android.mealpass.data.network.NetworkState" />
+        <import type="com.android.eatwell.data.network.NetworkState" />
 
         <variable
             name="item"

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="vm"
-            type="com.android.mealpass.view.login.viewmodel.LoginFragmentViewModel" />
+            type="com.android.eatwell.view.login.viewmodel.LoginFragmentViewModel" />
     </data>
 
 
@@ -83,10 +83,12 @@
                         app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
                         app:textAllCaps="false" />
 
+                   <!-- app:goneVisible="@{vm.needToShowSocialLogin}"
+-->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/faceBookLoginBtn"
                         android:layout_width="0dp"
-                        app:goneVisible="@{vm.needToShowSocialLogin}"
+                        android:visibility="gone"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_4sdp"
                         android:text="@string/LoginWithFacebook"

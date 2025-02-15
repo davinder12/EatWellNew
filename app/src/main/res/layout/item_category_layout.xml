@@ -5,7 +5,7 @@
     <data>
         <variable
             name="vm"
-            type="com.android.mealpass.data.models.ProductTypeResponse.Body"></variable>
+            type="com.android.eatwell.data.models.ProductTypeResponse.Body"></variable>
     </data>
 
 <androidx.cardview.widget.CardView
@@ -15,7 +15,7 @@
     android:layout_margin="6dp"
     android:layout_height="wrap_content">
 
-    <com.android.mealpass.widgets.CustomTextView
+    <com.android.eatwell.widgets.CustomTextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"

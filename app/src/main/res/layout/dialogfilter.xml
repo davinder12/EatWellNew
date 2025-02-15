@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="com.android.mealpass.view.dashboard.viewmodel.FoodFilterViewModel" />
+            type="com.android.eatwell.view.dashboard.viewmodel.FoodFilterViewModel" />
 
     </data>
 
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.android.mealpass.widgets.CustomTextView
+            <com.android.eatwell.widgets.CustomTextView
                 android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/textView17" />
 
-    <com.android.mealpass.widgets.CustomTextView
+    <com.android.eatwell.widgets.CustomTextView
         android:id="@+id/textView18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
         app:layout_constraintTop_toBottomOf="@+id/toogle_btn" />
 
 
-    <com.android.mealpass.widgets.CustomTextView
+    <com.android.eatwell.widgets.CustomTextView
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seekbar" />
 
-    <com.android.mealpass.widgets.CustomTextView
+    <com.android.eatwell.widgets.CustomTextView
         android:id="@+id/textView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -128,7 +128,7 @@
         app:layout_constraintTop_toTopOf="@+id/apply" />
 
 
-            <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+            <com.android.eatwell.crystalrangeseekbar.widgets.CrystalRangeSeekbar
                 android:id="@+id/seekbar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -150,7 +150,7 @@
                 app:steps="15" />
 
 
-    <com.android.mealpass.widgets.CustomTextView
+    <com.android.eatwell.widgets.CustomTextView
         android:id="@+id/min_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -175,7 +175,7 @@
                 tools:listitem="@layout/item_category_layout" />
 
 
-    <com.android.mealpass.widgets.CustomTextView
+    <com.android.eatwell.widgets.CustomTextView
         android:id="@+id/max_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

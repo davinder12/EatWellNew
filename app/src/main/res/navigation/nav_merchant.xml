@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/merchantNotification"
-        android:name="com.android.mealpass.view.merchant.fragment.MerchantNotification"
+        android:name="com.android.eatwell.view.merchant.fragment.MerchantNotification"
         android:label="MerchantNotification"
         tools:layout="@layout/fragment_merchant_notification">
         <action
@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/merchantPortion"
         tools:layout="@layout/fragment_merchant_portion"
-        android:name="com.android.mealpass.view.merchant.fragment.MerchantPortion"
+        android:name="com.android.eatwell.view.merchant.fragment.MerchantPortion"
         android:label="MerchantPortion" >
         <action
             android:id="@+id/action_merchantPortion_to_merchantNotification"
@@ -31,13 +31,13 @@
             />
         <argument
             android:name="productDetail"
-            app:argType="com.android.mealpass.data.models.MerchantNotificationResponse$Body"
+            app:argType="com.android.eatwell.data.models.MerchantNotificationResponse$Body"
             app:nullable="true"
             />
     </fragment>
     <fragment
         android:id="@+id/merchantDescriptionUpdate"
-        android:name="com.android.mealpass.view.merchant.fragment.MerchantDescriptionUpdate"
+        android:name="com.android.eatwell.view.merchant.fragment.MerchantDescriptionUpdate"
         tools:layout="@layout/fragment_merchant_description_update"
         android:label="MerchantDescriptionUpdate" >
         <action

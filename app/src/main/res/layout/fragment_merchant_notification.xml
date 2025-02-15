@@ -6,7 +6,7 @@
     <data>
         <variable
             name="vm"
-            type="com.android.mealpass.view.merchant.viewmodel.MerchantNotificationModel" />
+            type="com.android.eatwell.view.merchant.viewmodel.MerchantNotificationModel" />
 
     </data>
 
@@ -50,7 +50,7 @@
             app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
             tools:listitem="@layout/item_merchant_notification">
 
-            <com.android.mealpass.widgets.EmptyRecyclerView
+            <com.android.eatwell.widgets.EmptyRecyclerView
                 android:id="@+id/displayNotification"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

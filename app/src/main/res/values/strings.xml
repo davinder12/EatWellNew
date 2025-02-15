@@ -295,6 +295,7 @@
     <string name="cenaidja" translatable="false">&#160;CENAIDJA</string>
     <string name="Notification">Notification</string>
     <string name="APPVERSION">App Version</string>
+    <string name="Delete_Account">Delete Account</string>
     <string name="SwitchOffDailyPushAlert">Are you sure? you want to switch off Daily reminder.</string>
     <string name="SwitchOffDailyPushNote">Note : It will not stop all remote push but just stop the daily reminder.</string>
     <string name="FeedbackThanksMessage">Thank you for giving your valuable feedback</string>

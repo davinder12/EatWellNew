@@ -8,7 +8,7 @@
 
         <variable
             name="vm"
-            type="com.android.mealpass.view.merchant.viewmodel.MerchantDescriptionUpdateModel" />
+            type="com.android.eatwell.view.merchant.viewmodel.MerchantDescriptionUpdateModel" />
 
     </data>
 
@@ -38,7 +38,7 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-        <com.android.mealpass.widgets.CustomEditText
+        <com.android.eatwell.widgets.CustomEditText
             android:id="@+id/descriptionLabel"
             android:layout_width="0dp"
             android:layout_height="250dp"
@@ -59,7 +59,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
-        <com.android.mealpass.widgets.CustomTextView
+        <com.android.eatwell.widgets.CustomTextView
             android:id="@+id/textView16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 
-        <com.android.mealpass.widgets.CustomTextView
+        <com.android.eatwell.widgets.CustomTextView
             android:id="@+id/textView7"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

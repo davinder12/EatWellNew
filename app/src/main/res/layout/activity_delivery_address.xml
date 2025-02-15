@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="com.android.mealpass.view.dashboard.viewmodel.DeliveryAddressViewModel" />
+            type="com.android.eatwell.view.dashboard.viewmodel.DeliveryAddressViewModel" />
 
     </data>
 
@@ -116,7 +116,7 @@
             app:layout_constraintTop_toBottomOf="@+id/hometoolbar">
 
 
-            <com.android.mealpass.widgets.CustomTextView
+            <com.android.eatwell.widgets.CustomTextView
                 android:id="@+id/delivery_note"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

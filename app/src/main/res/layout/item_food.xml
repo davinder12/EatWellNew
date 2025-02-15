@@ -4,11 +4,11 @@
 
     <data>
 
-        <import type="com.android.mealpass.view.units.DataConverterKt" />
+        <import type="com.android.eatwell.view.units.DataConverterKt" />
 
         <variable
             name="vm"
-            type="com.android.mealpass.data.models.FoodData.Body" />
+            type="com.android.eatwell.data.models.FoodData.Body" />
 
     </data>
 

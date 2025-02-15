@@ -5,7 +5,7 @@
     <data>
         <variable
             name="vm"
-            type="com.android.mealpass.view.dashboard.viewmodel.FindFoodViewModel" />
+            type="com.android.eatwell.view.dashboard.viewmodel.FindFoodViewModel" />
 
     </data>
 
@@ -49,7 +49,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/ic_call_color" />
 
-                    <com.android.mealpass.widgets.CustomTextView
+                    <com.android.eatwell.widgets.CustomTextView
                         android:id="@+id/textView"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
@@ -84,7 +84,7 @@
                             app:layout_constraintTop_toTopOf="parent"
                             app:srcCompat="@drawable/ic_notification" />
 
-                        <com.android.mealpass.widgets.CustomTextView
+                        <com.android.eatwell.widgets.CustomTextView
 
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -171,7 +171,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:layout_height="match_parent">
 
-            <com.android.mealpass.widgets.EmptyRecyclerView
+            <com.android.eatwell.widgets.EmptyRecyclerView
                 android:id="@+id/resturantList"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
