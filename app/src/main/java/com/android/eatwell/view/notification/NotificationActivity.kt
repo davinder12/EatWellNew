@@ -9,9 +9,9 @@ import com.android.eatwell.view.common.NavigationScreen
 import com.android.eatwell.view.notification.adapter.NotificationListAdapter
 import com.android.eatwell.view.notification.viewmodel.NotificationViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.empty_view.*
 import eatwell.com.eatwell.R
 import eatwell.com.eatwell.databinding.ActivityNotificationBinding
+import eatwell.com.eatwell.databinding.EmptyViewBinding
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -25,6 +25,8 @@ class NotificationActivity : DataBindingActivity<ActivityNotificationBinding>() 
     lateinit var navigationScreen: NavigationScreen
 
     private val viewModel: NotificationViewModel by viewModels()
+
+    val emptyView : EmptyViewBinding by lazy { EmptyViewBinding.inflate(layoutInflater) }
 
     override val layoutRes: Int
         get() = R.layout.activity_notification
@@ -41,7 +43,7 @@ class NotificationActivity : DataBindingActivity<ActivityNotificationBinding>() 
             }
         }
 
-        subscribe(emptyView.throttleClicks()) {
+        subscribe(emptyView.root.throttleClicks()) {
             viewModel.callApi()
         }
 

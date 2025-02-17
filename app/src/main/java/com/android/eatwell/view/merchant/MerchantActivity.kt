@@ -1,11 +1,12 @@
 package com.android.eatwell.view.merchant
 
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.android.eatwell.utilitiesclasses.baseclass.DataBindingActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_merchant.*
 import eatwell.com.eatwell.R
 import eatwell.com.eatwell.databinding.ActivityMerchantBinding
+import eatwell.com.eatwell.databinding.ActivityStartUpBinding
 
 @AndroidEntryPoint
 class MerchantActivity : DataBindingActivity<ActivityMerchantBinding>() {
@@ -16,7 +17,10 @@ class MerchantActivity : DataBindingActivity<ActivityMerchantBinding>() {
 
 
     override fun onSupportNavigateUp(): Boolean {
-        return nav_merchant_host.findNavController()
+
+       val navController = findNavController(R.id.nav_merchant_host)
+
+        return navController
             .navigateUp() || super.onSupportNavigateUp()
     }
 

@@ -6,7 +6,7 @@ plugins {
     id 'androidx.navigation.safeargs'
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
-    id 'kotlin-android-extensions'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -53,8 +53,9 @@ android {
         jvmTarget = "11"
     }
 
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        viewBinding true
+        dataBinding true
     }
 
 //    kotlinOptions {
@@ -85,11 +86,11 @@ android {
 
         }
     }
-    buildFeatures {
-        viewBinding true
-    }
 
+}
 
+kapt {
+    correctErrorTypes true
 }
 
 dependencies {
@@ -131,8 +132,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
 
-    implementation "com.google.dagger:hilt-android:2.44"
-    kapt "com.google.dagger:hilt-compiler:2.44"
+    implementation "com.google.dagger:hilt-android:2.55"
+    kapt "com.google.dagger:hilt-compiler:2.55"
 
 //    // Import the BoM for the Firebase platform
 //    implementation(platform("com.google.firebase:firebase-bom:32.7.2"))
@@ -143,7 +144,7 @@ dependencies {
 //    implementation("com.google.firebase:firebase-analytics")
 
     // Import the BoM for the Firebase platform
-    implementation platform('com.google.firebase:firebase-bom:32.1.1')
+    implementation platform('com.google.firebase:firebase-bom:33.9.0')
     //implementation(platform("com.google.firebase:firebase-bom:33.8.0"))
 
     // Add the dependencies for the Crashlytics and Analytics libraries

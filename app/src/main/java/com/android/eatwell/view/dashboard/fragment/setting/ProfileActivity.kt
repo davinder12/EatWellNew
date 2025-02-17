@@ -18,7 +18,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import id.zelory.compressor.Compressor
 import id.zelory.compressor.constraint.format
 import id.zelory.compressor.constraint.resolution
-import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.coroutines.launch
 import eatwell.com.eatwell.R
 import eatwell.com.eatwell.databinding.ActivityProfileBinding
@@ -53,7 +52,7 @@ class ProfileActivity : DataBindingActivity<ActivityProfileBinding>() {
             viewModel.filterMethod{status,message->
                 when{
                     status -> bindNetworkState(
-                        viewModel.uploadProfileData(newslatter.isChecked), progressDialog(R.string.Pleasewait),
+                        viewModel.uploadProfileData(binding.newslatter.isChecked), progressDialog(R.string.Pleasewait),
                         success = R.string.ProfileUpdated
                     ) {
                         finish()
@@ -63,21 +62,21 @@ class ProfileActivity : DataBindingActivity<ActivityProfileBinding>() {
             }
         }
 
-        subscribe(menu_layout.throttleClicks()){
+        subscribe(binding.menuLayout.throttleClicks()){
             finish()
         }
 
 
 
 
-        subscribe(profilePick.throttleClicks()){
+        subscribe(binding.profilePick.throttleClicks()){
             callImagePicker()
 
         }
 
 
 
-        subscribe(edit_icon.throttleClicks()){
+        subscribe(binding.editIcon.throttleClicks()){
             viewModel. updateEditableValue()
         }
     }

@@ -17,7 +17,6 @@ import com.facebook.GraphRequest
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_signup.*
 import eatwell.com.eatwell.R
 import eatwell.com.eatwell.databinding.FragmentSignupBinding
 import javax.inject.Inject
@@ -43,14 +42,14 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>() {
         binding.facebookSignUpBtn.setPermissions(listOf("public_profile", "email"))
         facebookLoginMethod()
 
-        subscribe(cross.throttleClicks()) {
+        subscribe(binding.cross.throttleClicks()) {
             findNavController().popBackStack()
         }
 
         subscribe(binding.registerWithFacebook.throttleClicks()) {
             binding.facebookSignUpBtn.performClick()
         }
-        subscribe(terms_condition.throttleClicks()) {
+        subscribe(binding.termsCondition.throttleClicks()) {
             navigationScreen.goToTermAndConditionScreen(false)
         }
 
@@ -59,7 +58,7 @@ class SignupFragment : BaseFragment<FragmentSignupBinding>() {
                 when {
                     status -> {
                         bindNetworkState(
-                                viewModel.callSignUpApi(checkbox.isChecked),
+                                viewModel.callSignUpApi(binding.checkbox.isChecked),
                                 progressDialog(R.string.Pleasewait),
                                 R.string.success_register
                         ) {

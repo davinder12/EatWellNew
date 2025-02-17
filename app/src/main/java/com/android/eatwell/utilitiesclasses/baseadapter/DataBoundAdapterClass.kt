@@ -14,7 +14,7 @@ import eatwell.com.eatwell.R;
 import eatwell.com.eatwell.databinding.NetworkStateItemBinding
 import java.util.concurrent.TimeUnit
 
-abstract class DataBoundAdapterClass<T, V : ViewDataBinding>(
+abstract class DataBoundAdapterClass<T : Any, V : ViewDataBinding>(
     diffUtil: DiffUtil.ItemCallback<T>,
     private val enableClicks: Boolean = true
 ) :

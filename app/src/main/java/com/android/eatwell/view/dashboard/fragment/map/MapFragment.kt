@@ -18,7 +18,6 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.ClusterManager.OnClusterItemInfoWindowClickListener
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_map.*
 import eatwell.com.eatwell.R
 import eatwell.com.eatwell.databinding.FragmentMapBinding
 import javax.inject.Inject
@@ -47,7 +46,7 @@ class MapFragment : BaseListFragment<FragmentMapBinding>(), OnMapReadyCallback,
 
         //(requireActivity() as DashboardActivity).viewModel.updateTitle(getString(R.string.map))
 
-        bindNetworkState(viewModel.networkState, loadingIndicator = progressBar)
+        bindNetworkState(viewModel.networkState, loadingIndicator = binding.progressBar)
 
         viewModel.data.observe(viewLifecycleOwner) {
             mClusterManager?.addItems(it)
@@ -77,7 +76,7 @@ class MapFragment : BaseListFragment<FragmentMapBinding>(), OnMapReadyCallback,
     }
 
     @SuppressLint("MissingPermission")
-    override fun onMapReady(googleMap: GoogleMap?) {
+    override fun onMapReady(googleMap: GoogleMap) {
         when {
             isAllGranted(
                 Permission.ACCESS_FINE_LOCATION,

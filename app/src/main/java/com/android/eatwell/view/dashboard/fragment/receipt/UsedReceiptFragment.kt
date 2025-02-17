@@ -9,8 +9,6 @@ import com.android.eatwell.view.common.NavigationScreen
 import com.android.eatwell.view.dashboard.adapter.UsedReceiptAdapter
 import com.android.eatwell.view.dashboard.viewmodel.ReceiptFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.empty_view.*
-import kotlinx.android.synthetic.main.fragment_receipt_item.*
 import eatwell.com.eatwell.R
 import eatwell.com.eatwell.databinding.FragmentReceiptItemBinding
 import javax.inject.Inject
@@ -29,11 +27,11 @@ class UsedReceiptFragment : BaseListFragment<FragmentReceiptItemBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.updateReceipt()
-        initAdapter(UsedReceiptAdapter(), receiptList, viewModel.usedReceiptList,viewModel.receiptResponse) {
+        initAdapter(UsedReceiptAdapter(), binding.receiptList, viewModel.usedReceiptList,viewModel.receiptResponse) {
             navigationScreen.goToUsedReceiptDetailActivity(it)
         }
 
-        subscribe(emptyView.throttleClicks()) {
+        subscribe(emptyView.root.throttleClicks()) {
             updateList()
         }
 

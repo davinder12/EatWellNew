@@ -16,14 +16,13 @@ import com.android.eatwell.view.common.NavigationScreen
 import com.android.eatwell.view.dashboard.adapter.FavouriteFoodAdapter
 import com.android.eatwell.view.dashboard.viewmodel.FavouriteFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.empty_view.*
 import eatwell.com.eatwell.R
+import eatwell.com.eatwell.databinding.EmptyViewBinding
 import eatwell.com.eatwell.databinding.FragmentFavouriteBinding
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class FavouriteFragment : BaseListFragment<FragmentFavouriteBinding>() {
-
 
     @Inject
     lateinit var navigationScreen: NavigationScreen
@@ -48,7 +47,7 @@ class FavouriteFragment : BaseListFragment<FragmentFavouriteBinding>() {
                 viewModel.favouriteItemList) { items ->
             launchProductDetailScreen.launch(navigationScreen.productDetailScreenWithCallBack(items.id, items.storename))
         }
-        subscribe(emptyView.throttleClicks()) {
+        subscribe(emptyView.root.throttleClicks()) {
             fetchFavouriteList()
         }
 

@@ -21,6 +21,7 @@ import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import eatwell.com.eatwell.R
+import eatwell.com.eatwell.databinding.EmptyViewBinding
 
 abstract class BaseFragment<TBinding : ViewDataBinding> : BaseBackStack() {
 
@@ -35,6 +36,7 @@ abstract class BaseFragment<TBinding : ViewDataBinding> : BaseBackStack() {
 
     protected open lateinit var binding: TBinding
 
+    val emptyView : EmptyViewBinding by lazy { EmptyViewBinding.inflate(layoutInflater) }
 
     /**
      * Creates the [ViewDataBinding] for this view.

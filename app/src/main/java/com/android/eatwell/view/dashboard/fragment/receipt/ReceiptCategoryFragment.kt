@@ -6,7 +6,6 @@ import com.android.eatwell.utilitiesclasses.baseclass.BaseListFragment
 import com.android.eatwell.view.dashboard.adapter.ReceiptTabAdapter
 import com.google.android.material.tabs.TabLayout
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_receipt.*
 import eatwell.com.eatwell.R
 import eatwell.com.eatwell.databinding.FragmentReceiptBinding
 
@@ -30,9 +29,9 @@ class ReceiptCategoryFragment : BaseListFragment<FragmentReceiptBinding>() {
 
 
     private fun tabSelectedListener() {
-        receiptTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        binding.receiptTabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                receiptViewPager.currentItem = tab.position
+                binding.receiptViewPager.currentItem = tab.position
                 pagerAdapter.getCurrentFragment()?.let {
                     (it as UsedReceiptFragment).updateList()
                 }
@@ -44,13 +43,13 @@ class ReceiptCategoryFragment : BaseListFragment<FragmentReceiptBinding>() {
 
 
     private fun initTabViewAndAdapter() {
-        receiptTabLayout.addTab(receiptTabLayout.newTab().setText(ACTIVE_RECEIPTS))
-        receiptTabLayout.addTab(receiptTabLayout.newTab().setText(USED_RECEIPTS))
-        pagerAdapter = ReceiptTabAdapter(requireActivity().supportFragmentManager, receiptTabLayout.tabCount)
-        receiptViewPager.adapter = pagerAdapter
+        binding.receiptTabLayout.addTab(binding.receiptTabLayout.newTab().setText(ACTIVE_RECEIPTS))
+        binding.receiptTabLayout.addTab(binding.receiptTabLayout.newTab().setText(USED_RECEIPTS))
+        pagerAdapter = ReceiptTabAdapter(requireActivity().supportFragmentManager, binding.receiptTabLayout.tabCount)
+        binding.receiptViewPager.adapter = pagerAdapter
         // Unable to load fragment on Second Time So Add this line
-        receiptViewPager.isSaveFromParentEnabled = false;
-        receiptViewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(receiptTabLayout))
+        binding.receiptViewPager.isSaveFromParentEnabled = false;
+        binding.receiptViewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(binding.receiptTabLayout))
     }
 
 

@@ -26,7 +26,6 @@ import com.android.eatwell.view.dashboard.adapter.FoodAdapter
 import com.android.eatwell.view.dashboard.fragment.dialog.FoodFilter
 import com.android.eatwell.view.dashboard.viewmodel.FindFoodViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.empty_view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -157,7 +156,7 @@ class HomeFragment : BaseListFragment<FragmentHomeBinding>() {
             resturantFilter.show(childFragmentManager, resturantFilter.tag)
         }
 
-        subscribe(emptyView.throttleClicks()) {
+        subscribe(emptyView.root.throttleClicks()) {
             searchItem(binding.searchText.text.toString())
         }
     }

@@ -11,7 +11,6 @@ import com.android.eatwell.view.common.NavigationScreen
 import com.android.eatwell.view.dashboard.adapter.ActiveReceiptAdapter
 import com.android.eatwell.view.dashboard.viewmodel.ReceiptFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.empty_view.*
 import eatwell.com.eatwell.R
 import eatwell.com.eatwell.databinding.FragmentReceiptItemBinding
 import javax.inject.Inject
@@ -43,7 +42,7 @@ class ActiveReceiptFragment : BaseListFragment<FragmentReceiptItemBinding>() {
             }
         }
 
-        subscribe(emptyView.throttleClicks()) {
+        subscribe(emptyView.root.throttleClicks()) {
             viewModel.updateReceipt()
         }
 

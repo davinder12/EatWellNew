@@ -23,9 +23,9 @@ import com.android.eatwell.view.units.AlarmReceiver
 import com.android.eatwell.widgets.alertDialog
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_dashboard.*
 import eatwell.com.eatwell.BuildConfig
 import eatwell.com.eatwell.R
+import eatwell.com.eatwell.databinding.ActivityDashboardBinding
 import java.util.*
 import javax.inject.Inject
 
@@ -33,7 +33,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class DashboardActivity : BaseActivity() {
 
-
+    lateinit var binding : ActivityDashboardBinding
     lateinit var navController: NavController
 
     @Inject
@@ -48,7 +48,8 @@ class DashboardActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dashboard)
+        binding = ActivityDashboardBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         initDrawerBottomSheet()
 
 
@@ -147,7 +148,7 @@ class DashboardActivity : BaseActivity() {
 //    }
 
     private fun initDrawerBottomSheet() {
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(
