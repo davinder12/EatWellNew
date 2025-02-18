@@ -86,6 +86,7 @@ android {
 
         }
     }
+    namespace 'eatwell.com.eatwell'
 
 }
 

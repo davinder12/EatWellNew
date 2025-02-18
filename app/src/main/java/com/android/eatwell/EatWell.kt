@@ -10,7 +10,11 @@ class EatWell : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        FirebaseApp.initializeApp(this);
+        try {
+            FirebaseApp.initializeApp(this);
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
         AndroidThreeTen.init(this)
     }
 }
