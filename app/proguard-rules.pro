@@ -114,4 +114,26 @@
 -keep class * extends androidx.fragment.app.Fragment{}
 -keep class com.google.firebase.** { *; }
 -keep class com.google.android.gms.** { *; }
--keep class com.google.common.** { *; }
+
+
+-dontwarn androidx.window.extensions.WindowExtensions
+-dontwarn androidx.window.extensions.WindowExtensionsProvider
+-dontwarn androidx.window.extensions.layout.DisplayFeature
+-dontwarn androidx.window.extensions.layout.FoldingFeature
+-dontwarn androidx.window.extensions.layout.WindowLayoutComponent
+-dontwarn androidx.window.extensions.layout.WindowLayoutInfo
+-dontwarn androidx.window.sidecar.SidecarDeviceState
+-dontwarn androidx.window.sidecar.SidecarDisplayFeature
+-dontwarn androidx.window.sidecar.SidecarInterface$SidecarCallback
+-dontwarn androidx.window.sidecar.SidecarInterface
+-dontwarn androidx.window.sidecar.SidecarProvider
+-dontwarn androidx.window.sidecar.SidecarWindowLayoutInfo
+-dontwarn org.chromium.net.CronetEngine$Builder
+-dontwarn org.chromium.net.CronetEngine
+-dontwarn org.chromium.net.CronetException
+-dontwarn org.chromium.net.UploadDataProvider
+-dontwarn org.chromium.net.UploadDataProviders
+-dontwarn org.chromium.net.UrlRequest$Builder
+-dontwarn org.chromium.net.UrlRequest$Callback
+-dontwarn org.chromium.net.UrlRequest
+-dontwarn org.chromium.net.UrlResponseInfo
